@@ -50,9 +50,9 @@ def initialize_notice_settings(context):
         )
         registry_record = Record(registry_field)
         registry_record.value = None
-        registry.records["{0}.sent_on_behalf_of_municipality_id".format(base)] = (
-            registry_record
-        )
+        registry.records[
+            "{0}.sent_on_behalf_of_municipality_id".format(base)
+        ] = registry_record
     if "{0}.last_import_date".format(base) not in registry.records:
         registry_field = field.Datetime(title=INoticeSettings["last_import_date"].title)
         registry_record = Record(registry_field)
@@ -419,7 +419,7 @@ def setup_notice_mailing_content_rules(context):
     portal = api.portal.get()
 
     success_template = dedent(
-        """
+        u"""
         Bonjour,
 
         Une notification du SPW a été réceptionnée pour:
@@ -433,7 +433,7 @@ def setup_notice_mailing_content_rules(context):
     ).strip()
 
     failure_template = dedent(
-        """
+        u"""
         Créer un ticket JIRA à l'attention d'un développeur
         (composant : Dématérialisation, sprint : En cours, état : Bloquant)
 
@@ -458,7 +458,7 @@ def setup_notice_mailing_content_rules(context):
     rule_id = "notification_tlpe_imported_successfully"
     if not ContentRulesUtils.rule_exists(rule_id):
         ContentRulesUtils.create_content_rule(
-            title="Notification TLPE importée",
+            title=u"Notification TLPE importée",
             event_interface=INoticeImportSucceededEvent,
             rule_id=rule_id,
         )
@@ -472,8 +472,8 @@ def setup_notice_mailing_content_rules(context):
             action_name="plone.actions.Mail",
             data={
                 "exclude_actor": False,
-                "subject": "Notification importée",
-                "recipients": "support-urban@imio.be",
+                "subject": u"Notification importée",
+                "recipients": u"support-urban@imio.be",
                 "message": success_template,
             },
         )
@@ -483,7 +483,7 @@ def setup_notice_mailing_content_rules(context):
     rule_id = "notification_arne_imported_successfully"
     if not ContentRulesUtils.rule_exists(rule_id):
         ContentRulesUtils.create_content_rule(
-            title="Notification ARNE importée",
+            title=u"Notification ARNE importée",
             event_interface=INoticeImportSucceededEvent,
             rule_id=rule_id,
         )
@@ -506,8 +506,8 @@ def setup_notice_mailing_content_rules(context):
             action_name="plone.actions.Mail",
             data={
                 "exclude_actor": False,
-                "subject": "Notification importée",
-                "recipients": "support-urban@imio.be",
+                "subject": u"Notification importée",
+                "recipients": u"support-urban@imio.be",
                 "message": success_template,
             },
         )
@@ -517,7 +517,7 @@ def setup_notice_mailing_content_rules(context):
     rule_id = "notification_import_failed"
     if not ContentRulesUtils.rule_exists(rule_id):
         ContentRulesUtils.create_content_rule(
-            title="Notification NOTICE en erreur",
+            title=u"Notification NOTICE en erreur",
             event_interface=INoticeImportFailedEvent,
             rule_id=rule_id,
         )
@@ -526,8 +526,8 @@ def setup_notice_mailing_content_rules(context):
             action_name="plone.actions.Mail",
             data={
                 "exclude_actor": False,
-                "subject": "Notification Notice en erreur",
-                "recipients": "support-urban@imio.be",
+                "subject": u"Notification Notice en erreur",
+                "recipients": u"support-urban@imio.be",
                 "message": failure_template,
             },
         )
@@ -556,7 +556,7 @@ def add_digital_term_to_deposit_type(context):
         deposittype_folder = tool.deposittype
         if "digital" not in deposittype_folder.objectIds():
             deposittype_folder.invokeFactory(
-                "UrbanVocabularyTerm", id="digital", title="Dématérialisé"
+                "UrbanVocabularyTerm", id="digital", title=u"Dématérialisé"
             )
             logger.info("Added 'digital' vocabulary term to global deposittype")
 
@@ -607,7 +607,7 @@ def normalize_externaldecisions_vocabulary(context):
         "defavorable": "DEFAVORABLE",
         "favorable-conditionnel": "FAVORABLE_CONDITIONS",
     }
-    DESCRIPTION = "obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
+    DESCRIPTION = u"obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
     portal_urban = api.portal.get_tool("portal_urban")
     voc_folder = portal_urban.externaldecisions
     term_objects = portal_urban.listVocabularyObjects(
