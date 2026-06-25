@@ -1572,3 +1572,6 @@ msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr ""
+
+msgid "PM_ENVOI_RS_COMMUNE"
+msgstr ""
