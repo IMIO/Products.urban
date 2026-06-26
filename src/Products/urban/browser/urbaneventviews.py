@@ -791,6 +791,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         )
 
     def import_claimants_from_csv(self):
+        logger.info("Start importing claimant for {}".format("/".join(self.context.getPhysicalPath())))
         portal_urban = api.portal.get_tool("portal_urban")
         plone_utils = api.portal.get_tool("plone_utils")
         site = api.portal.get()
@@ -810,8 +811,10 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
             "Écrite": "writedClaim",
             "ecrite": "writedClaim",
             "Ecrite": "writedClaim",
+            "writedClaim": "writedClaim",
             "orale": "oralClaim",
             "Orale": "oralClaim",
+            "oralClaim": "oralClaim",
         }
 
         claimants_file = interfaces.IAnnotations(self.context)[
@@ -843,6 +846,7 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
                 row for row in reader if row["name1"] or row["name2"] or row["society"]
             ][1:]
         except csv.Error as error:
+            logger.error("CSV parse error: %s", error)
             return
 
         try:
@@ -862,15 +866,21 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
         for claimant_arg in claimant_args:
             # create claimant
+            if None in claimant_arg:
+                del claimant_arg[None]
             with api.env.adopt_roles(["Manager"]):
-                self.context.invokeFactory("Claimant", **claimant_arg)
+                api.content.create(
+                    type="Claimant",
+                    container=self.context,
+                    safe_id=True,
+                    **claimant_arg
+                )
             logger.info(
-                "imported claimant {id}, {name} {surname}".format(
-                    id=claimant_arg["id"],
-                    name=claimant_arg["name1"],
-                    surname=claimant_arg["name2"],
+                "imported claimant {title}".format(
+                    title=claimant_arg["title"]
                 )
             )
+        logger.info("Finish importing claimant for {}".format("/".join(self.context.getPhysicalPath())))
 
     def handle_claimant_arg(
         self, row, titles_mapping, country_mapping, site, claim_type_mapping
@@ -899,18 +909,10 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         # mappings
         row["personTitle"] = titles_mapping.get(row["personTitle"], "notitle")
         row["country"] = country_mapping.get(row["country"], "belgium")
-        row["id"] = site.plone_utils.normalizeString(
-            row["name1"] + row["name2"] + row["society"]
-        )
-        row["claimType"] = claim_type_mapping[row["claimType"]]
-        count = 0
-        if row["id"] in self.context.objectIds():
-            count += 1
-            new_id = row["id"] + "-" + str(count)
-            while new_id in self.context.objectIds():
-                count += 1
-                new_id = row["id"] + "-" + str(count)
-            row["id"] = new_id
+        row["title"] = "{} {}".format(row["name1"], row["name2"])
+        if row["society"] != "":
+            row["title"] += " {}".format(row["society"])
+        row["claimType"] = claim_type_mapping.get(row["claimType"], "writedClaim")
         return row
 
     def getParcels(self):
