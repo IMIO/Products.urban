@@ -601,7 +601,7 @@ class SummaryReportHandler(IncomingNoticeHandler):
 
     @property
     def desired_licence_state(self):
-        return "prepare_final_decision"
+        return "final_decision_in_progress"
 
     def fill_incoming_event(self):
         super(SummaryReportHandler, self).fill_incoming_event()
