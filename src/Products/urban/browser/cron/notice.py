@@ -605,6 +605,11 @@ class SummaryReportHandler(IncomingNoticeHandler):
 
     def fill_incoming_event(self):
         super(SummaryReportHandler, self).fill_incoming_event()
+
+        if self.notification.due_date:
+            event_date = DateTime(str(self.notification.due_date))
+            self.event.setUltimeDate(event_date)
+
         if self.notification.proposed_decision_code:
             self.event.setExternalDecision(self.notification.proposed_decision_code)
 

@@ -241,6 +241,13 @@ class NoticeNotification(NoticeElement):
         raw_date = self._get_data("sendDate")
         if raw_date:
             return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
+    
+    @property
+    def due_date(self):
+        """Return the due date"""
+        raw_date = self._get_data("dueDate")
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
 
     @property
     def container(self):
