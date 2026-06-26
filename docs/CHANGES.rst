@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b17 (2026-06-26)
+---------------------
+
+Bug fixes:
+
+
+- SUP-41210 Fix import csv claimant
+  [jchandelle] (SUP-41210)
+
+
 3.0.0b16 (2026-06-23)
 ---------------------
 
