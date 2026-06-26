@@ -119,6 +119,7 @@ class ExplosivesPossession(BaseFolder, EnvironmentLicence, BrowserDefaultMixin):
                 "Title",
                 "applicantInfosIndex",
                 "sortable_title",
+                "SearchableText",
             )
         )
 

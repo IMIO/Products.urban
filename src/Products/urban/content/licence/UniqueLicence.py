@@ -296,6 +296,7 @@ class UniqueLicence(BaseFolder, BaseBuildLicence, EnvironmentBase, BrowserDefaul
                 "Title",
                 "applicantInfosIndex",
                 "sortable_title",
+                "SearchableText",
             )
         )
 
