@@ -33,6 +33,8 @@
     <element value="UrbanEventCollege" />
     <element value="UrbanEventInspectionReport" />
     <element value="UrbanEventFollowUp" />
+    <element value="UrbanEventAcknowledgment" />
+    <element value="UrbanEventMayor" />
     <element value="File" />
     <element value="Parcel" />
     <element value="task" />
