@@ -2918,13 +2918,13 @@ msgid "transfer_opinion"
 msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
 msgid "transfer_opinion_gesper_ap"
-msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège (A.P.) vers le SPW"
 
 msgid "transfer_opinion_gesper_ep"
-msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège (E.P.) vers le SPW"
 
 msgid "transfer_opinion_gesper_opinion_request"
-msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège (avis seul) vers le SPW"
 
 msgid "transfer_ticket"
 msgstr "Envoyer le PV et les réclamations vers le SPW"
