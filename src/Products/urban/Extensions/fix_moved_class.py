@@ -62,3 +62,26 @@ def fix_labruyere_envclassthrees():
         reindex_object(obj)
 
     logger.info("finished.")
+
+
+def fix_liege_patrimony():
+    from Products.urban.interfaces import IMiscDemand
+    from Products.urban.content.licence.PatrimonyCertificate import PatrimonyCertificate
+
+    logger.info("Start fixing PatrimonyCertificate")
+    portal = api.portal.get()
+    folder = portal.urban.patrimonycertificates
+
+    for obj_id, obj in folder.contentItems():
+        if not IMiscDemand.providedBy(obj):
+            continue
+        logger.info("fixing and reindexing {} ...".format(obj_id))
+        if obj.__class__ == PatrimonyCertificate:
+            continue
+        obj.__class__ = PatrimonyCertificate
+        obj.meta_type = "PatrimonyCertificate"
+        obj.schema = PatrimonyCertificate.schema
+        obj._p_changed = 1
+        obj.reindexObject()
+
+    logger.info("End fixing PatrimonyCertificate")
