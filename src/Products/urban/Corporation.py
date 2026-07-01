@@ -79,7 +79,10 @@ schema = Schema(
                 i18n_domain="urban",
             ),
             vocabulary=UrbanVocabulary(
-                "persons_titles", vocType="PersonTitleTerm", inUrbanConfig=False
+                "persons_titles",
+                vocType="PersonTitleTerm",
+                inUrbanConfig=False,
+                _filter=lambda title: title["multiplicity"] == "single"
             ),
         ),
         StringField(
