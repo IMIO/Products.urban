@@ -21,6 +21,7 @@ from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.MasterSelectWidget.MasterBooleanWidget import MasterBooleanWidget
 from Products.urban.Contact import Contact
 from Products.urban.config import *
+from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.widget.select2widget import MultiSelect2Widget
 from plone import api
 from zope.interface import implements
@@ -375,7 +376,12 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     """
     schema.moveField("representedBySociety", after="society")
     schema.moveField("isSameAddressAsWorks", after="representedBySociety")
-
+    schema["personTitle"].vocabulary = UrbanVocabulary(
+        "persons_titles",
+        vocType="PersonTitleTerm",
+        inUrbanConfig=False,
+        _filter=lambda title: title["multiplicity"] == "single",
+    )
 
 finalizeSchema(Applicant_schema)
 ##/code-section module-footer
