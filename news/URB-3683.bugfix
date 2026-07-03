@@ -1,0 +1,3 @@
+Avoid handling the same incoming NOTICE notification twice
+Hide NOTICE response forms from events with a final notification
+[daggelpop]
