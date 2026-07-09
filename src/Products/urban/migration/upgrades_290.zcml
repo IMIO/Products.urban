@@ -141,6 +141,7 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
+<<<<<<< HEAD
         title="Set up NOTICE form error mailing content rule"
         description=""
         source="2917"
@@ -226,6 +227,14 @@
         source="2927"
         destination="2928"
         handler=".update_290.reindex_decision_date"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Setup cron4plone notice import"
+        description=""
+        source="2928"
+        destination="2929"
+        handler=".update_290.setup_cron4plone_notice_import"
         profile="Products.urban:default" />
 
 </configure>
