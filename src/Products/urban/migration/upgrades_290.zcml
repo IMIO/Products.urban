@@ -140,4 +140,12 @@
         handler=".update_290.normalize_externaldecisions_vocabulary"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Setup cron4plone notice import"
+        description=""
+        source="2917"
+        destination="2918"
+        handler=".update_290.setup_cron4plone_notice_import"
+        profile="Products.urban:default" />
+
 </configure>

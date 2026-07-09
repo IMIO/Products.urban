@@ -303,6 +303,7 @@ def addDefaultCronJobs(context):
         u"0 1 * * portal/@@mailings",
         u"0 2 * * portal/@@inquiry_radius",
         u"0 4 * * portal/@@claimants_import",
+        u"0 * * * portal/@@import-from-notice",
     ]
 
 
