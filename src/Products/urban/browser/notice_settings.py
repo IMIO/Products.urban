@@ -16,7 +16,7 @@ class INoticeSettings(Interface):
     url = schema.URI(
         title=_("Webservice URL"),
         required=True,
-        default="https://api-staging.imio.be/spw/notice/v1/",
+        default="https://api.imio.be/spw/notice/v1/",
     )
 
     municipality_id = schema.TextLine(
