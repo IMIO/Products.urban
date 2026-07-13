@@ -8,6 +8,48 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.24 (2026-07-13)
+-------------------
+
+New features:
+
+
+- Handle PM_RS_PAS_ENVOYE_SFD and PM_ENVOI_RS_HD_SFD_COMMUNE notification
+  [WBoudabous] (URB-3313)
+- Handle PM_RS_PAS_ENVOYE notification
+  [WBoudabous] (URB-3314)
+- Add upgrade step to check existing vocabulary terms, create missing ones and add required mappings
+  [WBoudabous] (URB-3528)
+- Add a marker for the free notification event type
+  [WBoudabous] (URB-3594)
+- Handle PM_NOTIF_IRRECEVABLE_COMMUNE notification
+  [WBoudabous] (URB-3639)
+- Handle PM_PROROGATION_COURRIER_COMMUNE notification
+  [WBoudabous] (URB-3641)
+- Handle PM_ENVOI_DECISION_FT_COURRIER_COMMUNE  PM_RS_DECISION_COMMUNE and PM_REFUS_TACITE_COMMUNE notifications
+  [WBoudabous] (URB-3642)
+- Add college opinion code to GESPER EP & AP final responses
+  [daggelpop]
+  Validate the presence of a college opinion code in GESPER EP & AP final forms
+  [daggelpop]
+  Validate the presence of a college decision code in ARNE decision form
+  [daggelpop] (URB-3657)
+
+
+Bug fixes:
+
+
+- Add missing translation for urban_bound_roaddecrees
+  [WBoudabous] (SUP-53078)
+- Add  missing translation of warning_add_a_proprietary
+  [WBoudabous] (URB-2540)
+- Avoid handling the same incoming NOTICE notification twice
+  Hide NOTICE response forms from events with a final notification
+  [daggelpop] (URB-3683)
+- Handle irregular parcel data from NOTICe
+  [daggelpop] (URB-3705)
+
+
 2.9.23 (2026-06-10)
 -------------------
 
