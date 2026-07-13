@@ -1,2 +1,0 @@
-Handle PM_RS_PAS_ENVOYE_SFD and PM_ENVOI_RS_HD_SFD_COMMUNE notification
-[WBoudabous]
