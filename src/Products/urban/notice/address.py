@@ -26,10 +26,12 @@ class NoticeAddress(NoticeElement):
         if not result:
             result = utils.find_address(self.search_term, exact_match=False)
         # just by street
-        if not result and self.notice_street:
-            result = utils.find_address(self.notice_street, exact_match=True)
-        if not result and self.notice_street:
-            result = utils.find_address(self.notice_street, exact_match=False)
+        if self.notice_street:
+            sanitized_street = re.sub("[()]", "", self.notice_street)  # ZCTextIndex limitation
+            if not result:
+                result = utils.find_address(sanitized_street, exact_match=True)
+            if not result:
+                result = utils.find_address(sanitized_street, exact_match=False)
         return result
 
     @property
@@ -56,10 +58,7 @@ class NoticeAddress(NoticeElement):
             else:
                 term = u"{0} {1}".format(term, self.municipality)
 
-        if u"(" in term:
-            term = term.replace(u"(", u"")
-        if u")" in term:
-            term = term.replace(u")", u"")
+        term = re.sub("[()]", "", term)  # ZCTextIndex limitation
 
         return term  # must be unicode for utils.find_address
 
