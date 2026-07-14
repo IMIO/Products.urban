@@ -8,6 +8,27 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.25 (2026-07-14)
+-------------------
+
+New features:
+
+
+- Add NOTICE form error handling
+  [daggelpop]
+  Add mailing content rule for NOTICE form errors
+  [daggelpop] (URB-3650)
+
+
+Bug fixes:
+
+
+- Handle an empty list of NOTICe notifications
+  [daggelpop] (URB-3704)
+- Handle parentheses in street searches
+  [daggelpop] (URB-3709)
+
+
 2.9.24 (2026-07-13)
 -------------------
 
