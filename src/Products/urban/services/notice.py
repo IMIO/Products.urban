@@ -135,7 +135,9 @@ class WebserviceNotice(WebService):
         result = response.json()
         if result["status"] != "PROCESSED":
             raise ValueError("Error in response '{}'".format(result["status"]["value"]))
-        return result["notices"]["notice"]
+        notices_obj = result.get("notices") or {}
+        notices_list = notices_obj.get("notice") or []
+        return notices_list
 
     def _get_notification(self, notification_id):
         """Get a notification informations response from REST API"""
