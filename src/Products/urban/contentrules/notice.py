@@ -24,12 +24,20 @@ class INoticeImportFailedEvent(INoticeImportEvent):
     """Interface for event when a NOTICe notification has failed to import"""
 
 
+class INoticeResponseFailedEvent(INoticeImportEvent):
+    """Interface for event when a response to a NOTICe notification has failed"""
+
+
 class NoticeImportSucceededEvent(ObjectEvent):
     implements(INoticeImportSucceededEvent)
 
 
 class NoticeImportFailedEvent(ObjectEvent):
     implements(INoticeImportFailedEvent)
+
+
+class NoticeResponseFailedEvent(ObjectEvent):
+    implements(INoticeResponseFailedEvent)
 
 
 def notice_import(event):
