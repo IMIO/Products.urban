@@ -142,6 +142,16 @@ class NoPreviousEventFoundException(NoticeException):
         super(NoPreviousEventFoundException, self).__init__(msg)
 
 
+class NotificationAlreadyHandledException(NoticeException):
+    """Raised when trying to handle a notification more than once"""
+
+    def __init__(self, existing_event):
+        msg = "An event matching this notification has been found on the licence: {}".format(
+            existing_event.absolute_url()
+        )
+        super(NotificationAlreadyHandledException, self).__init__(msg)
+
+
 # FORM EXCEPTIONS
 
 

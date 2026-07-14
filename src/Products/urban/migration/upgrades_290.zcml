@@ -18,7 +18,7 @@
         destination="2901"
         handler=".update_290.add_event_config_types_notice"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Add folder manager for notice import"
         description=""
@@ -83,7 +83,7 @@
         destination="2909"
         handler=".update_290.fix_housing_roaddecree"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Update manageableLicences for notice FolderManager"
         description=""
@@ -91,7 +91,7 @@
         destination="2910"
         handler=".update_290.update_folder_manager_notice"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Add CODT unique bordering licences"
         description=""
@@ -123,12 +123,28 @@
         destination="2915"
         handler=".update_290.reindex_getDecisionDate"
         profile="Products.urban:default" />
-
+  
     <gs:upgradeStep
-        title="Set up NOTICE form error mailing content rule"
+        title="Add 'Dématérialisé' deposit type and activate field on deposit event"
         description=""
         source="2915"
         destination="2916"
+        handler=".update_290.add_digital_term_to_deposit_type"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Normalize external decisions vocabulary"
+        description=""
+        source="2916"
+        destination="2917"
+        handler=".update_290.normalize_externaldecisions_vocabulary"
+        profile="Products.urban:default" />
+    
+    <gs:upgradeStep
+        title="Set up NOTICE form error mailing content rule"
+        description=""
+        source="2917"
+        destination="2918"
         handler=".update_290.setup_notice_form_error_mailing_content_rule"
         profile="Products.urban:default" />
 

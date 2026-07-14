@@ -556,3 +556,6 @@ msgstr "Constat annuel"
 
 msgid "ComplementaryDelayTerm"
 msgstr "Prorogation complémentaire"
+
+msgid "warning_add_a_proprietary"
+msgstr "Veuillez renseigner le ou les demandeur(s)"

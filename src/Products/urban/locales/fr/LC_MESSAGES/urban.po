@@ -921,8 +921,14 @@ msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais i
 msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
 msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis (volet urbanistique manquant)"
 
+msgid "PM_RS_PAS_ENVOYE"
+msgstr "Impossibilité de transmettre un rapport de synthèse suite aux plans modificatifs dans les délais impartis"
+
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction"
+
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
 
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr "Transmission du rapport de synthèse"
@@ -932,6 +938,15 @@ msgstr "Transmission hors délai du rapport de synthèse"
 
 msgid "NOTIFICATION_RS_COMMUNE_RETARD_SFD"
 msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme"
+
+msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
+msgstr "Transmission hors délai du rapport de synthèse sans le volet urbanisme - Plans Modificatifs"
+
+msgid "PM_RS_PAS_ENVOYE_SFD"
+msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis - Plans Modificatifs"
+
+msgid "PM_ENVOI_RS_COMMUNE"
+msgstr "Transmission du rapport de synthèse suite aux plans modificatifs"
 
 msgid "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE"
 msgstr "Notification à la commune que la demande est incomplète"
@@ -947,6 +962,9 @@ msgstr "Notification à la commune que la demande est irrecevable (2e tour)"
 
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr "Notification à la commune que la demande est non recevable (2e tour)"
+
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
 
 #: ../browser/urban_configfolderview.py:22
 msgid "Name"
@@ -3046,7 +3064,7 @@ msgstr "urban_bound_licence"
 #. Default: "Bound roaddecrees"
 #: ../browser/licence/templates/licencetabsmacros.pt:71
 msgid "urban_bound_roaddecrees"
-msgstr "urban_bound_roaddecrees"
+msgstr "Décrets voirie liés"
 
 #. Default: "Browse old parcels (Only works with the parcel reference)"
 #: ../browser/templates/searchparcels.pt:156
@@ -5936,3 +5954,12 @@ msgstr "Partie de l'immeuble concernée"
 
 msgid "urban_label_buildingType"
 msgstr "Nature de l'immeuble"
+
+msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgstr "Plans Modificatifs - Notification à la commune de la décision"
+
+msgid "PM_RS_DECISION_COMMUNE"
+msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision"
+
+msgid "PM_REFUS_TACITE_COMMUNE"
+msgstr "Plans modificatifs - Notification à la commune du refus tacite"

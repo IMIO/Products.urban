@@ -11,12 +11,14 @@ from Products.urban.notice.exceptions import ErrorProcessingNotificationExceptio
 from Products.urban.notice.exceptions import FailedGettingRecentNotificationsException
 from Products.urban.notice.exceptions import NoImplementationFoundException
 from Products.urban.notice.exceptions import NoLicenceFoundException
+from Products.urban.notice.exceptions import NotificationAlreadyHandledException
 from Products.urban.services import notice
 from StringIO import StringIO
 from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.stringinterp.interfaces import IContextWrapper
+from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
 from zope.lifecycleevent import ObjectModifiedEvent
@@ -210,6 +212,7 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE",
+            "PM_NOTIF_IRRECEVABLE_COMMUNE",
         ):
             handler = InadmissibleHandler
         elif detailed_notification.notice_type in (
@@ -219,7 +222,10 @@ class ImportFromNoticeView(BrowserView):
             handler = PublicSurveyHandler
         elif detailed_notification.notice_type == "DEMANDE_EP_EXTRA":
             handler = BorderingPublicSurveyHandler
-        elif detailed_notification.notice_type == "NOTIFICATION_PROROGATION_COMMUNE":
+        elif detailed_notification.notice_type in (
+            "NOTIFICATION_PROROGATION_COMMUNE",
+            "PM_PROROGATION_COURRIER_COMMUNE",
+        ):
             handler = DeadlineExtensionHandler
         elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",
@@ -227,12 +233,19 @@ class ImportFromNoticeView(BrowserView):
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
             "NOTIFICATION_PAS_ENVOI_RS",
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
+            "PM_RS_PAS_ENVOYE",
+            "PM_RS_PAS_ENVOYE_SFD",
+            "PM_ENVOI_RS_HD_SFD_COMMUNE",
+            "PM_ENVOI_RS_COMMUNE",
         ):
             handler = SummaryReportHandler
         elif detailed_notification.notice_type in (
             "NOTIFICATION_DECISION_COMMUNE",
             "NOTIFICATION_DEC_RS_COMMUNE",
             "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
+            "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
+            "PM_RS_DECISION_COMMUNE",
+            "PM_REFUS_TACITE_COMMUNE",
         ):
             handler = DecisionSPWHandler
 
@@ -290,6 +303,7 @@ class IncomingNoticeHandler(object):
 
     def process(self):
         if self.licence:
+            self.ensure_no_duplicates()
             self.update_licence()
         elif self.create_licence_if_missing:
             self.create_licence()
@@ -440,6 +454,19 @@ class IncomingNoticeHandler(object):
             self.licence.setReferenceDGATLP(notification_ref)
             self.licence.reindexObject(idxs=["referenceDGATLP"])
 
+    def ensure_no_duplicates(self):
+        """Make sure that no event pertaining to this notification already exists in this licence"""
+        all_licence_events = sorted(
+            self.licence.getAllEvents(), key=lambda e: e.created()
+        )
+        for event in all_licence_events:
+            annotations = IAnnotations(event)
+            key = "notice_notification"
+            notice = annotations.get(key, {})
+            incoming = notice.get("incoming", {})
+            if self.notification.noticeId == incoming.get("notice_id"):
+                raise NotificationAlreadyHandledException(event)
+
     def _add_error(self, msg, serialized_data):
         error = _(
             u"<p>${msg} for informations: ${data}</p>",
@@ -587,6 +614,15 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
 
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "final_decision_in_progress"
+
+    def fill_incoming_event(self):
+        super(SummaryReportHandler, self).fill_incoming_event()
+        if self.notification.proposed_decision_code:
+            self.event.setExternalDecision(self.notification.proposed_decision_code)
 
 
 class DecisionSPWHandler(IncomingNoticeHandler):

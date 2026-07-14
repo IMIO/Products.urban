@@ -162,15 +162,19 @@ class NoticeNotification(NoticeElement):
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_NOTIF_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
             "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",
             "NOTIFICATION_PAS_ENVOI_RS": "ns3:SummaryReportRequest",
             "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
+            "PM_RS_PAS_ENVOYE": "ns3:SummaryReportRequest",
+            "PM_ENVOI_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DEC_RS_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
@@ -360,6 +364,13 @@ class NoticeNotification(NoticeElement):
     def workLocations(self):
         """Initialize workLocations"""
         return []
+
+    @property
+    def proposed_decision_code(self):
+        """Return proposed decision code from a SummaryReportRequest"""
+        return self._get_data(
+            "specific", "ns3:SummaryReportRequest", "ns3:proposedDecisionCode", "code"
+        )
 
     @property
     def decision_code(self):

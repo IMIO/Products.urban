@@ -1606,6 +1606,9 @@ msgstr ""
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr ""
 
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr ""
+
 msgid "DEMANDE_EP"
 msgstr ""
 
@@ -1631,6 +1634,9 @@ msgid "NOTIFICATION_PAS_ENVOI_RS"
 msgstr ""
 
 msgid "NOTIFICATION_PAS_ENVOI_RS_SFD"
+msgstr ""
+
+msgid "PM_RS_PAS_ENVOYE"
 msgstr ""
 
 msgid "NOTIFICATION_DECISION_COMMUNE"
@@ -1688,4 +1694,22 @@ msgid "DECISION_GESPER_1_ERE_INSTANCE"
 msgstr ""
 
 msgid "DECISION_GESPER_2_EME_INSTANCE"
+msgstr ""
+
+msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
+msgstr ""
+
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "PM_ENVOI_RS_COMMUNE"
+msgstr ""
+
+msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "PM_RS_DECISION_COMMUNE"
+msgstr ""
+
+msgid "PM_REFUS_TACITE_COMMUNE"
 msgstr ""
