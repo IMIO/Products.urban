@@ -140,4 +140,12 @@
         handler=".update_290.normalize_externaldecisions_vocabulary"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up NOTICE form error mailing content rule"
+        description=""
+        source="2917"
+        destination="2918"
+        handler=".update_290.setup_notice_form_error_mailing_content_rule"
+        profile="Products.urban:default" />
+
 </configure>

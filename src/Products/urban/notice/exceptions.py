@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import traceback
 
+from Products.urban import UrbanMessage as _
+from zope.globalrequest import getRequest
+from zope.i18n import translate
+
 
 def shorten_message(message, max_length=5000, cut_in_middle=True):
     """
@@ -62,6 +66,9 @@ class NoticeException(Exception):
             report += "\n\n{}".format(self.traceback_str)
 
         return report
+
+
+# CRON EXCEPTIONS
 
 
 class FailedGettingRecentNotificationsException(NoticeException):
@@ -143,3 +150,114 @@ class NotificationAlreadyHandledException(NoticeException):
             existing_event.absolute_url()
         )
         super(NotificationAlreadyHandledException, self).__init__(msg)
+
+
+# FORM EXCEPTIONS
+
+
+class NoticeResponseException(NoticeException):
+    """Raised when there is an error while posting a notification response."""
+
+    user_msg_template = _(
+        u"Couldn't process your request. Please contact an administrator."
+    )
+
+    def __init__(self, customer_ticket=None, original_exception=None):
+        message = u"Unexpected error while posting a NOTICE response\ncustomer ticket: {}".format(
+            customer_ticket
+        )
+        super(NoticeResponseException, self).__init__(message, original_exception)
+
+    def get_user_message(self):
+        return translate(self.user_msg_template, "urban", context=getRequest())
+
+
+class UnprocessableEntityException(NoticeResponseException):
+    """Raised when an unprocessable entity (HTTP code 422) is encountered is returned by the WS."""
+
+    user_msg_template = _(
+        u"Couldn't process your request. Please contact an administrator."
+    )
+
+    def __init__(self, url, details, original_exception=None):
+        message = (
+            u"Unexpected error while posting a NOTICE response\n"
+            u"NOTICE WS returned a 422 code (unprocessable entity)\n"
+            u"- URL: {}\n"
+            u"- Details: {}"
+        ).format(url, details)
+        super(NoticeResponseException, self).__init__(message, original_exception)
+
+
+class WrongStatusException(NoticeResponseException):
+    """Raised when trying to answer a notification with wrong status."""
+
+    user_msg_template = _(
+        u"Couldn't process your request: this notification does not have the correct status in Notice"
+    )
+
+    def __init__(self, information, customer_ticket=None, original_exception=None):
+        message = (
+            u"Unexpected error while posting a NOTICE response\n"
+            u"Notification does not have the correct status in Notice\n"
+            u"{}\n"
+            u"customer ticket: {}"
+        ).format(
+            information,
+            customer_ticket,
+        )
+        super(NoticeResponseException, self).__init__(message, original_exception)
+
+
+class MissingNotificationException(NoticeResponseException):
+    """Raised when trying to answer a notification that doesn't exist."""
+
+    user_msg_template = _(
+        u"Couldn't process your request: this notification does not exist in Notice"
+    )
+
+    def __init__(self, information, customer_ticket=None, original_exception=None):
+        message = (
+            u"Unexpected error while posting a NOTICE response\n"
+            u"Notification does not exist in Notice\n"
+            u"{}\n"
+            u"customer ticket: {}"
+        ).format(
+            information,
+            customer_ticket,
+        )
+        super(NoticeResponseException, self).__init__(message, original_exception)
+
+
+class MalformedFieldException(NoticeResponseException):
+    """Raised when trying to answer a notification with a malformed field."""
+
+    user_msg_template = _(
+        u"Couldn't process your request. Please contact an administrator."
+    )
+
+    def __init__(self, information, customer_ticket=None, original_exception=None):
+        message = (
+            u"Unexpected error while posting a NOTICE response\n"
+            u"A field is malformed\n"
+            u"{}\n"
+            u"customer ticket: {}"
+        ).format(information, customer_ticket)
+        super(NoticeResponseException, self).__init__(message, original_exception)
+
+
+class MissingFieldException(NoticeResponseException):
+    """Raised when trying to answer a notification with a missing field."""
+
+    user_msg_template = _(
+        u"Couldn't process your request. Please contact an administrator."
+    )
+
+    def __init__(self, information, customer_ticket=None, original_exception=None):
+        message = (
+            u"Unexpected error while posting a NOTICE response\n"
+            u"A field is missing\n"
+            u"{}\n"
+            u"customer ticket: {}"
+        ).format(information, customer_ticket)
+        super(NoticeResponseException, self).__init__(message, original_exception)
