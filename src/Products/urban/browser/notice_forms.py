@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import logging
 from datetime import datetime
 from z3c.form import button
 from z3c.form import field
@@ -17,7 +16,6 @@ from zope.interface import implementer
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeResponseFailedEvent
@@ -31,6 +29,8 @@ from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
 from plone.stringinterp.interfaces import IContextWrapper
 from plone.z3cform.layout import wrap_form
+
+import logging
 
 
 logger = logging.getLogger("urban: Notice Forms")

@@ -123,7 +123,7 @@
         destination="2915"
         handler=".update_290.reindex_getDecisionDate"
         profile="Products.urban:default" />
-  
+
     <gs:upgradeStep
         title="Add 'Dématérialisé' deposit type and activate field on deposit event"
         description=""
@@ -139,7 +139,7 @@
         destination="2917"
         handler=".update_290.normalize_externaldecisions_vocabulary"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Set up NOTICE form error mailing content rule"
         description=""
