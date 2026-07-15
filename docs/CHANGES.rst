@@ -8,6 +8,16 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.26 (2026-07-15)
+-------------------
+
+Internal:
+
+
+- Increase metadata version to last upgrade step (2916 -> 2918)
+  [daggelpop] (URB-3650)
+
+
 2.9.25 (2026-07-14)
 -------------------
 
