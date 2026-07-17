@@ -95,7 +95,7 @@
     <gs:upgradeStep
         title="Add CODT unique bordering licences"
         description=""
-        source="2911"
+        source="2910"
         destination="2912"
         handler=".update_290.add_codt_uniquebordering_licences"
         profile="Products.urban:default" />
