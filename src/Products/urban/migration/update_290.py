@@ -543,6 +543,8 @@ def reindex_getDecisionDate(context):
 
     reindexIndexes(None, ["getDecisionDate"])
 
+    logger.info("Upgrade done!")
+
 
 def add_digital_term_to_deposit_type(context):
     """
@@ -646,6 +648,7 @@ def setup_notice_form_error_mailing_content_rule(context):
 
 
 def normalize_externaldecisions_vocabulary(context):
+    logger = logging.getLogger("urban: Normalize external decisions vocabulary")
 
     VOCABULARY_TERMS = [
         "FAVORABLE",
@@ -695,3 +698,5 @@ def normalize_externaldecisions_vocabulary(context):
             new_term = getattr(voc_folder, vocabulary_term)
             new_term.setDescription(DESCRIPTION)
             logger.info("Created missing vocabulary term: %s", vocabulary_term)
+
+    logger.info("Upgrade done!")
