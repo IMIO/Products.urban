@@ -1,0 +1,2 @@
+Fix a missing upgrade step number
+[mpeeters]
