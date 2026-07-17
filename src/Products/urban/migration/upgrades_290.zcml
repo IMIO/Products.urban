@@ -125,7 +125,7 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add 'Dématérialisé' deposit type and activate field on deposit event"
+        title="Add 'digital' deposit type and activate field on deposit event"
         description=""
         source="2915"
         destination="2916"
