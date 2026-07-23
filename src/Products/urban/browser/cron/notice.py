@@ -284,6 +284,13 @@ class ImportFromNoticeView(BrowserView):
             # "DECISION_GESPER_2_EME_INSTANCE",
         ):
             handler = GesperDecisionSPWHandler
+        elif detailed_notification.notice_type in (
+            "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE",
+            "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE",
+            "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE",
+            "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
+        ):
+            handler = GesperFreeNotificationSPWHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -714,3 +721,8 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "complete"
+
+
+class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IFreeNotificationEvent"
+    create_licence_if_missing = True
