@@ -133,6 +133,11 @@
   </index>
   <column value="referenceFT"/>
 
+  <index name="referenceFT_PM" meta_type="FieldIndex">
+    <indexed_attr value="referenceFT_PM"/>
+  </index>
+  <column value="referenceFT_PM"/>
+
   <index name="referenceDGATLP" meta_type="FieldIndex">
     <indexed_attr value="referenceDGATLP"/>
   </index>

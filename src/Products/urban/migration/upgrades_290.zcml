@@ -148,4 +148,12 @@
         handler=".update_290.setup_notice_form_error_mailing_content_rule"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up `referenceFT_PM` index"
+        description=""
+        source="2918"
+        destination="2919"
+        handler=".update_290.setup_referenceFT_PM"
+        profile="Products.urban:default" />
+
 </configure>
