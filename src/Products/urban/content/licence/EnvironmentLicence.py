@@ -45,6 +45,7 @@ optional_fields = [
     "previousLicences",
     "referenceSPE",
     "referenceFT",
+    "referenceFT_PM",
     "claimsSynthesis",
     "conclusions",
     "commentsOnSPWOpinion",

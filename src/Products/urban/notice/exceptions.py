@@ -106,10 +106,12 @@ class NoImplementationFoundException(NoticeException):
 class NoLicenceFoundException(NoticeException):
     """Raised when no licence is found for given references."""
 
-    def __init__(self, urban_reference, referenceFT=None, referenceDGATLP=None):
+    def __init__(self, urban_reference, referenceFT=None, referenceFT_PM=None, referenceDGATLP=None):
         msg_parts = ["No licence found for URBAN reference {}".format(urban_reference)]
         if referenceFT:
             msg_parts.append("reference FT {}".format(referenceFT))
+        if referenceFT_PM:
+            msg_parts.append("reference FT (PM) {}".format(referenceFT_PM))
         if referenceDGATLP:
             msg_parts.append("reference DGATLP {}".format(referenceDGATLP))
         msg = ", or ".join(msg_parts)
