@@ -964,16 +964,16 @@ msgstr ""
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr ""
 
-msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgid "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE"
 msgstr ""
 
-msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgid "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE"
 msgstr ""
 
-msgid "PM_RS_DECISION_COMMUNE"
+msgid "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE"
 msgstr ""
 
-msgid "PM_REFUS_TACITE_COMMUNE"
+msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
 msgstr ""
 
 #: ../browser/urban_configfolderview.py:22
@@ -1040,6 +1040,18 @@ msgstr ""
 #: ../contentrules/configure.zcml:132
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
+msgstr ""
+
+msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "PM_REFUS_TACITE_COMMUNE"
+msgstr ""
+
+msgid "PM_RS_DECISION_COMMUNE"
 msgstr ""
 
 msgid "ParcelOutLicence"
