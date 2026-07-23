@@ -963,8 +963,17 @@ msgstr "Notification à la commune que la demande est irrecevable (2e tour)"
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr "Notification à la commune que la demande est non recevable (2e tour)"
 
-msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
-msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
+msgid "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE"
+msgstr "Notification libre avec réponse attendue - 1ère instance"
+
+msgid "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE"
+msgstr "Notification libre avec réponse attendue - 2ème instance"
+
+msgid "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE"
+msgstr "Notification libre sans réponse attendue - 1ère instance"
+
+msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
+msgstr "Notification libre sans réponse attendue - 2ème instance"
 
 #: ../browser/urban_configfolderview.py:22
 msgid "Name"
@@ -1027,6 +1036,9 @@ msgstr "Un fichier n'est plus disponible et n'a pas pu être envoyé"
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr "Avis à demander"
+
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
