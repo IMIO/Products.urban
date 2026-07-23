@@ -57,6 +57,7 @@ from zope.interface import implements
 optional_fields = [
     "referenceSPE",
     "referenceFT",
+    "referenceFT_PM",
     "environmentTechnicalRemarks",
     "claimsSynthesis",
     "conclusions",
@@ -446,6 +447,7 @@ def finalizeSchema(schema):
     """
     schema.moveField("referenceSPE", after="reference")
     schema.moveField("referenceFT", after="referenceDGATLP")
+    schema.moveField("referenceFT_PM", before="additionalReference")
     schema.moveField("authority", before="folderCategory")
     schema.moveField("folderTendency", after="folderCategory")
     schema.moveField("rubrics", after="folderTendency")

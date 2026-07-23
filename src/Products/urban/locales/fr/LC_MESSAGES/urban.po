@@ -5077,6 +5077,11 @@ msgstr "Référence SPW Economie, Emploi, Recherche"
 msgid "urban_label_referenceFT"
 msgstr "Référence FT (ARNE)"
 
+#. Default: "reference FT PM"
+#: ../content/licence/EnvironmentBase.py:112
+msgid "urban_label_referenceFT_PM"
+msgstr "Référence FT (Plans modifiés)"
+
 #. Default: "Referenceprosecution"
 #: ../content/licence/Inspection.py:38
 #: ../content/licence/Ticket.py:39

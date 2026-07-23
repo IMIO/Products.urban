@@ -700,3 +700,24 @@ def normalize_externaldecisions_vocabulary(context):
             logger.info("Created missing vocabulary term: %s", vocabulary_term)
 
     logger.info("Upgrade done!")
+
+
+def setup_referenceFT_PM(context):
+    logger = logging.getLogger("urban: Set up `referenceFT_PM` index and attribute")
+
+    # activate optional attribute
+    portal_urban = api.portal.get_tool("portal_urban")
+    for config in portal_urban.objectValues("LicenceConfig"):
+        if (
+            "referenceFT_PM" in config.listUsedAttributes()
+            and "referenceFT_PM" not in config.getUsedAttributes()
+        ):
+            to_set = ("referenceFT_PM",)
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+
+    # set up index
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+    reindexIndexes(None, ["referenceFT_PM"])
+
+    logger.info("upgrade step done!")

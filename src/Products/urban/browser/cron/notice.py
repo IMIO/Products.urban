@@ -311,6 +311,7 @@ class IncomingNoticeHandler(object):
             raise NoLicenceFoundException(
                 self.notification.reference,
                 self.notification.referenceFT,
+                self.notification.referenceFT_PM,
                 self.notification.referenceDGATLP,
             )
         self.create_incoming_event()
@@ -430,6 +431,7 @@ class IncomingNoticeHandler(object):
 
     def update_licence(self):
         self.set_reference_ft()
+        self.set_reference_ft_pm()
         self.set_reference_dgatlp()
 
     def set_reference_ft(self):
@@ -442,6 +444,17 @@ class IncomingNoticeHandler(object):
         if notification_ref and licence_ref != notification_ref:
             self.licence.setReferenceFT(notification_ref)
             self.licence.reindexObject(idxs=["referenceFT"])
+
+    def set_reference_ft_pm(self):
+        try:
+            licence_ref = self.licence.getReferenceFT_PM()
+        except AttributeError:
+            return
+
+        notification_ref = self.notification.referenceFT_PM
+        if notification_ref and licence_ref != notification_ref:
+            self.licence.setReferenceFT_PM(notification_ref)
+            self.licence.reindexObject(idxs=["referenceFT_PM"])
 
     def set_reference_dgatlp(self):
         try:

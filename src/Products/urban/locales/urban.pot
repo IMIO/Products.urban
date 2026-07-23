@@ -5110,6 +5110,11 @@ msgstr ""
 msgid "urban_label_referenceFT"
 msgstr ""
 
+#. Default: "reference FT PM"
+#: ../content/licence/EnvironmentBase.py:112
+msgid "urban_label_referenceFT_PM"
+msgstr ""
+
 #. Default: "Referenceprosecution"
 #: ../content/licence/Inspection.py:137
 #: ../content/licence/Ticket.py:138

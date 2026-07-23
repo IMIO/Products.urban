@@ -88,10 +88,18 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT(self):
-        if self.original_application == "TWICE":
+        if self.original_application == "TWICE" and self.notification_type == "PE_PU":
             return self._get_data("BO", "idBO")
         else:
             return None
+
+    @property
+    def referenceFT_PM(self):
+        if self.original_application == "TWICE" and self.notification_type == "PLANS_MODIFICATIFS":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
 
     @property
     def referenceDGATLP(self):
@@ -276,6 +284,15 @@ class NoticeNotification(NoticeElement):
         if self.referenceFT:
             brains = catalog.unrestrictedSearchResults(
                 referenceFT=self.referenceFT,
+                object_provides=IGenericLicence.__identifier__,
+            )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        if self.referenceFT_PM:
+            brains = catalog.unrestrictedSearchResults(
+                referenceFT_PM=self.referenceFT_PM,
                 object_provides=IGenericLicence.__identifier__,
             )
             if brains:
