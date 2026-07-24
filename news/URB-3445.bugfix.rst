@@ -1,2 +1,0 @@
-Fix an issue with unicode in upgrade step title
-[mpeeters]

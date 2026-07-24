@@ -8,6 +8,36 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.27 (2026-07-24)
+-------------------
+
+New features:
+
+
+- Implement reception of NOTICE free notification
+  [daggelpop] (URB-3561)
+- Store and index `referenceFT_PM`, coming from TWICE
+  [daggelpop] (URB-3703)
+
+
+Bug fixes:
+
+
+- Fix an issue with unicode in upgrade step title
+  [mpeeters] (URB-3445)
+- Fill missing keys for specific code mapping
+  [daggelpop] (URB-3703)
+
+
+Internal:
+
+
+- Fix a missing upgrade step number
+  [mpeeters] (URB-3470)
+- Add missing logging during upgrade step
+  [mpeeters] (URB-3528)
+
+
 2.9.26 (2026-07-15)
 -------------------
 
