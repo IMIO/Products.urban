@@ -1,2 +1,0 @@
-Add missing logging during upgrade step
-[mpeeters]
