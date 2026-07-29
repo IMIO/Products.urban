@@ -725,7 +725,7 @@ def add_last_received_notice_notification(context):
             criteria.add(
                 _cid_=u"c96",
                 wid="daterange",
-                title=u"Dernier événement réceptionné",
+                title=u"Dernier événement reçu",
                 position="top",
                 section="advanced",
                 hidden=False,

@@ -186,7 +186,7 @@
   </criterion>
   <criterion name="c96">
    <property name="widget">daterange</property>
-   <property name="title">Dernier événement réceptionné</property>
+   <property name="title">Dernier événement reçu</property>
    <property name="position">top</property>
    <property name="section">advanced</property>
    <property name="hidden">False</property>
