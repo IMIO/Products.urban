@@ -714,6 +714,8 @@ def add_last_received_notice_notification(context):
     # add dashboard widget
     urban_base_folder = api.portal.get().urban
     urban_dashboard_folders = [urban_base_folder]  # needed for dashboard 'All'
+    if "import-notice" in urban_base_folder.objectIds():
+        urban_dashboard_folders.append(getattr(urban_base_folder, "import-notice"))
     for urban_type in URBAN_TYPES:
         licence_folder = getattr(urban_base_folder, "{}s".format(urban_type.lower()), None)
         if licence_folder is not None:
