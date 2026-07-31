@@ -236,4 +236,12 @@
         handler=".update_290.setup_cron4plone_notice_import"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Import buttons for NOTICe forms"
+        description=""
+        source="2929"
+        destination="2930"
+        handler=".update_290.import_notice_form_buttons"
+        profile="Products.urban:default" />
+
 </configure>

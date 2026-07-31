@@ -873,3 +873,10 @@ def setup_cron4plone_notice_import(context):
         cron_cfg.cronjobs = new_list
 
     logger.info("upgrade step done!")
+
+
+def import_notice_form_buttons(context):
+    logger = logging.getLogger("urban: Import buttons for NOTICe forms")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
+    logger.info("upgrade step done!")
