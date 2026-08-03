@@ -87,7 +87,7 @@ class ImportFromNoticeView(BrowserView):
                     failed_notice_id, exc, retry=True
                 )
                 logger.exception(
-                    "%s",
+                    u"%s",
                     custom_exc,
                 )
                 self._notify_import_error(
@@ -139,7 +139,7 @@ class ImportFromNoticeView(BrowserView):
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(notice_id, exc)
                 logger.exception(
-                    "%s",
+                    u"%s",
                     custom_exc,
                 )
                 self._notify_import_error(
@@ -177,7 +177,7 @@ class ImportFromNoticeView(BrowserView):
         except Exception as exc:
             custom_exc = FailedGettingRecentNotificationsException(exc)
             logger.exception(
-                "%s",
+                u"%s",
                 custom_exc,
             )
             self._notify_import_error(
@@ -523,11 +523,11 @@ class IncomingNoticeHandler(object):
 
     def _add_error(self, msg, serialized_data):
         error = _(
-            "<p>${msg} for informations: ${data}</p>",
+            u"<p>${msg} for informations: ${data}</p>",
             mapping={
                 "msg": msg,
-                "data": ", ".join(
-                    ["{0}: {1}".format(k, v) for k, v in serialized_data.items()]
+                "data": u", ".join(
+                    [u"{0}: {1}".format(k, v) for k, v in serialized_data.items()]
                 ),
             },
         )
@@ -708,7 +708,7 @@ class DecisionSPWHandler(IncomingNoticeHandler):
                 self.event.setDecision(urban_decision_term)
             else:
                 self.event.setDescription(
-                    "Décision: {}".format(self.notification.decision_code)
+                    u"Décision: {}".format(self.notification.decision_code)
                 )
 
     @property
@@ -751,7 +751,7 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
-                self.event.setDescription("Décision: {}".format(decision_code))
+                self.event.setDescription(u"Décision: {}".format(decision_code))
 
     @property
     def desired_licence_state(self):
