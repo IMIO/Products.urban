@@ -6,6 +6,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
 from Products.urban.contentrules.notice import NoticeImportSucceededEvent
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.notice.exceptions import ErrorProcessingNotificationException
 from Products.urban.notice.exceptions import FailedGettingRecentNotificationsException
 from Products.urban.notice.exceptions import NoImplementationFoundException
@@ -22,6 +23,7 @@ from time import sleep
 from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
+from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectModifiedEvent
 
 import logging
@@ -367,6 +369,7 @@ class IncomingNoticeHandler(object):
         self.licence = api.content.create(
             container=self.notification.container, **self.notification.serialize()
         )
+        alsoProvides(self.licence, ILicenceCreatedViaNoticeWS)
         if IBaseBuildLicence.providedBy(self.licence):
             self.licence.setUsage("not_applicable")
         self.licence.setFoldermanagers(
