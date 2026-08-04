@@ -9,6 +9,9 @@ from Products.urban.contentrules.notice import INoticeImportFailedEvent
 from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
+from Products.urban.interfaces import IUrbanEventNotice
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
@@ -21,8 +24,11 @@ from plone.app.textfield import RichTextValue
 from plone.registry import field
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.event import notify
+from zope.i18n import translate
+from zope.interface import alsoProvides
 
 import logging
 
@@ -754,8 +760,23 @@ def add_notice_warning(context):
             {
                 "condition": "urban.warnings.notice",
                 "level": "warning",
-                "message": "Ce dossier a \xc3\xa9t\xc3\xa9 encod\xc3\xa9 de mani\xc3\xa8re d\xc3\xa9mat\xc3\xa9rialis\xc3\xa9e",
+                "message": translate(
+                    "urban.warnings.notice",
+                    domain="urban",
+                    target_language="fr",
+                    default=u"Ce dossier a été encodé de manière dématérialisée",
+                ).encode("utf-8"),
             }
         )
         portal_urban.setWarnings(tuple(existing))
+
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+        for event in licence.getAllEvents(IUrbanEventNotice):
+            if IAnnotations(event).get("notice_notification", {}):
+                alsoProvides(licence, ILicenceCreatedViaNoticeWS)
+                break
+
     logger.info("upgrade done!")
