@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-  <version>2923</version>
+  <version>2924</version>
   <dependencies>
     <dependency>profile-Products.urban:preinstall</dependency>
   </dependencies>
