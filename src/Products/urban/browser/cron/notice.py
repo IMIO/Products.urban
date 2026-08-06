@@ -248,6 +248,11 @@ class ImportFromNoticeView(BrowserView):
             "PM_REFUS_TACITE_COMMUNE",
         ):
             handler = DecisionSPWHandler
+        elif detailed_notification.notice_type in (
+            "ARRET_PLAN_MODIF_COMMUNE",
+            "ARRET_PLAN_MODIF_COMMUNE_MANUELLE",
+        ):
+            handler = StopForAmendedPlansHandler
 
         # GESPER
 
@@ -678,6 +683,14 @@ class DecisionSPWHandler(IncomingNoticeHandler):
             return mapping_decision_states.get(decision_code, "")
         else:
             return ""
+
+
+class StopForAmendedPlansHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IIntentionToSubmitAmendedPlans"
+
+    @property
+    def desired_licence_state(self):
+        return "suspension"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):
