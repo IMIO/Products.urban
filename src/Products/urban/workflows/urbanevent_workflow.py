@@ -7,6 +7,7 @@ from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IUniqueLicence
 from Products.urban.interfaces import IUrbanAndEnvironmentEvent
 from Products.urban.interfaces import IUrbanOrEnvironmentEvent
+from Products.urban.interfaces import IHousing
 from Products.urban.workflows.adapter import LocalRoleAdapter
 
 
@@ -19,6 +20,8 @@ class StateRolesMapping(LocalRoleAdapter):
         self.licence = self.context.aq_parent
 
     def get_allowed_groups(self, licence, event):
+        if IHousing.providedBy(licence):
+            return "housing"
         integrated_licence = IIntegratedLicence.providedBy(licence)
         if IEnvironmentBase.providedBy(licence) or integrated_licence:
             if IUniqueLicence.providedBy(licence) or ICODT_UniqueLicence.providedBy(
@@ -55,6 +58,10 @@ class StateRolesMapping(LocalRoleAdapter):
                 "urban_editors",
                 "environment_editors",
             ],
+            "housing": [
+                "housing_editors",
+                "urban_editors",
+            ]
         }
         allowed_group = self.get_allowed_groups(licence, event)
         if allowed_group in mapping:
@@ -75,6 +82,10 @@ class StateRolesMapping(LocalRoleAdapter):
                 "urban_readers",
                 "environment_readers",
             ],
+            "housing": [
+                "housing_readers",
+                "urban_readers",
+            ]
         }
         allowed_group = self.get_allowed_groups(licence, event)
         if allowed_group in mapping:

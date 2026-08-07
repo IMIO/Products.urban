@@ -703,6 +703,12 @@ def addUrbanGroups(context):
     site.portal_groups.addGroup("inspection_editors", title="Inspection Editors")
     site.portal_groups.setRolesForGroup("inspection_editors", ("UrbanMapReader",))
     site.portal_groups.addPrincipalToGroup("inspection_editors", "urban_readers")
+    # add housing editors group
+    site.portal_groups.addGroup("housing_editors", title="Housing Editors")
+    site.portal_groups.setRolesForGroup("housing_editors", ("UrbanMapReader",))
+    site.portal_groups.addGroup("housing_readers", title="Housing Readers")
+    site.portal_groups.setRolesForGroup("housing_readers", ("UrbanMapReader",))
+    site.portal_groups.addPrincipalToGroup("housing_editors", "housing_readers")
 
 
 def setDefaultApplicationSecurity(context):
@@ -737,6 +743,8 @@ def setDefaultApplicationSecurity(context):
     site.portal_urban.manage_addLocalRoles("environment_readers", ("Reader",))
     site.portal_urban.manage_addLocalRoles("environment_editors", ("Reader",))
     site.portal_urban.manage_addLocalRoles("urban_map_readers", ("Reader",))
+    site.portal_urban.manage_addLocalRoles("housing_editors", ("Reader",))
+    site.portal_urban.manage_addLocalRoles("housing_readers", ("Reader",))
 
     # application folders local roles
     # global application folder : "urban_readers" and "urban_editors" can read...
@@ -755,6 +763,8 @@ def setDefaultApplicationSecurity(context):
         app_folder.manage_addLocalRoles("urban_editors", ("Reader",))
         app_folder.manage_addLocalRoles("environment_readers", ("Reader",))
         app_folder.manage_addLocalRoles("environment_editors", ("Reader",))
+        app_folder.manage_addLocalRoles("housing_editors", ("Reader",))
+        app_folder.manage_addLocalRoles("housing_readers", ("Reader",))
         # set some hardcoded permissions
         # sharing is only managed by the 'Managers'
         app_folder.manage_permission(
@@ -806,6 +816,8 @@ def setDefaultApplicationSecurity(context):
                     folder.manage_addLocalRoles("environment_editors", ("Contributor",))
             if folder_name == getLicenceFolderId("Inspection"):
                 folder.manage_addLocalRoles("inspection_editors", ("Contributor",))
+            if folder_name == getLicenceFolderId("Housing"):
+                folder.manage_addLocalRoles("housing_editors", ("Contributor",))
 
     # objects application folder : "urban_readers" can read and "urban_editors" can edit...
     objectsfolder_names = ["architects", "geometricians", "notaries", "parcellings"]
@@ -836,6 +848,8 @@ def setDefaultApplicationSecurity(context):
             folder.manage_addLocalRoles("environment_readers", ("Reader",))
             folder.manage_addLocalRoles("environment_editors", ("Contributor",))
             folder.manage_addLocalRoles("opinions_editors", ("Reader",))
+            folder.manage_addLocalRoles("housing_readers", ("Reader",))
+            folder.manage_addLocalRoles("housing_editors", ("Editor", "Contributor"))
             # mark them with IContactFolder interface use some view methods, like 'getemails', on it
             alsoProvides(folder, IContactFolder)
 
@@ -1975,6 +1989,8 @@ def set_licence_folder_security(urban_type, urban_folder=None):
             urban_folder.manage_addLocalRoles("environment_editors", ("Contributor",))
     if urban_type == "Inspection":
         urban_folder.manage_addLocalRoles("inspection_editors", ("Contributor",))
+    if urban_type == "Housing":
+        urban_folder.manage_addLocalRoles("housing_editors", ("Contributor",))
 
 
 def add_imio_dashboard(urban_type, urban_folder=None):

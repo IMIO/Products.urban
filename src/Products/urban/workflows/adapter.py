@@ -5,6 +5,7 @@ from Products.urban.interfaces import ICODT_UniqueLicence
 from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.interfaces import IIntegratedLicence
 from Products.urban.interfaces import IUniqueLicence
+from Products.urban.interfaces import IHousing
 from borg.localrole.interfaces import ILocalRoleProvider
 from imio.schedule.config import DONE
 from imio.schedule.config import STARTED
@@ -41,6 +42,8 @@ class LocalRoleAdapter(object):
         self.licence = self.context
 
     def get_allowed_groups(self, licence):
+        if IHousing.providedBy(licence):
+            return "housing"
         if (
             IUniqueLicence.providedBy(licence)
             or ICODT_UniqueLicence.providedBy(licence)
@@ -96,6 +99,10 @@ class LocalRoleAdapter(object):
                 "urban_editors",
                 "environment_editors",
             ],
+            "housing": [
+                "housing_editors",
+                "urban_editors",
+            ]
         }
         allowed_group = self.get_allowed_groups(licence)
         if allowed_group in mapping:
@@ -115,6 +122,10 @@ class LocalRoleAdapter(object):
                 "urban_readers",
                 "environment_readers",
             ],
+            "housing": [
+                "housing_readers",
+                "urban_readers",
+            ]
         }
         allowed_group = self.get_allowed_groups(licence)
         if allowed_group in mapping:

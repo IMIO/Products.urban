@@ -156,4 +156,12 @@
         handler=".update_290.setup_referenceFT_PM"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add housing group"
+        description=""
+        source="2919"
+        destination="2920"
+        handler=".update_290.add_housing_group"
+        profile="Products.urban:default" />
+
 </configure>
