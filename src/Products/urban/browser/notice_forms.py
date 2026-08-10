@@ -151,7 +151,7 @@ class NoticeResponseActionForm(Form):
             annotations = IAnnotations(event)
             key = "notice_notification"
             notice = annotations.get(key, {})
-            incoming = notice.get("incoming", [])
+            incoming = notice.get("incoming", {})
             if incoming.get("notice_id") == incoming_id:
                 return incoming.get("notice_type")
         return None
