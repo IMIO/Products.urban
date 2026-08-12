@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.28 (2026-08-12)
+-------------------
+
+Bug fixes:
+
+
+- Clarify translations for NOTICE response buttons
+  [daggelpop] (URB-3658)
+- Fix decision display form
+  [daggelpop] (URB-3720)
+
+
 2.9.27 (2026-07-24)
 -------------------
 
