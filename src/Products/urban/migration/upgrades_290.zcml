@@ -156,4 +156,12 @@
         handler=".update_290.setup_referenceFT_PM"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Import buttons for NOTICe forms"
+        description=""
+        source="2919"
+        destination="2920"
+        handler=".update_290.import_notice_form_buttons"
+        profile="Products.urban:default" />
+
 </configure>

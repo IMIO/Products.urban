@@ -721,3 +721,10 @@ def setup_referenceFT_PM(context):
     reindexIndexes(None, ["referenceFT_PM"])
 
     logger.info("upgrade step done!")
+
+
+def import_notice_form_buttons(context):
+    logger = logging.getLogger("urban: Import buttons for NOTICe forms")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
+    logger.info("upgrade step done!")
