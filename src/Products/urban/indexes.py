@@ -26,6 +26,7 @@ from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.indexer import indexer
 from requests.exceptions import RequestException
+from zope.annotation.interfaces import IAnnotations
 from zope.component import queryAdapter
 from zope.interface import Interface
 
@@ -426,3 +427,23 @@ def streetcode_indexer(obj):
 @indexer(interfaces.IGenericLicence)
 def additional_reference(object):
     return object.getAdditionalReference()
+
+
+@indexer(interfaces.IGenericLicence)
+def last_received_notice_notification(object):
+    """
+    Get the creation date of the last received NOTICe event
+    """
+
+    all_licence_events = sorted(
+        object.getAllEvents(), key=lambda e: e.created(), reverse=True
+    )
+    for event in all_licence_events:
+        annotations = IAnnotations(event)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        incoming = notice.get("incoming", {})
+        if incoming.get("notice_id"):
+            return event.created()
+
+    return None
