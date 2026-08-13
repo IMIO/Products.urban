@@ -735,9 +735,25 @@ msgstr "Règlement transactionnel"
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr "Collège simple"
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr "Décision de révision des conditions particulières"
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr "Dépôt de révision des conditions particulières"
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr "Projet de révision des conditions particulières"
+
 #: ../interfaces.py:565
 msgid "ISuspensionEvent type marker interface"
 msgstr "Suspension"
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
+msgstr "Refus tacite"
 
 #: ../interfaces.py:465
 msgid "ITechnicalAnalysis type marker interface"

@@ -743,8 +743,24 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:581
 msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:481
