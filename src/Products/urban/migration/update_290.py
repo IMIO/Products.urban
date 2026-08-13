@@ -12,6 +12,8 @@ from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.utils import moveElementAfter
+from Products.urban.utils import getLicenceFolderId
+from Products.urban.migration.utils import refresh_workflow_permissions
 from Products.urban.setuphandlers import set_licence_folder_security
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
@@ -719,5 +721,124 @@ def setup_referenceFT_PM(context):
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
     reindexIndexes(None, ["referenceFT_PM"])
+
+    logger.info("upgrade step done!")
+
+
+def _reindex_security(catalog, brains):
+    """Reindex only 'allowedRolesAndUsers' on the given brains."""
+    for brain in brains:
+        obj = brain._unrestrictedGetObject()
+        if obj is None:
+            continue
+        catalog.reindexObject(
+            obj,
+            idxs=["allowedRolesAndUsers"],
+            update_metadata=0,
+            uid=brain.getPath(),
+        )
+
+
+def add_housing_group(context):
+    logger = logging.getLogger("urban: Add housing groups")
+    logger.info("starting upgrade step")
+
+    HOUSING_GROUPS = {
+        "housing_editors": {
+            "title": "Housing Editors",
+            "description": "Group for housing editor",
+        },
+        "housing_readers": {
+            "title": "Housing Readers",
+            "description": "Group for housing reader",
+        },
+    }
+
+    for group_id, values in HOUSING_GROUPS.items():
+        if api.group.get(groupname=group_id) is None:
+            api.group.create(
+                groupname=group_id,
+                title=values["title"],
+                description=values["description"],
+                roles=["UrbanMapReader"],
+            )
+    portal_groups = api.portal.get_tool("portal_groups")
+    portal_groups.addPrincipalToGroup("housing_editors", "housing_readers")
+
+    portal = api.portal.get()
+    urban_folder = portal["urban"]
+    portal_urban = api.portal.get_tool("portal_urban")
+    housing_folder = getattr(urban_folder, getLicenceFolderId("Housing"), None)
+    if housing_folder is None:
+        logger.error("could not find the housing folder, aborting!")
+        return
+
+    urban_folder.manage_addLocalRoles("housing_readers", ("Reader",))
+    urban_folder.manage_addLocalRoles("housing_editors", ("Reader",))
+
+    portal_urban.manage_addLocalRoles("housing_readers", ("Reader",))
+    portal_urban.manage_addLocalRoles("housing_editors", ("Reader",))
+
+    housing_folder.manage_addLocalRoles("housing_editors", ("Contributor",))
+
+    objects_folder_names = ["architects", "geometricians", "notaries", "parcellings"]
+    for folder_name in objects_folder_names:
+        folder = getattr(urban_folder, folder_name, None)
+        if folder is None:
+            continue
+        folder.manage_addLocalRoles("housing_readers", ("Reader",))
+        folder.manage_addLocalRoles("housing_editors", ("Editor", "Contributor"))
+
+    catalog = api.portal.get_tool("portal_catalog")
+    urban_path = "/".join(urban_folder.getPhysicalPath())
+    config_path = "/".join(portal_urban.getPhysicalPath())
+
+    # housing business content: licences + collection_housing
+    housing_folder.reindexObjectSecurity()
+
+    # "procedure" links in the /urban collection widget
+    _reindex_security(
+        catalog,
+        catalog.unrestrictedSearchResults(
+            path={"query": urban_path},
+            object_provides="plone.app.collection.interfaces.ICollection",
+        ),
+    )
+
+    # procedure listing in portal_urban
+    _reindex_security(
+        catalog,
+        catalog.unrestrictedSearchResults(
+            path={"query": config_path},
+            portal_type="LicenceConfig",
+        ),
+    )
+
+    # contact folders: needed for the search-by-name form
+    for folder_name in objects_folder_names:
+        _reindex_security(
+            catalog,
+            catalog.unrestrictedSearchResults(
+                path={"query": "{}/{}".format(urban_path, folder_name)},
+            ),
+        )
+
+    # folder managers
+    foldermanagers_folder = getattr(portal_urban, "foldermanagers", None)
+    if foldermanagers_folder is not None:
+        foldermanagers_folder.reindexObjectSecurity()
+
+    urban_folder.reindexObject(idxs=["allowedRolesAndUsers"])
+    portal_urban.reindexObject(idxs=["allowedRolesAndUsers"])
+
+    if housing_folder.objectIds("Housing"):
+        refresh_workflow_permissions("housing_workflow", folder_path=urban_path)
+        refresh_workflow_permissions("urbanevent_workflow", folder_path=urban_path)
+        refresh_workflow_permissions("opinion_request_workflow", folder_path=urban_path)
+    else:
+        logger.info(
+            "no housing licence found in %s, skipping workflow permissions refresh",
+            "/".join(housing_folder.getPhysicalPath()),
+        )
 
     logger.info("upgrade step done!")

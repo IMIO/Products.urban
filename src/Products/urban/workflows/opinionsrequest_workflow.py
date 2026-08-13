@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import IHousing
 from Products.urban.workflows.adapter import LocalRoleAdapter
 from collections import OrderedDict
 from plone import api
@@ -33,15 +34,19 @@ class StateRolesMapping(LocalRoleAdapter):
                 elif groupe_type == "validators":
                     return (record["validator_group_id"],)
 
+        if IHousing.providedBy(self.licence):
+            return ("urban_editors", "housing_editors",)
         return ("urban_editors", "environment_editors")
 
     def get_editors(self):
+        if IHousing.providedBy(self.licence):
+            return ("housing_editors",)
         if IEnvironmentBase.providedBy(self.licence):
             return ("environment_editors",)
         return ("urban_editors",)
 
     def get_editors_roles(self):
-        if "urban_editors" in self.get_opinion_editor():
+        if "urban_editors" in self.get_opinion_editor() or "housing_editors" in self.get_opinion_editor():
             return (
                 "Reader",
                 "Contributor",
@@ -56,7 +61,7 @@ class StateRolesMapping(LocalRoleAdapter):
 
     def get_opinion_editor_role(self):
         groups = self.get_opinion_editor()
-        if "urban_editors" in groups:
+        if "urban_editors" in groups or "housing_editors" in groups:
             return (
                 "Reader",
                 "Contributor",

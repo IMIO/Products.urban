@@ -121,6 +121,7 @@ class ConfigRenderer(base.Renderer):
             "Manager" in roles
             or "urban_editors" in groups
             or "environment_editors" in groups
+            or "housing_editors" in groups
             or "urban_managers" in groups
         )
         return available
