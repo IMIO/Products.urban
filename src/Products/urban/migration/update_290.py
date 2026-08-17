@@ -10,6 +10,7 @@ from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.utils import moveElementAfter
 from Products.urban.setuphandlers import set_licence_folder_security
@@ -720,4 +721,20 @@ def setup_referenceFT_PM(context):
     setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
     reindexIndexes(None, ["referenceFT_PM"])
 
+    logger.info("upgrade step done!")
+
+
+def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
+    logger = logging.getLogger("urban: Hide CODT_UniqueBorderingLicences folder")
+    webservice = WebserviceNotice()
+    if webservice.is_setup:
+        logger.info("Notice is configure, abort hiding")
+        return
+    portal = api.portal.get()
+    urban = portal["urban"]
+    codt_uniqueborderinglicences = urban.get("codt_uniqueborderinglicences", None)
+    if codt_uniqueborderinglicences is None:
+        logger.warning("codt_uniqueborderinglicences folder is not present")
+        return
+    codt_uniqueborderinglicences.setExcludeFromNav(True)
     logger.info("upgrade step done!")

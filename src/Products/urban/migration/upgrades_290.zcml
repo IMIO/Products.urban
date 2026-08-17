@@ -156,4 +156,12 @@
         handler=".update_290.setup_referenceFT_PM"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Hide CODT_UniqueBorderingLicences for none notice instance"
+        description=""
+        source="2919"
+        destination="2920"
+        handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
+        profile="Products.urban:default" />
+
 </configure>
