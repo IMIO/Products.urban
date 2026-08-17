@@ -1,2 +1,2 @@
-Add upgradestep to hide `CODT_UniqueBorderingLicences` folder
+Add upgrade step to hide `CODT_UniqueBorderingLicences` folder
 [jchandelle]
