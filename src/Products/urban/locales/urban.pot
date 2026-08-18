@@ -567,6 +567,10 @@ msgstr ""
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr ""
 
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:401
 msgid "IAcknowledgment type marker interface"
 msgstr ""
@@ -585,6 +589,10 @@ msgstr ""
 
 #: ../interfaces.py:433
 msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr ""
+
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:361
@@ -637,6 +645,10 @@ msgstr ""
 
 #: ../interfaces.py:521
 msgid "IIILEPrescriptionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:437
