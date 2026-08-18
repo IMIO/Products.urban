@@ -318,6 +318,18 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IAbandonEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IInformationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ICessionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 

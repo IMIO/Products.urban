@@ -629,6 +629,18 @@ class IExtensionEvent(Interface):
     __doc__ = _("""IExtensionEvent type marker interface""")
 
 
+class IAbandonEvent(Interface):
+    __doc__ = _("""IAbandonEvent type marker interface""")
+
+
+class IInformationEvent(Interface):
+    __doc__ = _("""IInformationEvent type marker interface""")
+
+
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 
