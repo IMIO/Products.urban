@@ -721,3 +721,16 @@ def setup_referenceFT_PM(context):
     reindexIndexes(None, ["referenceFT_PM"])
 
     logger.info("upgrade step done!")
+
+
+def set_pul_urbanConfigId(context):
+    logger = logging.getLogger("urban: Set urbanConfigId for PUL")
+
+    portal = api.portal.get()
+    licence_folder = getattr(portal.urban, "codt_uniqueborderinglicences", None)
+    if not licence_folder.getProperty("urbanConfigId"):
+        licence_folder.manage_addProperty(
+            "urbanConfigId", "codt_uniqueborderinglicence", "string"
+        )
+
+    logger.info("upgrade step done!")
