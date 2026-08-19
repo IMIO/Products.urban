@@ -114,6 +114,18 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ISpecialConditionsRevisionDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISpecialConditionsRevisionProjectEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISpecialConditionsRevisionDecisionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDepositEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -365,3 +377,4 @@
     />
 
 </configure>
+ 
