@@ -536,6 +536,7 @@ class ITransferDecisionActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
                 "NOTIFICATION_PAS_ENVOI_RS",
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
+                "PM_ENVOI_RS_HD_COMMUNE",
                 "PM_RS_PAS_ENVOYE",
                 "PM_ENVOI_RS_COMMUNE",
                 "ART65_ENVOI_PROJET_COMMUNE",
@@ -595,6 +596,7 @@ class ITransferDecisionDisplayActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
                 "PM_RS_PAS_ENVOYE",
                 "PM_ENVOI_RS_COMMUNE",
+                "PM_ENVOI_RS_HD_COMMUNE",
                 "NOTIFICATION_DECISION_COMMUNE",
                 "NOTIFICATION_DEC_RS_COMMUNE",
                 "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
@@ -649,6 +651,7 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
             "PM_RS_PAS_ENVOYE",
             "PM_ENVOI_RS_COMMUNE",
+            "PM_ENVOI_RS_HD_COMMUNE",
             "ART65_ENVOI_PROJET_COMMUNE",
             "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
         ):

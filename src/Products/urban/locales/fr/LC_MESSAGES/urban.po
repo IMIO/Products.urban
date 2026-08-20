@@ -1118,6 +1118,9 @@ msgstr "Notification à la commune de l'abandon de la procédure (Plans modifica
 msgid "PM_ABANDON_COMMUNE_FTFD"
 msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
 
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr "Notification hors délai à la commune du RS - Plans Modificatifs"
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
 
