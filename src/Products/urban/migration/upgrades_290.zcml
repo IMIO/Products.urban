@@ -136,4 +136,36 @@
         handler=".update_290.add_digital_term_to_deposit_type"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Normalize external decisions vocabulary"
+        description=""
+        source="2916"
+        destination="2917"
+        handler=".update_290.normalize_externaldecisions_vocabulary"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up NOTICE form error mailing content rule"
+        description=""
+        source="2917"
+        destination="2918"
+        handler=".update_290.setup_notice_form_error_mailing_content_rule"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up `referenceFT_PM` index"
+        description=""
+        source="2918"
+        destination="2919"
+        handler=".update_290.setup_referenceFT_PM"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Hide CODT_UniqueBorderingLicences for none notice instance"
+        description=""
+        source="2919"
+        destination="2920"
+        handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
+        profile="Products.urban:default" />
+
 </configure>
