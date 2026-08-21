@@ -1621,6 +1621,15 @@ msgstr ""
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr ""
 
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr ""
+
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr ""
 

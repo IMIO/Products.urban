@@ -222,6 +222,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IAbandonEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IRefusedIncompletenessEvent"
     type=".interfaces.IEventTypeType"/>
 
