@@ -233,26 +233,9 @@ class NoticeResponseActionForm(Form):
             return
 
         incoming_notice_id = data["incoming_notification"]
-
         self.field_values_to_store = {}
-        try:
-            response_result = self.transfer_response(data)
-        except NoticeResponseException as e:
-            IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
-            # NoticeResponseException have already been logged in the service layer
-            self._notify_response_error(incoming_notice_id, e.get_error_report())
-            return
-        except Exception as e:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"Couldn't process your request. Please contact an administrator."),
-                "error",
-            )
-            logger.exception(u"%s", e)
-            self._notify_response_error(incoming_notice_id, str(e))
-            return
-        else:
-            IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
 
+        # first, send documents
         file_paths = data.get("file_paths", [])
         for file_path in file_paths:
             file_obj = api.content.get(path=file_path)
@@ -282,6 +265,25 @@ class NoticeResponseActionForm(Form):
                     }
                 )
                 self.field_values_to_store["documents"] = sent_documents
+
+        # second, send response
+        try:
+            response_result = self.transfer_response(data)
+        except NoticeResponseException as e:
+            IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
+            # NoticeResponseException have already been logged in the service layer
+            self._notify_response_error(incoming_notice_id, e.get_error_report())
+            return
+        except Exception as e:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"Couldn't process your request. Please contact an administrator."),
+                "error",
+            )
+            logger.exception(u"%s", e)
+            self._notify_response_error(incoming_notice_id, str(e))
+            return
+        else:
+            IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
 
         response_body = response_result.get("body", {}) or {}
         response_body_result = response_body.get("result", {}) or {}
