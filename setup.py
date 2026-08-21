@@ -4,7 +4,11 @@ from setuptools import setup
 import os
 
 
+<<<<<<< HEAD
 version = "3.0.0b19.dev0"
+=======
+version = "2.9.30.dev0"
+>>>>>>> 0632f91bc (Back to development: 2.9.30)
 
 setup(
     name="Products.urban",
