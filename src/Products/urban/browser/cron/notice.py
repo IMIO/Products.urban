@@ -78,6 +78,12 @@ class ImportFromNoticeView(BrowserView):
             try:
                 self._handle_notification(failed_notice_id)
                 logger.info(u"Retried notification %s succeeded", failed_notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    failed_notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(
@@ -126,6 +132,12 @@ class ImportFromNoticeView(BrowserView):
                 if notif_last_status_date > self.latest_successful_date:
                     self.latest_successful_date = notif_last_status_date
                 logger.info(u"Notification %s succeeded", notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(notice_id, exc)
