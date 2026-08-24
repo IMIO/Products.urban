@@ -222,10 +222,6 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IAbandonEvent"
-    type=".interfaces.IEventTypeType"/>
-
-  <interface
     interface=".interfaces.IRefusedIncompletenessEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -323,7 +319,7 @@
 
   <interface
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
-    type=".interfaces.IEventTypeType"/> 
+    type=".interfaces.IEventTypeType"/>
 
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware

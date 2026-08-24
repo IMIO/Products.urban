@@ -639,7 +639,7 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
 
 
 class AbandonHandler(IncomingNoticeHandler):
-    event_config_marker = "Products.urban.interfaces.IAbandonEvent"
+    event_config_marker = "Products.urban.interfaces.IForcedEndEvent"
 
     @property
     def desired_licence_state(self):

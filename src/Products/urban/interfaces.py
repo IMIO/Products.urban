@@ -517,10 +517,6 @@ class IProrogationEvent(Interface):
     __doc__ = _("""IProrogation type marker interface""")
 
 
-class IAbandonEvent(Interface):
-    __doc__ = _("""IAbandonEvent type marker interface""")
-
-
 class IProvocationEvent(Interface):
     __doc__ = _("""IProvocationEvent type marker interface""")
 
