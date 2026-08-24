@@ -342,6 +342,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ITacitRefusalEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -369,4 +373,3 @@
     />
 
 </configure>
- 
