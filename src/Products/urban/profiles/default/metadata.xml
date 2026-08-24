@@ -1,10 +1,6 @@
 <?xml version="1.0"?>
 <metadata>
-<<<<<<< HEAD
   <version>2920</version>
-=======
-  <version>2915</version>
->>>>>>> a0e8ea4d8 (Apply review comments)
   <dependencies>
     <dependency>profile-Products.urban:preinstall</dependency>
   </dependencies>
