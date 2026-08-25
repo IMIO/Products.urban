@@ -100,7 +100,6 @@ class NoticeNotification(NoticeElement):
         else:
             return None
 
-
     @property
     def referenceDGATLP(self):
         if self.original_application == "GESPER":
@@ -198,6 +197,7 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
             "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
+            "DECISION_REGISTRE_COMMUNE": "ns3:DecisionRequest",
         }
         return specific.get(self.notice_type)
 
@@ -368,7 +368,7 @@ class NoticeNotification(NoticeElement):
             NoticeParty(self.service, p)
             for p in self._get_data("parties", "part") or []
         ]
-    
+
     @property
     def business_reference_denomination(self):
         return self._get_data("businessReference", "denomination")

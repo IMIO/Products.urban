@@ -5968,3 +5968,6 @@ msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr ""
+
+msgid "DECISION_REGISTRE_COMMUNE"
+msgstr ""

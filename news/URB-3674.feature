@@ -1,0 +1,2 @@
+Implemnt DECISION_REGISTRE_COMMUNE notification
+[WBoudabous]
