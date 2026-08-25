@@ -164,7 +164,7 @@
         handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
         profile="Products.urban:default" />
 
-    <gs::upgradeStep
+    <gs:upgradeStep
         title="Add notice warning"
         description=""
         source="2920"
