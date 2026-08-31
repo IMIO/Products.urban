@@ -78,6 +78,12 @@ class ImportFromNoticeView(BrowserView):
             try:
                 self._handle_notification(failed_notice_id)
                 logger.info(u"Retried notification %s succeeded", failed_notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    failed_notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(
@@ -126,6 +132,12 @@ class ImportFromNoticeView(BrowserView):
                 if notif_last_status_date > self.latest_successful_date:
                     self.latest_successful_date = notif_last_status_date
                 logger.info(u"Notification %s succeeded", notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(notice_id, exc)
@@ -227,6 +239,12 @@ class ImportFromNoticeView(BrowserView):
             "PM_PROROGATION_COURRIER_COMMUNE",
         ):
             handler = DeadlineExtensionHandler
+        elif detailed_notification.notice_type in (
+            "ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE_FTFD",
+        ):
+            handler = AbandonHandler
         elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",
             "NOTIFICATION_RS_COMMUNE_RETARD",
@@ -630,6 +648,14 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
             self.licence.getField("prorogation").set(self.licence, True)
             notify(ObjectModifiedEvent(self.licence))
             self.licence.reindexObject()
+
+
+class AbandonHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IForcedEndEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "retired"
 
 
 class SummaryReportHandler(IncomingNoticeHandler):

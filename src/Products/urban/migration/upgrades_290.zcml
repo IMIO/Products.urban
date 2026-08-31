@@ -157,11 +157,19 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Set urbanConfigId for PUL"
+        title="Hide CODT_UniqueBorderingLicences for none notice instance"
         description=""
         source="2919"
         destination="2920"
-        handler=".update_290.set_pul_urbanConfigId"
+        handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
         profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set urbanConfigId for PUL"
+        description=""
+        source="2920"
+        destination="2921"
+        handler=".update_290.set_pul_urbanConfigId"
+        profile="Products.urban:default" />  
 
 </configure>
