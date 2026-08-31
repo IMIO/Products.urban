@@ -388,7 +388,7 @@
 
   <interface
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
-    type=".interfaces.IEventTypeType"/> 
+    type=".interfaces.IEventTypeType"/>
 
   <adapter
       factory="plone.indexer.wrapper.IndexableObjectWrapper"

@@ -174,6 +174,9 @@ class NoticeNotification(NoticeElement):
             "PM_NOTIF_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
 
             # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",

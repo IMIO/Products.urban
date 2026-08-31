@@ -1,0 +1,2 @@
+Implement notifications ABANDON_COMMUNE, PM_ABANDON_COMMUNE and PM_ABANDON_COMMUNE_FTFD
+[WBoudabous]
