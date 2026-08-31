@@ -5989,3 +5989,9 @@ msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision
 
 msgid "PM_REFUS_TACITE_COMMUNE"
 msgstr "Plans modificatifs - Notification à la commune du refus tacite"
+
+msgstr "Nature de l'immeuble"
+msgstr "Nature de l'immeuble"
+
+msgid "urban.warnings.notice"
+msgstr "Ce dossier a été encodé de manière dématérialisée"

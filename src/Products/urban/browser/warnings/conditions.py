@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.interfaces import IUrbanWarningCondition
 from plone import api
 from zope.interface import implements
-
 
 class WarningCondition(object):
     """
@@ -43,3 +43,12 @@ class BoundTicketSettlementEventDone(WarningCondition):
                 ):
                     return True
         return False
+
+
+class NoticeWarning(WarningCondition):
+    """
+    Check if license is a notice folder.
+    """
+
+    def evaluate(self):
+        return ILicenceCreatedViaNoticeWS.providedBy(self.licence)

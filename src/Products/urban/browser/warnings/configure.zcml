@@ -18,4 +18,11 @@
         name="urban.warnings.bound_ticket_settlement"
     />
 
+    <adapter
+            for="Products.urban.interfaces.IGenericLicence"
+            provides="Products.urban.interfaces.IUrbanWarningCondition"
+            factory=".conditions.NoticeWarning"
+            name="urban.warnings.notice"
+        />
+
 </configure>
