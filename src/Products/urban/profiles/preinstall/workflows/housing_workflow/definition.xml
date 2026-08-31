@@ -257,7 +257,7 @@
     </state>
     <state state_id="ended" title="ended">
         <exit-transition transition_id="to_annual_observation" />
-        <exit-transition transition_id="2to_2nd_observation" />
+        <exit-transition transition_id="to_2nd_observation" />
         <exit-transition transition_id="to_3rd_observation" />
         <permission-map name="Acces contents information" acquired="False">
             <permission-role>Reader</permission-role>
