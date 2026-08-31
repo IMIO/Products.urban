@@ -723,7 +723,7 @@ def setup_referenceFT_PM(context):
 
     logger.info("upgrade step done!")
 
-
+    
 def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
     logger = logging.getLogger("urban: Hide CODT_UniqueBorderingLicences folder")
     webservice = WebserviceNotice()
@@ -737,4 +737,17 @@ def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
         logger.warning("codt_uniqueborderinglicences folder is not present")
         return
     codt_uniqueborderinglicences.setExcludeFromNav(True)
+    logger.info("upgrade step done!")
+
+
+def set_pul_urbanConfigId(context):
+    logger = logging.getLogger("urban: Set urbanConfigId for PUL")
+
+    portal = api.portal.get()
+    licence_folder = getattr(portal.urban, "codt_uniqueborderinglicences", None)
+    if not licence_folder.getProperty("urbanConfigId", ""):
+        licence_folder.manage_addProperty(
+            "urbanConfigId", "codt_uniqueborderinglicence", "string"
+        )
+
     logger.info("upgrade step done!")
