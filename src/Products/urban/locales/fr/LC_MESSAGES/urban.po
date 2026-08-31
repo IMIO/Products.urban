@@ -930,6 +930,15 @@ msgstr "Notification à la commune de la prolongation du délai d'instruction"
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
 
+msgid "ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure"
+
+msgid "PM_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs)"
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
+
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr "Transmission du rapport de synthèse"
 

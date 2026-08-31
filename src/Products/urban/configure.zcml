@@ -319,7 +319,7 @@
 
   <interface
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
-    type=".interfaces.IEventTypeType"/> 
+    type=".interfaces.IEventTypeType"/>
 
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware

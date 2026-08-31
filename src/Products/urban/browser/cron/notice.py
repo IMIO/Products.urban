@@ -240,6 +240,12 @@ class ImportFromNoticeView(BrowserView):
         ):
             handler = DeadlineExtensionHandler
         elif detailed_notification.notice_type in (
+            "ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE_FTFD",
+        ):
+            handler = AbandonHandler
+        elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",
             "NOTIFICATION_RS_COMMUNE_RETARD",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
@@ -642,6 +648,14 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
             self.licence.getField("prorogation").set(self.licence, True)
             notify(ObjectModifiedEvent(self.licence))
             self.licence.reindexObject()
+
+
+class AbandonHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IForcedEndEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "retired"
 
 
 class SummaryReportHandler(IncomingNoticeHandler):
