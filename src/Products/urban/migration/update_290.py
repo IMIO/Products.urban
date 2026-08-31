@@ -728,7 +728,7 @@ def set_pul_urbanConfigId(context):
 
     portal = api.portal.get()
     licence_folder = getattr(portal.urban, "codt_uniqueborderinglicences", None)
-    if not licence_folder.getProperty("urbanConfigId"):
+    if not licence_folder.getProperty("urbanConfigId", ""):
         licence_folder.manage_addProperty(
             "urbanConfigId", "codt_uniqueborderinglicence", "string"
         )
