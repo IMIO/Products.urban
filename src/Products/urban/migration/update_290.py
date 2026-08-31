@@ -3,6 +3,7 @@
 from textwrap import dedent
 
 from Products.CMFCore.utils import getToolByName
+from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import INoticeImportFailedEvent
@@ -22,6 +23,7 @@ from plone.registry import field
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
+from zope.component import queryUtility
 from zope.event import notify
 
 import logging
@@ -737,4 +739,19 @@ def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
         logger.warning("codt_uniqueborderinglicences folder is not present")
         return
     codt_uniqueborderinglicences.setExcludeFromNav(True)
+    logger.info("upgrade step done!")
+
+  
+def setup_cron4plone_notice_import(context):
+    logger = logging.getLogger("urban: Setup cron4plone notice import")
+
+    cron_cfg = queryUtility(
+        ICronConfiguration, name="cron4plone_config", context=api.portal.get()
+    )
+
+    line_to_add = u"0 * * * portal/@@import-from-notice"
+    if line_to_add not in cron_cfg.cronjobs:
+        new_list = list(cron_cfg.cronjobs) + [line_to_add]
+        cron_cfg.cronjobs = new_list
+
     logger.info("upgrade step done!")
