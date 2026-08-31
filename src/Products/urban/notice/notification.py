@@ -88,10 +88,18 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT(self):
-        if self.original_application == "TWICE":
+        if self.original_application == "TWICE" and self.notification_type == "PE_PU":
             return self._get_data("BO", "idBO")
         else:
             return None
+
+    @property
+    def referenceFT_PM(self):
+        if self.original_application == "TWICE" and self.notification_type == "PLANS_MODIFICATIFS":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
 
     @property
     def referenceDGATLP(self):
@@ -154,6 +162,7 @@ class NoticeNotification(NoticeElement):
     @property
     def _specific_code(self):
         specific = {
+            # Twice Default
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
             "TRANSFERT_DOSSIER_PM": "ns3:TwiceDefaultRequest",
             "TRANSFERT_DOSSIER_DRC": "ns3:TwiceDefaultRequest",
@@ -163,11 +172,18 @@ class NoticeNotification(NoticeElement):
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_NOTIF_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
+
+            # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
-            "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
-            "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
+
+            # Summary Report
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",
@@ -175,9 +191,16 @@ class NoticeNotification(NoticeElement):
             "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
             "PM_RS_PAS_ENVOYE": "ns3:SummaryReportRequest",
             "PM_ENVOI_RS_COMMUNE": "ns3:SummaryReportRequest",
+            "PM_ENVOI_RS_HD_SFD_COMMUNE": "ns3:SummaryReportRequest",
+            "PM_RS_PAS_ENVOYE_SFD": "ns3:SummaryReportRequest",
+
+            # Decision
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DEC_RS_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
+            "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
+            "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
         }
         return specific.get(self.notice_type)
 
@@ -264,6 +287,15 @@ class NoticeNotification(NoticeElement):
         if self.referenceFT:
             brains = catalog.unrestrictedSearchResults(
                 referenceFT=self.referenceFT,
+                object_provides=IGenericLicence.__identifier__,
+            )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        if self.referenceFT_PM:
+            brains = catalog.unrestrictedSearchResults(
+                referenceFT_PM=self.referenceFT_PM,
                 object_provides=IGenericLicence.__identifier__,
             )
             if brains:

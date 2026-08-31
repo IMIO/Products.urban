@@ -95,7 +95,7 @@
     <gs:upgradeStep
         title="Add CODT unique bordering licences"
         description=""
-        source="2911"
+        source="2910"
         destination="2912"
         handler=".update_290.add_codt_uniquebordering_licences"
         profile="Products.urban:default" />
@@ -125,7 +125,7 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add 'Dématérialisé' deposit type and activate field on deposit event"
+        title="Add 'digital' deposit type and activate field on deposit event"
         description=""
         source="2915"
         destination="2916"
@@ -141,11 +141,35 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Setup cron4plone notice import"
+        title="Set up NOTICE form error mailing content rule"
         description=""
         source="2917"
         destination="2918"
-        handler=".update_290.setup_cron4plone_notice_import"
+        handler=".update_290.setup_notice_form_error_mailing_content_rule"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set up `referenceFT_PM` index"
+        description=""
+        source="2918"
+        destination="2919"
+        handler=".update_290.setup_referenceFT_PM"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Hide CODT_UniqueBorderingLicences for none notice instance"
+        description=""
+        source="2919"
+        destination="2920"
+        handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Setup cron4plone notice import"
+        description=""
+        source="2920"
+        destination="2921"
+        handler=".update_290.setup_cron4plone_notice_import"
+        profile="Products.urban:default" />
+      
 </configure>

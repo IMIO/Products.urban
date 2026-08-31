@@ -1,11 +1,18 @@
 # -*- coding: utf-8 -*-
 
+import logging
 import requests
 
 from Products.urban import UrbanMessage as _
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.notice import NoticeNotification
+from Products.urban.notice.exceptions import MalformedFieldException
+from Products.urban.notice.exceptions import MissingFieldException
+from Products.urban.notice.exceptions import MissingNotificationException
+from Products.urban.notice.exceptions import NoticeResponseException
+from Products.urban.notice.exceptions import UnprocessableEntityException
+from Products.urban.notice.exceptions import WrongStatusException
 from Products.urban.services.base import WebService
 from plone import api
 from plone.restapi.interfaces import IExpandableElement
@@ -15,6 +22,9 @@ from zope.annotation.interfaces import IAnnotations
 from zope.component import adapter
 from zope.interface import implementer
 from zope.interface import Interface
+
+
+logger = logging.getLogger("urban: Notice Service")
 
 
 @implementer(IExpandableElement)
@@ -135,7 +145,9 @@ class WebserviceNotice(WebService):
         result = response.json()
         if result["status"] != "PROCESSED":
             raise ValueError("Error in response '{}'".format(result["status"]["value"]))
-        return result["notices"]["notice"]
+        notices_obj = result.get("notices") or {}
+        notices_list = notices_obj.get("notice") or []
+        return notices_list
 
     def _get_notification(self, notification_id):
         """Get a notification informations response from REST API"""
@@ -187,54 +199,105 @@ class WebserviceNotice(WebService):
         )
 
     def _handle_error(self, response):
-        default_error = {
-            "error": True,
-            "error_type": "UNEXCEPECTED",
-            "message": _("An unexcepted error occured"),
-        }
+        """
+        This method should raise an Exception in any case.
+
+        :type response: requests.Response
+        """
+
         try:
             body = response.json()
-        except Exception:
-            return default_error
-        if body.get("status") == u"ERROR" and u"error" in body:
+        except Exception as e:
+            custom_exc = NoticeResponseException(original_exception=e)
+            logger.exception(
+                u"Couldn't decode JSON from NOTICE WS response\n%s",
+                custom_exc,
+            )
+            raise custom_exc
+        if response.status_code == 422:  # FastAPI can't parse the data
+            custom_exc = UnprocessableEntityException(response.url, body.get("detail"))
+            logger.exception(u"%s", custom_exc)
+            raise custom_exc
+        if body.get("status") == u"ERROR" and u"error" in body:  # error coming from SOAP WS
+            customer_ticket = body.get("customerTicket", "")
             error = body["error"]
-            if error["code"]["code"] == u"00006":
-                return {
-                    "error": True,
-                    "error_type": "WRONG_STATUS",
-                    "message": _(
-                        u"Notification ${id} does not have the correct status in Notice",
-                        mapping={"id": error["information"]["informationValue"]},
-                    ),
-                }
-            elif error["code"]["code"] == u"00005":
-                return {
-                    "error": True,
-                    "error_type": "NOT_EXISTING",
-                    "message": _(
-                        u"Notification ${id} does not exist in Notice",
-                        mapping={"id": error["information"]["informationValue"]},
-                    ),
-                }
-        return default_error
+            information = error.get("information") or {}
+
+            if (
+                error["code"]["code"] in (u"00006", u"00007")
+                and error["category"] == u"600"
+            ):
+                custom_exc = WrongStatusException(
+                    str(information), customer_ticket=customer_ticket
+                )
+                logger.exception(u"%s", custom_exc)
+                raise custom_exc
+            elif (
+                error["code"]["code"] in (u"00004", u"00005")
+                and error["category"] == u"600"
+            ):
+                custom_exc = MissingNotificationException(
+                    str(information), customer_ticket=customer_ticket
+                )
+                logger.exception(u"%s", custom_exc)
+                raise custom_exc
+            elif error["code"]["code"] == u"00003" and error["category"] == u"600":
+                custom_exc = MalformedFieldException(
+                    str(information), customer_ticket=customer_ticket
+                )
+                logger.exception(u"%s", custom_exc)
+                raise custom_exc
+            elif error["code"]["code"] == u"00002" and error["category"] == u"600":
+                custom_exc = MissingFieldException(
+                    str(information), customer_ticket=customer_ticket
+                )
+                logger.exception(u"%s", custom_exc)
+                raise custom_exc
+            elif error["code"]["code"] == u"00001" and error["category"] == u"100":
+                custom_exc = MissingNotificationException(
+                    str(information), customer_ticket=customer_ticket
+                )
+                logger.exception(u"%s", custom_exc)
+                raise custom_exc
+            elif error["code"]["code"] == u"00001" and error["category"] == u"600":
+                custom_exc = NoticeResponseException(customer_ticket=customer_ticket)
+                logger.exception(u"%s", custom_exc)
+                raise custom_exc
+            else:
+                custom_exc = NoticeResponseException(customer_ticket=customer_ticket)
+                logger.exception(
+                    u"Unknown error coming from NOTICE WS\ncategory %s, code %s\n%s",
+                    error["code"]["code"],
+                    error["category"],
+                    custom_exc,
+                )
+                raise custom_exc
+
+        custom_exc = NoticeResponseException()
+        logger.exception(
+            u"Unhandled error when sending response to NOTICE WS\n%s",
+            custom_exc,
+        )
+        raise custom_exc
 
     def post_notification_response(self, notification_id, data):
         """Post a response for a notification"""
         response = self._post_notification_response(notification_id, data)
         if response.status_code != 200:
-            return self._handle_error(response)
+            self._handle_error(response)
         result = response.json()
         if result["status"] != "PROCESSED":
-            return {
-                "error": True,
-                "error_type": "UNEXCEPECTED",
-                "message": _("An unexcepted error occured, please try again"),
-            }
+            custom_exc = NoticeResponseException()
+            logger.exception(
+                u"Sent response couldn't be processed by NOTICE WS\n%s",
+                custom_exc,
+            )
+            raise custom_exc
         return {"error": False, "body": result}
 
     def post_notification_document(self, notification_id, data):
         """Post a document for a notification"""
         response = self._post_notification_document(notification_id, data)
         if response.status_code != 204:
-            return self._handle_error(response)
+            self._handle_error(response)
         return "OK"

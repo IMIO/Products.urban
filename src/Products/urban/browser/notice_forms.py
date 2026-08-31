@@ -8,6 +8,7 @@ from z3c.form.interfaces import ActionExecutionError
 from z3c.form.form import Form
 from zope import schema
 from zope.annotation.interfaces import IAnnotations
+from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import Invalid
@@ -15,17 +16,24 @@ from zope.interface import implementer
 from zope.schema.interfaces import IContextSourceBinder
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
-
 from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import UrbanMessage as _
+from Products.urban.contentrules.notice import NoticeResponseFailedEvent
 from Products.urban.notice.exceptions import NoMatchingEventFoundException
 from Products.urban.notice.exceptions import NoPreviousEventFoundException
+from Products.urban.notice.exceptions import NoticeResponseException
 from Products.urban.notice.response import clean_accents
 from Products.urban.utils import get_ws_meetingitem_infos
 from plone import api
 from plone.app.textfield import RichText
 from plone.app.textfield.value import RichTextValue
+from plone.stringinterp.interfaces import IContextWrapper
 from plone.z3cform.layout import wrap_form
+
+import logging
+
+
+logger = logging.getLogger("urban: Notice Forms")
 
 
 def possible_outgoing_notice_notifications(licence):
@@ -143,7 +151,7 @@ class NoticeResponseActionForm(Form):
             annotations = IAnnotations(event)
             key = "notice_notification"
             notice = annotations.get(key, {})
-            incoming = notice.get("incoming", [])
+            incoming = notice.get("incoming", {})
             if incoming.get("notice_id") == incoming_id:
                 return incoming.get("notice_type")
         return None
@@ -201,6 +209,20 @@ class NoticeResponseActionForm(Form):
 
         self.widgets["file_paths"].value = []
 
+    def _notify_response_error(self, notice_id="", error_message=""):
+        try:
+            args = {
+                "notice_id": notice_id,
+                "notice_error": error_message,
+            }
+            event_wrapper = IContextWrapper(self.context)(**args)
+            notify(NoticeResponseFailedEvent(event_wrapper))
+        except Exception:
+            logger.exception(
+                u"Failed to emit NoticeResponseFailedEvent for notice_id=%s",
+                notice_id,
+            )
+
     @button.buttonAndHandler(_("Send"), name="send_response")
     def handleSendResponse(self, action):
         data, errors = self.extractData()
@@ -211,17 +233,9 @@ class NoticeResponseActionForm(Form):
             return
 
         incoming_notice_id = data["incoming_notification"]
-
         self.field_values_to_store = {}
-        response_result = self.transfer_response(data)
-        if type(response_result) == dict and response_result.get("error") is True:
-            IStatusMessage(self.request).addStatusMessage(
-                response_result.get("message"), "error"
-            )
-            return
-        else:
-            IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
 
+        # first, send documents
         file_paths = data.get("file_paths", [])
         for file_path in file_paths:
             file_obj = api.content.get(path=file_path)
@@ -233,15 +247,43 @@ class NoticeResponseActionForm(Form):
                 continue
             document_title = file_obj.Title().decode("utf8")
             sent_documents = self.field_values_to_store.get("documents", [])
-            sent_documents.append(
-                {
-                    "path": file_path,
-                    "title": document_title,
-                }
-            )
-            self.field_values_to_store["documents"] = sent_documents
 
-            file_result = self.context.transfer_notice_file(incoming_notice_id, file_path)
+            try:
+                self.context.transfer_notice_file(incoming_notice_id, file_path)
+            except Exception as e:
+                IStatusMessage(self.request).addStatusMessage(
+                    _(u"Couldn't send one of the files. Please contact an administrator."),
+                    "error",
+                )
+                logger.exception(u"%s", e)
+                self._notify_response_error(incoming_notice_id, str(e))
+            else:
+                sent_documents.append(
+                    {
+                        "path": file_path,
+                        "title": document_title,
+                    }
+                )
+                self.field_values_to_store["documents"] = sent_documents
+
+        # second, send response
+        try:
+            response_result = self.transfer_response(data)
+        except NoticeResponseException as e:
+            IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
+            # NoticeResponseException have already been logged in the service layer
+            self._notify_response_error(incoming_notice_id, e.get_error_report())
+            return
+        except Exception as e:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"Couldn't process your request. Please contact an administrator."),
+                "error",
+            )
+            logger.exception(u"%s", e)
+            self._notify_response_error(incoming_notice_id, str(e))
+            return
+        else:
+            IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
 
         response_body = response_result.get("body", {}) or {}
         response_body_result = response_body.get("result", {}) or {}

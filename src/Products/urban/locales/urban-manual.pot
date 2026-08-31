@@ -1621,6 +1621,15 @@ msgstr ""
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr ""
 
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr ""
+
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr ""
 
@@ -1712,4 +1721,16 @@ msgid "PM_RS_DECISION_COMMUNE"
 msgstr ""
 
 msgid "PM_REFUS_TACITE_COMMUNE"
+msgstr ""
+
+msgid "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE"
+msgstr ""
+
+msgid "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
 msgstr ""

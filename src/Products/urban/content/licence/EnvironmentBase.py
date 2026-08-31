@@ -56,6 +56,7 @@ optional_fields = [
     "environmentTechnicalRemarks",
     "rubricsDetails",
     "referenceFT",
+    "referenceFT_PM",
     "divergences",
     "divergenceDetails",
     "prorogation",
@@ -101,6 +102,14 @@ schema = Schema(
             widget=StringField._properties["widget"](
                 size=30,
                 label=_("urban_label_referenceFT", default="Referenceft"),
+            ),
+            schemata="urban_description",
+        ),
+        StringField(
+            name="referenceFT_PM",
+            widget=StringField._properties["widget"](
+                size=30,
+                label=_("urban_label_referenceFT_PM", default="reference FT PM"),
             ),
             schemata="urban_description",
         ),
@@ -639,6 +648,7 @@ def finalizeSchema(schema, folderish=False, moveDiscussion=True):
     schema.moveField("description", after="additionalLegalConditions")
     schema.moveField("referenceFT", after="referenceDGATLP")
     schema.moveField("isTransferOfLicence", after="referenceFT")
+    schema.moveField("referenceFT_PM", before="additionalReference")
 
     return schema
 

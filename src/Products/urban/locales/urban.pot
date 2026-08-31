@@ -81,7 +81,11 @@ msgstr ""
 msgid "A NOTICe notification import succeeded"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:435
+#: ../contentrules/configure.zcml:26
+msgid "A NOTICe notification response failed"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:436
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr ""
 
@@ -168,15 +172,7 @@ msgstr ""
 msgid "An opinion to ask condition makes the rule apply only when one of the Opinion to ask selected correspond to the one of the context."
 msgstr ""
 
-#: ../services/notice.py:189
-msgid "An unexcepted error occured"
-msgstr ""
-
-#: ../services/notice.py:227
-msgid "An unexcepted error occured, please try again"
-msgstr ""
-
-#: ../contentrules/configure.zcml:132
+#: ../contentrules/configure.zcml:145
 msgid "Apply only when one of the Opinion to ask selected corresponds to the one of the context"
 msgstr ""
 
@@ -309,6 +305,23 @@ msgstr ""
 
 #: ../browser/urbaneventviews.py:653
 msgid "Couldn't import this(these) owner(s): ${owners}"
+msgstr ""
+
+#: ../browser/notice_forms.py:228
+#: ../notice/exceptions.py:145
+msgid "Couldn't process your request. Please contact an administrator."
+msgstr ""
+
+#: ../notice/exceptions.py:188
+msgid "Couldn't process your request: this notification does not exist in Notice"
+msgstr ""
+
+#: ../notice/exceptions.py:174
+msgid "Couldn't process your request: this notification does not have the correct status in Notice"
+msgstr ""
+
+#: ../browser/notice_forms.py:260
+msgid "Couldn't send one of the files. Please contact an administrator."
 msgstr ""
 
 msgid "DECISION_GESPER_1_ERE_INSTANCE"
@@ -924,6 +937,15 @@ msgstr ""
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr ""
 
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr ""
+
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr ""
 
@@ -951,16 +973,16 @@ msgstr ""
 msgid "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE"
 msgstr ""
 
-msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgid "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE"
 msgstr ""
 
-msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgid "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE"
 msgstr ""
 
-msgid "PM_RS_DECISION_COMMUNE"
+msgid "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE"
 msgstr ""
 
-msgid "PM_REFUS_TACITE_COMMUNE"
+msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
 msgstr ""
 
 #: ../browser/urban_configfolderview.py:22
@@ -1012,14 +1034,6 @@ msgstr ""
 msgid "Notice settings"
 msgstr ""
 
-#: ../services/notice.py:210
-msgid "Notification ${id} does not exist in Notice"
-msgstr ""
-
-#: ../services/notice.py:201
-msgid "Notification ${id} does not have the correct status in Notice"
-msgstr ""
-
 #: ../browser/offdays_settings.py:74
 msgid "Off days"
 msgstr ""
@@ -1035,6 +1049,18 @@ msgstr ""
 #: ../contentrules/configure.zcml:132
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
+msgstr ""
+
+msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr ""
+
+msgid "PM_REFUS_TACITE_COMMUNE"
+msgstr ""
+
+msgid "PM_RS_DECISION_COMMUNE"
 msgstr ""
 
 msgid "ParcelOutLicence"
@@ -5103,6 +5129,11 @@ msgstr ""
 #: ../content/licence/CODT_UniqueLicence.py:93
 #: ../content/licence/EnvironmentBase.py:103
 msgid "urban_label_referenceFT"
+msgstr ""
+
+#. Default: "reference FT PM"
+#: ../content/licence/EnvironmentBase.py:112
+msgid "urban_label_referenceFT_PM"
 msgstr ""
 
 #. Default: "Referenceprosecution"

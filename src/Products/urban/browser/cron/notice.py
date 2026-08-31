@@ -78,6 +78,12 @@ class ImportFromNoticeView(BrowserView):
             try:
                 self._handle_notification(failed_notice_id)
                 logger.info(u"Retried notification %s succeeded", failed_notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    failed_notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(
@@ -126,6 +132,12 @@ class ImportFromNoticeView(BrowserView):
                 if notif_last_status_date > self.latest_successful_date:
                     self.latest_successful_date = notif_last_status_date
                 logger.info(u"Notification %s succeeded", notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(notice_id, exc)
@@ -228,6 +240,12 @@ class ImportFromNoticeView(BrowserView):
         ):
             handler = DeadlineExtensionHandler
         elif detailed_notification.notice_type in (
+            "ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE_FTFD",
+        ):
+            handler = AbandonHandler
+        elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",
             "NOTIFICATION_RS_COMMUNE_RETARD",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
@@ -284,6 +302,13 @@ class ImportFromNoticeView(BrowserView):
             # "DECISION_GESPER_2_EME_INSTANCE",
         ):
             handler = GesperDecisionSPWHandler
+        elif detailed_notification.notice_type in (
+            "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE",
+            "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE",
+            "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE",
+            "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
+        ):
+            handler = GesperFreeNotificationSPWHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -311,6 +336,7 @@ class IncomingNoticeHandler(object):
             raise NoLicenceFoundException(
                 self.notification.reference,
                 self.notification.referenceFT,
+                self.notification.referenceFT_PM,
                 self.notification.referenceDGATLP,
             )
         self.create_incoming_event()
@@ -430,6 +456,7 @@ class IncomingNoticeHandler(object):
 
     def update_licence(self):
         self.set_reference_ft()
+        self.set_reference_ft_pm()
         self.set_reference_dgatlp()
 
     def set_reference_ft(self):
@@ -442,6 +469,17 @@ class IncomingNoticeHandler(object):
         if notification_ref and licence_ref != notification_ref:
             self.licence.setReferenceFT(notification_ref)
             self.licence.reindexObject(idxs=["referenceFT"])
+
+    def set_reference_ft_pm(self):
+        try:
+            licence_ref = self.licence.getReferenceFT_PM()
+        except AttributeError:
+            return
+
+        notification_ref = self.notification.referenceFT_PM
+        if notification_ref and licence_ref != notification_ref:
+            self.licence.setReferenceFT_PM(notification_ref)
+            self.licence.reindexObject(idxs=["referenceFT_PM"])
 
     def set_reference_dgatlp(self):
         try:
@@ -612,6 +650,14 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
             self.licence.reindexObject()
 
 
+class AbandonHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IForcedEndEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "retired"
+
+
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
 
@@ -714,3 +760,8 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "complete"
+
+
+class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IFreeNotificationEvent"
+    create_licence_if_missing = True

@@ -19,6 +19,12 @@
       name="A NOTICe notification import failed"
       />
 
+    <interface
+      interface="Products.urban.contentrules.notice.INoticeResponseFailedEvent"
+      type="plone.contentrules.rule.interfaces.IRuleEventType"
+      name="A NOTICe notification response failed"
+      />
+
     <subscriber
       for="Products.urban.contentrules.notice.INoticeImportEvent"
       handler="Products.urban.contentrules.notice.notice_import"

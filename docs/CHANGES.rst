@@ -8,6 +8,140 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.29 (2026-08-21)
+-------------------
+
+New features:
+
+
+- Add upgrade step to hide `CODT_UniqueBorderingLicences` folder
+  [jchandelle] (SUP-52184)
+
+
+Bug fixes:
+
+
+- Avoid double import of NOTICe notification
+  [daggelpop] (URB-3711)
+- Reorder actions in NOTICe forms: send documents first, then send the response
+  [daggelpop] (URB-3730)
+
+
+2.9.28 (2026-08-12)
+-------------------
+
+Bug fixes:
+
+
+- Clarify translations for NOTICE response buttons
+  [daggelpop] (URB-3658)
+- Fix decision display form
+  [daggelpop] (URB-3720)
+
+
+2.9.27 (2026-07-24)
+-------------------
+
+New features:
+
+
+- Implement reception of NOTICE free notification
+  [daggelpop] (URB-3561)
+- Store and index `referenceFT_PM`, coming from TWICE
+  [daggelpop] (URB-3703)
+
+
+Bug fixes:
+
+
+- Fix an issue with unicode in upgrade step title
+  [mpeeters] (URB-3445)
+- Fill missing keys for specific code mapping
+  [daggelpop] (URB-3703)
+
+
+Internal:
+
+
+- Fix a missing upgrade step number
+  [mpeeters] (URB-3470)
+- Add missing logging during upgrade step
+  [mpeeters] (URB-3528)
+
+
+2.9.26 (2026-07-15)
+-------------------
+
+Internal:
+
+
+- Increase metadata version to last upgrade step (2916 -> 2918)
+  [daggelpop] (URB-3650)
+
+
+2.9.25 (2026-07-14)
+-------------------
+
+New features:
+
+
+- Add NOTICE form error handling
+  [daggelpop]
+  Add mailing content rule for NOTICE form errors
+  [daggelpop] (URB-3650)
+
+
+Bug fixes:
+
+
+- Handle an empty list of NOTICe notifications
+  [daggelpop] (URB-3704)
+- Handle parentheses in street searches
+  [daggelpop] (URB-3709)
+
+
+2.9.24 (2026-07-13)
+-------------------
+
+New features:
+
+
+- Handle PM_RS_PAS_ENVOYE_SFD and PM_ENVOI_RS_HD_SFD_COMMUNE notification
+  [WBoudabous] (URB-3313)
+- Handle PM_RS_PAS_ENVOYE notification
+  [WBoudabous] (URB-3314)
+- Add upgrade step to check existing vocabulary terms, create missing ones and add required mappings
+  [WBoudabous] (URB-3528)
+- Add a marker for the free notification event type
+  [WBoudabous] (URB-3594)
+- Handle PM_NOTIF_IRRECEVABLE_COMMUNE notification
+  [WBoudabous] (URB-3639)
+- Handle PM_PROROGATION_COURRIER_COMMUNE notification
+  [WBoudabous] (URB-3641)
+- Handle PM_ENVOI_DECISION_FT_COURRIER_COMMUNE  PM_RS_DECISION_COMMUNE and PM_REFUS_TACITE_COMMUNE notifications
+  [WBoudabous] (URB-3642)
+- Add college opinion code to GESPER EP & AP final responses
+  [daggelpop]
+  Validate the presence of a college opinion code in GESPER EP & AP final forms
+  [daggelpop]
+  Validate the presence of a college decision code in ARNE decision form
+  [daggelpop] (URB-3657)
+
+
+Bug fixes:
+
+
+- Add missing translation for urban_bound_roaddecrees
+  [WBoudabous] (SUP-53078)
+- Add  missing translation of warning_add_a_proprietary
+  [WBoudabous] (URB-2540)
+- Avoid handling the same incoming NOTICE notification twice
+  Hide NOTICE response forms from events with a final notification
+  [daggelpop] (URB-3683)
+- Handle irregular parcel data from NOTICe
+  [daggelpop] (URB-3705)
+
+
 2.9.23 (2026-06-10)
 -------------------
 

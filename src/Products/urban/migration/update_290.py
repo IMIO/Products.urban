@@ -8,8 +8,10 @@ from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import INoticeImportFailedEvent
 from Products.urban.contentrules.notice import INoticeImportSucceededEvent
+from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.utils import moveElementAfter
 from Products.urban.setuphandlers import set_licence_folder_security
@@ -544,6 +546,8 @@ def reindex_getDecisionDate(context):
 
     reindexIndexes(None, ["getDecisionDate"])
 
+    logger.info("Upgrade done!")
+
 
 def add_digital_term_to_deposit_type(context):
     """
@@ -595,7 +599,59 @@ def add_digital_term_to_deposit_type(context):
     logger.info("upgrade step done!")
 
 
+def setup_notice_form_error_mailing_content_rule(context):
+    logger = logging.getLogger("urban: Set up NOTICE form error mailing content rule")
+
+    portal = api.portal.get()
+
+    failure_template = dedent(
+        u"""
+        Créer un ticket JIRA à l'attention d'un développeur
+        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
+
+        "Bonjour,
+
+        Une erreur d'implémentation de formulaire de réponse Notice a été enregistrée.
+        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
+
+        - commune / dossier : ${parent_url}
+        - identifiant NOTICE : ${notice_id}
+
+        ```
+        ${notice_error}
+        ```
+
+        Belle journée.
+
+        Aurore"
+        """
+    ).strip()
+
+    rule_id = "notification_form_failed"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Formulaire pour notification NOTICE en erreur",
+            event_interface=INoticeResponseFailedEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Formulaire pour notification Notice en erreur",
+                "recipients": u"support-urban@imio.be",
+                "message": failure_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    logger.info("Upgrade done!")
+
+
 def normalize_externaldecisions_vocabulary(context):
+    logger = logging.getLogger("urban: Normalize external decisions vocabulary")
 
     VOCABULARY_TERMS = [
         "FAVORABLE",
@@ -646,7 +702,46 @@ def normalize_externaldecisions_vocabulary(context):
             new_term.setDescription(DESCRIPTION)
             logger.info("Created missing vocabulary term: %s", vocabulary_term)
 
+    logger.info("Upgrade done!")
 
+
+def setup_referenceFT_PM(context):
+    logger = logging.getLogger("urban: Set up `referenceFT_PM` index and attribute")
+
+    # activate optional attribute
+    portal_urban = api.portal.get_tool("portal_urban")
+    for config in portal_urban.objectValues("LicenceConfig"):
+        if (
+            "referenceFT_PM" in config.listUsedAttributes()
+            and "referenceFT_PM" not in config.getUsedAttributes()
+        ):
+            to_set = ("referenceFT_PM",)
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+
+    # set up index
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+    reindexIndexes(None, ["referenceFT_PM"])
+
+    logger.info("upgrade step done!")
+
+
+def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
+    logger = logging.getLogger("urban: Hide CODT_UniqueBorderingLicences folder")
+    webservice = WebserviceNotice()
+    if webservice.is_setup:
+        logger.info("Notice is configure, abort hiding")
+        return
+    portal = api.portal.get()
+    urban = portal["urban"]
+    codt_uniqueborderinglicences = urban.get("codt_uniqueborderinglicences", None)
+    if codt_uniqueborderinglicences is None:
+        logger.warning("codt_uniqueborderinglicences folder is not present")
+        return
+    codt_uniqueborderinglicences.setExcludeFromNav(True)
+    logger.info("upgrade step done!")
+
+  
 def setup_cron4plone_notice_import(context):
     logger = logging.getLogger("urban: Setup cron4plone notice import")
 
