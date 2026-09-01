@@ -284,7 +284,7 @@
     <state state_id="annual_observation" title="">
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_2nd_observation" />
-        <exit-transition transition_id="to_3rd_content" />
+        <exit-transition transition_id="to_3rd_observation" />
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
