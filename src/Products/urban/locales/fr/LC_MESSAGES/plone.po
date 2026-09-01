@@ -561,3 +561,39 @@ msgstr "Veuillez indiquer d'avantages de termes de recherche"
 
 msgid "workLocationStreet"
 msgstr "Rue"
+
+msgid "nonapplicable"
+msgstr "Refuser"
+
+msgid "analyse"
+msgstr "Analyse"
+
+msgid "to_1st_observation"
+msgstr "1er constat"
+
+msgid "to_2nd_observation"
+msgstr "2e constat"
+
+msgid "to_annual_observation"
+msgstr "Constat annuel"
+
+msgid "1st_observation"
+msgstr "1er constat"
+
+msgid "2nd_observation"
+msgstr "2e constat"
+
+msgid "annual_observation"
+msgstr "Constat annuel"
+
+msgid "to_3rd_observation"
+msgstr "3ème constat ou +"
+
+msgid "3rd_observation"
+msgstr "3ème constat ou +"
+
+msgid "ComplementaryDelayTerm"
+msgstr "Prorogation complémentaire"
+
+msgid "warning_add_a_proprietary"
+msgstr "Veuillez renseigner le ou les demandeur(s)"
