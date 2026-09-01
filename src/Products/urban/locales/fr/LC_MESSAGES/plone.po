@@ -558,7 +558,7 @@ msgid "to_3rd_observation"
 msgstr "3ème constat ou +"
 
 msgid "3rd_observation"
-msgstr "3eme constat ou +"
+msgstr "3ème constat ou +"
 
 msgid "ComplementaryDelayTerm"
 msgstr "Prorogation complémentaire"

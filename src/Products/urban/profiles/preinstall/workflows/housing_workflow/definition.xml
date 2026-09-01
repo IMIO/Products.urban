@@ -13,12 +13,6 @@
     <permission>View</permission>
     <state state_id="creation" title="creation">
         <exit-transition transition_id="analyse" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -62,12 +56,6 @@
     </state>
     <state state_id="analysis" title="analysis">
         <exit-transition transition_id="to_1st_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -113,7 +101,7 @@
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_2nd_observation" />
         <exit-transition transition_id="analyse" />
-        <permission-map name="Acces contents information" acquired="False">
+        <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
             <permission-role>Contributor</permission-role>
@@ -164,12 +152,6 @@
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_1st_observation" />
         <exit-transition transition_id="to_3rd_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -214,7 +196,7 @@
     <state state_id="3rd_observation" title="">
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_2nd_observation" />
-        <permission-map name="Acces contents information" acquired="False">
+        <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
             <permission-role>Contributor</permission-role>
@@ -259,12 +241,6 @@
         <exit-transition transition_id="to_annual_observation" />
         <exit-transition transition_id="to_2nd_observation" />
         <exit-transition transition_id="to_3rd_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -308,8 +284,29 @@
     <state state_id="annual_observation" title="">
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_2nd_observation" />
-        <exit-transition transition_id="to_3rd_ content" />
-        <permission-map>
+        <exit-transition transition_id="to_3rd_content" />
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Add portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Delete objects" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Manage properties" acquired="False">
+            <permission-role>Contributor</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
             <permission-role>Editor</permission-role>
             <permission-role>Contributor</permission-role>
             <permission-role>Manager</permission-role>
