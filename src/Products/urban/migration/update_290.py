@@ -352,6 +352,20 @@ def fix_housing_roaddecree(context):
     logger.info("upgrade step done!")
 
 
+def add_3rd_observation_to_housing_workflow(context):
+    logger = logging.getLogger("urban: Add 3rd_observation state to housing workflow")
+    logger.info("starting upgrade steps")
+    from Products.urban.migration.utils import refresh_workflow_permissions
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    refresh_workflow_permissions("housing_workflow")
+    logger.info("upgrade step done!")
+
+
 def update_folder_manager_notice(context):
 
     UPDATED_URBAN_TYPES = [
