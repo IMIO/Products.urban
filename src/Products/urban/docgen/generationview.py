@@ -126,10 +126,13 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
                 "@@document_generation_helper_view"
             )
 
-        current_user = api.user.get_current()
-        current_user_fullname = (
-            current_user.getProperty("fullname") or current_user.getUserName()
-        )
+        user = api.user.get_current()
+        current_user = {
+            "id": user.getId(),
+            "fullname": user.getProperty("fullname") or user.getUserName(),
+            "email": user.getProperty("email"),
+            "username": user.getUserName()
+        }
 
         generation_context = {
             "this": licence,
@@ -154,8 +157,6 @@ class UrbanDocGenerationView(PersistentDocumentGenerationView):
             "uncapitalize": licence_helper_view.uncapitalize,
             "last_inquiry": last_inquiry,
             "current_user": current_user,
-            "current_user_fullname": current_user_fullname,
-            "current_user_id": current_user.getUserName(),
         }
 
         return generation_context
