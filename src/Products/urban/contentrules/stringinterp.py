@@ -65,7 +65,6 @@ class FolderManagersMail(BaseSubstitution):
         return output
 
 
-@adapter(IContentish)
 class ParentUrlSubstitution(BaseParentUrlSubstitution):
 
     def safe_call(self):
