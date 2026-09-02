@@ -165,6 +165,18 @@ class TestDefaultValues(unittest.TestCase):
                 ) and field.default_content_type.startswith("text"):
                     self.assertEquals(field.default_method, "getDefaultText")
 
+    def testLicenceSubjectTextValueConfigured(self):
+        licence_config = self.site.portal_urban.housing
+        default_subject = "Logement inoccupé"
+        licence_config.textDefaultValues = (
+            {"text": default_subject, "fieldname": "licenceSubject"},
+        )
+        housings = self.site.urban.housings
+        housings.invokeFactory("Housing", id="newhousing")
+        newhousing = housings.newhousing
+        notify(EditBegunEvent(newhousing))
+        self.assertEquals(default_subject, newhousing.getLicenceSubject())
+
 
 class TestEventDefaultValues(unittest.TestCase):
     """
