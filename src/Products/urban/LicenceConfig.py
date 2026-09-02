@@ -641,7 +641,10 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
         available_fields = [
             field
             for field in licence_schema.fields()
-            if field.getType() == "Products.Archetypes.Field.TextField"
+            if (
+                field.getType() == "Products.Archetypes.Field.TextField"
+                or field.getName() == "licenceSubject"
+            )
             and field.getName() != "rights"
         ]
         vocabulary_fields = [
