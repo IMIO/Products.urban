@@ -8,6 +8,18 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.30 (2026-09-02)
+-------------------
+
+New features:
+
+
+- Implement notifications ABANDON_COMMUNE, PM_ABANDON_COMMUNE and PM_ABANDON_COMMUNE_FTFD
+  [WBoudabous] (URB-3567)
+- Add 3rd observation state to Housing workflow
+  [WBoudabous] (URBBDC-3278)
+
+
 2.9.29 (2026-08-21)
 -------------------
 
