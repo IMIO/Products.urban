@@ -305,6 +305,23 @@ Internal:
   [mpeeters] (URBBDC-3257)
 
 
+2.9.31 (2026-09-03)
+-------------------
+
+New features:
+
+
+- Add a configurable subject (objet) to licences, backfilled for existing Housing licences, for future use in notary letters and divisions
+  [WBoudabous] (URBBDC-3225)
+
+
+Bug fixes:
+
+
+- Remove extra scheme from parent url variable interpolation
+  [daggelpop] (URB-3652)
+
+
 2.9.30 (2026-09-02)
 -------------------
 
