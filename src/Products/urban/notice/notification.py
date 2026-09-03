@@ -191,6 +191,7 @@ class NoticeNotification(NoticeElement):
             "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
             "PM_RS_PAS_ENVOYE": "ns3:SummaryReportRequest",
             "PM_ENVOI_RS_COMMUNE": "ns3:SummaryReportRequest",
+            "PM_ENVOI_RS_HD_COMMUNE": "ns3:SummaryReportRequest",
             "PM_ENVOI_RS_HD_SFD_COMMUNE": "ns3:SummaryReportRequest",
             "PM_RS_PAS_ENVOYE_SFD": "ns3:SummaryReportRequest",
 
