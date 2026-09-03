@@ -232,6 +232,7 @@ schema = Schema(
                 label=_("urban_label_licenceSubject", default="Licencesubject"),
             ),
             schemata="urban_description",
+            default_method="getDefaultText",
         ),
         StringField(
             name="reference",
