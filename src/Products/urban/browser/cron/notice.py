@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from random import randint
+from time import sleep
 
 from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
@@ -35,6 +37,7 @@ class ImportFromNoticeView(BrowserView):
     def __call__(self):
 
         self._initialize()
+        self._add_jitter()
         self._retry_failed_notifications()
         self._process_fresh_notifications()
         self._save_progress()
@@ -61,6 +64,17 @@ class ImportFromNoticeView(BrowserView):
             or []
         )
         self.already_handled_notifications = []
+
+    def _add_jitter(self):
+        """
+        Add a random sleep to cron-based requests, to avoid swarming the NOTICe API.
+        TEMPORARY FIX !
+        """
+
+        if not self.retry_failed_notifications:
+            delay = randint(1, 1800)
+            logger.info(u"Delaying NOTICe cron call by %s seconds", delay)
+            sleep(delay)
 
     def _retry_failed_notifications(self):
         """Retry processing of previously failed notifications, if requested."""
