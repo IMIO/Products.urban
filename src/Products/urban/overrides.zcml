@@ -61,6 +61,13 @@
         />
   </configure>
 
+  <adapter
+      for="*"
+      provides="plone.stringinterp.interfaces.IStringSubstitution"
+      factory="Products.urban.contentrules.stringinterp.ParentUrlSubstitution"
+      name="parent_url"
+      />
+
   <configure package="collective.faceted.task">
     <browser:view
         name="faceted-table-view"
