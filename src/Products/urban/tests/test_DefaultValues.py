@@ -167,7 +167,7 @@ class TestDefaultValues(unittest.TestCase):
 
     def testLicenceSubjectTextValueConfigured(self):
         licence_config = self.site.portal_urban.housing
-        default_subject = "Logement inoccupé"
+        default_subject = u"Logement inoccupé"
         licence_config.textDefaultValues = (
             {"text": default_subject, "fieldname": "licenceSubject"},
         )

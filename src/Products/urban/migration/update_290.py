@@ -752,16 +752,3 @@ def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
         return
     codt_uniqueborderinglicences.setExcludeFromNav(True)
     logger.info("upgrade step done!")
-
-
-def update_custom_subjects(context):
-    urban_tool = api.portal.get_tool("portal_urban")
-    catalog = api.portal.get_tool("portal_catalog")
-    brains = catalog(portal_type="Housing")
-    for brain in brains:
-        obj = brain.getObject()
-        default_subject = urban_tool.getTextDefaultValue("licenceSubject", obj)
-        if default_subject:
-            obj.setLicenceSubject(default_subject)
-            obj.updateTitle()
-            obj.reindexObject(idxs=("SearchableText",))
