@@ -93,6 +93,12 @@ msgstr ""
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr ""
 
+msgid "ARRET_PLAN_MODIF_COMMUNE"
+msgstr ""
+
+msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
+msgstr ""
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:39

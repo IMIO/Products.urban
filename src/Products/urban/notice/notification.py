@@ -171,6 +171,8 @@ class NoticeNotification(NoticeElement):
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ARRET_PLAN_MODIF_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ARRET_PLAN_MODIF_COMMUNE_MANUELLE": "ns3:TwiceDefaultRequest",
             "PM_NOTIF_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
