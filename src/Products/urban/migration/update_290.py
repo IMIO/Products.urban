@@ -20,6 +20,9 @@ from plone import api
 from plone.app.textfield import RichTextValue
 from plone.registry import field
 from plone.registry import Record
+from plone.registry.field import Bool
+from plone.registry.field import List
+from plone.registry.field import TextLine
 from plone.registry.interfaces import IRegistry
 from zope.component import getUtility
 from zope.event import notify
@@ -752,3 +755,65 @@ def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
         return
     codt_uniqueborderinglicences.setExcludeFromNav(True)
     logger.info("upgrade step done!")
+
+
+def add_licence_date_fields_to_querystring(context):
+    date_operations = [
+        u'plone.app.querystring.operation.date.lessThan',
+        u'plone.app.querystring.operation.date.largerThan',
+        u'plone.app.querystring.operation.date.between',
+        u'plone.app.querystring.operation.date.lessThanRelativeDate',
+        u'plone.app.querystring.operation.date.largerThanRelativeDate',
+        u'plone.app.querystring.operation.date.today',
+        u'plone.app.querystring.operation.date.beforeToday',
+        u'plone.app.querystring.operation.date.afterToday',
+    ]
+    licence_date_fields = [
+        ("getDecisionDate", _(u"Decision date")),
+        ("getDepositDate", _(u"Deposit date")),
+        ("getValidityDate", _(u"Validity date")),
+        ("investigationStart", _(u"Investigation start date")),
+        ("investigationEnd", _(u"Investigation end date")),
+        ("work_beginning", _(u"Work beginning date")),
+        ("work_end", _(u"Work end date")),
+    ]
+
+    logger = logging.getLogger("urban: Add licence date fields to querystring")
+    registry = getUtility(IRegistry)
+
+    for key, title in licence_date_fields:
+        base = "plone.app.querystring.field.{0}".format(key)
+
+        if "{0}.title".format(base) not in registry.records:
+            registry_field = field.TextLine(title=u"title")
+            registry_record = Record(registry_field)
+            registry_record.value = title
+            registry.records["{0}.title".format(base)] = registry_record
+
+        if "{0}.enabled".format(base) not in registry.records:
+            registry_field = field.Bool(title=u"enabled")
+            registry_record = Record(registry_field)
+            registry_record.value = True
+            registry.records["{0}.enabled".format(base)] = registry_record
+
+        if "{0}.sortable".format(base) not in registry.records:
+            registry_field = field.Bool(title=u"sortable")
+            registry_record = Record(registry_field)
+            registry_record.value = True
+            registry.records["{0}.sortable".format(base)] = registry_record
+
+        if "{0}.operations".format(base) not in registry.records:
+            registry_field = field.List(
+                title=u"operations", value_type=field.TextLine()
+            )
+            registry_record = Record(registry_field)
+            registry_record.value = date_operations
+            registry.records["{0}.operations".format(base)] = registry_record
+
+        if "{0}.group".format(base) not in registry.records:
+            registry_field = field.TextLine(title=u"group")
+            registry_record = Record(registry_field)
+            registry_record.value = u"Dates"
+            registry.records["{0}.group".format(base)] = registry_record
+
+    logger.info("Upgrade done!")
