@@ -27,7 +27,7 @@
       <property name="visible">True</property>
     </object>
   </object>
- <object meta_type="CMF Action Category"
+  <object meta_type="CMF Action Category"
           name="user"
   >
     <object insert-before="logout"
@@ -215,8 +215,7 @@
       <property name="visible">True</property>
     </object>
   </object>
- </object>
- <object name="object_buttons" meta_type="CMF Action Category">
+  <object name="object_buttons" meta_type="CMF Action Category">
   <property name="title"></property>
   <object name="copy_to_claimant" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="">Copy to claimant</property>
@@ -273,7 +272,7 @@
    </property>
    <property name="visible">True</property>
   </object>
-   <object name="transfer_opinion" meta_type="CMF Action" i18n:domain="urban">
+  <object name="transfer_opinion" meta_type="CMF Action" i18n:domain="urban">
    <property name="title" i18n:translate="">Transfer opinion to the SPW</property>
    <property name="description" i18n:translate=""></property>
    <property name="url_expr">string:$object_url/@@transfer_opinion_form</property>
