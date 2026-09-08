@@ -1046,6 +1046,9 @@ msgstr "Un fichier n'est plus disponible et n'a pas pu être envoyé"
 msgid "Opinion to ask"
 msgstr "Avis à demander"
 
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr "Notification hors délai à la commune du RS - Plans Modificatifs"
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
 
