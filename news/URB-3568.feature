@@ -1,0 +1,2 @@
+Add handling of ABANDON_COMMUNE_MANUELLE, PM_ABANDON_COMMUNE_EP, and PM_ABANDON_COMMUNE_EP_FTFD notification.
+[WBoudabous]
