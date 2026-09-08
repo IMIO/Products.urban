@@ -1315,6 +1315,12 @@ msgstr ""
 msgid "This action cannot be reversed."
 msgstr ""
 
+#: ../content/licence/CODT_UniqueLicence.py:96
+#: ../content/licence/EnvironmentBase.py:106
+#: ../content/licence/GenericLicence.py:251
+msgid "This field can only be set once; only an administrator can modify it afterwards."
+msgstr ""
+
 #: ../browser/portlets.py:212
 msgid "This portlet lists scheduled licences."
 msgstr ""

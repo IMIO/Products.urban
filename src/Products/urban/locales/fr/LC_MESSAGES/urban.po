@@ -1296,6 +1296,12 @@ msgstr "Cette UrbanEventInquiry n'est pas liée à une demande existante ! Défi
 msgid "This action cannot be reversed."
 msgstr "Cette action est irréversible"
 
+#: ../content/licence/CODT_UniqueLicence.py:96
+#: ../content/licence/EnvironmentBase.py:106
+#: ../content/licence/GenericLicence.py:251
+msgid "This field can only be set once; only an administrator can modify it afterwards."
+msgstr "Ce champ ne peut être complété qu'une seule fois; seul un administrateur pourra le modifier ensuite !"
+
 #: ../browser/portlets.py:212
 msgid "This portlet lists scheduled licences."
 msgstr "Ce portlet liste les licences planifiées."

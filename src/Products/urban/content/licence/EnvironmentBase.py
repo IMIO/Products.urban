@@ -31,6 +31,7 @@ from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.CODT_UniqueLicenceInquiry import CODT_UniqueLicenceInquiry
 from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.fields import SetOnceStringField
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import (
@@ -97,19 +98,25 @@ slave_fields_prorogation = (
 
 schema = Schema(
     (
-        StringField(
+        SetOnceStringField(
             name="referenceFT",
             widget=StringField._properties["widget"](
                 size=30,
                 label=_("urban_label_referenceFT", default="Referenceft"),
+                description=_(
+                    "This field can only be set once; only an administrator can modify it afterwards."
+                ),
             ),
             schemata="urban_description",
         ),
-        StringField(
+        SetOnceStringField(
             name="referenceFT_PM",
             widget=StringField._properties["widget"](
                 size=30,
                 label=_("urban_label_referenceFT_PM", default="reference FT PM"),
+                description=_(
+                    "This field can only be set once; only an administrator can modify it afterwards."
+                ),
             ),
             schemata="urban_description",
         ),
