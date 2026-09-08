@@ -550,6 +550,10 @@ msgstr "Je créerai une demande d'avis préalable du Collège"
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr "Je ne créerai pas de demande d'avis préalable du Collège, et je finalise la réponse vers le SPW maintenant"
 
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr "Abandon"
+
 #. Default: "Acknowledgement"
 #: ../interfaces.py:385
 msgid "IAcknowledgment type marker interface"
@@ -570,6 +574,10 @@ msgstr "Annonce de projet"
 #: ../interfaces.py:417
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr "Notification du choix de la procédure"
+
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
+msgstr "Cession"
 
 #: ../interfaces.py:345
 msgid "ICollege type marker interface"
@@ -625,6 +633,10 @@ msgstr "Fin forcée"
 #: ../interfaces.py:505
 msgid "IIILEPrescriptionEvent type marker interface"
 msgstr "Prescription IILE"
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
+msgstr "Information"
 
 #. Default: "Inquiry"
 #: ../interfaces.py:421
@@ -735,9 +747,25 @@ msgstr "Règlement transactionnel"
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr "Collège simple"
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr "Décision de révision des conditions particulières"
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr "Dépôt de révision des conditions particulières"
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr "Projet de révision des conditions particulières"
+
 #: ../interfaces.py:565
 msgid "ISuspensionEvent type marker interface"
 msgstr "Suspension"
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
+msgstr "Refus tacite"
 
 #: ../interfaces.py:465
 msgid "ITechnicalAnalysis type marker interface"
