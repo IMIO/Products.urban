@@ -455,9 +455,47 @@ class IncomingNoticeHandler(object):
                 )
 
     def update_licence(self):
-        self.set_reference_ft()
-        self.set_reference_ft_pm()
-        self.set_reference_dgatlp()
+        self.set_external_reference("referenceFT")
+        self.set_external_reference("referenceFT_PM")
+        self.set_external_reference("referenceDGATLP")
+
+    def set_external_reference(self, field_name):
+        notification_ref = getattr(self.notification, field_name, None)
+        if not notification_ref:
+            return
+
+        licence = self.licence
+        try:
+            licence_field = licence.getField(field_name)
+            stored_licence_ref = licence_field.get(licence)
+        except AttributeError:
+            return
+
+        # in case of disagreeing references
+        if stored_licence_ref and stored_licence_ref != notification_ref:
+            try:
+                licence_additional_ref_field = licence.getField("additionalReference")
+                licence_additional_ref_value = licence_additional_ref_field.get(licence)
+            except AttributeError:
+                licence_additional_ref_field = None
+                licence_additional_ref_value = None
+
+            # append the stored reference to field Additional reference
+            # unless it already contains it
+            if (
+                isinstance(licence_additional_ref_value, basestring)
+                and stored_licence_ref not in licence_additional_ref_value
+            ):
+                if not licence_additional_ref_value:
+                    new_value = stored_licence_ref
+                else:
+                    new_value = ", ".join([licence_additional_ref_value, stored_licence_ref])
+                licence_additional_ref_field.set(licence, new_value)
+
+        if stored_licence_ref != notification_ref:
+            # overwrite the stored reference
+            licence_field.set(licence, notification_ref)
+            self.licence.reindexObject(idxs=[field_name])
 
     def set_reference_ft(self):
         try:
