@@ -28,6 +28,9 @@ claimants_csv_fieldnames = [
     "hasPetition",
     "outOfTime",
     "claimDate",
+    "claimDay",
+    "claimMonth",
+    "claimYear",
     "claimingText",
     "wantDecisionCopy",
 ]
@@ -50,6 +53,9 @@ CLAIMANT_HEADER_LABELS = [
     ("hasPetition", u"Pétition"),
     ("outOfTime", u"Hors délai"),
     ("claimDate", u"Date de réception"),
+    ("claimDay", u"Jour de réception"),
+    ("claimMonth", u"Mois de réception"),
+    ("claimYear", u"Année de réception"),
     ("claimingText", u"Texte de la réclamation"),
     ("wantDecisionCopy", u"Souhaite une copie de la décision"),
 ]
@@ -83,7 +89,12 @@ CLAIM_DATE_FORMATS = (
 CLAIM_DATE_STORAGE_FORMAT = "%d/%m/%Y"
 
 IDENTITY_FIELDS = ("name1", "name2", "society", "nationalRegister")
-COMPARABLE_FIELDS = [f for f in claimants_csv_fieldnames if f != "claimingText"]
+_TRANSIENT_DATE_FIELDS = ("claimDay", "claimMonth", "claimYear")
+CLAIMANT_FIELDS = [
+    f for f in claimants_csv_fieldnames if f not in _TRANSIENT_DATE_FIELDS
+]
+COMPARABLE_FIELDS = [f for f in CLAIMANT_FIELDS if f != "claimingText"]
+MERGEABLE_FIELDS = list(CLAIMANT_FIELDS)
 
 logger = logging.getLogger("Products.urban import utils")
 
@@ -121,20 +132,17 @@ def _get_existing_value(claimant_obj, field):
 
 
 def _to_comparable_date(value):
-    """Normalize a date-ish value (raw CSV string or a Zope DateTime
-    object) to a plain (year, month, day) tuple for comparison,
-    or None if it can't be parsed."""
+    """value is either an existing DateTime.DateTime (from a Claimant
+    object) or our canonical 'YYYY-MM-DD' string."""
     if not value:
         return None
     if isinstance(value, DateTime):
         return (value.year(), value.month(), value.day())
-    for fmt in CLAIM_DATE_FORMATS:
-        try:
-            parsed = datetime.strptime(unicode(value).strip(), fmt)
-            return (parsed.year, parsed.month, parsed.day)
-        except (ValueError, TypeError):
-            continue
-    return None
+    try:
+        parsed = datetime.strptime(unicode(value).strip(), "%Y-%m-%d")
+        return (parsed.year, parsed.month, parsed.day)
+    except (ValueError, TypeError):
+        return None
 
 
 def _values_match(existing_value, csv_value, field=None):
@@ -144,11 +152,9 @@ def _values_match(existing_value, csv_value, field=None):
         existing_date = _to_comparable_date(existing_value)
         csv_date = _to_comparable_date(csv_value)
         if existing_date is None or csv_date is None:
-            return True  # unparsable, don't block a match on it
+            return True
         return existing_date == csv_date
-    return _normalize_label(unicode(existing_value)) == _normalize_label(
-        unicode(csv_value)
-    )
+    return _normalize_label(unicode(existing_value)) == _normalize_label(unicode(csv_value))
 
 
 def _comparable_row_value(field, row, titles_mapping=None, country_mapping=None):
@@ -161,12 +167,62 @@ def _comparable_row_value(field, row, titles_mapping=None, country_mapping=None)
     if field == "country" and country_mapping is not None:
         raw = row.get("country")
         return country_mapping.get(raw, raw)
+    if field == "claimDate":
+        return iso_string_to_datetime(row.get("claimDate"))
     return row.get(field)
 
 
 NORMALIZED_LABEL_TO_FIELDNAME = dict(
     (_normalize_label(label), fieldname) for fieldname, label in CLAIMANT_HEADER_LABELS
 )
+
+
+def iso_string_to_datetime(value):
+    """Convert our canonical 'YYYY-MM-DD' storage format to an explicit
+    DateTime(year, month, day) — the positional constructor form is
+    unambiguous, unlike passing a raw string to Archetypes' DateField,
+    which misinterprets DD/MM/YYYY as MM/DD/YYYY (confirmed bug)."""
+    if not value:
+        return None
+    year, month, day = [int(p) for p in value.split("-")]
+    return DateTime(year, month, day)
+
+
+def build_claim_date(row):
+    """Build an unambiguous claim date for this row.
+    Priority: explicit day/month/year columns (new template) if any of
+    the three is filled in — all three are then required together.
+    Falls back to the legacy single claimDate column, parsed strictly
+    as DD/MM/YYYY (the documented official format) — no MM/DD guessing.
+    Returns (iso_string_or_None, invalid_value_repr_or_None)."""
+    day = (row.get("claimDay") or "").strip()
+    month = (row.get("claimMonth") or "").strip()
+    year = (row.get("claimYear") or "").strip()
+
+    if day or month or year:
+        if not (day and month and year):
+            # incomplete day/month/year triple: report the raw combination
+            # as the invalid value, same shape as other field errors
+            return None, u"%s/%s/%s" % (day or "?", month or "?", year or "?")
+        try:
+            day_i, month_i, year_i = int(day), int(month), int(year)
+            if year_i < 100:
+                year_i += 2000
+            datetime(year_i, month_i, day_i)  # raises if not a real calendar date
+            return u"%04d-%02d-%02d" % (year_i, month_i, day_i), None
+        except (ValueError, TypeError):
+            return None, u"%s/%s/%s" % (day, month, year)
+
+    claim_date = (row.get("claimDate") or "").strip()
+    if not claim_date:
+        return None, None  # empty is allowed
+    for fmt in ("%d/%m/%Y", "%d-%m-%Y", "%d.%m.%Y", "%d/%m/%y", "%d-%m-%y", "%d.%m.%y"):
+        try:
+            parsed = datetime.strptime(claim_date, fmt)
+            return u"%04d-%02d-%02d" % (parsed.year, parsed.month, parsed.day), None
+        except ValueError:
+            continue
+    return None, claim_date
 
 
 def handle_boolean_value(value):
@@ -235,38 +291,30 @@ def _detect_delimiter_and_fieldnames(header_line):
 
 
 def parse_and_validate_claimants_csv(raw_data):
-    """Parse the raw CSV once, return (rows, errors).
-    rows: list of dicts with already-normalized values (bool, date,
-          claimType); columns missing from the file are simply absent
-          from the dict (not an error).
-    errors: list of i18n messages, one entry per invalid value."""
     raw_data = _decode_csv_data(raw_data)
+
     lines = raw_data.splitlines()
     if not lines:
         return [], [_(u"The imported file is empty.")]
 
     delimiter, fieldnames = _detect_delimiter_and_fieldnames(lines[0])
     if not any(fieldnames):
-        return [], [
-            _(
-                u"The imported file couldn't be read properly. "
-                u"Please verify its structure and try again."
-            )
-        ]
+        return [], [_(
+            u"The imported file couldn't be read properly. "
+            u"Please verify its structure and try again."
+        )]
 
     final_fieldnames = [
-        fn if fn else u"_ignored_%s" % idx for idx, fn in enumerate(fieldnames)
+        fn if fn else u"_ignored_%s" % idx
+        for idx, fn in enumerate(fieldnames)
     ]
     reader = csv.DictReader(
-        StringIO(raw_data),
-        fieldnames=final_fieldnames,
-        delimiter=delimiter,
-        quotechar='"',
+        StringIO(raw_data), fieldnames=final_fieldnames,
+        delimiter=delimiter, quotechar='"',
     )
-    raw_rows = list(reader)[1:]  # skip the header line
+    raw_rows = list(reader)[1:]
     raw_rows = [
-        row
-        for row in raw_rows
+        row for row in raw_rows
         if row.get("name1") or row.get("name2") or row.get("society")
     ]
 
@@ -287,29 +335,20 @@ def parse_and_validate_claimants_csv(raw_data):
         except ValueError:
             row_errors.append(("claimType", row.get("claimType")))
 
-        claim_date = row.get("claimDate")
-        if claim_date:
-            if not is_plausible_date(claim_date):
-                row_errors.append(("claimDate", claim_date))
-            try:
-                clean_row["claimDate"] = parse_claim_date(claim_date).strftime(
-                    CLAIM_DATE_STORAGE_FORMAT
-                )
-            except ValueError:
-                row_errors.append(("claimDate", claim_date))
+        claim_date_iso, date_error = build_claim_date(row)
+        if date_error:
+            row_errors.append(("claimDate", date_error))
+        clean_row["claimDate"] = claim_date_iso or u""
+        clean_row.pop("claimDay", None)
+        clean_row.pop("claimMonth", None)
+        clean_row.pop("claimYear", None)
 
         if row_errors:
             for field, value in row_errors:
-                errors.append(
-                    _(
-                        u'line ${line}, field ${field}: invalid value "${value}"',
-                        mapping={
-                            u"line": line_number,
-                            u"field": field,
-                            u"value": value,
-                        },
-                    )
-                )
+                errors.append(_(
+                    u"line ${line}, field ${field}: invalid value \"${value}\"",
+                    mapping={u"line": line_number, u"field": field, u"value": value},
+                ))
         else:
             rows.append(clean_row)
 

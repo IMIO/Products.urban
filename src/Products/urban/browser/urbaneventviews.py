@@ -11,6 +11,7 @@ from Products.urban import utils
 from Products.urban.browser.import_utils import find_matching_claimant
 from Products.urban.browser.import_utils import merge_missing_fields
 from Products.urban.browser.import_utils import parse_and_validate_claimants_csv
+from Products.urban.browser.import_utils import iso_string_to_datetime
 from Products.urban.browser.import_utils import CLAIM_TYPE_MAPPING
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.mapview import MapView
@@ -735,11 +736,11 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
 
     def handle_claimant_arg(self, row, titles_mapping, country_mapping, site):
-        # booleans, claimType, and claimDate were already normalized
-        # and validated upstream (at upload) — no need to redo it here
         row["claimType"] = CLAIM_TYPE_MAPPING[row["claimType"]]
         row["personTitle"] = titles_mapping.get(row.get("personTitle"), "notitle")
         row["country"] = country_mapping.get(row.get("country"), "belgium")
+        # explicit DateTime, bypasses the widget's ambiguous string parsing
+        row["claimDate"] = iso_string_to_datetime(row.get("claimDate"))
         row["id"] = site.plone_utils.normalizeString(
             (row.get("name1") or "") + (row.get("name2") or "") + (row.get("society") or "")
         )
