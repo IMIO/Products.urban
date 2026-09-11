@@ -7,6 +7,30 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b18 (2026-09-11)
+---------------------
+
+New features:
+
+
+- Adapt dashboard config for Liege / Classic
+  [mpeeters] (URBBDC-3272)
+
+
+Bug fixes:
+
+
+- Fix merge conflicts
+  [mpeeters] (URBBDC-3272)
+
+
+Internal:
+
+
+- Adapt upgrade steps to be compatible with Liege current state
+  [mpeeters] (URBBDC-3272)
+
+
 3.0.0b17 (2026-06-26)
 ---------------------
 

@@ -1,2 +1,0 @@
-Fix merge conflicts
-[mpeeters]
