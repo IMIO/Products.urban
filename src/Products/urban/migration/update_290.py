@@ -147,6 +147,7 @@ def add_event_config_types_notice(context):
 
 def add_folder_manager_notice(context):
     from Products.urban.setuphandlers import _activate_dashboard_navigation
+    from Products.urban.utils import switch_config_folder
     from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
     from eea.facetednavigation.criteria.interfaces import ICriteria
     from eea.facetednavigation.events import FacetedGlobalSettingsChangedEvent
@@ -180,7 +181,8 @@ def add_folder_manager_notice(context):
         )
 
         _activate_dashboard_navigation(
-            import_notice_folder, "/dashboard/config/import_notice.xml"
+            import_notice_folder,
+            switch_config_folder("import_notice.xml"),
         )
 
         # no need to create another collection, this one does the job

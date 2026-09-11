@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban import UrbanMessage as _
 from Products.urban.browser.default_text import DefaultTextRenderer
 from Products.urban.events.licenceEvents import _setDefaultSelectValues
 from Products.urban.interfaces import IEventTypeType
@@ -9,6 +10,7 @@ from plone import api
 from plone.memoize.request import cache
 from zope.component.interface import getInterface
 from zope.event import notify
+from zope.i18n import translate
 from zope.interface import alsoProvides
 from zope.lifecycleevent import ObjectModifiedEvent
 
@@ -88,7 +90,17 @@ def generateSingletonDocument(urban_event, event):
             generation_view = urban_event.restrictedTraverse(
                 "urban-document-generation"
             )
-            generation_view(pod_template.UID(), output_format)
+            try:
+                generation_view(pod_template.UID(), output_format)
+            except Exception as e:
+                error_msg = _("There was an error during document generation")
+                request = urban_event.REQUEST
+                print(e)
+                api.portal.show_message(
+                    message=translate(error_msg, context=request),
+                    request=request,
+                    type="error",
+                )
 
 
 def updateKeyEvent(urban_event, event):

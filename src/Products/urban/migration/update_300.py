@@ -330,9 +330,10 @@ def add_rubrics_index_and_filters(context):
     }
     urban_folder_criterion = ICriteria(urban_folder)
     if urban_folder_criterion is not None:
-        urban_folder_criterion.add(
-            wid="select2", position="top", section="advanced", **data
-        )
+        if data["_cid_"] not in urban_folder_criterion.keys():
+            urban_folder_criterion.add(
+                wid="select2", position="top", section="advanced", **data
+            )
     for urban_type in URBAN_TYPES:
         licence_config = portal_urban.get(urban_type.lower(), None)
         if licence_config is None:
@@ -345,5 +346,6 @@ def add_rubrics_index_and_filters(context):
         if criterion is None:
             continue
 
-        criterion.add(wid="select2", position="top", section="advanced", **data)
+        if data["_cid_"] not in criterion.keys():
+            criterion.add(wid="select2", position="top", section="advanced", **data)
     logger.info("upgrade step done!")
