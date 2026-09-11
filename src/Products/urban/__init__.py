@@ -134,6 +134,7 @@ from Products.urban.content.licence import CODT_BuildLicence  # noqa
 from Products.urban.content.licence import CODT_CommercialLicence  # noqa
 from Products.urban.content.licence import CODT_IntegratedLicence  # noqa
 from Products.urban.content.licence import CODT_ParcelOutLicence  # noqa
+from Products.urban.content.licence import CODT_UniqueBorderingLicence  # noqa
 from Products.urban.content.licence import CODT_UniqueLicence  # noqa
 from Products.urban.content.licence import CODT_UrbanCertificateBase  # noqa
 from Products.urban.content.licence import CODT_UrbanCertificateTwo  # noqa

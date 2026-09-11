@@ -140,22 +140,6 @@
       />
 
   <adapter
-      factory=".start_date.DecisionProjectFromSPWReceiptDateOrAcknowledgmentDate"
-      provides="imio.schedule.interfaces.IStartDate"
-      for="Products.urban.interfaces.IEnvironmentLicence
-           imio.schedule.content.task.IAutomatedTask"
-      name="urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
-      />
-
-  <adapter
-      factory=".start_date.WalloonRegionDecisionDate"
-      provides="imio.schedule.interfaces.IStartDate"
-      for="Products.urban.interfaces.IEnvironmentLicence
-           imio.schedule.content.task.IAutomatedTask"
-      name="urban.schedule.start_date.walloonregion_decision_date"
-      />
-
-  <adapter
       factory=".start_date.AskOpinionDate"
       provides="imio.schedule.interfaces.IStartDate"
       for="Products.urban.interfaces.IUrbanEventOpinionRequest

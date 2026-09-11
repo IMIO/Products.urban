@@ -493,11 +493,11 @@
   <!--  NOTICE actions-->
 
   <browser:page
-      name="can_transfer_folder_to_dpa"
-      for="*"
-      class=".urbaneventviews.CanTransferFolderToDpaView"
-      permission="zope2.View"
-      />
+     for="*"
+     name="can_transfer_folder_to_dpa"
+     class=".urbaneventviews.CanTransferFolderToDpaView"
+     permission="zope2.View"
+  />
 
   <browser:page
      for="*"
@@ -531,6 +531,55 @@
      for="*"
      name="can_transfer_decision_display"
      class=".urbaneventviews.CanTransferDecisionDisplayView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_dates_gesper_ep"
+     class=".urbaneventviews.CanTransferDatesGesperEPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_ticket_gesper_ep"
+     class=".urbaneventviews.CanTransferTicketGesperEPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_opinion_gesper_ep"
+     class=".urbaneventviews.CanTransferOpinionGesperEPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_dates_gesper_ap"
+     class=".urbaneventviews.CanTransferDatesGesperAPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_ticket_gesper_ap"
+     class=".urbaneventviews.CanTransferTicketGesperAPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_opinion_gesper_ap"
+     class=".urbaneventviews.CanTransferOpinionGesperAPView"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     for="*"
+     name="can_transfer_opinion_gesper_opinion_request"
+     class=".urbaneventviews.CanTransferOpinionGesperOpinionRequestView"
      permission="zope2.View"
   />
 
@@ -585,11 +634,62 @@
      />
 
   <browser:page
-      name="generate-portionOut-list"
-      for="*"
-      class=".portionOut_migration.GeneratePortioOutList"
-      permission="cmf.ManagePortal"
-      />
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_dates_gesper_ep_form"
+     class=".notice_forms.TransferDatesGesperEPActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_ticket_gesper_ep_form"
+     class=".notice_forms.TransferTicketGesperEPActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_gesper_ep_form"
+     class=".notice_forms.TransferOpinionGesperEPActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_dates_gesper_ap_form"
+     class=".notice_forms.TransferDatesGesperAPActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_ticket_gesper_ap_form"
+     class=".notice_forms.TransferTicketGesperAPActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_gesper_ap_form"
+     class=".notice_forms.TransferOpinionGesperAPActionWrapper"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="Products.urban.interfaces.IUrbanEvent"
+     layer="Products.urban.interfaces.IProductUrbanLayer"
+     name="transfer_opinion_gesper_opinion_request_form"
+     class=".notice_forms.TransferOpinionGesperOpinionRequestActionWrapper"
+     permission="zope2.View"
+     />
+
+   <!-- technical views -->
 
   <browser:page
       name="generate-portionOut-list"
