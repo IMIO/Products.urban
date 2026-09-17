@@ -68,6 +68,7 @@ optional_fields = [
     "availableParkings",
     "missingParkings",
     "parkingDetails",
+    "representativeContacts",
 ]
 
 slave_fields_habitation = (
@@ -515,6 +516,7 @@ schema = Schema(
                 ),
                 popup_name="contact_reference_popup",
             ),
+            optional=True,
             schemata="urban_description",
             multiValued=1,
             relationship="basebuildlicenceRepresentativeContacts",
