@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
@@ -18,6 +17,8 @@ from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.stringinterp.interfaces import IContextWrapper
+from random import randint
+from time import sleep
 from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
@@ -25,6 +26,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 
 import logging
 import transaction
+
 
 logger = logging.getLogger("urban: Notice Cron")
 
@@ -35,6 +37,7 @@ class ImportFromNoticeView(BrowserView):
     def __call__(self):
 
         self._initialize()
+        self._add_random_sleep()
         self._retry_failed_notifications()
         self._process_fresh_notifications()
         self._save_progress()
@@ -61,6 +64,17 @@ class ImportFromNoticeView(BrowserView):
             or []
         )
         self.already_handled_notifications = []
+
+    def _add_random_sleep(self):
+        """
+        Add a random sleep to cron-based requests, to avoid swarming the NOTICe API.
+        TEMPORARY FIX !
+        """
+
+        if not self.retry_failed_notifications:
+            delay = randint(1, 1800)
+            logger.info(u"Delaying NOTICe cron call by %s seconds", delay)
+            sleep(delay)
 
     def _retry_failed_notifications(self):
         """Retry processing of previously failed notifications, if requested."""
