@@ -37,7 +37,7 @@ class ImportFromNoticeView(BrowserView):
     def __call__(self):
 
         self._initialize()
-        self._add_jitter()
+        self._add_random_sleep()
         self._retry_failed_notifications()
         self._process_fresh_notifications()
         self._save_progress()
@@ -65,7 +65,7 @@ class ImportFromNoticeView(BrowserView):
         )
         self.already_handled_notifications = []
 
-    def _add_jitter(self):
+    def _add_random_sleep(self):
         """
         Add a random sleep to cron-based requests, to avoid swarming the NOTICe API.
         TEMPORARY FIX !
