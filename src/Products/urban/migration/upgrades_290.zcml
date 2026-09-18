@@ -172,5 +172,12 @@
         handler=".update_290.add_3rd_observation_to_housing_workflow"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Set urbanConfigId for PUL"
+        description=""
+        source="2921"
+        destination="2922"
+        handler=".update_290.set_pul_urbanConfigId"
+        profile="Products.urban:default" />
 
 </configure>
