@@ -1,7 +1,4 @@
 # -*- coding: utf-8 -*-
-from random import randint
-from time import sleep
-
 from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
@@ -20,6 +17,8 @@ from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.stringinterp.interfaces import IContextWrapper
+from random import randint
+from time import sleep
 from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
@@ -27,6 +26,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 
 import logging
 import transaction
+
 
 logger = logging.getLogger("urban: Notice Cron")
 
