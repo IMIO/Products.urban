@@ -266,6 +266,12 @@ class ImportFromNoticeView(BrowserView):
             "PM_REFUS_TACITE_COMMUNE",
         ):
             handler = DecisionSPWHandler
+        elif detailed_notification.notice_type in (
+            "ABANDON_COMMUNE_MANUELLE",
+            "PM_ABANDON_COMMUNE_EP",
+            "PM_ABANDON_COMMUNE_EP_FTFD",
+        ):
+            handler = AbandonedHandler
 
         # GESPER
 
@@ -669,6 +675,14 @@ class SummaryReportHandler(IncomingNoticeHandler):
         super(SummaryReportHandler, self).fill_incoming_event()
         if self.notification.proposed_decision_code:
             self.event.setExternalDecision(self.notification.proposed_decision_code)
+
+
+class AbandonedHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IForcedEndEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "retired"
 
 
 class DecisionSPWHandler(IncomingNoticeHandler):
