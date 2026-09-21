@@ -14,6 +14,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 __docformat__ = "plaintext"
 
 from AccessControl import ClassSecurityInfo
+from DateTime import DateTime
 from Products.ATContentTypes.configuration import zconf
 from Products.Archetypes.Widget import RichWidget
 from Products.Archetypes.atapi import *
@@ -33,6 +34,10 @@ from Products.urban.config import *
 from Products.urban.content.licence.base import UrbanBase
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
+from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import ITicket
+from Products.urban.interfaces import IUrbanCertificateBase
 from Products.urban.utils import get_interface_by_path
 from Products.urban.utils import is_attachment
 from Products.urban.utils import setOptionalAttributes
@@ -1712,6 +1717,71 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
         """
         parcels = [prc for prc in self.getParcels() if prc.isOfficialParcel]
         return parcels
+
+    security.declarePublic("get_related_licences")
+
+    def get_related_licences(
+        self,
+        licence_types=[],
+        decision_limit_date=None,
+        licence_state=None,
+        with_historic=False,
+    ):
+        related_licences = [
+            licence.getObject()
+            for licence in self.get_related_licences_of_parcel(
+                licence_types, with_historic
+            )
+        ]
+
+        if decision_limit_date:
+            related_licences_decision_limit_date = []
+            if not isinstance(decision_limit_date, DateTime):
+                decision_limit_date = DateTime(decision_limit_date)
+            for licence in related_licences:
+                delivered = ""
+                if IBaseBuildLicence.providedBy(
+                    licence
+                ) or IUrbanCertificateBase.providedBy(licence):
+                    delivered = licence.getLastTheLicence()
+                elif IEnvironmentBase.providedBy(licence):
+                    delivered = licence.getLastLicenceDelivery()
+                elif ITicket.providedBy(licence):
+                    delivered = licence.getLastTheTicket()
+                if delivered and (
+                    (delivered.getDecisionDate() or delivered.getEventDate())
+                    >= decision_limit_date
+                ):
+                    related_licences_decision_limit_date.append(licence)
+            related_licences = related_licences_decision_limit_date
+
+        if licence_state:
+            licences = []
+            for licence in related_licences:
+                licence_review_state = api.content.get_state(obj=licence)
+                if licence_review_state == licence_state:
+                    licences.append(licence)
+            related_licences = licences
+
+        return related_licences
+
+    security.declarePublic("get_related_licences_of_parcel")
+
+    def get_related_licences_of_parcel(self, licence_types=[], with_historic=False):
+        """
+        Returns the licences related to a parcel
+        """
+        parcels = self.getParcels()
+        relatedLicences = []
+        licence_uids = set([])
+        for parcel in parcels:
+            for brain in parcel.getRelatedLicences(
+                licence_type=licence_types, with_historic=with_historic
+            ):
+                if brain.UID not in licence_uids:
+                    relatedLicences.append(brain)
+                    licence_uids.add(brain.UID)
+        return relatedLicences
 
     security.declarePublic("updateTitle")
 
