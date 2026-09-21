@@ -31,6 +31,7 @@ from Products.urban import utils
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
 from Products.urban.content.licence.base import UrbanBase
+from Products.urban.fields import SetOnceStringField
 from Products.urban.interfaces import IOpinionRequestEvent
 from Products.urban.interfaces import IUrbanEvent
 from Products.urban.utils import get_interface_by_path
@@ -242,11 +243,14 @@ schema = Schema(
             schemata="urban_description",
             validators=("isNotDuplicatedReference",),
         ),
-        StringField(
+        SetOnceStringField(
             name="referenceDGATLP",
             widget=StringField._properties["widget"](
                 size=60,
                 label=_("urban_label_referenceDGATLP", default="Referencedgatlp"),
+                description=_(
+                    "This field can only be set once; only an administrator can modify it afterwards."
+                ),
             ),
             schemata="urban_description",
         ),

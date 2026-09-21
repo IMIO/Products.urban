@@ -201,15 +201,50 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
             "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
+
+            # Gesper Licence Notice
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_1_ERE_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_2_EME_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_OBLIGATOIRE_PLAN_MODIFIE_2_EME_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_1_ERE_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_INITIAL_2_EME_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_2_EME_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "NOTIF_LIBRE_AVEC_REPONSE_1_ERE_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+            "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE": "ns3:GesperLicenceNoticeRequest",
+
+            # Gesper Public Survey
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_1_ERE_INSTANCE": "ns3:GesperPublicSurveyRequest",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE": "ns3:GesperPublicSurveyRequest",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE": "ns3:GesperPublicSurveyRequest",
+            "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE": "ns3:GesperPublicSurveyRequest",
+
+            # Gesper Project Announcement
+            "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_1_ERE_INSTANCE": "ns3:GesperProjectAnnouncementRequest",
+            "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE": "ns3:GesperProjectAnnouncementRequest",
+            "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE": "ns3:GesperProjectAnnouncementRequest",
+            "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE": "ns3:GesperProjectAnnouncementRequest",
+
+            # Gesper Request Information
+            "DECISION_GESPER_1_ERE_INSTANCE": "ns3:GesperRequestInformationRequest",
+            "DECISION_GESPER_2_EME_INSTANCE": "ns3:GesperRequestInformationRequest",
+            "NOTIF_LIBRE_SANS_REPONSE_1_ERE_INSTANCE": "ns3:GesperRequestInformationRequest",
+            "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE": "ns3:GesperRequestInformationRequest",
         }
         return specific.get(self.notice_type)
 
     @property
     def reference(self):
         """Return the URBAN reference, if present"""
-        return self._get_data(
-            "specific", self._specific_code, "ns3:municipalityReference"
-        )
+        if self.original_application == "TWICE":
+            return self._get_data(
+                "specific", self._specific_code, "ns3:municipalityReference"
+            )
+        if self.original_application == "GESPER":
+            return self._get_data(
+                "specific", self._specific_code, "ns3:iaReference"
+            )
 
     @property
     def _pj_formulaire_xml_tree(self):
