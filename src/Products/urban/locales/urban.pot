@@ -5977,3 +5977,12 @@ msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
