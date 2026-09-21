@@ -420,7 +420,7 @@ class IncomingNoticeHandler(object):
         event_config = self.notification.event_config(self.event_config_marker)
         self.event = self.licence.createUrbanEvent(event_config)
         self.fill_incoming_event()
-        api.content.transition(self.event, "close")
+        api.content.transition(self.event, to_state="closed")
 
     def fill_incoming_event(self):
         usable_date = None
