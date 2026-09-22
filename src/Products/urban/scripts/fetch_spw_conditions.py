@@ -25,7 +25,12 @@ ENDPOINT = (
 
 
 def fetch_legal_conditions(identifier, retries=3, pause=0.3):
-    """Return the `legal` list for one rubric identifier, or [] on failure."""
+    """Return the `legal` list for one rubric identifier.
+
+    Raises the last encountered exception if every retry failed, so a
+    network/server failure is never silently treated as "this rubric has
+    no conditions".
+    """
     url = ENDPOINT.format(identifier=identifier)
     request = urllib2.Request(
         url,
@@ -46,11 +51,7 @@ def fetch_legal_conditions(identifier, retries=3, pause=0.3):
             return payload.get("legal", [])
         except Exception as exc:
             if attempt == retries - 1:
-                sys.stderr.write(
-                    "WARNING: failed to fetch conditions for rubricId=%s: %s\n"
-                    % (identifier, exc)
-                )
-                return []
+                raise
             time.sleep(pause)
 
 
@@ -68,19 +69,33 @@ def condition_id_from_url(url):
 
 
 def build_mapping_and_conditions(xml_path):
-    """Return (mapping, conditions):
+    """Return (mapping, conditions, failed_identifiers):
     - mapping: {rubric_code: [{"type": codeType, "id": condition_id}, ...]}
     - conditions: {codeType: {condition_id: {id, title, url, codeType}}}
+    - failed_identifiers: rubric identifiers whose fetch failed after all
+      retries -- a rubric_code missing from `mapping` because of a failure
+      is otherwise indistinguishable from one that genuinely has no
+      conditions, so callers must check this list before trusting the
+      result.
     """
     rubrics = parse_rubrics(xml_path)
 
     mapping = {}
     conditions = {}
+    failed_identifiers = []
 
     total = len(rubrics)
     for i, rubric in enumerate(rubrics):
         rubric_code = rubric["number"]
-        legal_entries = fetch_legal_conditions(rubric["identifier"])
+        try:
+            legal_entries = fetch_legal_conditions(rubric["identifier"])
+        except Exception as exc:
+            sys.stderr.write(
+                "WARNING: failed to fetch conditions for rubricId=%s (%s): %s\n"
+                % (rubric["identifier"], rubric_code, exc)
+            )
+            failed_identifiers.append(rubric["identifier"])
+            continue
 
         to_map = []
         for entry in legal_entries:
@@ -107,7 +122,7 @@ def build_mapping_and_conditions(xml_path):
         if (i + 1) % 50 == 0 or (i + 1) == total:
             sys.stderr.write("... %s/%s rubrics processed\n" % (i + 1, total))
 
-    return mapping, conditions
+    return mapping, conditions, failed_identifiers
 
 
 def main():
@@ -118,7 +133,17 @@ def main():
         sys.exit(1)
 
     xml_path, output_path = sys.argv[1], sys.argv[2]
-    mapping, conditions = build_mapping_and_conditions(xml_path)
+    mapping, conditions, failed_identifiers = build_mapping_and_conditions(xml_path)
+
+    if failed_identifiers:
+        sys.stderr.write(
+            "ABORTED: %s rubric(s) could not be fetched after retries, "
+            "not writing %s (a partial/incomplete mapping would be "
+            "indistinguishable from rubrics with genuinely no conditions). "
+            "Failed rubricIds: %s\n"
+            % (len(failed_identifiers), output_path, failed_identifiers)
+        )
+        sys.exit(1)
 
     result = {"mapping": mapping, "conditions": conditions}
 

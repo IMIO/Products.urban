@@ -185,7 +185,6 @@
         description="Consolidate the EnvironmentRubricTerm vocabulary with the SPW/NOTICe reference rubric list and their exploitation conditions"
         source="2922"
         destination="2923"
-        handler=".update_spw_rubrics.import_spw_rubrics"
         handler=".update_290.import_spw_rubrics"
         profile="Products.urban:default" />
 
