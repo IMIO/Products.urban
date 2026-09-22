@@ -6028,3 +6028,9 @@ msgstr ""
 
 msgid "PM_ABANDON_COMMUNE_EP_FTFD"
 msgstr ""
+
+msgid "ICessionEvent type marker interface"
+msgstr ""
+
+msgid "urban_label_newOperator"
+msgstr ""

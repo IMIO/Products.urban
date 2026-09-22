@@ -6040,3 +6040,9 @@ msgstr "Plans modificatifs - Notification à la commune de l'abandon de la proc�
 
 msgid "PM_ABANDON_COMMUNE_EP_FTFD"
 msgstr "Plans modificatifs - Notification à la commune de l'abandon de la procédure (AC=FTFD)"
+
+msgid "ICessionEvent type marker interface"
+msgstr "Cession"
+
+msgid "urban_label_newOperator"
+msgstr "Nouvel exploitant"

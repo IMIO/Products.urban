@@ -331,6 +331,10 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
         ):
             handler = GesperFreeNotificationSPWHandler
+        elif detailed_notification.notice_type in (
+            "ACTE_CESSION_COMMUNE",
+        ):
+            handler = CessionSpwHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -800,3 +804,28 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
 class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IFreeNotificationEvent"
     create_licence_if_missing = True
+
+
+class CessionSpwHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.ICessionEvent"
+
+    def update_licence(self):
+        super(CessionSpwHandler, self).update_licence()
+        self.import_new_applicant()
+
+    def import_new_applicant(self):
+        for old_applicant in self.licence.getApplicants():
+            api.content.transition(obj=old_applicant, transition="disable")
+        self.new_applicants = [
+            api.content.create(container=self.licence, **party.serialize())
+            for party in self.notification.parties
+        ]
+
+    def fill_incoming_event(self):
+        super(CessionSpwHandler, self).fill_incoming_event()
+        if self.new_applicants:
+            self.event.setNewOperator(self.new_applicants[0])
+
+    def process(self):
+        super(CessionSpwHandler, self).process()
+        notify(ObjectModifiedEvent(self.licence))

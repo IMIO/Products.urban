@@ -179,6 +179,7 @@ class NoticeNotification(NoticeElement):
             "ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
+            "ACTE_CESSION_COMMUNE": "ns3:TwiceDefaultRequest",
 
             # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
@@ -203,6 +204,7 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
             "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
+
         }
         return specific.get(self.notice_type)
 
@@ -380,7 +382,7 @@ class NoticeNotification(NoticeElement):
             NoticeParty(self.service, p)
             for p in self._get_data("parties", "part") or []
         ]
-    
+
     @property
     def business_reference_denomination(self):
         return self._get_data("businessReference", "denomination")

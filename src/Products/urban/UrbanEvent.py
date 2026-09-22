@@ -534,6 +534,19 @@ schema = Schema(
             default_output_type="text/html",
             optional=True,
         ),
+        ReferenceField(
+            name="newOperator",
+            widget=ReferenceBrowserWidget(
+                label=_("urban_label_newOperator", default="NewOperator"),
+                allow_search=1,
+                allow_browse=1,
+                show_indexes=0,
+            ),
+            allowed_types=("Applicant", "Corporation"),
+            multiValued=0,
+            optional=True,
+            relationship="newOperator",
+        ),
         DateTimeField(
             name="videoConferenceDate",
             widget=DateTimeField._properties["widget"](
