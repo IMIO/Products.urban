@@ -773,3 +773,7 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IDecisionRegisterOfModification(Interface):
+    __doc__ = _("""Marker interface for Urban event Decision register of modification""")

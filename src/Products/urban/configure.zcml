@@ -321,6 +321,10 @@
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IDecisionRegisterOfModification"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"
