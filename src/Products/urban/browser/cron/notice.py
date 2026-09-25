@@ -285,6 +285,8 @@ class ImportFromNoticeView(BrowserView):
             "ARRET_PLAN_MODIF_COMMUNE_MANUELLE",
         ):
             handler = StopForAmendedPlansHandler
+        elif detailed_notification.notice_type == "DECISION_REGISTRE_COMMUNE":
+            handler = DecisionRegisterOfModificationHandler
 
         # GESPER
 
@@ -425,7 +427,8 @@ class IncomingNoticeHandler(object):
         event_config = self.notification.event_config(self.event_config_marker)
         self.event = self.licence.createUrbanEvent(event_config)
         self.fill_incoming_event()
-        api.content.transition(self.event, "close")
+        api.content.transition(self.event, to_state="closed")
+
 
     def fill_incoming_event(self):
         usable_date = None
@@ -736,6 +739,8 @@ class StopForAmendedPlansHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "suspension"
+class DecisionRegisterOfModificationHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDecisionRegisterOfModification"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):
