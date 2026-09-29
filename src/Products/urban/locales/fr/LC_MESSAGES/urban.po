@@ -88,6 +88,12 @@ msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importa
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/reclamant_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
 
+msgid "ARRET_PLAN_MODIF_COMMUNE"
+msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs"
+
+msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
+msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs (autre commune)"
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:34
