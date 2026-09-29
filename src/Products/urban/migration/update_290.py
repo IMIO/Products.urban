@@ -10,9 +10,14 @@ from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.profiles.extra.config_default_values import default_values
+
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.utils import moveElementAfter
+
 from Products.urban.setuphandlers import set_licence_folder_security
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
@@ -763,4 +768,18 @@ def set_pul_urbanConfigId(context):
             "urbanConfigId", "codt_uniqueborderinglicence", "string"
         )
 
+    logger.info("upgrade step done!")
+def add_sessiontype_vocabulary(context):
+    logger = logging.getLogger("urban: add sessiontype vocabulary")
+    portal_urban = api.portal.get_tool("portal_urban")
+    dimension_type_vocabularies_config = default_values["global"]["dimensiontypes"]
+    allowedtypes = dimension_type_vocabularies_config[0]
+    sessiontype_vocabularies_config = createVocabularyFolder(
+        portal_urban, "sessiontype", context, allowedtypes
+    )
+    createFolderDefaultValues(
+        sessiontype_vocabularies_config,
+        default_values["global"]["sessiontype"][1:],
+        default_values["global"]["sessiontype"][0],
+    )
     logger.info("upgrade step done!")

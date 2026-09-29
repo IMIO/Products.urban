@@ -180,4 +180,12 @@
         handler=".update_290.set_pul_urbanConfigId"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add session type "
+        description=""
+        source="2922"
+        destination="2923"
+        handler=".update_290.add_sessiontype_vocabulary"
+        profile="Products.urban:default" />
+
 </configure>

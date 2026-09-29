@@ -6034,3 +6034,6 @@ msgstr ""
 
 msgid "urban_label_newOperator"
 msgstr ""
+
+msgid "urban_label_sessionType"
+msgstr ""

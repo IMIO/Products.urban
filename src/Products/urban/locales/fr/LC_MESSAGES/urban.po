@@ -6046,3 +6046,9 @@ msgstr "Cession"
 
 msgid "urban_label_newOperator"
 msgstr "Nouvel exploitant"
+
+msgid "urban_label_sessionType"
+msgstr "Type de cession"
+
+msgid "sessiontype_folder_title"
+msgstr "Type de cession"

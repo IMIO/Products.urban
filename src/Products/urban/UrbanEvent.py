@@ -571,6 +571,18 @@ schema = Schema(
             ),
             optional=True,
         ),
+        StringField(
+            name="sessionType",
+            widget=SelectionWidget(
+                label=_("urban_label_sessionType", default="Sessiontype"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary(
+                "sessiontype", with_empty_value=True, inUrbanConfig=False
+            ),
+            default_method="getDefaultValue",
+        ),
     ),
 )
 

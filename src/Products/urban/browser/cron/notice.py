@@ -825,6 +825,8 @@ class CessionSpwHandler(IncomingNoticeHandler):
         super(CessionSpwHandler, self).fill_incoming_event()
         if self.new_applicants:
             self.event.setNewOperator(self.new_applicants[0])
+        if self.notification.session_type:
+            self.event.setSessionType(self.notification.session_type)
 
     def process(self):
         super(CessionSpwHandler, self).process()
