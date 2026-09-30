@@ -433,6 +433,18 @@ class IModificationDepositEvent(IDepositEvent):
     __doc__ = _("""IModificationDeposit type marker interface""")
 
 
+class ISpecialConditionsRevisionDepositEvent(IDepositEvent):
+    __doc__ = _("""ISpecialConditionsRevisionDepositEvent type marker interface""")
+
+
+class ISpecialConditionsRevisionProjectEvent(Interface):
+    __doc__ = _("""ISpecialConditionsRevisionProjectEvent type marker interface""")
+
+
+class ISpecialConditionsRevisionDecisionEvent(Interface):
+    __doc__ = _("""ISpecialConditionsRevisionDecisionEvent type marker interface""")
+
+
 class IMissingPartEvent(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
 
@@ -525,6 +537,10 @@ class IRefusedIncompletenessEvent(Interface):
     __doc__ = _("""IRefusedIncompleteness type marker interface""")
 
 
+class ITacitRefusalEvent(Interface):
+    __doc__ = _("""ITacitRefusalEvent type marker interface""")
+
+
 class IIILEPrescriptionEvent(Interface):
     __doc__ = _("""IIILEPrescriptionEvent type marker interface""")
 
@@ -603,6 +619,18 @@ class ITransferOfLicenceEvent(Interface):
 
 class IObservationEvent(Interface):
     __doc__ = _("""IObservationEvent type marker interface""")
+
+
+class IAbandonEvent(Interface):
+    __doc__ = _("""IAbandonEvent type marker interface""")
+
+
+class IInformationEvent(Interface):
+    __doc__ = _("""IInformationEvent type marker interface""")
+
+
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
 
 
 class IUrbanBase(Interface):
