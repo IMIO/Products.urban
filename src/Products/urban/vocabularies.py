@@ -464,7 +464,11 @@ class RubricsVocabulary(object):
     def get_rubrics_vocabularies(self):
         portal = api.portal.get()
         rubrics_folder = portal.portal_urban.rubrics
-        return self.recursive_get_term(rubrics_folder, rubrics=[], check_id=[])
+        rubrics = []
+        check_id = []
+        return self.recursive_get_term(
+            rubrics_folder, rubrics=rubrics, check_id=check_id
+        )
 
     def recursive_get_term(self, element, rubrics=None, check_id=None):
         if rubrics is None:
