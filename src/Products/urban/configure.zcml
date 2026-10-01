@@ -314,6 +314,10 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IDecisionOnAmendedPlans"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IObservationEvent"
     type=".interfaces.IEventTypeType"/>
 

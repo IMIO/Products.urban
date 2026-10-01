@@ -330,6 +330,8 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
         ):
             handler = GesperFreeNotificationSPWHandler
+        elif detailed_notification.notice_type == "DECISION_REGISTRE_COMMUNE":
+            handler = ModificationLogDecisionHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -427,8 +429,7 @@ class IncomingNoticeHandler(object):
         event_config = self.notification.event_config(self.event_config_marker)
         self.event = self.licence.createUrbanEvent(event_config)
         self.fill_incoming_event()
-        api.content.transition(self.event, to_state="closed")
-
+        api.content.transition(self.event, "close")
 
     def fill_incoming_event(self):
         usable_date = None
@@ -802,3 +803,7 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
 class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IFreeNotificationEvent"
     create_licence_if_missing = True
+
+
+class ModificationLogDecisionHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDecisionOnAmendedPlans"

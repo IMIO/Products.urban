@@ -203,6 +203,9 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
             "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
+
+            # Modification log
+            "DECISION_REGISTRE_COMMUNE": "ns3:TwiceDefaultRequest",
         }
         return specific.get(self.notice_type)
 
@@ -380,7 +383,7 @@ class NoticeNotification(NoticeElement):
             NoticeParty(self.service, p)
             for p in self._get_data("parties", "part") or []
         ]
-    
+
     @property
     def business_reference_denomination(self):
         return self._get_data("businessReference", "denomination")

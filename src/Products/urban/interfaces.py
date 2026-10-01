@@ -783,5 +783,5 @@ class IMissingCapakey(Interface):
     """ """
 
 
-class IDecisionRegisterOfModification(Interface):
-    __doc__ = _("""Marker interface for Urban event Decision register of modification""")
+class IDecisionOnAmendedPlans(Interface):
+    __doc__ = _("""IDecisionOnAmendedPlans type marker interface""")
