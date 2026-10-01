@@ -314,10 +314,6 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IDecisionOnAmendedPlans"
-    type=".interfaces.IEventTypeType"/>
-
-  <interface
     interface=".interfaces.IObservationEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -326,16 +322,9 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IEstablishmentEvent"
+    interface=".interfaces.IDecisionOnAmendedPlans"
     type=".interfaces.IEventTypeType"/>
 
-  <interface
-    interface=".interfaces.IExtensionEvent"
-    type=".interfaces.IEventTypeType"/>
-
-  <interface 
-    interface=".interfaces.IDecisionRegisterOfModification"
-    type=".interfaces.IEventTypeType"/>
 
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware

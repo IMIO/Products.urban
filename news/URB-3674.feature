@@ -1,2 +1,2 @@
-Handle NOTICe `DECISION_REGISTRE_COMMUNE` notifications (decision on the modification log) by creating an event with the new `IDecisionOnAmendedPlans` marker on the matching licence.
+Handle NOTICE DECISION_REGISTRE_COMMUNE notifications and add the IDecisionRegisterOfModification marker for the matching event
 [WBoudabous]
