@@ -591,6 +591,29 @@ msgstr ""
 
 #: ../interfaces.py:397
 msgid "IAcknowledgment type marker interface"
+
+#: ../interfaces.py:413
+msgid "IDeposit type marker interface"
+msgstr ""
+
+#: ../interfaces.py:493
+msgid "IDisplayingTheDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:541
+msgid "IEnvironmentOnly type marker interface"
+msgstr ""
+
+#: ../interfaces.py:393
+msgid "IEnvironmentSimpleCollegeEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:609
+msgid "IEstablishmentEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:537
+msgid "IForcedEndEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:521
@@ -639,6 +662,29 @@ msgstr ""
 
 #: ../interfaces.py:489
 msgid "IDisplayingTheDecisionEvent type marker interface"
+
+#: ../interfaces.py:577
+msgid "IProprietaryChangeEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:509
+msgid "IProrogation type marker interface"
+msgstr ""
+
+#: ../interfaces.py:613
+msgid "IExtensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:521
+msgid "IProvocationEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:497
+msgid "IRecourseEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:517
+msgid "IRefusedIncompleteness type marker interface"
 msgstr ""
 
 #: ../interfaces.py:537

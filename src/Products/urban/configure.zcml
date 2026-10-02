@@ -390,6 +390,14 @@
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
     type=".interfaces.IEventTypeType"/>
 
+  <interface
+    interface=".interfaces.IEstablishmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IExtensionEvent"
+    type=".interfaces.IEventTypeType"/>
+
   <adapter
       factory="plone.indexer.wrapper.IndexableObjectWrapper"
       provides="plone.indexer.interfaces.IIndexableObject"
