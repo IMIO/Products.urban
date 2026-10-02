@@ -3,6 +3,7 @@
 from .event import SendMailAction
 from Products.CMFPlone.utils import safe_unicode
 from Products.urban import UrbanMessage as _
+from Products.urban.send_mail_action.interface import ISendMailAction
 from datetime import datetime
 from imio.pm.wsclient.interfaces import IRedirect
 from plone import api
@@ -17,7 +18,7 @@ from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
-from Products.urban.send_mail_action.interface import ISendMailAction
+
 
 MAIL_ACTION_KEY = "Products.urban.send_mail_action"
 
