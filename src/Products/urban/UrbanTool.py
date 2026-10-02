@@ -138,24 +138,6 @@ schema = Schema(
             default=[],
         ),
         DataGridField(
-            name="inquirySuspensionPeriods",
-            widget=DataGridWidget(
-                helper_js=("datagridwidget.js", "datagriddatepicker.js"),
-                columns={
-                    "from": DateColumn("From", date_format="dd/mm/yy"),
-                    "to": DateColumn("To", date_format="dd/mm/yy"),
-                },
-                label=_(
-                    "urban_label_inquirySuspensionPeriods",
-                    default="Inquiry suspension periods",
-                ),
-            ),
-            allow_oddeven=True,
-            allow_reorder=False,
-            schemata="public_settings",
-            columns=("from", "to"),
-        ),
-        DataGridField(
             name="collegeHolidays",
             widget=DataGridWidget(
                 helper_js=("datagridwidget.js", "datagriddatepicker.js"),

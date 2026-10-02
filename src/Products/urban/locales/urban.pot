@@ -3918,11 +3918,6 @@ msgstr ""
 msgid "urban_label_initials"
 msgstr ""
 
-#. Default: "Inquiry suspension periods"
-#: ../UrbanTool.py:148
-msgid "urban_label_inquirySuspensionPeriods"
-msgstr ""
-
 #. Default: "Inquiry_category"
 #: ../content/CODT_UniqueLicenceInquiry.py:45
 msgid "urban_label_inquiry_category"
