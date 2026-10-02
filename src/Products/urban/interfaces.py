@@ -605,6 +605,14 @@ class IObservationEvent(Interface):
     __doc__ = _("""IObservationEvent type marker interface""")
 
 
+class IEstablishmentEvent(Interface):
+    __doc__ = _("""IEstablishmentEvent type marker interface""")
+
+
+class IExtensionEvent(Interface):
+    __doc__ = _("""IExtensionEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 

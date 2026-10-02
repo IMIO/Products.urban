@@ -637,7 +637,11 @@ msgstr ""
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:529
+#: ../interfaces.py:609
+msgid "IEstablishmentEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:537
 msgid "IForcedEndEvent type marker interface"
 msgstr ""
 
@@ -725,7 +729,11 @@ msgstr ""
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:513
+#: ../interfaces.py:613
+msgid "IExtensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:521
 msgid "IProvocationEvent type marker interface"
 msgstr ""
 

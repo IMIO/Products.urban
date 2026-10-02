@@ -624,7 +624,11 @@ msgstr "Événement exclusif à l'environnement (permis unique)"
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
-#: ../interfaces.py:513
+#: ../interfaces.py:609
+msgid "IEstablishmentEvent type marker interface"
+msgstr "Implantation"
+
+#: ../interfaces.py:537
 msgid "IForcedEndEvent type marker interface"
 msgstr "Fin forcée"
 
@@ -714,7 +718,11 @@ msgstr "Changement d'exploitant"
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:497
+#: ../interfaces.py:613
+msgid "IExtensionEvent type marker interface"
+msgstr "Prolongation"
+
+#: ../interfaces.py:521
 msgid "IProvocationEvent type marker interface"
 msgstr "Provocation"
 
