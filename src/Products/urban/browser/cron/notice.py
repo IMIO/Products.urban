@@ -331,7 +331,7 @@ class ImportFromNoticeView(BrowserView):
         ):
             handler = GesperFreeNotificationSPWHandler
         elif detailed_notification.notice_type == "DECISION_REGISTRE_COMMUNE":
-            handler = ModificationLogDecisionHandler
+            handler = ModificationRegistryDecisionHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -805,5 +805,5 @@ class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
     create_licence_if_missing = True
 
 
-class ModificationLogDecisionHandler(IncomingNoticeHandler):
-    event_config_marker = "Products.urban.interfaces.IDecisionOnAmendedPlans"
+class ModificationRegistryDecisionHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IModificationRegistryDecisionEvent"

@@ -6004,5 +6004,5 @@ msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision
 msgid "PM_REFUS_TACITE_COMMUNE"
 msgstr "Plans modificatifs - Notification à la commune du refus tacite"
 
-msgid "IDecisionOnAmendedPlans type marker interface"
+msgid "IModificationRegistryDecisionEvent type marker interface"
 msgstr "Décision sur le registre des modifications"

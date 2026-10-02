@@ -783,5 +783,5 @@ class IMissingCapakey(Interface):
     """ """
 
 
-class IDecisionOnAmendedPlans(Interface):
-    __doc__ = _("""IDecisionOnAmendedPlans type marker interface""")
+class IModificationRegistryDecisionEvent(Interface):
+    __doc__ = _("""IModificationRegistryDecisionEvent type marker interface""")

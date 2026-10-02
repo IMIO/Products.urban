@@ -322,7 +322,7 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IDecisionOnAmendedPlans"
+    interface=".interfaces.IModificationRegistryDecisionEvent"
     type=".interfaces.IEventTypeType"/>
 
 
