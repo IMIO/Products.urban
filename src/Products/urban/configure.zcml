@@ -322,12 +322,9 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IEstablishmentEvent"
+    interface=".interfaces.IModificationRegistryDecisionEvent"
     type=".interfaces.IEventTypeType"/>
 
-  <interface
-    interface=".interfaces.IExtensionEvent"
-    type=".interfaces.IEventTypeType"/>
 
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware

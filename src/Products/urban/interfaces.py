@@ -781,3 +781,7 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IModificationRegistryDecisionEvent(Interface):
+    __doc__ = _("""IModificationRegistryDecisionEvent type marker interface""")

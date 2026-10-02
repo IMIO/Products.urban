@@ -285,6 +285,8 @@ class ImportFromNoticeView(BrowserView):
             "ARRET_PLAN_MODIF_COMMUNE_MANUELLE",
         ):
             handler = StopForAmendedPlansHandler
+        elif detailed_notification.notice_type == "DECISION_REGISTRE_COMMUNE":
+            handler = DecisionRegisterOfModificationHandler
 
         # GESPER
 
@@ -328,6 +330,8 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
         ):
             handler = GesperFreeNotificationSPWHandler
+        elif detailed_notification.notice_type == "DECISION_REGISTRE_COMMUNE":
+            handler = ModificationRegistryDecisionHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -736,6 +740,8 @@ class StopForAmendedPlansHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "suspension"
+class DecisionRegisterOfModificationHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDecisionRegisterOfModification"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):
@@ -797,3 +803,7 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
 class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IFreeNotificationEvent"
     create_licence_if_missing = True
+
+
+class ModificationRegistryDecisionHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IModificationRegistryDecisionEvent"
