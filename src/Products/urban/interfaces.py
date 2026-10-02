@@ -609,8 +609,8 @@ class IEstablishmentEvent(Interface):
     __doc__ = _("""IEstablishmentEvent type marker interface""")
 
 
-class IProtractionEvent(Interface):
-    __doc__ = _("""IProtractionEvent type marker interface""")
+class IExtensionEvent(Interface):
+    __doc__ = _("""IExtensionEvent type marker interface""")
 
 
 class IUrbanBase(Interface):

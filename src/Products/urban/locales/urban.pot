@@ -730,7 +730,7 @@ msgid "IProrogation type marker interface"
 msgstr ""
 
 #: ../interfaces.py:613
-msgid "IProtractionEvent type marker interface"
+msgid "IExtensionEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:521

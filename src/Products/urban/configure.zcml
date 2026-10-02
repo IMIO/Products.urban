@@ -326,7 +326,7 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
-    interface=".interfaces.IProtractionEvent"
+    interface=".interfaces.IExtensionEvent"
     type=".interfaces.IEventTypeType"/>
 
   <adapter
