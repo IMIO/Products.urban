@@ -449,6 +449,7 @@ class Inspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
             idxs=(
                 "Title",
                 "sortable_title",
+                "SearchableText",
             )
         )
 

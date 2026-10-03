@@ -1751,6 +1751,7 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
                 "Title",
                 "applicantInfosIndex",
                 "sortable_title",
+                "SearchableText",
             )
         )
 
