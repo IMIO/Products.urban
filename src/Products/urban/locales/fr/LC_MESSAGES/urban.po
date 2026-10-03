@@ -396,6 +396,10 @@ msgstr "Date"
 msgid "Day"
 msgstr "Jour"
 
+#: ../migration/update_290.py:741
+msgid "Decision date"
+msgstr "Date de décision"
+
 msgid "Declaration"
 msgstr "Déclaration"
 
@@ -403,7 +407,10 @@ msgstr "Déclaration"
 msgid "Demo Extension profile for urban."
 msgstr "Profile de démo urban"
 
-#: ../browser/licence/duplicate_licence.py:30
+#: ../migration/update_290.py:742
+msgid "Deposit date"
+msgstr "Date de dépôt"
+
 msgid "Destination type"
 msgstr "Type de destination"
 
@@ -848,6 +855,14 @@ msgstr "Permis intégré"
 #: ../interfaces.py:661
 msgid "Internal opinion services"
 msgstr "Avis de services internes à la ville"
+
+#: ../migration/update_290.py:745
+msgid "Investigation end date"
+msgstr "Date de fin d’enquête"
+
+#: ../migration/update_290.py:744
+msgid "Investigation start date"
+msgstr "Date de début d’enquête"
 
 #: ../browser/notice_settings.py:33
 msgid "Last import date from Notice Webservice"
@@ -1405,7 +1420,10 @@ msgstr "Certificat d'urbanisme 2"
 msgid "UrbanTool"
 msgstr "UrbanTool"
 
-#: ../content/licence/CODT_BaseBuildLicence.py:570
+#: ../migration/update_290.py:743
+msgid "Validity date"
+msgstr "Date de validité"
+
 msgid "Value"
 msgstr "Valeur"
 
@@ -1417,7 +1435,14 @@ msgstr "URL du WebService"
 msgid "Week off days"
 msgstr "Jours de fermeture en semaine"
 
-#: ../UrbanEventType.py:295
+#: ../migration/update_290.py:746
+msgid "Work beginning date"
+msgstr "Date de début des travaux"
+
+#: ../migration/update_290.py:747
+msgid "Work end date"
+msgstr "Date de fin des travaux"
+
 msgid "You can not create this UrbanEvent !"
 msgstr "Vous ne pouvez pas créer cet événement"
 
