@@ -23,6 +23,8 @@
     <element value="Inquiry" />
     <element value="UrbanEventInquiry" />
     <element value="UrbanEventOpinionRequest" />
+    <element value="UrbanEventMayor" />
+    <element value="UrbanEventWithEnvironmentValidation" />
     <element value="Applicant" />
     <element value="Couple" />
     <element value="UrbanEvent" />

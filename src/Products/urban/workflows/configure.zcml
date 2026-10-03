@@ -75,6 +75,13 @@
       name="opinionrequest_local_roles"
       />
 
+  <adapter
+     for="Products.urban.interfaces.IUrbanEventWithEnvironmentValidation"
+     provides="borg.localrole.interfaces.ILocalRoleProvider"
+     factory=".env_validation_event_workflow.StateRolesMapping"
+     name="acknowledgmentevent_local_roles"
+  />
+
   <!-- register suspension workflow adaptation -->
   <utility
       factory=".suspension.SuspensionWorkflowAdaptation"

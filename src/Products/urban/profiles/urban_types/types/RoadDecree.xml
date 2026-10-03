@@ -27,6 +27,7 @@
     <element value="UrbanEventInquiry" />
     <element value="UrbanEventCollege" />
     <element value="UrbanEventOpinionRequest" />
+    <element value="UrbanEventMayor" />
     <element value="task" />
   </property>
   <property name="allow_discussion">False</property>

@@ -23,6 +23,8 @@
     <element value="UrbanEventInquiry" />
     <element value="UrbanEventCollege" />
     <element value="UrbanEventNotificationCollege" />
+    <element value="UrbanEventAcknowledgment" />
+    <element value="UrbanEventMayor" />
     <element value="Applicant" />
     <element value="Couple" />
     <element value="Corporation" />
