@@ -1,0 +1,5064 @@
+{
+  "conditions": {
+    "CMTD": {
+      "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "title": "CMTD pour la fabrication du verre, au titre de la directive 2010/75/UE du Parlement européen et du Conseil relative aux émissions industrielles - Décision d’exécution de la Commission du 28 février 2012",
+        "url": "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2012:070:0001:0062:FR:PDF"
+      },
+      "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0063_0098_FR_PDF": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0063_0098_FR_PDF",
+        "title": "CMTD dans la sidérurgie, au titre de la directive 2010/75/UE du Parlement européen et du Conseil relative aux émissions industrielles - Décision d’exécution de la Commission du 28 février 2012",
+        "url": "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2012:070:0063:0098:FR:PDF"
+      },
+      "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2013_100_FULL_FR_PDF": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2013_100_FULL_FR_PDF",
+        "title": "CMTD pour la production de ciment, de chaux et d'oxyde de magnésium, au titre de la directive 2010/75/UE du Parlement européen et du Conseil relative aux émissions industrielles - Décision d’exécution de la Commission du 26 mars 2013",
+        "url": "http://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2013:100:FULL:FR:PDF"
+      },
+      "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "title": "CMTD dans l’industrie des métaux non ferreux, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 13 juin 2016",
+        "url": "http://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32016D1032&from=FR"
+      },
+      "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "title": "CMTD pour l'élevage intensif de volailles ou de porcs, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 15 février 2017",
+        "url": "http://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32017D0302&from=FR"
+      },
+      "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D1442_qid_1502958118940_from_FR": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D1442_qid_1502958118940_from_FR",
+        "title": "CMTD pour les grandes installations de combustion, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 31 juillet 2017",
+        "url": "http://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32017D1442&qid=1502958118940&from=FR"
+      },
+      "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D2117_from_FR": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D2117_from_FR",
+        "title": "CMTD dans le secteur de la chimie organique à grand volume de production, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 21 novembre 2017",
+        "url": "http://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32017D2117&from=FR"
+      },
+      "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_OJ_JOL_2014_284_R_0017_rid_13": {
+        "codeType": "CMTD",
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_OJ_JOL_2014_284_R_0017_rid_13",
+        "title": "CMTD pour la production de pâte à papier, de papier et de carton, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 26 septembre 2014",
+        "url": "http://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=OJ:JOL_2014_284_R_0017&rid=13"
+      },
+      "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR": {
+        "codeType": "CMTD",
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "title": "CMTD pour le traitement des déchets, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 10 août 2018",
+        "url": "https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32018D1147&from=FR"
+      },
+      "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR": {
+        "codeType": "CMTD",
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "title": "CMTD pour l’incinération des déchets, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 12 novembre 2019",
+        "url": "https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32019D2010&from=FR"
+      },
+      "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR": {
+        "codeType": "CMTD",
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "title": "CMTD dans les industries agroalimentaire et laitière, au titre de la directive 2010/75/UE du Parlement européen et du Conseil - Décision d’exécution de la Commission du 12 novembre 2019",
+        "url": "https://eur-lex.europa.eu/legal-content/FR/TXT/PDF/?uri=CELEX:32019D2031&from=FR"
+      }
+    },
+    "I": {
+      "2003027283": {
+        "codeType": "I",
+        "id": "2003027283",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions intégrales relatives aux ruchers situés en zone d’habitat telle que définie à l’article 26 du Code wallon de l’Aménagement du Territoire, de l’Urbanisme et du Patrimoine",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027283"
+      },
+      "2003027328": {
+        "codeType": "I",
+        "id": "2003027328",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions intégrales des ateliers de travail du bois et de fabrication d’articles en bois",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027328"
+      },
+      "2003027332": {
+        "codeType": "I",
+        "id": "2003027332",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions intégrales des activités de modélisme à moteur thermique",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027332"
+      },
+      "2003027364": {
+        "codeType": "I",
+        "id": "2003027364",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions intégrales relatives aux ateliers d’entretien et de réparation des véhicules à moteur lorsque le nombre de fosses ou ponts élévateurs est inférieur ou égal à trois",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027364"
+      },
+      "2003201262": {
+        "codeType": "I",
+        "id": "2003201262",
+        "title": "Arrêté du Gouvernement wallon du 26 août 2003 déterminant les conditions intégrales relatives aux parcs à conteneurs pour déchets ménagers",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/08/26/2003201262"
+      },
+      "2003201475": {
+        "codeType": "I",
+        "id": "2003201475",
+        "title": "Arrêté du Gouvernement wallon du 17 juillet 2003 déterminant les conditions intégrales relatives aux chantiers d'enlèvement et de décontamination de bâtiments ou d'ouvrages d'art contenant de l'amiante et aux chantiers d'encapsulation de l'amiante",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/07/17/2003201475"
+      },
+      "2003201612": {
+        "codeType": "I",
+        "id": "2003201612",
+        "title": "Arrêté du Gouvernement wallon du 17 juillet 2003 fixant les conditions intégrales des dépôts de liquides combustibles en réservoirs fixes, à l'exclusion des dépôts en vrac de produits pétroliers et substances dangereuses ainsi que les dépôts présents dans les stations-service & Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives aux dépôts d’hydrocarbures liquides",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/07/17/2003201612"
+      },
+      "2004202632": {
+        "codeType": "I",
+        "id": "2004202632",
+        "title": "Arrêté du Gouvernement wallon du 27 mai 2004 déterminant les conditions intégrales d'exploitation relatives aux stockages temporaires sur chantier de construction ou de démolition de déchets visés à la rubrique 45.92.01",
+        "url": "https://wallex.wallonie.be/eli/arrete/2004/05/27/2004202632"
+      },
+      "2004202633": {
+        "codeType": "I",
+        "id": "2004202633",
+        "title": "Arrêté du Gouvernement wallon du 27 mai 2004 déterminant les conditions intégrales relatives aux cribles et concasseurs sur chantier visés à la rubrique 45.91.02",
+        "url": "https://wallex.wallonie.be/eli/arrete/2004/05/27/2004202633"
+      },
+      "2005201476": {
+        "codeType": "I",
+        "id": "2005201476",
+        "title": "Arrêté du Gouvernement wallon du 19 mai 2005 déterminant les conditions intégrales relatives aux dépôts de gaz de pétrole liquéfié en récipients mobiles",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/05/19/2005201476"
+      },
+      "2005201989": {
+        "codeType": "I",
+        "id": "2005201989",
+        "title": "Arrêté du Gouvernement wallon du 7 juillet 2005 déterminant les conditions intégrales relatives aux dépôts de gaz de pétrole liquéfié en « vrac »",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/07/07/2005201989"
+      },
+      "2006200059": {
+        "codeType": "I",
+        "id": "2006200059",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions intégrales relatives aux activités d'élevage ou d'engraissement de porcins",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200059"
+      },
+      "2006200060": {
+        "codeType": "I",
+        "id": "2006200060",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions intégrales relatives aux activités d'élevage ou d'engraissement de lapins",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200060"
+      },
+      "2006200061": {
+        "codeType": "I",
+        "id": "2006200061",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions intégrales relatives aux activités d'élevage ou d'engraissement de canards, d'oies, de dindes, de pintades et autres volailles",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200061"
+      },
+      "2006200062": {
+        "codeType": "I",
+        "id": "2006200062",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions intégrales relatives aux activités d'élevage ou d'engraissement de poulettes, poules reproductrices, poules pondeuses et poulets de chair",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200062"
+      },
+      "2006200100": {
+        "codeType": "I",
+        "id": "2006200100",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions intégrales relatives aux installations de fabrication de carreaux en céramique et de tuiles, briques et autres produits en terre cuite pour la construction",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200100"
+      },
+      "2006203965": {
+        "codeType": "I",
+        "id": "2006203965",
+        "title": "Arrêté du Gouvernement wallon du 23 novembre 2006 déterminant les conditions intégrales relatives aux batteries stationnaires dont le produit de la capacité exprimée en Ah par la tension en V est supérieur à 10.000",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/11/23/2006203965"
+      },
+      "2006203967": {
+        "codeType": "I",
+        "id": "2006203967",
+        "title": "Arrêté du Gouvernement wallon du 23 novembre 2006 déterminant les conditions intégrales relatives aux installations de stockage temporaire de déchets dangereux",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/11/23/2006203967/"
+      },
+      "2007027185": {
+        "codeType": "I",
+        "id": "2007027185",
+        "title": "Arrêté du Gouvernement wallon du 14 novembre 2007 déterminant les conditions intégrales relatives aux installations de stockage temporaire de déchets de classe B1",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/11/14/2007027185"
+      },
+      "2007200264": {
+        "codeType": "I",
+        "id": "2007200264",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions intégrales relatives aux terrains de camping d’une capacité inférieure à 50 emplacements",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200264"
+      },
+      "2007200267": {
+        "codeType": "I",
+        "id": "2007200267",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions intégrales relatives aux transformateurs statiques d’électricité d’une puissance nominale égale ou supérieure à 100 kVA et inférieure à 1 500 kVA",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200267"
+      },
+      "2007200268": {
+        "codeType": "I",
+        "id": "2007200268",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions intégrales relatives aux installations pour la préparation ou pour la conservation par découpage, cuisson, appertisation, surgélation, congélation, lyophilisation, déshydratation, salage, séchage, saurage et fumage, à l'exclusion des produits issus du lait et des corps gras mais y compris les aliments pour animaux de compagnie, de produits à base de viandes dont la capacité de production ou de conservation de produits finis est supérieure à 0,1 t/jour et inférieure ou égale à 2 t/jour",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200268"
+      },
+      "2007200270": {
+        "codeType": "I",
+        "id": "2007200270",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions intégrales relatives aux installations destinées à l’équitation comportant une/des piste(s) dont la surface totale est inférieure ou égale à 2000 m2",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200270"
+      },
+      "2007200271": {
+        "codeType": "I",
+        "id": "2007200271",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions intégrales relatives aux commerces de détail de viandes et de produits à base de viandes couplés à la préparation de produits à base de viandes",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200271"
+      },
+      "2007202034": {
+        "codeType": "I",
+        "id": "2007202034",
+        "title": "Arrêté du Gouvernement wallon du 31 mai 2007 déterminant les conditions intégrales relatives aux installations de stockage temporaire d'huiles usagées",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/05/31/2007202034"
+      },
+      "2007203372": {
+        "codeType": "I",
+        "id": "2007203372",
+        "title": "Arrêté du Gouvernement wallon du 25 octobre 2007 déterminant les conditions intégrales relatives aux installations de stockage temporaire de déchets non dangereux",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/10/25/2007203372"
+      },
+      "2007203628": {
+        "codeType": "I",
+        "id": "2007203628",
+        "title": "Arrêté du Gouvernement wallon du 29 novembre 2007 déterminant les conditions intégrales relatives aux installations de distribution d'hydrocarbures liquides dont le point d'éclair est supérieur à 55 °C et inférieur ou égal à 100 °C, pour véhicules à moteur, à des fins commerciales autres que la vente au public, telles que la distribution d'hydrocarbures destinée à l'alimentation d'un parc de véhicules en gestion propre ou pour compte propre, comportant deux pistolets maximum et pour autant que la capacité de stockage du dépôt d'hydrocarbures soit supérieure ou égale à 3 000 litres et inférieure à 25 000 litres",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/11/29/2007203628"
+      },
+      "2008204830": {
+        "codeType": "I",
+        "id": "2008204830",
+        "title": "Arrêté du Gouvernement wallon du 5 décembre 2008 déterminant les conditions intégrales relatives aux installations de regroupement ou de tri de déchets de classe B1",
+        "url": "https://wallex.wallonie.be/eli/arrete/2008/12/05/2008204830"
+      },
+      "2008204832": {
+        "codeType": "I",
+        "id": "2008204832",
+        "title": "Arrêté du Gouvernement wallon du 5 décembre 2008 déterminant les conditions intégrales relatives aux installations de regroupement ou de tri de déchets de classe B2 et modifiant l'arrêté du Gouvernement wallon du 14 novembre 2007 déterminant les conditions intégrales relatives aux installations de stockage temporaire de déchets de classe B2.",
+        "url": "https://wallex.wallonie.be/eli/arrete/2008/12/05/2008204832"
+      },
+      "2009201064": {
+        "codeType": "I",
+        "id": "2009201064",
+        "title": "Arrêté du Gouvernement wallon du 12 février 2009 déterminant les conditions intégrales relatives aux installations pour la prise d'eau souterraine potabilisable ou destinée à la consommation humaine et aux installations pour la prise d'eau souterraine non potabilisable et non destinée à la consommation humaine.",
+        "url": "https://wallex.wallonie.be/eli/arrete/2009/02/12/2009201064"
+      },
+      "2009201985": {
+        "codeType": "I",
+        "id": "2009201985",
+        "title": "Décret du 3 avril 2009 relatif à la protection contre les éventuels effets nocifs et nuisances provoqués par les rayonnements non ionisants générés par des antennes émettrices stationnaires",
+        "url": "https://wallex.wallonie.be/eli/loi-decret/2009/04/03/2009201985"
+      },
+      "2010027235": {
+        "codeType": "I",
+        "id": "2010027235",
+        "title": "Arrêté du Gouvernement wallon du 10 novembre 2010 déterminant les conditions intégrales relatives aux friteries permanentes",
+        "url": "https://wallex.wallonie.be/eli/arrete/2010/11/10/2010027235"
+      },
+      "2013027127": {
+        "codeType": "I",
+        "id": "2013027127",
+        "title": "Arrêté du Gouvernement wallon du13 juin 2013 déterminant les conditions intégrales relatives aux bassins de natation couverts et ouverts utilisés à un titre autre que purement privatif dans le cadre du cercle familial lorsque la surface est inférieure ou égale à 100 m² ou la profondeur inférieure ou égale à 40 cm, utilisant exclusivement le chlore comme procédé de désinfection de l'eau.\n",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/06/13/2013027127"
+      },
+      "2013027129": {
+        "codeType": "I",
+        "id": "2013027129",
+        "title": "Arrêté du Gouvernement wallon du 13 juin 2013 déterminant les conditions intégrales relatives aux dépôts de produits phytopharmaceutiques à usage professionnel",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/06/13/2013027129"
+      },
+      "2013201801": {
+        "codeType": "I",
+        "id": "2013201801",
+        "title": "Arrêté du Gouvernement wallon du 7 mars 2013 déterminant les conditions intégrales relatives aux funérariums sans pratique de l'embaumement",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/03/07/2013201801"
+      },
+      "2014200769": {
+        "codeType": "I",
+        "id": "2014200769",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2014 déterminant les conditions intégrales relatives à la détention d'animaux exotiques non domestiques et modifiant l'AGW procédure",
+        "url": "https://wallex.wallonie.be/eli/arrete/2014/01/16/2014200769"
+      },
+      "2017020301": {
+        "codeType": "I",
+        "id": "2017020301",
+        "title": "Arrêté du Gouvernement wallon du 16 mars 2017 déterminant les conditions intégrales relatives aux unités de ravitaillement destinées à approvisionner en gaz naturel comprimé un ou plusieurs véhicules roulant au gaz naturel, à une pression de remplissage maximale de 30 MPa (300 bar), sans stockage intermédiaire de gaz à haute pression",
+        "url": "https://wallex.wallonie.be/eli/arrete/2017/03/16/2017020301"
+      },
+      "peintegr033.htm": {
+        "codeType": "I",
+        "id": "peintegr033.htm",
+        "title": "Arrêté du Gouvernement wallon du 14 novembre 2007 déterminant les conditions intégrales relatives aux installations de stockage temporaire de déchets de classe B2",
+        "url": "http://environnement.wallonie.be/legis/pe/peintegr033.htm"
+      }
+    },
+    "I_S": {
+      "01": {
+        "codeType": "I_S",
+        "id": "01",
+        "title": "Arrêté du Gouvernement wallon du 01 décembre 2016 fixant les conditions intégrales et sectorielles relatives aux systèmes d'épuration individuelle et abrogeant les arrêtés du Gouvernement wallon du 25 septembre 2008 fixant les conditions intégrales relatives aux unités d'épuration individuelle et aux installations d'épuration individuelle et du 6 novembre 2008 fixant les conditions sectorielles relatives aux stations d'épuration individuelle et aux systèmes d'épuration individuelle installés en dérogation de l'obligation de raccordement à l'égout ",
+        "url": "https://wallex.wallonie.be/eli/arrete/2016/12/01/2016206423/2017/01/01"
+      },
+      "2002027814": {
+        "codeType": "I_S",
+        "id": "2002027814",
+        "title": "Arrêté du Gouvernement wallon du 4 juillet 2002 déterminant les conditions sectorielles et intégrales relatives aux utilisations confinées d'organismes génétiquement modifiés ou pathogènes",
+        "url": "https://wallex.wallonie.be/eli/arrete/2002/07/04/2002027814"
+      },
+      "2003027304": {
+        "codeType": "I_S",
+        "id": "2003027304",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions sectorielles et intégrales relatives aux installations de nettoyage à sec de vêtements, linge et autres textiles",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027304"
+      },
+      "2003027331": {
+        "codeType": "I_S",
+        "id": "2003027331",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions sectorielles et intégrales relatives aux cuves d’air comprimé",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027331"
+      },
+      "2006200055": {
+        "codeType": "I_S",
+        "id": "2006200055",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions sectorielles et intégrales relatives aux activités d'élevage ou d'engraissement d'équidés de six mois et plus",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200055"
+      },
+      "2006200056": {
+        "codeType": "I_S",
+        "id": "2006200056",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions sectorielles et intégrales relatives aux activités d'élevage ou d'engraissement d'ovins ou de caprins de six mois et plus",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200056"
+      },
+      "2006200057": {
+        "codeType": "I_S",
+        "id": "2006200057",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions sectorielles et intégrales relatives aux activités d'élevage ou d'engraissement de veaux de plus de deux semaines et de moins de six mois, à l'exception des veaux au pis",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200057"
+      },
+      "2006200058": {
+        "codeType": "I_S",
+        "id": "2006200058",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions sectorielles et intégrales relatives aux activités d'élevage ou d'engraissement de bovins de six mois et plus",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200058"
+      },
+      "2007200266": {
+        "codeType": "I_S",
+        "id": "2007200266",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions intégrales et sectorielles relatives à la détention d’équidés",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200266"
+      },
+      "2007202542": {
+        "codeType": "I_S",
+        "id": "2007202542",
+        "title": "Arrêté du Gouvernement wallon du 5 juillet 2007 déterminant les conditions intégrales et sectorielles relatives à la détention de bovins de six mois et plus",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/07/05/2007202542"
+      },
+      "2007202543": {
+        "codeType": "I_S",
+        "id": "2007202543",
+        "title": "Arrêté du Gouvernement wallon du 5 juillet 2007 déterminant les conditions intégrales et sectorielles relatives à la détention d'ovins et de caprins",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/07/05/2007202543"
+      },
+      "2007202544": {
+        "codeType": "I_S",
+        "id": "2007202544",
+        "title": "Arrêté du Gouvernement wallon du 5 juillet 2007 déterminant les conditions intégrales et sectorielles relatives à la détention de veaux à l'engraissement de plus de deux semaines et de moins de six mois, à l'exception des veaux au pis",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/07/05/2007202544"
+      },
+      "2007202867": {
+        "codeType": "I_S",
+        "id": "2007202867",
+        "title": "Arrêté du Gouvernement wallon du 12 juillet 2007 déterminant les conditions intégrales et sectorielles relatives aux installations fixes de production de froid ou de chaleur mettant en œuvre un cycle frigorifique",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/07/12/2007202867"
+      },
+      "2009027156": {
+        "codeType": "I_S",
+        "id": "2009027156",
+        "title": "Arrêté du Gouvernement wallon du 27 mai 2009 portant conditions sectorielles et intégrales des installations de gestion de déchets d'extraction et relatif au suivi après fermeture et modifiant l'arrêté du Gouvernement wallon du 27 février 2003 fixant les conditions sectorielles d'exploitation des centres d'enfouissement technique",
+        "url": "https://wallex.wallonie.be/eli/arrete/2009/05/27/2009027156"
+      },
+      "2009201569": {
+        "codeType": "I_S",
+        "id": "2009201569",
+        "title": "Arrêté du Gouvernement wallon du 19 mars 2009 déterminant les conditions intégrales et sectorielles relatives aux activités de location ou de mise à disposition de kayaks et de canoës",
+        "url": "https://wallex.wallonie.be/eli/arrete/2009/03/19/2009201569"
+      }
+    },
+    "S": {
+      "16": {
+        "codeType": "S",
+        "id": "16",
+        "title": "Arrêté du Gouvernement wallon du 17 juillet 2003 déterminant les conditions sectorielles relatives aux chantiers d'enlèvement et de décontamination de bâtiments ou d'ouvrages d'art contenant de l'amiante et aux chantiers d'encapsulation de l'amiante ...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/07/17/2003201474/2022/02/16"
+      },
+      "1999027462": {
+        "codeType": "S",
+        "id": "1999027462",
+        "title": "Arrêté du Gouvernement wallon du 4 mars 1999 modifiant le titre III du Règlement général pour la protection du travail en insérant des mesures spéciales applicables à l'implantation et l'exploitation des stations-service",
+        "url": "https://wallex.wallonie.be/eli/arrete/1999/03/04/1999027462"
+      },
+      "2002027956": {
+        "codeType": "S",
+        "id": "2002027956",
+        "title": "Arrêté du Gouvernement wallon du 18 juillet 2002 déterminant les conditions sectorielles relatives aux installations et/ou activités consommant des solvants",
+        "url": "https://wallex.wallonie.be/eli/arrete/2002/07/18/2002027956"
+      },
+      "2003027135": {
+        "codeType": "S",
+        "id": "2003027135",
+        "title": "Arrêté du Gouvernement wallon du 27 février 2003 fixant les conditions sectorielles d'exploitation des centres d'enfouissement technique (M.B. 13.03.2003)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/02/27/2003027135"
+      },
+      "2003027138": {
+        "codeType": "S",
+        "id": "2003027138",
+        "title": "Arrêté du Gouvernement wallon du 27 février 2003 déterminant les conditions sectorielles des installations de regroupement ou de tri de déchets métalliques ((...) - AGW du 12 février 2009, art.14), des installations de regroupement, de tri ou de récupération de pièces de véhicules hors d'usage, des centres de démantèlement et de dépollution des véhicules hors d'usage et des centres de destruction de véhicules hors d'usage et de traitement des métaux ferreux et non ferreux",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/02/27/2003027138"
+      },
+      "2003027290": {
+        "codeType": "S",
+        "id": "2003027290",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 fixant les conditions sectorielles d'exploitation de certaines installations de regroupement de matières enlevées du lit et des berges des cours et plans d'eau du fait de travaux de dragage ou de curage...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027290"
+      },
+      "2003027316": {
+        "codeType": "S",
+        "id": "2003027316",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions sectorielles relatives aux centrales à béton (M.B. 13.05.2003)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027316"
+      },
+      "2003027328": {
+        "codeType": "S",
+        "id": "2003027328",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions sectorielles des ateliers de travail du bois et de fabrication d’articles en bois",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027328"
+      },
+      "2003027365": {
+        "codeType": "S",
+        "id": "2003027365",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions sectorielles relatives aux ateliers d'entretien et de réparation des véhicules à moteur lorsque le nombre de fosses ou ponts élévateurs est supérieur à trois (M.B. 26.05.2003)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027365"
+      },
+      "2003027366": {
+        "codeType": "S",
+        "id": "2003027366",
+        "title": "Arrêté du Gouvernement wallon du 3 avril 2003 déterminant les conditions sectorielles relatives aux centrales d'enrobage de pierres à l'aide de produits hydrocarbonés (M.B. 26.05.2003)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/04/03/2003027366"
+      },
+      "2003200315": {
+        "codeType": "S",
+        "id": "2003200315",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relative à la fabrication des engrais",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200315"
+      },
+      "2003200361": {
+        "codeType": "S",
+        "id": "2003200361",
+        "title": "Arrêté du Gouvernement wallon du 27 février 2003 déterminant les conditions sectorielles des installations de stockage temporaire de véhicules hors d'usage d'un garage ou situées sur le site d'exploitation (M.B. 10.03.2003)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/02/27/2003200361"
+      },
+      "2003201104": {
+        "codeType": "S",
+        "id": "2003201104",
+        "title": "Arrêté du Gouvernement wallon du 17 juillet 2003 portant conditions sectorielles relatives aux carrières et à leurs dépendances (M.B. 06.10.2003)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/07/17/2003201104"
+      },
+      "2003201261": {
+        "codeType": "S",
+        "id": "2003201261",
+        "title": "Arrêté du Gouvernement wallon du 26 août 2003 déterminant les conditions sectorielles relatives aux parcs à conteneurs pour déchets ménagers",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/08/26/2003201261"
+      },
+      "2005200935": {
+        "codeType": "S",
+        "id": "2005200935",
+        "title": "Arrêté du Gouvernement wallon du 10 mars 2005 déterminant les conditions sectorielles relatives aux piscicultures intensives",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/03/10/2005200935"
+      },
+      "2005201988": {
+        "codeType": "S",
+        "id": "2005201988",
+        "title": "Arrêté du Gouvernement wallon du 7 juillet 2005 déterminant les conditions sectorielles relatives aux blanchisseries industrielles, teintureries, salons lavoirs, services de nettoyage de vêtements, linges et autres textiles pour particuliers à ...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/07/07/2005201988"
+      },
+      "2005203361": {
+        "codeType": "S",
+        "id": "2005203361",
+        "title": "Arrêté du Gouvernement wallon du 1er décembre 2005 déterminant les conditions sectorielles relatives aux transformateurs statiques d'électricité d'une puissance nominale égale ou supérieure à 1 500 kVA\n",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/01/2005203361"
+      },
+      "2006200099": {
+        "codeType": "S",
+        "id": "2006200099",
+        "title": "Arrêté du Gouvernement wallon du 22 décembre 2005 déterminant les conditions sectorielles relatives aux installations de fabrication de carreaux en céramique et de tuiles, briques et autres produits en terre cuite pour la construction (M.B. 24.01.2006)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2005/12/22/2006200099"
+      },
+      "2006203966": {
+        "codeType": "S",
+        "id": "2006203966",
+        "title": "Arrêté du Gouvernement wallon du 23 novembre 2006 déterminant les conditions sectorielles relatives aux installations de stockage temporaire de déchets dangereux (M.B. 12.12.2006)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/11/23/2006203966"
+      },
+      "2007200265": {
+        "codeType": "S",
+        "id": "2007200265",
+        "title": "Arrêté du Gouvernement wallon du 21 décembre 2006 déterminant les conditions sectorielles relatives aux terrains de camping d'une capacité égale ou supérieure à 50 emplacements (M.B. 31.01.2007)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200265"
+      },
+      "2007200269": {
+        "codeType": "S",
+        "id": "2007200269",
+        "title": "Arrêté du Gouvernement wallon du 21décembre 2006 déterminant les conditions sectorielles relatives aux installations pour la préparation ou pour la conservation par découpage, cuisson, appertisation, surgélation, congélation, lyophilisation,  déshydratation, salage, séchage, saurage et fumage, à l'exclusion des produits issus du lait et des corps gras mais y compris les aliments pour animaux de compagnie, de produits à base de viandes dont la capacité de production ou de conservation de produits finis est supérieure à 2 t/jour",
+        "url": "https://wallex.wallonie.be/eli/arrete/2006/12/21/2007200269"
+      },
+      "2007202036": {
+        "codeType": "S",
+        "id": "2007202036",
+        "title": "Arrêté du Gouvernement wallon du 31 mai 2007 déterminant les conditions sectorielles relatives aux installations de stockage temporaire d'huiles usagées (M.B. 20.06.2007)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/05/31/2007202036"
+      },
+      "2007203373": {
+        "codeType": "S",
+        "id": "2007203373",
+        "title": "Arrêté du Gouvernement wallon du 25 octobre 2007 déterminant les conditions sectorielles relatives aux installations de stockage temporaire de déchets non dangereux (M.B. 21.11.2007)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2007/10/25/2007203373"
+      },
+      "2008203665": {
+        "codeType": "S",
+        "id": "2008203665",
+        "title": "Arrêté du Gouvernement wallon du 25 septembre 2008 déterminant les conditions sectorielles relatives aux cabines de peinture (M.B. 15.10.2008)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2008/09/25/2008203665/"
+      },
+      "2008204830": {
+        "codeType": "S",
+        "id": "2008204830",
+        "title": "Arrêté du Gouvernement wallon du 5 décembre 2008 déterminant les conditions sectorielles relatives aux installations de regroupement ou de tri de déchets de classe B1 (M.B. 07.01.2009)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2008/12/05/2008204830"
+      },
+      "2008204831": {
+        "codeType": "S",
+        "id": "2008204831",
+        "title": "Arrêté du Gouvernement wallon du 5 décembre 2008 déterminant les conditions sectorielles relatives aux installations de regroupement ou de tri de déchets de classe B2  (M.B. 08.01.2009)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2008/12/05/2008204831"
+      },
+      "2009027058": {
+        "codeType": "S",
+        "id": "2009027058",
+        "title": "Arrêté du Gouvernement wallon du 12 février 2009 déterminant les conditions sectorielles relatives aux installations pour la ou les prise(s) d'eau et/ou le traitement des eaux souterraines potabilisables ou destinées à la consommation humaine et aux installations pour la ou les prise(s) d'eau et/ou le traitement des eaux souterraines non potabilisables et non destinées à la consommation humaine et modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure et à diverses mesures d'exécution du décret du 11 mars 1999 relatif au permis d'environnement;",
+        "url": "https://wallex.wallonie.be/eli/arrete/2009/02/12/2009027058"
+      },
+      "2009200009": {
+        "codeType": "S",
+        "id": "2009200009",
+        "title": "Arrêté du Gouvernement wallon du 5 décembre 2008 déterminant les conditions sectorielles relatives aux installations de regroupement ou de tri d'huiles usagées (M.B. 12.01.2009)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2008/12/05/2009200009"
+      },
+      "2009204053": {
+        "codeType": "S",
+        "id": "2009204053",
+        "title": "Arrêté du Gouvernement wallon du 18 juin 2009 déterminant les conditions sectorielles relatives aux installations de compostage lorsque la quantité de matière entreposée est supérieure ou égale à 500 m3 et modifiant l'arrêté du Gouvernement wallon...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2009/06/18/2009204053"
+      },
+      "2010203172": {
+        "codeType": "S",
+        "id": "2010203172",
+        "title": "Arrêté du Gouvernement wallon du 3 juin 2010 déterminant les conditions sectorielles relatives aux crématoriums et modifiant l'arrêté du Gouvernement wallon du 30 juin 1994 relatif aux déchets d'activités hospitalières et de soins de santé...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2010/06/03/2010203172"
+      },
+      "2012027152": {
+        "codeType": "S",
+        "id": "2012027152",
+        "title": "Arrêté du Gouvernement wallon du 13 septembre 2012 déterminant les conditions sectorielles relatives au forage et à l'équipement de puits destinés à une future prise d'eau souterraine et modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure et à diverses mesures d'exécution du décret du 11 mars 1999 relatif au permis d'environnement",
+        "url": "https://wallex.wallonie.be/eli/arrete/2012/09/13/2012027152"
+      },
+      "2013027126": {
+        "codeType": "S",
+        "id": "2013027126",
+        "title": "Arrêté du Gouvernement wallon du 13 juin 2013 déterminant les conditions sectorielles relatives aux bassins de natation couverts et ouverts utilisés à un titre autre que purement privatif dans le cadre du cercle familial, lorsque la surface est inférieure ou égale à 100 m² ou la profondeur inférieure ou égale à 40 cm utilisant un procédé de désinfection autre que le chlore ou en combinaison avec du chlore",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/06/13/2013027126"
+      },
+      "2013027128": {
+        "codeType": "S",
+        "id": "2013027128",
+        "title": "Arrêté du Gouvernement wallon du 13 juin 2013 déterminant les conditions sectorielles relatives aux bassins de natation couverts et ouverts utilisés à un titre autre que purement privatif dans le cadre du cercle familial, lorsque la surface est ...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/06/13/2013027128"
+      },
+      "2013027130": {
+        "codeType": "S",
+        "id": "2013027130",
+        "title": "Arrêté du Gouvernement wallon du 13 juin 2013 déterminant les conditions sectorielles relatives aux dépôts de produits phytopharmaceutiques à usage professionnel et modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure et à diverses mesures d'exécution du décret du 11 mars 1999 relatif au permis d'environnement ainsi que l'arrêté du Gouvernement wallon du 4 juillet 2002 arrêtant la liste des projets soumis à étude d'incidences et des installations et activités classées",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/06/13/2013027130"
+      },
+      "2013201394": {
+        "codeType": "S",
+        "id": "2013201394",
+        "title": "Arrêté du Gouvernement wallon du 21 février 2013 déterminant les conditions sectorielles relatives aux installations produisant du dioxyde de titane",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/02/21/2013201394"
+      },
+      "2013201395": {
+        "codeType": "S",
+        "id": "2013201395",
+        "title": "Arrêté du Gouvernement wallon du 21 février 2013  déterminant les conditions sectorielles relatives aux installations d'incinération et de coïncinération de déchets (M.B. 11.03.2013 - effet au 7 janvier 2013) ",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/02/21/2013201395"
+      },
+      "2013201396": {
+        "codeType": "S",
+        "id": "2013201396",
+        "title": "Arrêté du Gouvernement wallon du 21 février 2013 déterminant les conditions sectorielles relatives aux grandes installations de combustion (M.B. 11.03.2013) ",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/02/21/2013201396"
+      },
+      "2013205373": {
+        "codeType": "S",
+        "id": "2013205373",
+        "title": "Arrêté du Gouvernement wallon du 19 septembre 2013 déterminant les conditions sectorielles relatives aux installations destinées à l'équitation comportant une/des piste(s) dont la surface totale est supérieure à 2 000 m² et modifiant l'arrêté du Gouvernement wallon du 13 juin 2013",
+        "url": "https://wallex.wallonie.be/eli/arrete/2013/09/19/2013205373"
+      },
+      "2014200768": {
+        "codeType": "S",
+        "id": "2014200768",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2014 déterminant les conditions sectorielles relatives à la détention d'animaux exotiques non domestiques et modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure ...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2014/01/16/2014200768"
+      },
+      "2014201510": {
+        "codeType": "S",
+        "id": "2014201510",
+        "title": "Arrêté du Gouvernement wallon du 13 février 2014 portant conditions sectorielles relatives aux parcs d'éoliennes d'une puissance totale supérieure ou égale à 0,5 MW, modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure et...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2014/02/13/2014201510"
+      },
+      "2014203906": {
+        "codeType": "S",
+        "id": "2014203906",
+        "title": "Arrêté du Gouvernement wallon du 15 mai 2014 déterminant les conditions sectorielles relatives au commerce de détail en magasins non spécialisés et modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure et à diverses mesures...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2014/05/15/2014203906"
+      },
+      "2014203909": {
+        "codeType": "S",
+        "id": "2014203909",
+        "title": "Arrêté du Gouvernement wallon du 24 avril 2014 déterminant les conditions sectorielles relatives aux installations de biométhanisation visées par la rubrique 90.23.15 et modifiant l'arrêté du Gouvernement wallon du 4 juillet 2002 relatif à la procédure...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2014/04/24/2014203909"
+      },
+      "2015205932": {
+        "codeType": "S",
+        "id": "2015205932",
+        "title": "Arrêté du Gouvernement wallon du 10 décembre 2015 déterminant les conditions sectorielles relatives aux installations de distribution de carburants destinées à l'alimentation en carburant alternatif gazeux de réservoir de véhicules à moteur, lorsqu'il s'agit de gaz naturel comprimé",
+        "url": "https://wallex.wallonie.be/eli/arrete/2015/12/10/2015205932"
+      },
+      "2017202097": {
+        "codeType": "S",
+        "id": "2017202097",
+        "title": "Arrêté du Gouvernement wallon du 10 mars 2005 déterminant les conditions sectorielles des installations de regroupement ou de tri, de pré-traitement et de traitement des déchets d'équipements électriques et électroniques (DEEE) (M.B. 18.04.2005)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2017/03/09/2017202097"
+      },
+      "2018014305": {
+        "codeType": "S",
+        "id": "2018014305",
+        "title": "Arrêté du Gouvernement wallon du 30 août 2018 déterminant les conditions sectorielles relatives aux installations de combustion moyennes et modifiant diverses dispositions environnementales",
+        "url": "https://wallex.wallonie.be/eli/arrete/2018/08/30/2018014305"
+      },
+      "2019010940": {
+        "codeType": "S",
+        "id": "2019010940",
+        "title": "Arrêté du Gouvernement wallon du 13 décembre 2018 déterminant les conditions sectorielles relatives aux installations de distribution de carburants destinées à l'alimentation en carburant alternatif gazeux de réservoir de véhicules à moteur, lorsqu'il s'agit de gaz naturel liquéfié",
+        "url": "https://wallex.wallonie.be/eli/arrete/2018/12/13/2019010940"
+      },
+      "2019014813": {
+        "codeType": "S",
+        "id": "2019014813",
+        "title": "Arrêté du Gouvernement wallon du 18 juillet 2019 déterminant les conditions sectorielles relatives aux installations de distribution d'hydrogène sous forme gazeuse destiné aux véhicules à moteur et modifiant l'AGW du 4 juillet 2002...",
+        "url": "https://wallex.wallonie.be/eli/arrete/2019/07/18/2019014813"
+      },
+      "2021031141": {
+        "codeType": "S",
+        "id": "2021031141",
+        "title": "arrêté du Gouvernement wallon du 25 février 2021 portant conditions sectorielles relatives aux parcs d'éoliennes d'une puissance totale supérieure ou égale à 0,5 MW ",
+        "url": "https://wallex.wallonie.be/eli/arrete/2021/02/25/2021031141"
+      },
+      "2021032704": {
+        "codeType": "S",
+        "id": "2021032704",
+        "title": "Arrêté ministériel du 26 juillet 2021 relatif aux études acoustiques des parcs éoliens (MB 08/09/2021)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2021/07/26/2021032704"
+      }
+    },
+    "SE": {
+      "2003027133": {
+        "codeType": "SE",
+        "id": "2003027133",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la production des hydrocarbures chlorés en C1, C2, C3 et leurs polymères",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003027133"
+      },
+      "2003200306": {
+        "codeType": "SE",
+        "id": "2003200306",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la pétrochimie",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200306"
+      },
+      "2003200307": {
+        "codeType": "SE",
+        "id": "2003200307",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à l’industrie du poisson",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200307"
+      },
+      "2003200308": {
+        "codeType": "SE",
+        "id": "2003200308",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives au raffinage du pétrole",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200308"
+      },
+      "2003200309": {
+        "codeType": "SE",
+        "id": "2003200309",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la fabrication de savons et détergents, de produits d’entretien, de parfums et de cosmétiques",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200309"
+      },
+      "2003200310": {
+        "codeType": "SE",
+        "id": "2003200310",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives au nettoyage industriel de véhicules de transport de liquides et de bateaux",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200310"
+      },
+      "2003200311": {
+        "codeType": "SE",
+        "id": "2003200311",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 portant condition sectorielle eau relative à la fabrication de colorants et de pigments ainsi qu'à la fabrication de peintures, vernis et encres d'imprimerie non visés par une autre rubrique (peintures, vernis, pigments, opacifiants, compositions vitrifiables, engobés, mastics, enduits, solvants et diluants organiques composites, décapants, produits liquides pour la protection du bois et préparations liquides hydrofuges à base de silicone, encres d'imprimerie) (abrogé pour le TiO2)",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200311"
+      },
+      "2003200312": {
+        "codeType": "SE",
+        "id": "2003200312",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives au nettoyage des fûts",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200312"
+      },
+      "2003200313": {
+        "codeType": "SE",
+        "id": "2003200313",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la mécanique, transformation à froid et traitement de surface",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200313"
+      },
+      "2003200314": {
+        "codeType": "SE",
+        "id": "2003200314",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives aux distilleries et levureries",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200314"
+      },
+      "2003200316": {
+        "codeType": "SE",
+        "id": "2003200316",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à l’extraction et agglomération de houille, lignite, charbon de bois, graphite, carbone",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200316"
+      },
+      "2003200317": {
+        "codeType": "SE",
+        "id": "2003200317",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la fabrication du sucre",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200317"
+      },
+      "2003200319": {
+        "codeType": "SE",
+        "id": "2003200319",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la transformation et conservation des fruits et légumes",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200319"
+      },
+      "2003200320": {
+        "codeType": "SE",
+        "id": "2003200320",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la fabrication de produits laitiers",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200320"
+      },
+      "2003200321": {
+        "codeType": "SE",
+        "id": "2003200321",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives aux dépôts d’hydrocarbures liquides",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200321"
+      },
+      "2003200322": {
+        "codeType": "SE",
+        "id": "2003200322",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à l’industrie pharmaceutique",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200322"
+      },
+      "2003200323": {
+        "codeType": "SE",
+        "id": "2003200323",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à l’industrie des corps gras",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200323"
+      },
+      "2003200324": {
+        "codeType": "SE",
+        "id": "2003200324",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 déterminant les conditions sectorielles eau relatives à la sidérurgie à chaud",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200324"
+      },
+      "2003200325": {
+        "codeType": "SE",
+        "id": "2003200325",
+        "title": "Arrêté du Gouvernement wallon du 16 janvier 2003 portant condition sectorielle concernant l'eau relative à la fabrication du verre plat, le façonnage et la transformation du verre plat, la fabrication du verre creux, la fabrication de fibres de verre et la fabrication et le façonnage d'autres articles en verre",
+        "url": "https://wallex.wallonie.be/eli/arrete/2003/01/16/2003200325"
+      }
+    }
+  },
+  "mapping": {
+    "01.20.01.01.01": [
+      {
+        "id": "2006200058",
+        "type": "I_S"
+      }
+    ],
+    "01.20.01.01.02": [
+      {
+        "id": "2006200058",
+        "type": "I_S"
+      }
+    ],
+    "01.20.01.01.03": [
+      {
+        "id": "2006200058",
+        "type": "I_S"
+      }
+    ],
+    "01.20.01.02.01": [
+      {
+        "id": "2006200058",
+        "type": "I_S"
+      }
+    ],
+    "01.20.01.02.02": [
+      {
+        "id": "2006200058",
+        "type": "I_S"
+      }
+    ],
+    "01.20.02.01.01": [
+      {
+        "id": "2006200057",
+        "type": "I_S"
+      }
+    ],
+    "01.20.02.01.02": [
+      {
+        "id": "2006200057",
+        "type": "I_S"
+      }
+    ],
+    "01.20.02.01.03": [
+      {
+        "id": "2006200057",
+        "type": "I_S"
+      }
+    ],
+    "01.20.02.02.01": [
+      {
+        "id": "2006200057",
+        "type": "I_S"
+      }
+    ],
+    "01.20.02.02.02": [
+      {
+        "id": "2006200057",
+        "type": "I_S"
+      }
+    ],
+    "01.20.02.02.03": [
+      {
+        "id": "2006200057",
+        "type": "I_S"
+      }
+    ],
+    "01.21.01.01": [
+      {
+        "id": "2006200056",
+        "type": "I_S"
+      }
+    ],
+    "01.21.01.03": [
+      {
+        "id": "2006200056",
+        "type": "I_S"
+      }
+    ],
+    "01.21.02.01": [
+      {
+        "id": "2006200056",
+        "type": "I_S"
+      }
+    ],
+    "01.21.02.02": [
+      {
+        "id": "2006200056",
+        "type": "I_S"
+      }
+    ],
+    "01.21.02.03": [
+      {
+        "id": "2006200056",
+        "type": "I_S"
+      }
+    ],
+    "01.22.01.01": [
+      {
+        "id": "2006200055",
+        "type": "I_S"
+      }
+    ],
+    "01.22.01.02": [
+      {
+        "id": "2006200055",
+        "type": "I_S"
+      }
+    ],
+    "01.22.01.03": [
+      {
+        "id": "2006200055",
+        "type": "I_S"
+      }
+    ],
+    "01.22.02.01": [
+      {
+        "id": "2006200055",
+        "type": "I_S"
+      }
+    ],
+    "01.22.02.02": [
+      {
+        "id": "2006200055",
+        "type": "I_S"
+      }
+    ],
+    "01.23.01.01.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.01.02.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.02.01.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.02.02.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.02.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.23.03.01.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.03.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.23.03.02.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.03.02.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.23.03.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.23.04.01.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.23.04.02.01": [
+      {
+        "id": "2006200059",
+        "type": "I"
+      }
+    ],
+    "01.24.01.01.01": [
+      {
+        "id": "2006200062",
+        "type": "I"
+      }
+    ],
+    "01.24.01.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.24.01.02.01": [
+      {
+        "id": "2006200062",
+        "type": "I"
+      }
+    ],
+    "01.24.01.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.24.02.01.01": [
+      {
+        "id": "2006200061",
+        "type": "I"
+      }
+    ],
+    "01.24.02.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.24.02.02.01": [
+      {
+        "id": "2006200061",
+        "type": "I"
+      }
+    ],
+    "01.24.02.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.26.01.01": [
+      {
+        "id": "2006200060",
+        "type": "I"
+      }
+    ],
+    "01.26.02.01": [
+      {
+        "id": "2006200060",
+        "type": "I"
+      }
+    ],
+    "01.30.01.01.01": [
+      {
+        "id": "2007202542",
+        "type": "I_S"
+      }
+    ],
+    "01.30.01.01.02": [
+      {
+        "id": "2007202542",
+        "type": "I_S"
+      }
+    ],
+    "01.30.01.01.03": [
+      {
+        "id": "2007202542",
+        "type": "I_S"
+      }
+    ],
+    "01.30.01.02.01": [
+      {
+        "id": "2007202542",
+        "type": "I_S"
+      }
+    ],
+    "01.30.01.02.02": [
+      {
+        "id": "2007202542",
+        "type": "I_S"
+      }
+    ],
+    "01.30.02.01.01": [
+      {
+        "id": "2007202544",
+        "type": "I_S"
+      }
+    ],
+    "01.30.02.01.02": [
+      {
+        "id": "2007202544",
+        "type": "I_S"
+      }
+    ],
+    "01.30.02.01.03": [
+      {
+        "id": "2007202544",
+        "type": "I_S"
+      }
+    ],
+    "01.30.02.02.01": [
+      {
+        "id": "2007202544",
+        "type": "I_S"
+      }
+    ],
+    "01.30.02.02.02": [
+      {
+        "id": "2007202544",
+        "type": "I_S"
+      }
+    ],
+    "01.30.02.02.03": [
+      {
+        "id": "2007202544",
+        "type": "I_S"
+      }
+    ],
+    "01.31.01.01": [
+      {
+        "id": "2007202543",
+        "type": "I_S"
+      }
+    ],
+    "01.31.01.02": [
+      {
+        "id": "2007202543",
+        "type": "I_S"
+      }
+    ],
+    "01.31.01.03": [
+      {
+        "id": "2007202543",
+        "type": "I_S"
+      }
+    ],
+    "01.31.02.01": [
+      {
+        "id": "2007202543",
+        "type": "I_S"
+      }
+    ],
+    "01.31.02.02": [
+      {
+        "id": "2007202543",
+        "type": "I_S"
+      }
+    ],
+    "01.31.02.03": [
+      {
+        "id": "2007202543",
+        "type": "I_S"
+      }
+    ],
+    "01.32.01.01": [
+      {
+        "id": "2007200266",
+        "type": "I_S"
+      }
+    ],
+    "01.32.01.02": [
+      {
+        "id": "2007200266",
+        "type": "I_S"
+      }
+    ],
+    "01.32.01.03": [
+      {
+        "id": "2007200266",
+        "type": "I_S"
+      }
+    ],
+    "01.32.02.01": [
+      {
+        "id": "2007200266",
+        "type": "I_S"
+      }
+    ],
+    "01.32.02.02": [
+      {
+        "id": "2007200266",
+        "type": "I_S"
+      }
+    ],
+    "01.33.02.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.33.02.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.33.03.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.33.03.02.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.33.03.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.34.01.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.34.01.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.34.02.01.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.34.02.02.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D0302_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "01.39.02": [
+      {
+        "id": "2003027283",
+        "type": "I"
+      }
+    ],
+    "05.02.01.01.A": [
+      {
+        "id": "2005200935",
+        "type": "S"
+      }
+    ],
+    "05.02.01.01.B": [
+      {
+        "id": "2005200935",
+        "type": "S"
+      }
+    ],
+    "05.02.01.02.A": [
+      {
+        "id": "2005200935",
+        "type": "S"
+      }
+    ],
+    "05.02.01.02.B": [
+      {
+        "id": "2005200935",
+        "type": "S"
+      }
+    ],
+    "10.90.01": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.02": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.03.01": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.03.02": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.03.03": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.03.04": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.04": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "10.90.05": [
+      {
+        "id": "2003200316",
+        "type": "SE"
+      }
+    ],
+    "13.90": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0063_0098_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "14.00.01": [
+      {
+        "id": "2003201104",
+        "type": "S"
+      }
+    ],
+    "14.00.02": [
+      {
+        "id": "2003201104",
+        "type": "S"
+      }
+    ],
+    "14.00.03": [
+      {
+        "id": "2003201104",
+        "type": "S"
+      }
+    ],
+    "14.90.01.02": [
+      {
+        "id": "2003201104",
+        "type": "S"
+      }
+    ],
+    "15.13.01.01": [
+      {
+        "id": "2007200268",
+        "type": "I"
+      }
+    ],
+    "15.13.01.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2007200269",
+        "type": "S"
+      }
+    ],
+    "15.13.01.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2007200269",
+        "type": "S"
+      }
+    ],
+    "15.20.01.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200307",
+        "type": "SE"
+      }
+    ],
+    "15.20.01.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200307",
+        "type": "SE"
+      }
+    ],
+    "15.20.02.01": [
+      {
+        "id": "2003200307",
+        "type": "SE"
+      }
+    ],
+    "15.20.02.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200307",
+        "type": "SE"
+      }
+    ],
+    "15.20.02.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200307",
+        "type": "SE"
+      }
+    ],
+    "15.32.01.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.32.01.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.32.02.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.32.02.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.33.01": [
+      {
+        "id": "2003200319",
+        "type": "SE"
+      }
+    ],
+    "15.33.02": [
+      {
+        "id": "2003200319",
+        "type": "SE"
+      }
+    ],
+    "15.33.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200319",
+        "type": "SE"
+      }
+    ],
+    "15.41.01": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      }
+    ],
+    "15.41.02": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.41.03": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.42.01": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      }
+    ],
+    "15.42.02": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.42.03": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      }
+    ],
+    "15.43.01": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      }
+    ],
+    "15.43.02": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.43.03": [
+      {
+        "id": "2003200323",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.51.01.01": [
+      {
+        "id": "2003200320",
+        "type": "SE"
+      }
+    ],
+    "15.51.01.02": [
+      {
+        "id": "2003200320",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.51.01.03": [
+      {
+        "id": "2003200320",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.52.01": [
+      {
+        "id": "2003200320",
+        "type": "SE"
+      }
+    ],
+    "15.52.02": [
+      {
+        "id": "2003200320",
+        "type": "SE"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.62.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.62.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.62.03.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.62.03.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.71.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.71.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.81.01.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.81.01.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.82.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.82.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.83.01.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.01.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.01.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.01.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.02.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.02.01.B": [
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.02.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.02.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.03.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.03.01.B": [
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.03.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.03.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.04.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.04.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.04.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.04.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.05.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.05.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.05.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.83.05.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200317",
+        "type": "SE"
+      }
+    ],
+    "15.84.01.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.84.01.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.84.02.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.85.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.86.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.87.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.87.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.88.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.89.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.89.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2031_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "15.91.01": [
+      {
+        "id": "2003200314",
+        "type": "SE"
+      }
+    ],
+    "15.92.01": [
+      {
+        "id": "2003200314",
+        "type": "SE"
+      }
+    ],
+    "20.10.01.01.A": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.10.01.01.B": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.10.01.02.A": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.10.01.02.B": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.20.01": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.20.02.A": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.20.02.B": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.30.01.A": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.30.01.B": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.30.02.A": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.30.02.B": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.40.01.B": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.40.02.A": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.40.02.B": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.50.01.A": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.50.01.B": [
+      {
+        "id": "2003027328",
+        "type": "I"
+      }
+    ],
+    "20.50.02.A": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "20.50.02.B": [
+      {
+        "id": "2003027328",
+        "type": "S"
+      }
+    ],
+    "21.11.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_OJ_JOL_2014_284_R_0017_rid_13",
+        "type": "CMTD"
+      }
+    ],
+    "21.12.01.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_OJ_JOL_2014_284_R_0017_rid_13",
+        "type": "CMTD"
+      }
+    ],
+    "21.12.01.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_OJ_JOL_2014_284_R_0017_rid_13",
+        "type": "CMTD"
+      }
+    ],
+    "23.10.01": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0063_0098_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "23.10.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0063_0098_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "23.20.01": [
+      {
+        "id": "2003200308",
+        "type": "SE"
+      }
+    ],
+    "23.20.02": [
+      {
+        "id": "2003200308",
+        "type": "SE"
+      }
+    ],
+    "23.20.03": [
+      {
+        "id": "2003200308",
+        "type": "SE"
+      }
+    ],
+    "23.20.04": [
+      {
+        "id": "2003200308",
+        "type": "SE"
+      }
+    ],
+    "23.20.05": [
+      {
+        "id": "2003200308",
+        "type": "SE"
+      }
+    ],
+    "24.12.01": [
+      {
+        "id": "2003200311",
+        "type": "SE"
+      }
+    ],
+    "24.12.02": [
+      {
+        "id": "2003200311",
+        "type": "SE"
+      }
+    ],
+    "24.12.03": [
+      {
+        "id": "2013201394",
+        "type": "S"
+      }
+    ],
+    "24.14.01.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.01.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.02.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.02.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.03.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.03.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.04.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.04.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.05.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.05.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.06.01": [
+      {
+        "id": "2003027133",
+        "type": "SE"
+      }
+    ],
+    "24.14.06.02": [
+      {
+        "id": "2003027133",
+        "type": "SE"
+      }
+    ],
+    "24.14.07.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.14.07.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.15.01": [
+      {
+        "id": "2003200315",
+        "type": "S"
+      }
+    ],
+    "24.15.02": [
+      {
+        "id": "2003200315",
+        "type": "S"
+      }
+    ],
+    "24.15.03": [
+      {
+        "id": "2003200315",
+        "type": "S"
+      }
+    ],
+    "24.16.01.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.16.01.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.16.02.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.16.02.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.17.01.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D2117_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.17.01.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D2117_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.17.02.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.17.02.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.17.03.01": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.17.03.02": [
+      {
+        "id": "2003200306",
+        "type": "SE"
+      }
+    ],
+    "24.30.01": [
+      {
+        "id": "2003200311",
+        "type": "SE"
+      }
+    ],
+    "24.30.02": [
+      {
+        "id": "2003200311",
+        "type": "SE"
+      }
+    ],
+    "24.30.03": [
+      {
+        "id": "2003200311",
+        "type": "SE"
+      }
+    ],
+    "24.41.01": [
+      {
+        "id": "2003200322",
+        "type": "SE"
+      }
+    ],
+    "24.41.02": [
+      {
+        "id": "2003200322",
+        "type": "SE"
+      }
+    ],
+    "24.42.01": [
+      {
+        "id": "2003200322",
+        "type": "SE"
+      }
+    ],
+    "24.42.02": [
+      {
+        "id": "2003200322",
+        "type": "SE"
+      }
+    ],
+    "24.51.01.01": [
+      {
+        "id": "2003200309",
+        "type": "SE"
+      }
+    ],
+    "24.51.01.02": [
+      {
+        "id": "2003200309",
+        "type": "SE"
+      }
+    ],
+    "24.51.02.01": [
+      {
+        "id": "2003200309",
+        "type": "SE"
+      }
+    ],
+    "24.51.02.02": [
+      {
+        "id": "2003200309",
+        "type": "SE"
+      }
+    ],
+    "24.52.01": [
+      {
+        "id": "2003200309",
+        "type": "SE"
+      }
+    ],
+    "26.11.01": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.11.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.12.01": [
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.12.02": [
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.13.01": [
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.13.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.13.03": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.14.01": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.14.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.15.01": [
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.15.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.15.03": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200325",
+        "type": "SE"
+      }
+    ],
+    "26.19.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "26.19.03": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0001_0062_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "26.30.01": [
+      {
+        "id": "2006200100",
+        "type": "I"
+      }
+    ],
+    "26.30.02": [
+      {
+        "id": "2006200099",
+        "type": "S"
+      }
+    ],
+    "26.30.03": [
+      {
+        "id": "2006200099",
+        "type": "S"
+      }
+    ],
+    "26.40.01": [
+      {
+        "id": "2006200100",
+        "type": "I"
+      }
+    ],
+    "26.40.02": [
+      {
+        "id": "2006200099",
+        "type": "S"
+      }
+    ],
+    "26.40.03": [
+      {
+        "id": "2006200099",
+        "type": "S"
+      }
+    ],
+    "26.51.01.01": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2013_100_FULL_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "26.51.01.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2013_100_FULL_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "26.52.01.01": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2013_100_FULL_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "26.52.01.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2013_100_FULL_FR_PDF",
+        "type": "CMTD"
+      }
+    ],
+    "26.63.02.A": [
+      {
+        "id": "2003027316",
+        "type": "S"
+      }
+    ],
+    "26.63.02.B": [
+      {
+        "id": "2003027316",
+        "type": "S"
+      }
+    ],
+    "26.65.03.04.01": [
+      {
+        "id": "2003201475",
+        "type": "I"
+      }
+    ],
+    "26.65.03.04.02": [
+      {
+        "id": "16",
+        "type": "S"
+      }
+    ],
+    "26.82.01.04": [
+      {
+        "id": "2003027366",
+        "type": "S"
+      }
+    ],
+    "27.10.01.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.10.01.02": [
+      {
+        "id": "http_eur-lex.europa.eu_LexUriServ_LexUriServ.do_uri_OJ_L_2012_070_0063_0098_FR_PDF",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.10.02.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.10.02.02": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.10.03.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.10.03.02": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.21.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.21.02": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.22.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.22.02": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.30.01": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.30.02": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "27.42.02.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.42.02.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.43.02.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.43.02.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.44.02.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.44.02.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.45.02.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.45.02.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.51.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      }
+    ],
+    "27.52.01": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      }
+    ],
+    "27.53.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.53.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.54.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.54.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.59.01": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "27.59.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32016D1032_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "28.11.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.11.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.11.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.11.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.12.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.12.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.12.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.12.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.21.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.21.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.21.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.21.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.22.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.22.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.22.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.22.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.30.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.30.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.30.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.30.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.40.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.40.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.40.02.A": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.40.02.B": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.40.03": [
+      {
+        "id": "2003200324",
+        "type": "SE"
+      },
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.01.01": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.01.02": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.02.01": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.02.02": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.02.03": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.03.01": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.51.03.02": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.52.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.52.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.52.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.52.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.60.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.60.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.60.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.60.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.70.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.70.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.70.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "28.70.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.10.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.10.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.10.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.10.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.20.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.20.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.20.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.20.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.30.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.30.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.30.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.30.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.40.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.40.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.40.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.40.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.50.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.50.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.50.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.50.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.70.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.70.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.70.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "29.70.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.10.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.10.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.10.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.10.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.10.03.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.10.03.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.20.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.20.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.20.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.20.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.20.03.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.20.03.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.30.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.30.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.30.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.30.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.38.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.38.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.38.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.38.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.38.03.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.38.03.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.39.01": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "34.39.02": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.01.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.01.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.01.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.01.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.02.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.02.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.02.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.10.02.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.20.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.20.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.20.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.20.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.30.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.30.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.30.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.30.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.30.03.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.30.03.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.41.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.41.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.41.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.41.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.42.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.42.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.42.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.42.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.43.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.43.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.43.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.43.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.90.01.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.90.01.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.90.02.A": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "35.90.02.B": [
+      {
+        "id": "2003200313",
+        "type": "SE"
+      }
+    ],
+    "40.10.01.01.01": [
+      {
+        "id": "2007200267",
+        "type": "I"
+      }
+    ],
+    "40.10.01.01.02": [
+      {
+        "id": "2005203361",
+        "type": "S"
+      }
+    ],
+    "40.10.01.02": [
+      {
+        "id": "2006203965",
+        "type": "I"
+      }
+    ],
+    "40.10.01.04.01": [
+      {
+        "id": "2014201510",
+        "type": "S"
+      }
+    ],
+    "40.10.01.04.02": [
+      {
+        "id": "2014201510",
+        "type": "S"
+      },
+      {
+        "id": "2021032704",
+        "type": "S"
+      },
+      {
+        "id": "2021031141",
+        "type": "S"
+      }
+    ],
+    "40.10.01.04.03": [
+      {
+        "id": "2021032704",
+        "type": "S"
+      },
+      {
+        "id": "2021031141",
+        "type": "S"
+      }
+    ],
+    "40.30.02.01": [
+      {
+        "id": "2007202867",
+        "type": "I_S"
+      }
+    ],
+    "40.30.02.02": [
+      {
+        "id": "2007202867",
+        "type": "I_S"
+      }
+    ],
+    "40.50.01.01": [
+      {
+        "id": "2018014305",
+        "type": "S"
+      }
+    ],
+    "40.50.01.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D1442_qid_1502958118940_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201396",
+        "type": "S"
+      }
+    ],
+    "40.50.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D1442_qid_1502958118940_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201396",
+        "type": "S"
+      }
+    ],
+    "40.60.02": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D1442_qid_1502958118940_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "40.60.03": [
+      {
+        "id": "http_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32017D1442_qid_1502958118940_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "41.00.02.01": [
+      {
+        "id": "2009201064",
+        "type": "I"
+      }
+    ],
+    "41.00.02.02": [
+      {
+        "id": "2009027058",
+        "type": "S"
+      }
+    ],
+    "41.00.02.03": [
+      {
+        "id": "2009027058",
+        "type": "S"
+      }
+    ],
+    "41.00.03.01": [
+      {
+        "id": "2009201064",
+        "type": "I"
+      }
+    ],
+    "41.00.03.02": [
+      {
+        "id": "2009027058",
+        "type": "S"
+      }
+    ],
+    "41.00.03.03": [
+      {
+        "id": "2009027058",
+        "type": "S"
+      }
+    ],
+    "45.12.02": [
+      {
+        "id": "2012027152",
+        "type": "S"
+      }
+    ],
+    "45.91.02": [
+      {
+        "id": "2004202633",
+        "type": "I"
+      }
+    ],
+    "45.92.01": [
+      {
+        "id": "2004202632",
+        "type": "I"
+      }
+    ],
+    "50.20.01.01": [
+      {
+        "id": "2003027364",
+        "type": "I"
+      }
+    ],
+    "50.20.01.02": [
+      {
+        "id": "2003027365",
+        "type": "S"
+      }
+    ],
+    "50.20.02": [
+      {
+        "id": "2008203665",
+        "type": "S"
+      }
+    ],
+    "50.50.01": [
+      {
+        "id": "2007203628",
+        "type": "I"
+      }
+    ],
+    "50.50.02": [
+      {
+        "id": "1999027462",
+        "type": "S"
+      }
+    ],
+    "50.50.03": [
+      {
+        "id": "1999027462",
+        "type": "S"
+      }
+    ],
+    "50.50.04.01.01": [
+      {
+        "id": "2015205932",
+        "type": "S"
+      }
+    ],
+    "50.50.04.01.02": [
+      {
+        "id": "2019010940",
+        "type": "S"
+      }
+    ],
+    "50.50.04.01.04": [
+      {
+        "id": "2019014813",
+        "type": "S"
+      }
+    ],
+    "50.50.04.02": [
+      {
+        "id": "2017020301",
+        "type": "I"
+      }
+    ],
+    "52.10.02": [
+      {
+        "id": "2014203906",
+        "type": "S"
+      }
+    ],
+    "52.22": [
+      {
+        "id": "2007200271",
+        "type": "I"
+      }
+    ],
+    "55.22.01": [
+      {
+        "id": "2007200264",
+        "type": "I"
+      }
+    ],
+    "55.22.02": [
+      {
+        "id": "2007200265",
+        "type": "S"
+      }
+    ],
+    "55.22.03": [
+      {
+        "id": "2007200265",
+        "type": "S"
+      }
+    ],
+    "55.30.02": [
+      {
+        "id": "2010027235",
+        "type": "I"
+      }
+    ],
+    "63.12.05.02.01": [
+      {
+        "id": "2007203372",
+        "type": "I"
+      }
+    ],
+    "63.12.05.02.02": [
+      {
+        "id": "2007203373",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.04.A": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.04.B": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.05.A": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.05.B": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.06.A": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.06.B": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.07.A": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.03.07.B": [
+      {
+        "id": "2003200361",
+        "type": "S"
+      }
+    ],
+    "63.12.05.04.01": [
+      {
+        "id": "2006203967",
+        "type": "I"
+      }
+    ],
+    "63.12.05.04.02": [
+      {
+        "id": "2006203966",
+        "type": "S"
+      }
+    ],
+    "63.12.05.05.01": [
+      {
+        "id": "2007202034",
+        "type": "I"
+      }
+    ],
+    "63.12.05.05.02": [
+      {
+        "id": "2007202036",
+        "type": "S"
+      }
+    ],
+    "63.12.05.08": [
+      {
+        "id": "2007027185",
+        "type": "I"
+      }
+    ],
+    "63.12.05.09": [
+      {
+        "id": "peintegr033.htm",
+        "type": "I"
+      }
+    ],
+    "63.12.07.01": [
+      {
+        "id": "2005201989",
+        "type": "I"
+      }
+    ],
+    "63.12.07.03": [
+      {
+        "id": "2005201476",
+        "type": "I"
+      }
+    ],
+    "63.12.08.01.01": [
+      {
+        "id": "2003027331",
+        "type": "I_S"
+      }
+    ],
+    "63.12.09.01.01": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.01.02": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.01.03": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.02.01": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.02.02": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.02.03": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.03.01": [
+      {
+        "id": "2003201612",
+        "type": "I"
+      }
+    ],
+    "63.12.09.03.02": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.03.03": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.04.01": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.04.02": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.04.03": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.05.01": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.05.02": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.09.05.03": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.15.01.A": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.15.01.B": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.15.02.A": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.15.02.B": [
+      {
+        "id": "2003200321",
+        "type": "SE"
+      }
+    ],
+    "63.12.17.01.01": [
+      {
+        "id": "2013027129",
+        "type": "I"
+      }
+    ],
+    "63.12.17.01.02": [
+      {
+        "id": "2013027130",
+        "type": "S"
+      }
+    ],
+    "64.20.01.01.01": [
+      {
+        "id": "2009201985",
+        "type": "I"
+      }
+    ],
+    "64.20.02": [
+      {
+        "id": "2009201985",
+        "type": "I"
+      }
+    ],
+    "73.10.03.01": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.10.03.02": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.10.03.03": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.10.04.01": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.10.04.02": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.19.01.01": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.19.01.02": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.19.01.03": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.19.02.01": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "73.19.02.02": [
+      {
+        "id": "2002027814",
+        "type": "I_S"
+      }
+    ],
+    "74.70": [
+      {
+        "id": "2003200312",
+        "type": "SE"
+      },
+      {
+        "id": "2003200310",
+        "type": "SE"
+      }
+    ],
+    "90.11": [
+      {
+        "id": "01",
+        "type": "I_S"
+      }
+    ],
+    "90.12": [
+      {
+        "id": "01",
+        "type": "I_S"
+      }
+    ],
+    "90.13": [
+      {
+        "id": "01",
+        "type": "I_S"
+      }
+    ],
+    "90.14": [
+      {
+        "id": "01",
+        "type": "I_S"
+      }
+    ],
+    "90.21.02.02": [
+      {
+        "id": "2003027138",
+        "type": "S"
+      }
+    ],
+    "90.21.05.01": [
+      {
+        "id": "2009200009",
+        "type": "S"
+      }
+    ],
+    "90.21.05.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2009200009",
+        "type": "S"
+      }
+    ],
+    "90.21.06.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.21.08.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.21.09.01": [
+      {
+        "id": "2008204830",
+        "type": "I"
+      }
+    ],
+    "90.21.09.02": [
+      {
+        "id": "2008204830",
+        "type": "S"
+      }
+    ],
+    "90.21.10.01": [
+      {
+        "id": "2008204832",
+        "type": "I"
+      }
+    ],
+    "90.21.10.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2008204831",
+        "type": "S"
+      }
+    ],
+    "90.21.11.01": [
+      {
+        "id": "2003201262",
+        "type": "I"
+      }
+    ],
+    "90.21.11.02": [
+      {
+        "id": "2003201261",
+        "type": "S"
+      }
+    ],
+    "90.21.13": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2017202097",
+        "type": "S"
+      }
+    ],
+    "90.21.14": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.21.15.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.02.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.02.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.02.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.02.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.03.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.03.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.03.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.03.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.04": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.05": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.06": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.09": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.10": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.11": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.12.01": [
+      {
+        "id": "2003027290",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.12.02": [
+      {
+        "id": "2003027290",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.22.13": [
+      {
+        "id": "2017202097",
+        "type": "S"
+      }
+    ],
+    "90.22.14": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027138",
+        "type": "S"
+      }
+    ],
+    "90.22.15": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027138",
+        "type": "S"
+      }
+    ],
+    "90.23.01.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.01.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.01.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.02.01.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.02.01.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.02.02.A": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.02.02.B": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.04.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.04.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.05": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.06": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.07": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.10": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.11": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.12.02": [
+      {
+        "id": "2009204053",
+        "type": "S"
+      }
+    ],
+    "90.23.12.03": [
+      {
+        "id": "2009204053",
+        "type": "S"
+      }
+    ],
+    "90.23.13.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.13.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.14": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2017202097",
+        "type": "S"
+      }
+    ],
+    "90.23.15.01": [
+      {
+        "id": "2014203909",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.15.01.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.23.15.02": [
+      {
+        "id": "2014203909",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.24.01.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.01.02": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.24.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.03": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.04": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.05": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.06.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.06.02": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.07": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.08.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.08.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.09.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.09.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.10": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.11.01": [
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.24.11.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32019D2010_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2013201395",
+        "type": "S"
+      }
+    ],
+    "90.25.01": [
+      {
+        "id": "2003027135",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.25.02.01": [
+      {
+        "id": "2003027135",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.25.02.02": [
+      {
+        "id": "2003027135",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.25.02.03": [
+      {
+        "id": "2003027135",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.25.03": [
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.25.04.01": [
+      {
+        "id": "2003027135",
+        "type": "S"
+      },
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      }
+    ],
+    "90.25.04.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.25.05.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.25.05.02.01": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.25.05.02.02": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.25.05.02.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.25.05.03": [
+      {
+        "id": "https_eur-lex.europa.eu_legal-content_FR_TXT_PDF_uri_CELEX_32018D1147_from_FR",
+        "type": "CMTD"
+      },
+      {
+        "id": "2003027135",
+        "type": "S"
+      }
+    ],
+    "90.27.01.01": [
+      {
+        "id": "2009027156",
+        "type": "I_S"
+      }
+    ],
+    "90.27.01.02": [
+      {
+        "id": "2009027156",
+        "type": "I_S"
+      }
+    ],
+    "90.27.01.03.01.A": [
+      {
+        "id": "2009027156",
+        "type": "I_S"
+      }
+    ],
+    "90.27.01.03.01.B": [
+      {
+        "id": "2009027156",
+        "type": "I_S"
+      }
+    ],
+    "90.27.01.03.02": [
+      {
+        "id": "2009027156",
+        "type": "I_S"
+      }
+    ],
+    "90.27.01.03.03": [
+      {
+        "id": "2009027156",
+        "type": "I_S"
+      }
+    ],
+    "92.53.01": [
+      {
+        "id": "2014200768",
+        "type": "S"
+      }
+    ],
+    "92.53.02.01": [
+      {
+        "id": "2014200768",
+        "type": "S"
+      }
+    ],
+    "92.53.02.02": [
+      {
+        "id": "2014200769",
+        "type": "I"
+      },
+      {
+        "id": "2014200768",
+        "type": "S"
+      }
+    ],
+    "92.53.02.03": [
+      {
+        "id": "2014200768",
+        "type": "S"
+      }
+    ],
+    "92.53.02.04": [
+      {
+        "id": "2014200769",
+        "type": "I"
+      },
+      {
+        "id": "2014200768",
+        "type": "S"
+      }
+    ],
+    "92.53.02.05": [
+      {
+        "id": "2014200769",
+        "type": "I"
+      },
+      {
+        "id": "2014200768",
+        "type": "S"
+      }
+    ],
+    "92.61.01.01.01": [
+      {
+        "id": "2013027127",
+        "type": "I"
+      }
+    ],
+    "92.61.01.01.02": [
+      {
+        "id": "2013027126",
+        "type": "S"
+      }
+    ],
+    "92.61.01.02": [
+      {
+        "id": "2013027128",
+        "type": "S"
+      }
+    ],
+    "92.61.09.02.01": [
+      {
+        "id": "2007200270",
+        "type": "I"
+      }
+    ],
+    "92.61.09.02.02": [
+      {
+        "id": "2013205373",
+        "type": "S"
+      }
+    ],
+    "92.61.13.01": [
+      {
+        "id": "2003027332",
+        "type": "I"
+      }
+    ],
+    "92.61.14.01": [
+      {
+        "id": "2009201569",
+        "type": "I_S"
+      }
+    ],
+    "92.61.14.02": [
+      {
+        "id": "2009201569",
+        "type": "I_S"
+      }
+    ],
+    "93.01.01.01": [
+      {
+        "id": "2005201988",
+        "type": "S"
+      }
+    ],
+    "93.01.01.02": [
+      {
+        "id": "2005201988",
+        "type": "S"
+      }
+    ],
+    "93.01.02.01": [
+      {
+        "id": "2003027304",
+        "type": "I_S"
+      }
+    ],
+    "93.01.02.02": [
+      {
+        "id": "2003027304",
+        "type": "I_S"
+      }
+    ],
+    "93.01.02.03": [
+      {
+        "id": "2003027304",
+        "type": "I_S"
+      }
+    ],
+    "93.03.01.01": [
+      {
+        "id": "2013201801",
+        "type": "I"
+      }
+    ],
+    "93.03.02": [
+      {
+        "id": "2010203172",
+        "type": "S"
+      }
+    ],
+    "COV-01.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-02.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-03.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-03.02": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-04.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-05.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-06.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-07.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-08.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-09.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-10.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-11": [
+      {
+        "id": "2003027304",
+        "type": "I_S"
+      },
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-12.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-13.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-14.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-15.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-16.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-17.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-18.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-19.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ],
+    "COV-20.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      },
+      {
+        "id": "2003200322",
+        "type": "SE"
+      }
+    ],
+    "COV-21.01": [
+      {
+        "id": "2002027956",
+        "type": "S"
+      }
+    ]
+  }
+}
