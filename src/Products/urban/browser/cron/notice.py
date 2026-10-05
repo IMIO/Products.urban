@@ -257,6 +257,9 @@ class ImportFromNoticeView(BrowserView):
             "ABANDON_COMMUNE",
             "PM_ABANDON_COMMUNE",
             "PM_ABANDON_COMMUNE_FTFD",
+            "ABANDON_COMMUNE_MANUELLE",
+            "PM_ABANDON_COMMUNE_EP",
+            "PM_ABANDON_COMMUNE_EP_FTFD",
         ):
             handler = AbandonHandler
         elif detailed_notification.notice_type in (
