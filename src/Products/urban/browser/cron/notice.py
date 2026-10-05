@@ -64,7 +64,7 @@ class ImportFromNoticeView(BrowserView):
         if not self.retry_failed_notifications or not self.failed_notifications:
             return
 
-        logger.info("Retrying %d failed notifications", len(self.failed_notifications))
+        logger.info(u"Retrying %d failed notifications", len(self.failed_notifications))
         remaining_failed = []
 
         for failed_notice_id in self.failed_notifications:
@@ -157,7 +157,7 @@ class ImportFromNoticeView(BrowserView):
                 self.latest_successful_date,
             )
             logger.info(
-                "Updated last_import_date to %s",
+                u"Updated last_import_date to %s",
                 self.latest_successful_date.isoformat(),
             )
 
@@ -196,7 +196,7 @@ class ImportFromNoticeView(BrowserView):
             notify(NoticeImportFailedEvent(event_wrapper))
         except Exception:
             logger.exception(
-                "Failed to emit NoticeImportFailedEvent for notice_id=%s",
+                u"Failed to emit NoticeImportFailedEvent for notice_id=%s",
                 notice_id,
             )
 
@@ -542,7 +542,7 @@ class IncomingNoticeHandler(object):
     @property
     def _notification_transition_comment(self):
         msg = _(
-            "NOTICe notification n° ${noticeId}",
+            u"NOTICe notification n° ${noticeId}",
             mapping={
                 "noticeId": self.notification.noticeId,
             },
@@ -562,7 +562,7 @@ class IncomingNoticeHandler(object):
             notify(NoticeImportSucceededEvent(event_wrapper))
         except Exception:
             logger.exception(
-                "Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
                 notice_id,
             )
 
