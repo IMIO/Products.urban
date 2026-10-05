@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from .event import SendMailAction
+from Products.CMFPlone.utils import safe_unicode
 from Products.urban import UrbanMessage as _
+from Products.urban.send_mail_action.interface import ISendMailAction
 from datetime import datetime
 from imio.pm.wsclient.interfaces import IRedirect
 from plone import api
@@ -43,7 +45,7 @@ class SendMailActionForm(Form):
         self.context = context
         self.request = request
 
-        rules = [rule.title for rule in self.context.get_all_rules_for_this_event()]
+        rules = [safe_unicode(rule.title) for rule in self.context.get_all_rules_for_this_event(ISendMailAction)]
         last_rule = None
         if len(rules) > 1:
             last_rule = rules.pop()
