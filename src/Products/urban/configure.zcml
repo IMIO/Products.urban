@@ -114,6 +114,18 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ISpecialConditionsRevisionDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISpecialConditionsRevisionProjectEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISpecialConditionsRevisionDecisionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDepositEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -315,6 +327,22 @@
 
   <interface
     interface=".interfaces.IObservationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IAbandonEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IInformationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ICessionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ITacitRefusalEvent"
     type=".interfaces.IEventTypeType"/>
 
   <interface
