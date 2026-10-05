@@ -48,13 +48,10 @@ class ImportFromNoticeView(BrowserView):
 
         self.notice_service = notice.WebserviceNotice()
         self.retry_failed_notifications = self.request.form.get("retry") == "1"
-        self.last_import_date = (
-            api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
-                default=datetime(2000, 1, 1),
-            )
-            or datetime(2000, 1, 1)
-        )
+        self.last_import_date = api.portal.get_registry_record(
+            "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+            default=datetime(2000, 1, 1),
+        ) or datetime(2000, 1, 1)
         self.latest_successful_date = self.last_import_date
         self.failed_notifications = (
             api.portal.get_registry_record(
@@ -314,6 +311,7 @@ class ImportFromNoticeView(BrowserView):
             "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "PM_EP_COURRIER_COMMUNE",
         ):
             handler = GesperAmendedPlansSPWHandler
         elif detailed_notification.notice_type in (
@@ -390,12 +388,22 @@ class IncomingNoticeHandler(object):
             if not parcel.parcel:
                 data = {
                     translate(_("CaPaKey"), context=self.request): parcel.capakey,
-                    translate(_("urban_label_division"), context=self.request): parcel.division,
-                    translate(_("urban_label_section"), context=self.request): parcel.section,
-                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(
+                        _("urban_label_division"), context=self.request
+                    ): parcel.division,
+                    translate(
+                        _("urban_label_section"), context=self.request
+                    ): parcel.section,
+                    translate(
+                        _("urban_label_radical"), context=self.request
+                    ): parcel.radical,
                     translate(_("urban_label_bis"), context=self.request): parcel.bis,
-                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
-                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                    translate(
+                        _("urban_label_exposant"), context=self.request
+                    ): parcel.exposant,
+                    translate(
+                        _("urban_label_puissance"), context=self.request
+                    ): parcel.puissance,
                 }
                 self._add_error(_("Can not find a parcel"), data)
                 continue
@@ -404,13 +412,21 @@ class IncomingNoticeHandler(object):
     def import_addresses(self):
         for address in self.notification.addresses:
             data = {
-                translate(_("urban_label_street"), context=self.request): address.notice_street,
-                translate(_("urban_label_locality"), context=self.request): address.locality,
+                translate(
+                    _("urban_label_street"), context=self.request
+                ): address.notice_street,
+                translate(
+                    _("urban_label_locality"), context=self.request
+                ): address.locality,
                 translate(
                     _("municipality"), context=self.request
                 ): address.municipality,
-                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
-                translate(_("urban_label_number"), context=self.request): address.number,
+                translate(
+                    _("urban_label_zipCode"), context=self.request
+                ): address.postCode,
+                translate(
+                    _("urban_label_number"), context=self.request
+                ): address.number,
             }
             if not address.address:
                 self._add_error(_("Can not find an address"), data)
@@ -536,7 +552,9 @@ class IncomingNoticeHandler(object):
         )
         description_field = self.licence.getField("description")
         old_description = description_field.getRaw(self.licence)
-        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        new_description = old_description + translate(
+            error, context=self.request
+        ).encode("utf8")
         description_field.set(self.licence, new_description)
         self.licence._p_changed = 1
 
@@ -761,15 +779,11 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
                 "UFD2_DECISION_FD_OCTROI": "favorable",
                 "UFD2_DECISION_FD_REFUSEE": "defavorable",
             }
-            urban_decision_term = mapping_decision_terms.get(
-                decision_code
-            )
+            urban_decision_term = mapping_decision_terms.get(decision_code)
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
-                self.event.setDescription(
-                    u"Décision: {}".format(decision_code)
-                )
+                self.event.setDescription(u"Décision: {}".format(decision_code))
 
     @property
     def desired_licence_state(self):
