@@ -167,7 +167,7 @@ class ImportFromNoticeView(BrowserView):
         )
         if self.failed_notifications:
             logger.warning(
-                "%d notification(s) recorded as failed", len(self.failed_notifications)
+                u"%d notification(s) recorded as failed", len(self.failed_notifications)
             )
 
     def _get_notice_notifications(self):
