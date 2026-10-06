@@ -352,4 +352,18 @@
     handler=".subscribers.after_term_deactivate"
     />
 
+  <!-- OTel tracing: hand-rolled, no SDK available on Python 2.7/ZServer -->
+  <subscriber
+    for="ZPublisher.interfaces.IPubStart"
+    handler=".otel_tracing.handle_pub_start"
+    />
+  <subscriber
+    for="ZPublisher.interfaces.IPubSuccess"
+    handler=".otel_tracing.handle_pub_success"
+    />
+  <subscriber
+    for="ZPublisher.interfaces.IPubFailure"
+    handler=".otel_tracing.handle_pub_failure"
+    />
+
 </configure>
