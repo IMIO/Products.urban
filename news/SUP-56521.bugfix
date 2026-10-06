@@ -1,0 +1,2 @@
+Fix `getTextToShow` to avoid error when truncated html tag
+[jchandelle]
