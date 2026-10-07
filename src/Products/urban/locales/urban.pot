@@ -5991,3 +5991,6 @@ msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr ""
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr ""
