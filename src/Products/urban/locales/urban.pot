@@ -405,11 +405,19 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
+#: ../migration/update_290.py:741
+msgid "Decision date"
+msgstr ""
+
 msgid "Declaration"
 msgstr ""
 
 #: ../profiles.zcml:67
 msgid "Demo Extension profile for urban."
+msgstr ""
+
+#: ../migration/update_290.py:742
+msgid "Deposit date"
 msgstr ""
 
 #: ../browser/licence/duplicate_licence.py:27
@@ -845,6 +853,14 @@ msgstr ""
 
 #: ../interfaces.py:681
 msgid "Internal opinion services"
+msgstr ""
+
+#: ../migration/update_290.py:745
+msgid "Investigation end date"
+msgstr ""
+
+#: ../migration/update_290.py:744
+msgid "Investigation start date"
 msgstr ""
 
 #: ../browser/notice_settings.py:33
@@ -1429,6 +1445,10 @@ msgstr ""
 msgid "UrbanTool"
 msgstr ""
 
+#: ../migration/update_290.py:743
+msgid "Validity date"
+msgstr ""
+
 #: ../content/licence/CODT_BaseBuildLicence.py:571
 msgid "Value"
 msgstr ""
@@ -1439,6 +1459,14 @@ msgstr ""
 
 #: ../browser/offdays_settings.py:58
 msgid "Week off days"
+msgstr ""
+
+#: ../migration/update_290.py:746
+msgid "Work beginning date"
+msgstr ""
+
+#: ../migration/update_290.py:747
+msgid "Work end date"
 msgstr ""
 
 #: ../schedule/browser/debug.py:58
