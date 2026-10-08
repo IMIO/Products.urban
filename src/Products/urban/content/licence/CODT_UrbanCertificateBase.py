@@ -62,9 +62,10 @@ class CODT_UrbanCertificateBase(BaseFolder, UrbanCertificateBase, BrowserDefault
     schemata_order = ["urban_description", "urban_road", "urban_location"]
     ##/code-section class-header
 
-    # Methods
 
-    # Manually created methods
+    def updateTitle(self):
+        if not self._apply_custom_title():
+            super(CODT_UrbanCertificateBase, self).updateTitle()
 
 
 registerType(CODT_UrbanCertificateBase, PROJECTNAME)
