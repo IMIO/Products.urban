@@ -117,4 +117,10 @@
     provides="zope.schema.interfaces.IVocabularyFactory"
   />
 
+  <utility
+    component=".vocabularies.EnvUrbProcedureVocabularyFactory"
+    name="urban.vocabularies.env_urb_procedure"
+    provides="zope.schema.interfaces.IVocabularyFactory"
+  />
+
 </configure>

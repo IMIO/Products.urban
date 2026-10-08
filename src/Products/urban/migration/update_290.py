@@ -764,3 +764,13 @@ def set_pul_urbanConfigId(context):
         )
 
     logger.info("upgrade step done!")
+
+
+def add_faceted_remember_js(context):
+    logger = logging.getLogger("urban: Add faceted_remember.js")
+    logger.info("starting upgrade steps")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:default", "jsregistry"
+    )
+    logger.info("upgrade done!")
