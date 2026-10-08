@@ -180,19 +180,11 @@
         handler=".update_290.set_pul_urbanConfigId"
         profile="Products.urban:default" />
 
-    <gs::upgradeStep
-        title="Add notice warning"
-        description=""
-        source="2920"
-        destination="2921"
-        handler=".update_290.add_notice_warning"
-        profile="Products.urban:default"/>
-
     <gs:upgradeStep
         title="Update titles for Housing, Division and Urbanncertificate"
         description=""
-        source="2921"
-        destination="2922"
+        source="2922"
+        destination="2923"
         handler=".update_290.update_custom_titles"
         profile="Products.urban:default" />
 

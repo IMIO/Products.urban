@@ -772,19 +772,3 @@ def set_pul_urbanConfigId(context):
         )
 
     logger.info("upgrade step done!")
-
-
-def update_custom_titles(context):
-    catalog = api.portal.get_tool("portal_catalog")
-    brains = catalog(portal_type=["Housing", "Division","CODT_UrbanCertificateBase"])
-    for brain in brains:
-        obj = brain.getObject()
-        obj.updateTitle()
-
-
-def update_custom_titles(context):
-    catalog = api.portal.get_tool("portal_catalog")
-    brains = catalog(portal_type=["Housing", "Division"])
-    for brain in brains:
-        obj = brain.getObject()
-        obj.updateTitle()
