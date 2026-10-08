@@ -6006,3 +6006,6 @@ msgstr "Plans modificatifs - Notification à la commune du refus tacite"
 
 msgid "urban_label_customTitle"
 msgstr "Libellé personnalisé"
+
+msgid "urban_label_customTitle"
+msgstr "Libellé personnalisé"
