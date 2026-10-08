@@ -510,3 +510,27 @@ class ComplementaryDelayVocabulary(object):
 
 
 ComplementaryDelayFactory = ComplementaryDelayVocabulary()
+
+
+class EnvUrbProcedureVocabulary(object):
+    def __call__(self, context):
+        terms = []
+        env_types = (
+            URBAN_ENVIRONMENT_TYPES + [
+                "CODT_IntegratedLicence",
+                "CODT_UniqueLicence",
+                "UniqueLicence"
+            ]
+        )
+        urb_types = [
+            t for t in URBAN_TYPES if t not in URBAN_ENVIRONMENT_TYPES
+        ]
+
+        terms = [
+            SimpleTerm("env", ",".join(env_types), "Environement"),
+            SimpleTerm("urb", ",".join(urb_types), "Urbanisme"),
+        ]
+        return SimpleVocabulary(terms)
+
+
+EnvUrbProcedureVocabularyFactory = EnvUrbProcedureVocabulary()

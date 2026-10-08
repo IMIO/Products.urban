@@ -68,6 +68,15 @@
              expression=""
              id="++resource++Products.urban.send_mail_action/popup.js"
              inline="False"/>
+
+ <javascript cacheable="True"
+             compression="safe"
+             cookable="True"
+             enabled="True"
+             expression=""
+             id="++resource++Products.urban/faceted_remember.js"
+             inline="False"
+             insert-after="faceted_view.js"/>
  <!-- ##/code-section jsregistry.xml -->
 
 </object>
