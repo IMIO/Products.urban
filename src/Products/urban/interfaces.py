@@ -773,3 +773,7 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IProvisionOfSecurity(Interface):
+    __doc__ = _("""IProvisionOfSecurity type marker interface""")

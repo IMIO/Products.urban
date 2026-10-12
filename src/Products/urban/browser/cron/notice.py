@@ -280,6 +280,8 @@ class ImportFromNoticeView(BrowserView):
             "PM_REFUS_TACITE_COMMUNE",
         ):
             handler = DecisionSPWHandler
+        elif detailed_notification.notice_type == "ACTE_CONSTITUTION_SURETE_COMMUNE":
+            handler = ProvisionOfSecurityHandler
 
         # GESPER
 
@@ -718,6 +720,10 @@ class DecisionSPWHandler(IncomingNoticeHandler):
             return mapping_decision_states.get(decision_code, "")
         else:
             return ""
+
+
+class ProvisionOfSecurityHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IProvisionOfSecurity"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):

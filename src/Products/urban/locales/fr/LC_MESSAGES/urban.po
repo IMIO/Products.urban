@@ -5989,3 +5989,9 @@ msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision
 
 msgid "PM_REFUS_TACITE_COMMUNE"
 msgstr "Plans modificatifs - Notification à la commune du refus tacite"
+
+msgid "IProvisionOfSecurity type marker interface"
+msgstr "Constitution de sûreté"
+
+msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
+msgstr "Notification à la commune de l'acte de constitution de sûreté"
