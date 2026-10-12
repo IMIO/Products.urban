@@ -319,6 +319,8 @@ class ImportFromNoticeView(BrowserView):
 
         elif detailed_notification.notice_type == "ART65_ABANDON_COMMUNE":
             handler = SpecialConditionsAbandonHandler
+        elif detailed_notification.notice_type == "ACTE_CONSTITUTION_SURETE_COMMUNE":
+            handler = ProvisionOfSecurityHandler
 
         # GESPER
 
@@ -824,6 +826,8 @@ class StopForAmendedPlansHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "suspension"
+class ProvisionOfSecurityHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IProvisionOfSecurity"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):

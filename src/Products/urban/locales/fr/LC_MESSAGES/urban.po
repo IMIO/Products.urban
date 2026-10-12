@@ -6100,3 +6100,12 @@ msgstr "Prise de connaissance de la cession"
 
 msgid "ACTE_CESSION_COMMUNE"
 msgstr "Notification à la commune de l'acte de cession"
+
+msgid "IProvisionOfSecurity type marker interface"
+msgstr "Constitution de sûreté"
+
+msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
+msgstr "Notification à la commune de l'acte de constitution de sûreté"
+
+msgid "IReleaseOfSecurity type marker interface"
+msgstr "Libération de sûreté"
