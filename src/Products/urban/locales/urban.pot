@@ -6037,3 +6037,6 @@ msgstr ""
 
 msgid "urban_label_sessionType"
 msgstr ""
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr ""

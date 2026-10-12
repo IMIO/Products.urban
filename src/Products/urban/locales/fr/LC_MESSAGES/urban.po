@@ -6052,3 +6052,6 @@ msgstr "Type de cession"
 
 msgid "sessiontype_folder_title"
 msgstr "Type de cession"
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr "Prise de connaissance de la cession"

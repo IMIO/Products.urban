@@ -384,4 +384,8 @@
     interface=".interfaces.ICessionEvent"
     type=".interfaces.IEventTypeType"/>
 
+<interface
+    interface=".interfaces.IAcknowledgmentOfTransfer"
+    type=".interfaces.IEventTypeType"/>
+
 </configure>

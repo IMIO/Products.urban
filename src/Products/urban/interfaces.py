@@ -813,3 +813,7 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IAcknowledgmentOfTransfer(Interface):
+        __doc__ = _("""IAcknowledgmentOfTransfer type marker interface""")
