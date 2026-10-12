@@ -64,6 +64,7 @@ setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ("Manager", "Owner", "Contributo
 ADD_CONTENT_PERMISSIONS = {
     "Applicant": "urban: Add Applicant",
     "Article127": "urban: Add Article127",
+    "Article65": "urban: Add Article65",
     "BuildLicence": "urban: Add BuildLicence",
     "CODT_Article127": "urban: Add CODT_Article127",
     "CODT_BuildLicence": "urban: Add CODT_BuildLicence",
@@ -129,6 +130,7 @@ ADD_CONTENT_PERMISSIONS = {
 
 setDefaultRoles("urban: Add Applicant", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add Article127", ("Manager", "Contributor"))
+setDefaultRoles("urban: Add Article65", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add BuildLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add City", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add Claimant", ("Manager", "Contributor", "ClaimantEditor"))
@@ -203,6 +205,7 @@ URBAN_TYPES = [
     "CODT_BuildLicence",
     "Article127",
     "CODT_Article127",
+    "Article65",
     "CODT_CommercialLicence",
     "IntegratedLicence",
     "CODT_IntegratedLicence",
@@ -238,6 +241,7 @@ URBAN_TYPES_ACRONYM = {
     "BuildLicence": "P",
     "CODT_BuildLicence": "P",
     "Article127": "PA",
+    "Article65": "A65",
     "CODT_Article127": "PA",
     "CODT_CommercialLicence": "PIC",
     "IntegratedLicence": "PI",
@@ -317,6 +321,7 @@ URBAN_ENVIRONMENT_TYPES = [
     "EnvClassThree",
     "ExplosivesPossession",
     "EnvClassBordering",
+    "Article65",
 ]
 
 LICENCE_FINAL_STATES = [

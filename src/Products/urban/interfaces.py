@@ -637,6 +637,10 @@ class IEnvCLassOne(Interface):
     """Marker interface for EnvClassOne"""
 
 
+class IArticle65(Interface):
+    """Marker interface for Article65"""
+
+
 class IContactFolder(Interface):
     """Marker interface for folders containing contacts"""
 

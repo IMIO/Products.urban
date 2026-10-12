@@ -193,6 +193,9 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
+msgid "Article65"
+msgstr ""
+
 #: ../browser/licence/templates/licencetabsmacros.pt:469
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"

@@ -188,6 +188,9 @@ msgstr "Appliquer uniquement lorsque le type d'événement correspond à celui d
 msgid "Article127"
 msgstr "Article 127"
 
+msgid "Article65"
+msgstr "Article 65"
+
 #: ../browser/licence/templates/licencetabsmacros.pt:469
 #: ../browser/licence/templates/licenceview.pt:50
 msgid "Attachments"

@@ -1497,6 +1497,38 @@ default_values = {
             },
         ],
     },
+    "Article65": {
+        "decisions": [
+            "UrbanVocabularyTerm",
+            {"id": "octroi", "title": u"Octroi", "extraValue": "Recevable"},
+            {"id": "refus", "title": u"Refus", "extraValue": "Irrecevable"},
+        ],
+        "folderdelays": [
+            "UrbanDelay",
+            {"id": "40j", "title": u"40 jours", "deadLineDelay": 40, "alertDelay": 20},
+            {"id": "50j", "title": u"50 jours", "deadLineDelay": 50, "alertDelay": 20},
+            {"id": "70j", "title": u"70 jours", "deadLineDelay": 70, "alertDelay": 20},
+            {"id": "80j", "title": u"80 jours", "deadLineDelay": 80, "alertDelay": 20},
+            {
+                "id": "140j",
+                "title": u"140 jours",
+                "deadLineDelay": 140,
+                "alertDelay": 20,
+            },
+            {
+                "id": "170j",
+                "title": u"170 jours",
+                "deadLineDelay": 170,
+                "alertDelay": 20,
+            },
+            {
+                "id": "inconnu",
+                "title": u"Inconnu",
+                "deadLineDelay": 0,
+                "alertDelay": 20,
+            },
+        ],
+    },
     "ParcelOutLicence": {
         "foldercategories": [
             "UrbanVocabularyTerm",
@@ -1942,6 +1974,7 @@ default_values = {
                 "EnvClassOne",
                 "EnvClassTwo",
                 "EnvClassBordering",
+                "Article65",
             ],
             {
                 "id": "spw-dgo1",
@@ -2072,13 +2105,14 @@ default_values = {
                 "EnvClassOne",
                 "EnvClassTwo",
                 "UniqueLicence",
+                "Article65",
             ],
             {"id": "college", "title": u"Collège"},
             {"id": "ft", "title": u"Fonctionnaire technique"},
         ],
         "inadmissibilityreasons": [
             "UrbanVocabularyTerm",
-            ["EnvClassOne", "EnvClassTwo", "EnvClassThree", "EnvClassBordering"],
+            ["EnvClassOne", "EnvClassTwo", "EnvClassThree", "EnvClassBordering", "Article65"],
             {"id": "missing_parts", "title": u"Pièces/renseignements manquants"},
             {
                 "id": "no_deposit_receipt",
@@ -2097,6 +2131,7 @@ default_values = {
                 "EnvClassThree",
                 "EnvClassBordering",
                 "CODT_IntegratedLicence",
+                "Article65",
             ],
             {
                 "id": "new_business",

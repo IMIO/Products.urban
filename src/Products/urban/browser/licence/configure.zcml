@@ -188,6 +188,22 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IArticle65"
+     name="article65view"
+     class=".article65view.Article65View"
+     template="templates/article65view.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="article65-macros"
+     for="Products.urban.interfaces.IArticle65"
+     template="templates/article65macros.pt"
+     permission="zope2.View"
+  />
+
+
+  <browser:page
      for="Products.urban.interfaces.ICODT_IntegratedLicence"
      name="codt_integratedlicenceview"
      class=".codt_integratedlicenceview.CODTIntegratedLicenceView"
