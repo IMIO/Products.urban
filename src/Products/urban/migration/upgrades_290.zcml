@@ -180,4 +180,12 @@
         handler=".update_290.set_pul_urbanConfigId"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add faceted_remember.js"
+        description=""
+        source="2922"
+        destination="2923"
+        handler=".update_290.add_faceted_remember_js"
+        profile="Products.urban:default" />
+
 </configure>
