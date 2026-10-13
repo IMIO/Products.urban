@@ -454,6 +454,10 @@ msgstr ""
 msgid "Housing"
 msgstr ""
 
+#: ../interfaces.py:793
+msgid "IAbandonEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:397
 msgid "IAcknowledgment type marker interface"
 msgstr ""
@@ -468,6 +472,10 @@ msgstr ""
 
 #: ../interfaces.py:429
 msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr ""
+
+#: ../interfaces.py:801
+msgid "ICessionEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:357
@@ -520,6 +528,10 @@ msgstr ""
 
 #: ../interfaces.py:517
 msgid "IIILEPrescriptionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:797
+msgid "IInformationEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:433
@@ -626,8 +638,24 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:785
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:777
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:781
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:577
 msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:789
+msgid "ITacitRefusalEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:477
