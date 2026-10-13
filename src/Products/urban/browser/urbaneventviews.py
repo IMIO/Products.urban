@@ -1376,6 +1376,7 @@ class CanTransferFolderToDpaView(CanTransferNoticeBaseView):
         "TRANSFERT_DOSSIER",
         "TRANSFERT_DOSSIER_DRC",
         "TRANSFERT_DOSSIER_PM",
+        "REVISION_CP_FT_ENVOI_COMMUNE",
     ]
     avoided_outgoing_notice_types = ["transfer_folder_to_dpa"]
 
@@ -1386,6 +1387,7 @@ class CanTransferDatesView(CanTransferNoticeBaseView):
         "DEMANDE_EP",
         "DEMANDE_EP_DOSSIER_PRECEDENT",
         "DEMANDE_EP_EXTRA",
+        "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_dates",
@@ -1398,6 +1400,7 @@ class CanTransferTicketView(CanTransferNoticeBaseView):
         "DEMANDE_EP",
         "DEMANDE_EP_DOSSIER_PRECEDENT",
         "DEMANDE_EP_EXTRA",
+        "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_ticket",
@@ -1413,6 +1416,7 @@ class CanTransferOpinionView(CanTransferNoticeBaseView):
         "DEMANDE_EP",
         "DEMANDE_EP_DOSSIER_PRECEDENT",
         "DEMANDE_EP_EXTRA",
+        "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_opinion",
@@ -1425,6 +1429,7 @@ class CanTransferDecisionView(CanTransferNoticeBaseView):
     accepted_event_markers = [
         "Products.urban.interfaces.ITheLicenceEvent",
         "Products.urban.interfaces.ILicenceDeliveryEvent",
+        "Products.urban.interfaces.ISpecialConditionsRevisionDecisionEvent",
     ]
     accepted_incoming_notice_types = [
         "NOTIFICATION_RS_COMMUNE",
@@ -1436,6 +1441,8 @@ class CanTransferDecisionView(CanTransferNoticeBaseView):
         "PM_RS_PAS_ENVOYE_SFD",
         "PM_ENVOI_RS_HD_SFD_COMMUNE",
         "PM_ENVOI_RS_COMMUNE",
+        "ART65_ENVOI_PROJET_COMMUNE",
+        "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_decision",
@@ -1463,6 +1470,11 @@ class CanTransferDecisionDisplayView(CanTransferNoticeBaseView):
         "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
         "PM_RS_DECISION_COMMUNE",
         "PM_REFUS_TACITE_COMMUNE",
+        "ART65_ENVOI_PROJET_COMMUNE",
+        "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
+        "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+        "ART65_AVIS_FT_COURRIER_COMMUNE",
+        "ART65_REFUS_TACITE_COURRIER_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_decision_display",

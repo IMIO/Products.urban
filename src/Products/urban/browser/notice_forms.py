@@ -313,6 +313,7 @@ class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
                 "TRANSFERT_DOSSIER",
                 "TRANSFERT_DOSSIER_DRC",
                 "TRANSFERT_DOSSIER_PM",
+                "REVISION_CP_FT_ENVOI_COMMUNE",
             ],
             ["transfer_folder_to_dpa"]
         ),
@@ -344,6 +345,7 @@ class ITransferDatesTicketActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP",
                 "DEMANDE_EP_DOSSIER_PRECEDENT",
                 "DEMANDE_EP_EXTRA",
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
             ["transfer_dates"]
         ),
@@ -375,6 +377,7 @@ class ITransferTicketActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP",
                 "DEMANDE_EP_DOSSIER_PRECEDENT",
                 "DEMANDE_EP_EXTRA",
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
             ["transfer_ticket", "transfer_ticket_final"]
         ),
@@ -432,6 +435,7 @@ class ITransferOpinionActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP",
                 "DEMANDE_EP_DOSSIER_PRECEDENT",
                 "DEMANDE_EP_EXTRA",
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
             ["transfer_opinion", "transfer_ticket_final"]
         ),
@@ -508,6 +512,8 @@ class ITransferDecisionActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
                 "PM_RS_PAS_ENVOYE",
                 "PM_ENVOI_RS_COMMUNE",
+                "ART65_ENVOI_PROJET_COMMUNE",
+                "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
             ],
             ["transfer_decision"]
         ),
@@ -579,6 +585,11 @@ class ITransferDecisionDisplayActionForm(ITransferBaseActionForm):
                 "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
                 "PM_RS_DECISION_COMMUNE",
                 "PM_REFUS_TACITE_COMMUNE",
+                "ART65_ENVOI_PROJET_COMMUNE",
+                "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
+                "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+                "ART65_AVIS_FT_COURRIER_COMMUNE",
+                "ART65_REFUS_TACITE_COURRIER_COMMUNE",
             ],
             ["transfer_decision_display"]
         ),
@@ -622,6 +633,8 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
             "PM_RS_PAS_ENVOYE",
             "PM_ENVOI_RS_COMMUNE",
+            "ART65_ENVOI_PROJET_COMMUNE",
+            "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
         ):
             decision_event, college_decision = self._get_decision_data(incoming_id)
             if not decision_event:
@@ -640,6 +653,9 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
             "PM_RS_DECISION_COMMUNE",
             "PM_REFUS_TACITE_COMMUNE",
+            "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+            "ART65_AVIS_FT_COURRIER_COMMUNE",
+            "ART65_REFUS_TACITE_COURRIER_COMMUNE",
         ):
             result = self.context.transfer_decision_display(incoming_id)
         return result

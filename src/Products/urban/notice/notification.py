@@ -88,7 +88,10 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT(self):
-        if self.original_application == "TWICE" and self.notification_type == "PE_PU":
+        if self.original_application == "TWICE" and self.notification_type in (
+            "PE_PU",
+            "ARTICLE65",
+        ):
             return self._get_data("BO", "idBO")
         else:
             return None
@@ -147,6 +150,8 @@ class NoticeNotification(NoticeElement):
                     "PU": "CODT_UniqueBorderingLicence",
                     "PE": "EnvClassBordering",
                 }.get(self.notification_subtype)
+            elif self.notification_type == "ARTICLE65":
+                self._licence_type = "Article65"
             else:
                 existing_licence = self.licence
                 if existing_licence:
@@ -179,11 +184,16 @@ class NoticeNotification(NoticeElement):
             "ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
+            "REVISION_CP_FT_ENVOI_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ART65_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
 
             # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
+            "NOTIFICATION_RECEVABILITE_ART65_COMMUNE": "ns3:PublicSurveyRequest",
 
             # Summary Report
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
@@ -195,6 +205,8 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_RS_COMMUNE": "ns3:SummaryReportRequest",
             "PM_ENVOI_RS_HD_SFD_COMMUNE": "ns3:SummaryReportRequest",
             "PM_RS_PAS_ENVOYE_SFD": "ns3:SummaryReportRequest",
+            "ART65_ENVOI_PROJET_COMMUNE": "ns3:SummaryReportRequest",
+            "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE": "ns3:SummaryReportRequest",
 
             # Decision
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
@@ -203,6 +215,9 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
             "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
+            "ART65_FTAC_DECISION_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            "ART65_AVIS_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            "ART65_REFUS_TACITE_COURRIER_COMMUNE": "ns3:DecisionRequest",
         }
         return specific.get(self.notice_type)
 

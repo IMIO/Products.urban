@@ -223,7 +223,7 @@ class ImportFromNoticeView(BrowserView):
             notice_id,
         )
 
-        # TWICE
+        # TWICE (PE/PU, PM)
 
         if detailed_notification.notice_type == "TRANSFERT_DOSSIER":
             handler = NewLicenceHandler
@@ -285,6 +285,36 @@ class ImportFromNoticeView(BrowserView):
             "ARRET_PLAN_MODIF_COMMUNE_MANUELLE",
         ):
             handler = StopForAmendedPlansHandler
+
+        # Article 65
+
+        elif detailed_notification.notice_type == "REVISION_CP_FT_ENVOI_COMMUNE":
+            handler = SpecialConditionsRevisionDepositHandler
+
+        elif detailed_notification.notice_type in (
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
+                "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE",
+        ):
+            handler = SpecialConditionsPublicSurveyHandler
+
+        elif detailed_notification.notice_type == "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE":
+            handler = SpecialConditionsInadmissibleHandler
+
+        elif detailed_notification.notice_type in (
+                "ART65_ENVOI_PROJET_COMMUNE",
+                "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
+        ):
+            handler = SpecialConditionsRevisionProjectHandler
+
+        elif detailed_notification.notice_type in (
+                "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+                "ART65_AVIS_FT_COURRIER_COMMUNE",
+                "ART65_REFUS_TACITE_COURRIER_COMMUNE",
+        ):
+            handler = SpecialConditionsDecisionSPWHandler
+
+        elif detailed_notification.notice_type == "ART65_ABANDON_COMMUNE":
+            handler = SpecialConditionsAbandonHandler
 
         # GESPER
 
@@ -589,12 +619,25 @@ class ModificationDepositHandler(IncomingNoticeHandler):
         return "deposit"
 
 
+class SpecialConditionsRevisionDepositHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.ISpecialConditionsRevisionDepositEvent"
+    create_licence_if_missing = True
+
+    @property
+    def desired_licence_state(self):
+        return "deposit"
+
+
 class InadmissibleHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IRefusedIncompletenessEvent"
 
     @property
     def desired_licence_state(self):
         return "inacceptable"
+
+
+class SpecialConditionsInadmissibleHandler(InadmissibleHandler):
+    create_licence_if_missing = True
 
 
 class IncompleteHandler(IncomingNoticeHandler):
@@ -611,6 +654,10 @@ class PublicSurveyHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "complete"
+
+
+class SpecialConditionsPublicSurveyHandler(PublicSurveyHandler):
+    create_licence_if_missing = True
 
 
 class BorderingPublicSurveyHandler(IncomingNoticeHandler):
@@ -677,6 +724,10 @@ class AbandonHandler(IncomingNoticeHandler):
         return "retired"
 
 
+class SpecialConditionsAbandonHandler(AbandonHandler):
+    create_licence_if_missing = True
+
+
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
 
@@ -693,6 +744,11 @@ class SummaryReportHandler(IncomingNoticeHandler):
 
         if self.notification.proposed_decision_code:
             self.event.setExternalDecision(self.notification.proposed_decision_code)
+
+
+class SpecialConditionsRevisionProjectHandler(SummaryReportHandler):
+    event_config_marker = "Products.urban.interfaces.ISpecialConditionsRevisionProjectEvent"
+    create_licence_if_missing = True
 
 
 class DecisionSPWHandler(IncomingNoticeHandler):
@@ -728,6 +784,11 @@ class DecisionSPWHandler(IncomingNoticeHandler):
             return mapping_decision_states.get(decision_code, "")
         else:
             return ""
+
+
+class SpecialConditionsDecisionSPWHandler(DecisionSPWHandler):
+    event_config_marker = "Products.urban.interfaces.ISpecialConditionsRevisionDecisionEvent"
+    create_licence_if_missing = True
 
 
 class StopForAmendedPlansHandler(IncomingNoticeHandler):
