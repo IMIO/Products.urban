@@ -545,7 +545,11 @@ msgstr ""
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr ""
 
-#: ../interfaces.py:397
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:401
 msgid "IAcknowledgment type marker interface"
 msgstr ""
 
@@ -561,7 +565,11 @@ msgstr ""
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr ""
 
-#: ../interfaces.py:345
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:361
 msgid "ICollege type marker interface"
 msgstr ""
 
@@ -618,6 +626,10 @@ msgstr ""
 
 #: ../interfaces.py:521
 msgid "IActivityEndedEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:437
@@ -705,6 +717,30 @@ msgstr ""
 
 #: ../interfaces.py:433
 msgid "IInquiry type marker interface"
+msgstr ""
+
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:581
+msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:481
+msgid "ITechnicalAnalysis type marker interface"
 msgstr ""
 
 #: ../interfaces.py:565
