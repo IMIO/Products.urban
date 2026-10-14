@@ -572,14 +572,14 @@ schema = Schema(
             optional=True,
         ),
         StringField(
-            name="sessionType",
+            name="cessionType",
             widget=SelectionWidget(
-                label=_("urban_label_sessionType", default="Sessiontype"),
+                label=_("urban_label_cessionType", default="Cessiontype"),
             ),
             enforceVocabulary=True,
             optional=True,
             vocabulary=UrbanVocabulary(
-                "sessiontype", with_empty_value=True, inUrbanConfig=False
+                "cessiontype", with_empty_value=True, inUrbanConfig=False
             ),
             default_method="getDefaultValue",
         ),

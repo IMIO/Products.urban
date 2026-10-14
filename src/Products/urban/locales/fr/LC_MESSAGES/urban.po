@@ -6047,10 +6047,10 @@ msgstr "Cession"
 msgid "urban_label_newOperator"
 msgstr "Nouvel exploitant"
 
-msgid "urban_label_sessionType"
+msgid "urban_label_cessionType"
 msgstr "Type de cession"
 
-msgid "sessiontype_folder_title"
+msgid "cessiontype_folder_title"
 msgstr "Type de cession"
 
 msgid "IAcknowledgmentOfTransfer type marker interface"

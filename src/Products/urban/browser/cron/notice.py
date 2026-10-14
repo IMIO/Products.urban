@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
+from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
@@ -331,9 +332,7 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
         ):
             handler = GesperFreeNotificationSPWHandler
-        elif detailed_notification.notice_type in (
-            "ACTE_CESSION_COMMUNE",
-        ):
+        elif detailed_notification.notice_type in ("ACTE_CESSION_COMMUNE",):
             handler = CessionSpwHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
@@ -397,12 +396,22 @@ class IncomingNoticeHandler(object):
             if not parcel.parcel:
                 data = {
                     translate(_("CaPaKey"), context=self.request): parcel.capakey,
-                    translate(_("urban_label_division"), context=self.request): parcel.division,
-                    translate(_("urban_label_section"), context=self.request): parcel.section,
-                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(
+                        _("urban_label_division"), context=self.request
+                    ): parcel.division,
+                    translate(
+                        _("urban_label_section"), context=self.request
+                    ): parcel.section,
+                    translate(
+                        _("urban_label_radical"), context=self.request
+                    ): parcel.radical,
                     translate(_("urban_label_bis"), context=self.request): parcel.bis,
-                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
-                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                    translate(
+                        _("urban_label_exposant"), context=self.request
+                    ): parcel.exposant,
+                    translate(
+                        _("urban_label_puissance"), context=self.request
+                    ): parcel.puissance,
                 }
                 self._add_error(_("Can not find a parcel"), data)
                 continue
@@ -411,13 +420,21 @@ class IncomingNoticeHandler(object):
     def import_addresses(self):
         for address in self.notification.addresses:
             data = {
-                translate(_("urban_label_street"), context=self.request): address.notice_street,
-                translate(_("urban_label_locality"), context=self.request): address.locality,
+                translate(
+                    _("urban_label_street"), context=self.request
+                ): address.notice_street,
+                translate(
+                    _("urban_label_locality"), context=self.request
+                ): address.locality,
                 translate(
                     _("municipality"), context=self.request
                 ): address.municipality,
-                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
-                translate(_("urban_label_number"), context=self.request): address.number,
+                translate(
+                    _("urban_label_zipCode"), context=self.request
+                ): address.postCode,
+                translate(
+                    _("urban_label_number"), context=self.request
+                ): address.number,
             }
             if not address.address:
                 self._add_error(_("Can not find an address"), data)
@@ -543,7 +560,9 @@ class IncomingNoticeHandler(object):
         )
         description_field = self.licence.getField("description")
         old_description = description_field.getRaw(self.licence)
-        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        new_description = old_description + translate(
+            error, context=self.request
+        ).encode("utf8")
         description_field.set(self.licence, new_description)
         self.licence._p_changed = 1
 
@@ -768,15 +787,11 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
                 "UFD2_DECISION_FD_OCTROI": "favorable",
                 "UFD2_DECISION_FD_REFUSEE": "defavorable",
             }
-            urban_decision_term = mapping_decision_terms.get(
-                decision_code
-            )
+            urban_decision_term = mapping_decision_terms.get(decision_code)
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
-                self.event.setDescription(
-                    u"Décision: {}".format(decision_code)
-                )
+                self.event.setDescription(u"Décision: {}".format(decision_code))
 
     @property
     def desired_licence_state(self):
@@ -814,12 +829,70 @@ class CessionSpwHandler(IncomingNoticeHandler):
         self.import_new_applicant()
 
     def import_new_applicant(self):
-        for old_applicant in self.licence.getApplicants():
-            api.content.transition(obj=old_applicant, transition="disable")
-        self.new_applicants = [
-            api.content.create(container=self.licence, **party.serialize())
-            for party in self.notification.parties
-        ]
+        portal_workflow = api.portal.get_tool("portal_workflow")
+        existed_applicants = self.licence.getApplicants()
+        disabled_applicants = self.licence.get_applicants_history()
+        self.new_applicants = []
+
+        # Create only the missing parties
+        for party in self.notification.parties:
+            party_data = party.serialize()
+            applicant = None
+            for existed in existed_applicants:
+                if self._is_same_person(existed, party_data):
+                    applicant = existed
+            # Enable again a previously disabled applicant instead of
+            # creating a duplicate
+            if applicant is None:
+                for disabled in disabled_applicants:
+                    if self._is_same_person(disabled, party_data):
+                        transitions = [
+                            t["id"] for t in portal_workflow.getTransitionsFor(disabled)
+                        ]
+                        if "enable" in transitions:
+                            api.content.transition(obj=disabled, transition="enable")
+                            applicant = disabled
+                            break
+            if applicant is None:
+                applicant = api.content.create(container=self.licence, **party_data)
+            self.new_applicants.append(applicant)
+
+        # Disable only the applicants no longer in the notification
+        for existed in existed_applicants:
+            if existed not in self.new_applicants:
+                transitions = [
+                    t["id"] for t in portal_workflow.getTransitionsFor(existed)
+                ]
+                if "disable" in transitions:
+                    api.content.transition(obj=existed, transition="disable")
+
+    def _is_same_person(self, applicant, party_data):
+        """Return True if the licence applicant matches the notification party."""
+        party_type = party_data.get("type")
+        if applicant.portal_type != party_type:
+            return False
+        if party_type == "Corporation":
+            number_field, name_fields = "bceNumber", ("denomination",)
+        else:
+            number_field, name_fields = "nationalRegister", ("name1", "name2")
+
+        old_number = self._only_digits(applicant.getField(number_field).get(applicant))
+        new_number = self._only_digits(party_data.get(number_field))
+        if old_number and new_number:
+            return old_number == new_number
+
+        for field_name in name_fields:
+            old_value = safe_unicode(
+                applicant.getField(field_name).get(applicant) or ""
+            )
+            new_value = safe_unicode(party_data.get(field_name) or "")
+            if old_value.strip().lower() != new_value.strip().lower():
+                return False
+        return True
+
+    @staticmethod
+    def _only_digits(value):
+        return "".join(c for c in (value or "") if c.isdigit())
 
     def fill_incoming_event(self):
         super(CessionSpwHandler, self).fill_incoming_event()

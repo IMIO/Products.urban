@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-from textwrap import dedent
-
 from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
@@ -11,14 +9,12 @@ from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
-
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
-from Products.urban.setuphandlers import createVocabularyFolder
 from Products.urban.setuphandlers import createFolderDefaultValues
-from Products.urban.utils import moveElementAfter
-
+from Products.urban.setuphandlers import createVocabularyFolder
 from Products.urban.setuphandlers import set_licence_folder_security
+from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
 from plone import api
@@ -26,6 +22,7 @@ from plone.app.textfield import RichTextValue
 from plone.registry import field
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
+from textwrap import dedent
 from zope.component import getUtility
 from zope.event import notify
 
@@ -769,17 +766,15 @@ def set_pul_urbanConfigId(context):
         )
 
     logger.info("upgrade step done!")
-def add_sessiontype_vocabulary(context):
-    logger = logging.getLogger("urban: add sessiontype vocabulary")
+
+
+def add_cessiontype_vocabulary(context):
+    logger = logging.getLogger("urban: add cessiontype vocabulary")
     portal_urban = api.portal.get_tool("portal_urban")
-    dimension_type_vocabularies_config = default_values["global"]["dimensiontypes"]
-    allowedtypes = dimension_type_vocabularies_config[0]
-    sessiontype_vocabularies_config = createVocabularyFolder(
-        portal_urban, "sessiontype", context, allowedtypes
+    cessiontype_values = default_values["global"]["cessiontype"]
+    allowedtypes = cessiontype_values[0]
+    cessiontype_folder = createVocabularyFolder(
+        portal_urban, "cessiontype", context, allowedtypes
     )
-    createFolderDefaultValues(
-        sessiontype_vocabularies_config,
-        default_values["global"]["sessiontype"][1:],
-        default_values["global"]["sessiontype"][0],
-    )
+    createFolderDefaultValues(cessiontype_folder, cessiontype_values[1:], allowedtypes)
     logger.info("upgrade step done!")

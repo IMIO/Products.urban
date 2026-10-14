@@ -3057,7 +3057,7 @@ default_values = {
         ],
     },
     "global": {
-        "sessiontype": [
+        "cessiontype": [
             "UrbanVocabularyTerm",
             {"id": "partial", "title": u"Partielle"},
             {"id": "total", "title": u"Totale"},
