@@ -180,4 +180,12 @@
         handler=".update_290.set_pul_urbanConfigId"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add licence date fields to querystring"
+        description=""
+        source="2921"
+        destination="2922"
+        handler=".update_290.add_licence_date_fields_to_querystring"
+        profile="Products.urban:default" />
+
 </configure>
