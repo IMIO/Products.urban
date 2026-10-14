@@ -6055,3 +6055,6 @@ msgstr "Type de cession"
 
 msgid "IAcknowledgmentOfTransfer type marker interface"
 msgstr "Prise de connaissance de la cession"
+
+msgid "ACTE_CESSION_COMMUNE"
+msgstr "Notification à la commune de l'acte de cession"

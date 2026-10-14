@@ -829,6 +829,11 @@ class CessionSpwHandler(IncomingNoticeHandler):
         self.import_new_applicant()
 
     def import_new_applicant(self):
+        # Without parties, every applicant would be disabled
+        if not self.notification.parties:
+            raise ValueError(
+                "No party found in notification {0}".format(self.notification.noticeId)
+            )
         portal_workflow = api.portal.get_tool("portal_workflow")
         existed_applicants = self.licence.getApplicants()
         disabled_applicants = self.licence.get_applicants_history()
