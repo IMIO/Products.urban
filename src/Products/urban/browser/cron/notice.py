@@ -390,12 +390,22 @@ class IncomingNoticeHandler(object):
             if not parcel.parcel:
                 data = {
                     translate(_("CaPaKey"), context=self.request): parcel.capakey,
-                    translate(_("urban_label_division"), context=self.request): parcel.division,
-                    translate(_("urban_label_section"), context=self.request): parcel.section,
-                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(
+                        _("urban_label_division"), context=self.request
+                    ): parcel.division,
+                    translate(
+                        _("urban_label_section"), context=self.request
+                    ): parcel.section,
+                    translate(
+                        _("urban_label_radical"), context=self.request
+                    ): parcel.radical,
                     translate(_("urban_label_bis"), context=self.request): parcel.bis,
-                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
-                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                    translate(
+                        _("urban_label_exposant"), context=self.request
+                    ): parcel.exposant,
+                    translate(
+                        _("urban_label_puissance"), context=self.request
+                    ): parcel.puissance,
                 }
                 self._add_error(_("Can not find a parcel"), data)
                 continue
@@ -404,13 +414,21 @@ class IncomingNoticeHandler(object):
     def import_addresses(self):
         for address in self.notification.addresses:
             data = {
-                translate(_("urban_label_street"), context=self.request): address.notice_street,
-                translate(_("urban_label_locality"), context=self.request): address.locality,
+                translate(
+                    _("urban_label_street"), context=self.request
+                ): address.notice_street,
+                translate(
+                    _("urban_label_locality"), context=self.request
+                ): address.locality,
                 translate(
                     _("municipality"), context=self.request
                 ): address.municipality,
-                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
-                translate(_("urban_label_number"), context=self.request): address.number,
+                translate(
+                    _("urban_label_zipCode"), context=self.request
+                ): address.postCode,
+                translate(
+                    _("urban_label_number"), context=self.request
+                ): address.number,
             }
             if not address.address:
                 self._add_error(_("Can not find an address"), data)
@@ -536,7 +554,9 @@ class IncomingNoticeHandler(object):
         )
         description_field = self.licence.getField("description")
         old_description = description_field.getRaw(self.licence)
-        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        new_description = old_description + translate(
+            error, context=self.request
+        ).encode("utf8")
         description_field.set(self.licence, new_description)
         self.licence._p_changed = 1
 
@@ -679,6 +699,14 @@ class AbandonHandler(IncomingNoticeHandler):
 
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
+    # existing externaldecisions terms kept their historical ids, map the
+    # NOTICE codes to them (new terms are created with the NOTICE code as id)
+    external_decision_mapping = {
+        "FAVORABLE": "favorable",
+        "DEFAVORABLE": "defavorable",
+        "FAVORABLE_CONDITIONS": "favorable-conditionnel",
+        "FAVORABLE_PARTIEL": "FAVORABLE_PARTIEL",
+    }
 
     @property
     def desired_licence_state(self):
@@ -691,8 +719,13 @@ class SummaryReportHandler(IncomingNoticeHandler):
             event_date = DateTime(str(self.notification.due_date))
             self.event.setUltimeDate(event_date)
 
-        if self.notification.proposed_decision_code:
-            self.event.setExternalDecision(self.notification.proposed_decision_code)
+        decision_code = self.notification.proposed_decision_code
+        if decision_code:
+            mapped_value = self.external_decision_mapping.get(decision_code)
+            if mapped_value is not None:
+                self.event.setExternalDecision(mapped_value)
+            else:
+                self.event.setDescription(u"Avis proposé: {}".format(decision_code))
 
 
 class DecisionSPWHandler(IncomingNoticeHandler):
@@ -761,15 +794,11 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
                 "UFD2_DECISION_FD_OCTROI": "favorable",
                 "UFD2_DECISION_FD_REFUSEE": "defavorable",
             }
-            urban_decision_term = mapping_decision_terms.get(
-                decision_code
-            )
+            urban_decision_term = mapping_decision_terms.get(decision_code)
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
-                self.event.setDescription(
-                    u"Décision: {}".format(decision_code)
-                )
+                self.event.setDescription(u"Décision: {}".format(decision_code))
 
     @property
     def desired_licence_state(self):
