@@ -10,8 +10,11 @@ from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
+from Products.urban.setuphandlers import createVocabularies
+from Products.urban.setuphandlers import createVocabularyFolders
 from Products.urban.utils import moveElementAfter
 from Products.urban.setuphandlers import set_licence_folder_security
 from dm.historical import getHistory
@@ -764,3 +767,15 @@ def set_pul_urbanConfigId(context):
         )
 
     logger.info("upgrade step done!")
+
+
+def add_vocabularies_to_preliminary_notice_foldercategories(context):
+    portal_urban = api.portal.get_tool('portal_urban')
+    config_folder = getattr(portal_urban, 'preliminarynotice')
+    preliminary_notice_vocabularies = default_values['PreliminaryNotice']
+    createVocabularyFolders(
+        container=config_folder, vocabularies=preliminary_notice_vocabularies, site=None
+    )
+    createVocabularies(
+        container=config_folder, vocabularies=preliminary_notice_vocabularies
+    )
