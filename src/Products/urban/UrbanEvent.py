@@ -39,7 +39,9 @@ from Products.urban.interfaces import IUrbanDoc
 from Products.urban.notice import NoticeOutgoingDecisionNotification
 from Products.urban.notice import NoticeOutgoingFileNotification
 from Products.urban.notice import NoticeOutgoingGesperOpinionRequestNotification
-from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementOpinionNotification
+from Products.urban.notice import (
+    NoticeOutgoingGesperProjectAnnouncementOpinionNotification,
+)
 from Products.urban.notice import NoticeOutgoingGesperPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDecisionNotification
@@ -578,6 +580,19 @@ schema = Schema(
             default_output_type="text/html",
             optional=True,
         ),
+        ReferenceField(
+            name="newOperator",
+            widget=ReferenceBrowserWidget(
+                label=_("urban_label_newOperator", default="NewOperator"),
+                allow_search=1,
+                allow_browse=1,
+                show_indexes=0,
+            ),
+            allowed_types=("Applicant", "Corporation"),
+            multiValued=1,
+            optional=True,
+            relationship="newOperator",
+        ),
         DateTimeField(
             name="videoConferenceDate",
             widget=DateTimeField._properties["widget"](
@@ -601,6 +616,18 @@ schema = Schema(
                 label=_("urban_label_validityEndDate", default="validityEndDate"),
             ),
             optional=True,
+        ),
+        StringField(
+            name="cessionType",
+            widget=SelectionWidget(
+                label=_("urban_label_cessionType", default="Cessiontype"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary(
+                "cessiontype", with_empty_value=True, inUrbanConfig=False
+            ),
+            default_method="getDefaultValue",
         ),
     ),
 )
@@ -1134,7 +1161,9 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         annotations[key] = notice
 
     def transfer_opinion(self, incoming_id, inquiry_event, college_opinion):
-        notification = NoticeOutgoingPublicSurveyOpinionNotification(self, inquiry_event, college_opinion)
+        notification = NoticeOutgoingPublicSurveyOpinionNotification(
+            self, inquiry_event, college_opinion
+        )
         service = WebserviceNotice()
         result = service.post_notification_response(
             incoming_id,
@@ -1143,7 +1172,9 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         return result
 
     def transfer_decision(self, incoming_id, college_decision):
-        notification = NoticeOutgoingSummaryReportDecisionNotification(self, college_decision)
+        notification = NoticeOutgoingSummaryReportDecisionNotification(
+            self, college_decision
+        )
         service = WebserviceNotice()
         result = service.post_notification_response(
             incoming_id,
@@ -1179,7 +1210,9 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         )
         return result
 
-    def transfer_opinion_gesper_ap(self, incoming_id, announcement_event, college_opinion):
+    def transfer_opinion_gesper_ap(
+        self, incoming_id, announcement_event, college_opinion
+    ):
         notification = NoticeOutgoingGesperProjectAnnouncementOpinionNotification(
             self, announcement_event, college_opinion
         )
@@ -1191,7 +1224,9 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         return result
 
     def transfer_opinion_gesper_opinion_request(self, incoming_id, college_motivation):
-        notification = NoticeOutgoingGesperOpinionRequestNotification(self, college_motivation)
+        notification = NoticeOutgoingGesperOpinionRequestNotification(
+            self, college_motivation
+        )
         service = WebserviceNotice()
         result = service.post_notification_response(
             incoming_id,

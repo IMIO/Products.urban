@@ -1725,3 +1725,6 @@ msgstr ""
 
 msgid "PM_ABANDON_COMMUNE_EP_FTFD"
 msgstr ""
+
+msgid "ACTE_CESSION_COMMUNE"
+msgstr ""

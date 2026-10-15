@@ -6076,3 +6076,18 @@ msgstr ""
 
 msgid "PM_ABANDON_COMMUNE_EP_FTFD"
 msgstr ""
+
+msgid "ICessionEvent type marker interface"
+msgstr ""
+
+msgid "urban_label_newOperator"
+msgstr ""
+
+msgid "urban_label_cessionType"
+msgstr ""
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr ""
+
+msgid "cessiontype_folder_title"
+msgstr ""

@@ -605,6 +605,10 @@ class ISuspensionEvent(Interface):
     __doc__ = _("""ISuspensionEvent type marker interface""")
 
 
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
+
+
 class ISettlementEvent(Interface):
     __doc__ = _("""ISettlementEvent type marker interface""")
 
@@ -823,3 +827,7 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IAcknowledgmentOfTransfer(Interface):
+    __doc__ = _("""IAcknowledgmentOfTransfer type marker interface""")
