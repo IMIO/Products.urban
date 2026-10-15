@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
-from Products.CMFPlone.utils import safe_unicode
 from Products.Five import BrowserView
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
@@ -872,28 +871,22 @@ class CessionSpwHandler(IncomingNoticeHandler):
                     api.content.transition(obj=existed, transition="disable")
 
     def _is_same_person(self, applicant, party_data):
-        """Return True if the licence applicant matches the notification party."""
+        """Return True if the licence applicant matches the notification party.
+
+        Identity is only confirmed by the national register or BCE number,
+        a name match is not enough as two different people can share a name.
+        """
         party_type = party_data.get("type")
         if applicant.portal_type != party_type:
             return False
         if party_type == "Corporation":
-            number_field, name_fields = "bceNumber", ("denomination",)
+            number_field = "bceNumber"
         else:
-            number_field, name_fields = "nationalRegister", ("name1", "name2")
+            number_field = "nationalRegister"
 
         old_number = self._only_digits(applicant.getField(number_field).get(applicant))
         new_number = self._only_digits(party_data.get(number_field))
-        if old_number and new_number:
-            return old_number == new_number
-
-        for field_name in name_fields:
-            old_value = safe_unicode(
-                applicant.getField(field_name).get(applicant) or ""
-            )
-            new_value = safe_unicode(party_data.get(field_name) or "")
-            if old_value.strip().lower() != new_value.strip().lower():
-                return False
-        return True
+        return bool(old_number) and old_number == new_number
 
     @staticmethod
     def _only_digits(value):
