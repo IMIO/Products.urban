@@ -1782,6 +1782,7 @@ class CanTransferDatesGesperEPView(CanTransferNoticeBaseView):
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+        "PM_EP_COURRIER_COMMUNE",
     ]
     avoided_outgoing_notice_types = ["transfer_dates_gesper_ep"]
 
@@ -1793,6 +1794,7 @@ class CanTransferTicketGesperEPView(CanTransferNoticeBaseView):
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+        "PM_EP_COURRIER_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_ticket_gesper_ep",
@@ -1808,6 +1810,7 @@ class CanTransferOpinionGesperEPView(CanTransferNoticeBaseView):
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
         "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
+        "PM_EP_COURRIER_COMMUNE",
     ]
     avoided_outgoing_notice_types = [
         "transfer_opinion_gesper_ep",
