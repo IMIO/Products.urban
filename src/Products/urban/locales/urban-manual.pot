@@ -1740,3 +1740,12 @@ msgstr ""
 
 msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
 msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
