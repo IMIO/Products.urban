@@ -12,6 +12,7 @@ from Products.urban.notice.exceptions import NoImplementationFoundException
 from Products.urban.notice.exceptions import NoLicenceFoundException
 from Products.urban.notice.exceptions import NotificationAlreadyHandledException
 from Products.urban.services import notice
+from Products.urban.utils import is_same_person
 from StringIO import StringIO
 from datetime import datetime
 from plone import api
@@ -834,7 +835,7 @@ class CessionSpwHandler(IncomingNoticeHandler):
                 "No party found in notification {0}".format(self.notification.noticeId)
             )
         portal_workflow = api.portal.get_tool("portal_workflow")
-        existed_applicants = self.licence.getApplicants()
+        existing_applicants = self.licence.getApplicants()
         disabled_applicants = self.licence.get_applicants_history()
         self.new_applicants = []
 
@@ -842,60 +843,44 @@ class CessionSpwHandler(IncomingNoticeHandler):
         for party in self.notification.parties:
             party_data = party.serialize()
             applicant = None
-            for existed in existed_applicants:
-                if self._is_same_person(existed, party_data):
-                    applicant = existed
+            for existing_applicant in existing_applicants:
+                if is_same_person(existing_applicant, party_data):
+                    applicant = existing_applicant
             # Enable again a previously disabled applicant instead of
             # creating a duplicate
             if applicant is None:
-                for disabled in disabled_applicants:
-                    if self._is_same_person(disabled, party_data):
+                for disabled_applicant in disabled_applicants:
+                    if is_same_person(disabled_applicant, party_data):
                         transitions = [
-                            t["id"] for t in portal_workflow.getTransitionsFor(disabled)
+                            t["id"]
+                            for t in portal_workflow.getTransitionsFor(
+                                disabled_applicant
+                            )
                         ]
                         if "enable" in transitions:
-                            api.content.transition(obj=disabled, transition="enable")
-                            applicant = disabled
+                            api.content.transition(
+                                obj=disabled_applicant, transition="enable"
+                            )
+                            applicant = disabled_applicant
                             break
             if applicant is None:
                 applicant = api.content.create(container=self.licence, **party_data)
             self.new_applicants.append(applicant)
 
         # Disable only the applicants no longer in the notification
-        for existed in existed_applicants:
-            if existed not in self.new_applicants:
+        for existing_applicant in existing_applicants:
+            if existing_applicant not in self.new_applicants:
                 transitions = [
-                    t["id"] for t in portal_workflow.getTransitionsFor(existed)
+                    t["id"]
+                    for t in portal_workflow.getTransitionsFor(existing_applicant)
                 ]
                 if "disable" in transitions:
-                    api.content.transition(obj=existed, transition="disable")
-
-    def _is_same_person(self, applicant, party_data):
-        """Return True if the licence applicant matches the notification party.
-
-        Identity is only confirmed by the national register or BCE number,
-        a name match is not enough as two different people can share a name.
-        """
-        party_type = party_data.get("type")
-        if applicant.portal_type != party_type:
-            return False
-        if party_type == "Corporation":
-            number_field = "bceNumber"
-        else:
-            number_field = "nationalRegister"
-
-        old_number = self._only_digits(applicant.getField(number_field).get(applicant))
-        new_number = self._only_digits(party_data.get(number_field))
-        return bool(old_number) and old_number == new_number
-
-    @staticmethod
-    def _only_digits(value):
-        return "".join(c for c in (value or "") if c.isdigit())
+                    api.content.transition(obj=existing_applicant, transition="disable")
 
     def fill_incoming_event(self):
         super(CessionSpwHandler, self).fill_incoming_event()
         if self.new_applicants:
-            self.event.setNewOperator(self.new_applicants[0])
+            self.event.setNewOperator(self.new_applicants)
 
     def process(self):
         super(CessionSpwHandler, self).process()

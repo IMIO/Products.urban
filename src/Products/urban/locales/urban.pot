@@ -6043,3 +6043,6 @@ msgstr ""
 
 msgid "ACTE_CESSION_COMMUNE"
 msgstr ""
+
+msgid "cessiontype_folder_title"
+msgstr ""

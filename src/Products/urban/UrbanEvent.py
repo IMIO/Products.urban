@@ -545,7 +545,7 @@ schema = Schema(
                 show_indexes=0,
             ),
             allowed_types=("Applicant", "Corporation"),
-            multiValued=0,
+            multiValued=1,
             optional=True,
             relationship="newOperator",
         ),

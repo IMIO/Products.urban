@@ -95,11 +95,13 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT_PM(self):
-        if self.original_application == "TWICE" and self.notification_type == "PLANS_MODIFICATIFS":
+        if (
+            self.original_application == "TWICE"
+            and self.notification_type == "PLANS_MODIFICATIFS"
+        ):
             return self._get_data("BO", "idBO")
         else:
             return None
-
 
     @property
     def referenceDGATLP(self):
@@ -180,12 +182,10 @@ class NoticeNotification(NoticeElement):
             "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
             "ACTE_CESSION_COMMUNE": "ns3:TwiceDefaultRequest",
-
             # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
-
             # Summary Report
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
@@ -196,7 +196,6 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_RS_COMMUNE": "ns3:SummaryReportRequest",
             "PM_ENVOI_RS_HD_SFD_COMMUNE": "ns3:SummaryReportRequest",
             "PM_RS_PAS_ENVOYE_SFD": "ns3:SummaryReportRequest",
-
             # Decision
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DEC_RS_COMMUNE": "ns3:DecisionRequest",
@@ -204,7 +203,6 @@ class NoticeNotification(NoticeElement):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
             "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
-
         }
         return specific.get(self.notice_type)
 
@@ -242,7 +240,9 @@ class NoticeNotification(NoticeElement):
                 if class_elements and number_elements:
                     classe = class_elements[0]
                     number = number_elements[0].text
-                    number = number.replace("-", "")  # special case: `COV-01.01` => `COV01.01`
+                    number = number.replace(
+                        "-", ""
+                    )  # special case: `COV-01.01` => `COV01.01`
                     rubric_obj = get_rubric_obj(classe, number)
                     if rubric_obj:
                         found_uids.append(rubric_obj.UID())
@@ -268,7 +268,7 @@ class NoticeNotification(NoticeElement):
         raw_date = self._get_data("sendDate")
         if raw_date:
             return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
-    
+
     @property
     def due_date(self):
         """Return the due date"""
@@ -372,7 +372,8 @@ class NoticeNotification(NoticeElement):
     def parcels(self):
         """Return parcels"""
         return [
-            NoticeParcel(self.service, p) for p in self._get_data("parcels", "parcel") or []
+            NoticeParcel(self.service, p)
+            for p in self._get_data("parcels", "parcel") or []
         ]
 
     @property
