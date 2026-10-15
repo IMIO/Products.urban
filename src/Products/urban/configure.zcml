@@ -380,4 +380,12 @@
     handler=".subscribers.after_term_deactivate"
     />
 
+<interface
+    interface=".interfaces.ICessionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IAcknowledgmentOfTransfer"
+    type=".interfaces.IEventTypeType"/>
+
 </configure>
