@@ -95,6 +95,7 @@ class IAddInternalServiceForm(Interface):
 
 class AddInternalServiceForm(form.Form):
 
+    prefix = "internal_services."
     method = "get"
     fields = field.Fields(IAddInternalServiceForm)
     ignoreContext = True
@@ -287,6 +288,7 @@ class AddInternalServiceForm(form.Form):
 
 class UpdateDefaultValuesForm(form.Form):
 
+    prefix = "default_values."
     method = "get"
     ignoreContext = True
 
