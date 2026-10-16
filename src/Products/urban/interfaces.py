@@ -633,11 +633,7 @@ class ICODT_NotaryLetter(IGenericLicence):
     """Marker interface for CODT_ NotaryLetter"""
 
 
-class IEnvCLassOne(Interface):
-    """Marker interface for EnvClassOne"""
-
-
-class IArticle65(Interface):
+class IArticle65(IEnvironmentLicence):
     """Marker interface for Article65"""
 
 
