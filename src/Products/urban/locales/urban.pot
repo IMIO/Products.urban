@@ -597,6 +597,10 @@ msgstr ""
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr ""
 
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:401
 msgid "IAcknowledgment type marker interface"
 msgstr ""
@@ -615,6 +619,10 @@ msgstr ""
 
 #: ../interfaces.py:433
 msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr ""
+
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:361
@@ -671,6 +679,10 @@ msgstr ""
 
 #: ../interfaces.py:521
 msgid "IIILEPrescriptionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:437
@@ -781,8 +793,24 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:581
 msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:481
@@ -6029,4 +6057,28 @@ msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
 msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
+
+msgid "ICessionEvent type marker interface"
+msgstr ""
+
+msgid "urban_label_newOperator"
+msgstr ""
+
+msgid "urban_label_cessionType"
+msgstr ""
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr ""
+
+msgid "cessiontype_folder_title"
 msgstr ""

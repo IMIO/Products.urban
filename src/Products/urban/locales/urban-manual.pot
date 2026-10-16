@@ -1779,3 +1779,18 @@ msgstr ""
 
 msgid "ART65_ABANDON_COMMUNE"
 msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
+
+msgid "ACTE_CESSION_COMMUNE"
+msgstr ""
+
+msgid "PM_EP_COURRIER_COMMUNE"
+msgstr ""

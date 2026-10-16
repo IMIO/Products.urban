@@ -12,6 +12,7 @@ from z3c.form import field
 class ScheduleEditForm(RegistryEditForm):
     """ """
 
+    prefix = "schedule."
     schema = IDueDateSettings
     label = _(u"Schedule alerts")
     description = _(u"""""")

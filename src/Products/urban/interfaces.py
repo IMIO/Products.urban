@@ -433,6 +433,18 @@ class IModificationDepositEvent(IDepositEvent):
     __doc__ = _("""IModificationDeposit type marker interface""")
 
 
+class ISpecialConditionsRevisionDepositEvent(IDepositEvent):
+    __doc__ = _("""ISpecialConditionsRevisionDepositEvent type marker interface""")
+
+
+class ISpecialConditionsRevisionProjectEvent(Interface):
+    __doc__ = _("""ISpecialConditionsRevisionProjectEvent type marker interface""")
+
+
+class ISpecialConditionsRevisionDecisionEvent(Interface):
+    __doc__ = _("""ISpecialConditionsRevisionDecisionEvent type marker interface""")
+
+
 class IMissingPartEvent(Interface):
     __doc__ = _("""IMissingPart type marker interface""")
 
@@ -525,6 +537,10 @@ class IRefusedIncompletenessEvent(Interface):
     __doc__ = _("""IRefusedIncompleteness type marker interface""")
 
 
+class ITacitRefusalEvent(Interface):
+    __doc__ = _("""ITacitRefusalEvent type marker interface""")
+
+
 class IIILEPrescriptionEvent(Interface):
     __doc__ = _("""IIILEPrescriptionEvent type marker interface""")
 
@@ -589,6 +605,10 @@ class ISuspensionEvent(Interface):
     __doc__ = _("""ISuspensionEvent type marker interface""")
 
 
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
+
+
 class ISettlementEvent(Interface):
     __doc__ = _("""ISettlementEvent type marker interface""")
 
@@ -611,6 +631,18 @@ class IEstablishmentEvent(Interface):
 
 class IExtensionEvent(Interface):
     __doc__ = _("""IExtensionEvent type marker interface""")
+
+
+class IAbandonEvent(Interface):
+    __doc__ = _("""IAbandonEvent type marker interface""")
+
+
+class IInformationEvent(Interface):
+    __doc__ = _("""IInformationEvent type marker interface""")
+
+
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
 
 
 class IUrbanBase(Interface):
@@ -781,3 +813,7 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IAcknowledgmentOfTransfer(Interface):
+    __doc__ = _("""IAcknowledgmentOfTransfer type marker interface""")

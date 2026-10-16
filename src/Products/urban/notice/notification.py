@@ -98,11 +98,13 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT_PM(self):
-        if self.original_application == "TWICE" and self.notification_type == "PLANS_MODIFICATIFS":
+        if (
+            self.original_application == "TWICE"
+            and self.notification_type == "PLANS_MODIFICATIFS"
+        ):
             return self._get_data("BO", "idBO")
         else:
             return None
-
 
     @property
     def referenceDGATLP(self):
@@ -184,6 +186,7 @@ class NoticeNotification(NoticeElement):
             "ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
             "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
+            "ACTE_CESSION_COMMUNE": "ns3:TwiceDefaultRequest",
             "REVISION_CP_FT_ENVOI_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
@@ -255,7 +258,9 @@ class NoticeNotification(NoticeElement):
                 if class_elements and number_elements:
                     classe = class_elements[0]
                     number = number_elements[0].text
-                    number = number.replace("-", "")  # special case: `COV-01.01` => `COV01.01`
+                    number = number.replace(
+                        "-", ""
+                    )  # special case: `COV-01.01` => `COV01.01`
                     rubric_obj = get_rubric_obj(classe, number)
                     if rubric_obj:
                         found_uids.append(rubric_obj.UID())
@@ -281,7 +286,7 @@ class NoticeNotification(NoticeElement):
         raw_date = self._get_data("sendDate")
         if raw_date:
             return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
-    
+
     @property
     def due_date(self):
         """Return the due date"""
@@ -385,7 +390,8 @@ class NoticeNotification(NoticeElement):
     def parcels(self):
         """Return parcels"""
         return [
-            NoticeParcel(self.service, p) for p in self._get_data("parcels", "parcel") or []
+            NoticeParcel(self.service, p)
+            for p in self._get_data("parcels", "parcel") or []
         ]
 
     @property
@@ -395,7 +401,7 @@ class NoticeNotification(NoticeElement):
             NoticeParty(self.service, p)
             for p in self._get_data("parties", "part") or []
         ]
-    
+
     @property
     def business_reference_denomination(self):
         return self._get_data("businessReference", "denomination")
