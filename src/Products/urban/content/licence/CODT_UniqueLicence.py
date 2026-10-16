@@ -41,6 +41,7 @@ from Products.urban.content.licence.CODT_BuildLicence import (
 )
 from Products.urban.content.licence.EnvironmentBase import EnvironmentBase
 from Products.urban.content.licence.GenericLicence import GenericLicence
+from Products.urban.fields import SetOnceStringField
 from Products.urban.utils import setOptionalAttributes
 from Products.urban.utils import setSchemataForCODT_UniqueLicenceInquiry
 from Products.urban.widget.historizereferencewidget import (
@@ -87,11 +88,14 @@ schema = Schema(
             schemata="urban_description",
             default_method="getDefaultSPEReference",
         ),
-        StringField(
+        SetOnceStringField(
             name="referenceFT",
             widget=StringField._properties["widget"](
                 size=120,
                 label=_("urban_label_referenceFT", default="Referenceft"),
+                description=_(
+                    "This field can only be set once; only an administrator can modify it afterwards."
+                ),
             ),
             schemata="urban_description",
         ),
