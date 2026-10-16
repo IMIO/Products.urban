@@ -6061,3 +6061,9 @@ msgstr "Prise de connaissance de la cession"
 
 msgid "ACTE_CESSION_COMMUNE"
 msgstr "Notification à la commune de l'acte de cession"
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr "Décision sur le registre des modifications"
+
+msgid "DECISION_REGISTRE_COMMUNE"
+msgstr "Registre des modifications - Notification à la commune de la décision"
