@@ -6043,3 +6043,6 @@ msgstr ""
 
 msgid "cessiontype_folder_title"
 msgstr ""
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr ""
