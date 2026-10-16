@@ -7,15 +7,14 @@ from Products.urban.contentrules.notice import INoticeImportFailedEvent
 from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
-from Products.urban.interfaces import IGenericLicence
-from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
-from Products.urban.interfaces import IUrbanEventNotice
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import addNoticeWarning
+from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
@@ -29,8 +28,6 @@ from textwrap import dedent
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.event import notify
-from zope.i18n import translate
-from zope.interface import alsoProvides
 
 import logging
 
@@ -792,31 +789,6 @@ def add_notice_warning(context):
     """
     logger = logging.getLogger("urban: Add notice warning")
     logger.info("starting upgrade steps")
-    portal_urban = api.portal.get_tool("portal_urban")
-    existing = list(portal_urban.getWarnings())
-    names = [w["condition"] for w in existing]
-    if "urban.warnings.notice" not in names:
-        existing.append(
-            {
-                "condition": "urban.warnings.notice",
-                "level": "warning",
-                "message": translate(
-                    "urban.warnings.notice",
-                    domain="urban",
-                    target_language="fr",
-                    default=u"Ce dossier a été encodé de manière dématérialisée",
-                ).encode("utf-8"),
-            }
-        )
-        portal_urban.setWarnings(tuple(existing))
-
-    catalog = api.portal.get_tool("portal_catalog")
-    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
-    for licence_brain in licence_brains:
-        licence = licence_brain.getObject()
-        for event in licence.getAllEvents(IUrbanEventNotice):
-            if IAnnotations(event).get("notice_notification", {}):
-                alsoProvides(licence, ILicenceCreatedViaNoticeWS)
-                break
-
+    addNoticeWarning(context)
+    markLicencesCreatedViaNotice(context)
     logger.info("upgrade done!")

@@ -19,10 +19,10 @@
     />
 
     <adapter
-            for="Products.urban.interfaces.IGenericLicence"
-            provides="Products.urban.interfaces.IUrbanWarningCondition"
-            factory=".conditions.NoticeWarning"
-            name="urban.warnings.notice"
+        for="Products.urban.interfaces.IGenericLicence"
+        provides="Products.urban.interfaces.IUrbanWarningCondition"
+        factory=".conditions.NoticeWarning"
+        name="urban.warnings.notice"
         />
 
 </configure>
