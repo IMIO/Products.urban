@@ -1096,6 +1096,9 @@ msgstr ""
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
 msgstr ""
 
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr ""
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr ""
 
