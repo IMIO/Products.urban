@@ -25,7 +25,6 @@ optional_fields = [
     "environmentTechnicalRemarks",
     "rubricsDetails",
     "referenceFT",
-    "referenceFT_PM",
     "divergences",
     "divergenceDetails",
     "prorogation",
@@ -110,9 +109,8 @@ def finalizeSchema(schema):
     """
     Finalizes the type schema to alter some fields
     """
-    schema["procedureChoice"].widget.visible = False
-    schema["folderCategory"].widget.visible = False
-    schema["referenceFT_PM"].widget.visible = False
+    schema.delField("folderCategory")
+    schema.delField("referenceFT_PM")
     schema.moveField("businessOldLocation", after="workLocations")
     schema.moveField("foldermanagers", after="businessOldLocation")
     # schema.moveField("rubrics", after="folderCategory")
