@@ -829,3 +829,7 @@ class IProvisionOfSecurity(Interface):
 
 class IReleaseOfSecurity(Interface):
     __doc__ = _("""IReleaseOfSecurity type marker interface""")
+
+
+class IModificationRegistryDecisionEvent(Interface):
+    __doc__ = _("""IModificationRegistryDecisionEvent type marker interface""")

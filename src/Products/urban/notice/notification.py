@@ -222,6 +222,8 @@ class NoticeNotification(NoticeElement):
             "ART65_REFUS_TACITE_COURRIER_COMMUNE": "ns3:DecisionRequest",
             # Registre des modifications
             "NOTIFICATION_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            # Modification log
+            "DECISION_REGISTRE_COMMUNE": "ns3:TwiceDefaultRequest",
         }
         return specific.get(self.notice_type)
 
