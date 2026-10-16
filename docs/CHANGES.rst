@@ -7,6 +7,16 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b19 (2026-10-16)
+---------------------
+
+New features:
+
+
+- Port changes from version 2.9.29 to 2.9.32
+  [mpeeters] (URB-3795)
+
+
 3.0.0b18 (2026-09-11)
 ---------------------
 
