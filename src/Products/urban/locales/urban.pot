@@ -1620,6 +1620,12 @@ msgstr ""
 msgid "article127s"
 msgstr ""
 
+msgid "article65_urbanconfig_title"
+msgstr ""
+
+msgid "article65s"
+msgstr ""
+
 msgid "articles_folder_title"
 msgstr ""
 

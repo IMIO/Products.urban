@@ -27,6 +27,9 @@ msgstr "Demandeur"
 msgid "Architect"
 msgstr "Architecte"
 
+msgid "Article65"
+msgstr "Article 65"
+
 msgid "BuildLicence"
 msgstr "Permis d'urbanisme"
 

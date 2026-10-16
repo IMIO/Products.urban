@@ -1588,6 +1588,12 @@ msgstr "Paramètres des Articles 127"
 msgid "article127s"
 msgstr "Articles 127"
 
+msgid "article65_urbanconfig_title"
+msgstr "Paramètres des Articles 65"
+
+msgid "article65s"
+msgstr "Articles 65"
+
 msgid "articles_folder_title"
 msgstr "Articles"
 

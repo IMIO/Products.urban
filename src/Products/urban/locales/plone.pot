@@ -21,6 +21,9 @@ msgstr ""
 msgid "Architect"
 msgstr ""
 
+msgid "Article65"
+msgstr ""
+
 msgid "Claimant"
 msgstr ""
 
