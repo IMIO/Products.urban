@@ -27,6 +27,9 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import IGenericLicence
+from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
+from Products.urban.interfaces import IUrbanEventNotice
 from Products.urban.interfaces import ILicenceConfig
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import IUrbanConfigurationFolder
@@ -58,6 +61,7 @@ from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from plone.portlets.interfaces import IPortletManager
 from zExceptions import BadRequest
 from zope import event
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
@@ -214,6 +218,12 @@ def postInstall(context):
     logger.info("addDefaultCronJobs : starting...")
     addDefaultCronJobs(context)
     logger.info("addDefaultCronJobs : Done")
+    logger.info("addNoticeWarning : starting...")
+    addNoticeWarning(context)
+    logger.info("addNoticeWarning : Done")
+    logger.info("markLicencesCreatedViaNotice : starting...")
+    markLicencesCreatedViaNotice(context)
+    logger.info("markLicencesCreatedViaNotice : Done")
 
 
 def _(msgid, default="", domain="urban"):
@@ -304,6 +314,39 @@ def addDefaultCronJobs(context):
         u"0 2 * * portal/@@inquiry_radius",
         u"0 4 * * portal/@@claimants_import",
     ]
+
+
+def addNoticeWarning(context):
+    """Add the notice warning on portal_urban warnings field."""
+    portal_urban = api.portal.get_tool("portal_urban")
+    warnings = list(portal_urban.getWarnings())
+    if "urban.warnings.notice" in [w["condition"] for w in warnings]:
+        return
+    warnings.append(
+        {
+            "condition": "urban.warnings.notice",
+            "level": "warning",
+            "message": translate(
+                "urban.warnings.notice",
+                domain="urban",
+                target_language="fr",
+                default=u"Ce dossier a été encodé de manière dématérialisée",
+            ).encode("utf-8"),
+        }
+    )
+    portal_urban.setWarnings(tuple(warnings))
+
+
+def markLicencesCreatedViaNotice(context):
+    """Mark licences having a NOTICE notification with ILicenceCreatedViaNoticeWS."""
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+        for urban_event in licence.getAllEvents(IUrbanEventNotice):
+            if IAnnotations(urban_event).get("notice_notification", {}):
+                alsoProvides(licence, ILicenceCreatedViaNoticeWS)
+                break
 
 
 def setFolderAllowedTypes(folder, portal_types):

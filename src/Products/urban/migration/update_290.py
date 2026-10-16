@@ -13,6 +13,8 @@ from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import addNoticeWarning
+from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
@@ -23,6 +25,7 @@ from plone.registry import field
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
 from textwrap import dedent
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getUtility
 from zope.event import notify
 
@@ -778,3 +781,14 @@ def add_cessiontype_vocabulary(context):
     )
     createFolderDefaultValues(cessiontype_folder, cessiontype_values[1:], allowedtypes)
     logger.info("upgrade step done!")
+
+
+def add_notice_warning(context):
+    """
+    Add notice warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger("urban: Add notice warning")
+    logger.info("starting upgrade steps")
+    addNoticeWarning(context)
+    markLicencesCreatedViaNotice(context)
+    logger.info("upgrade done!")
