@@ -11,11 +11,97 @@
     <permission>Modify view template</permission>
     <permission>Review portal content</permission>
     <permission>View</permission>
+    <state state_id="creation" title="creation">
+        <exit-transition transition_id="analyse" />
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Add portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Delete objects" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Manage properties" acquired="False">
+            <permission-role>Contributor</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify view template" acquired="False">
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Review portal content" acquired="False">
+            <permission-role>Reviewer</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="View" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+    </state>
+    <state state_id="analysis" title="analysis">
+        <exit-transition transition_id="to_1st_observation" />
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Add portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Delete objects" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Manage properties" acquired="False">
+            <permission-role>Contributor</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify view template" acquired="False">
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Review portal content" acquired="False">
+            <permission-role>Reviewer</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="View" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+    </state>
     <state state_id="1st_observation" title="">
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_2nd_observation" />
         <exit-transition transition_id="analyse" />
-        <permission-map name="Acces contents information" acquired="False">
+        <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
             <permission-role>Contributor</permission-role>
@@ -65,12 +151,7 @@
     <state state_id="2nd_observation" title="">
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_1st_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
+        <exit-transition transition_id="to_3rd_observation" />
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -112,64 +193,9 @@
             <permission-role>Manager</permission-role>
         </permission-map>
     </state>
-    <state state_id="analysis" title="analysis">
-        <exit-transition transition_id="to_1st_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Access contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Add portal content" acquired="False">
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Delete objects" acquired="False">
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Manage properties" acquired="False">
-            <permission-role>Contributor</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Modify portal content" acquired="False">
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Modify view template" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Review portal content" acquired="False">
-            <permission-role>Reviewer</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="View" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="annual_observation" title="">
+    <state state_id="3rd_observation" title="">
         <exit-transition transition_id="close" />
         <exit-transition transition_id="to_2nd_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -189,50 +215,6 @@
         <permission-map name="Manage properties" acquired="False">
             <permission-role>Contributor</permission-role>
             <permission-role>Editor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Modify portal content" acquired="False">
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Modify view template" acquired="False">
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Review portal content" acquired="False">
-            <permission-role>Reviewer</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="View" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-    </state>
-    <state state_id="creation" title="creation">
-        <exit-transition transition_id="analyse" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Access contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Add portal content" acquired="False">
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
-        <permission-map name="Delete objects" acquired="False">
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
             <permission-role>Manager</permission-role>
         </permission-map>
         <permission-map name="Modify portal content" acquired="False">
@@ -257,13 +239,8 @@
     </state>
     <state state_id="ended" title="ended">
         <exit-transition transition_id="to_annual_observation" />
-        <exit-transition transition_id="2nd_observation" />
-        <permission-map name="Acces contents information" acquired="False">
-            <permission-role>Reader</permission-role>
-            <permission-role>Editor</permission-role>
-            <permission-role>Contributor</permission-role>
-            <permission-role>Manager</permission-role>
-        </permission-map>
+        <exit-transition transition_id="to_2nd_observation" />
+        <exit-transition transition_id="to_3rd_observation" />
         <permission-map name="Access contents information" acquired="False">
             <permission-role>Reader</permission-role>
             <permission-role>Editor</permission-role>
@@ -304,17 +281,55 @@
             <permission-role>Manager</permission-role>
         </permission-map>
     </state>
+    <state state_id="annual_observation" title="">
+        <exit-transition transition_id="close" />
+        <exit-transition transition_id="to_2nd_observation" />
+        <exit-transition transition_id="to_3rd_observation" />
+        <permission-map name="Access contents information" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Add portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Delete objects" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Manage properties" acquired="False">
+            <permission-role>Contributor</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify portal content" acquired="False">
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Modify view template" acquired="False">
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="Review portal content" acquired="False">
+            <permission-role>Reviewer</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+        <permission-map name="View" acquired="False">
+            <permission-role>Reader</permission-role>
+            <permission-role>Editor</permission-role>
+            <permission-role>Contributor</permission-role>
+            <permission-role>Manager</permission-role>
+        </permission-map>
+    </state>
     <transition transition_id="analyse" title="analyse" new_state="analysis" trigger="USER"
         before_script=""
         after_script="">
         <action url="" category="workflow" icon="">analyse</action>
-        <guard>
-            <guard-permission>Review portal content</guard-permission>
-        </guard>
-    </transition>
-    <transition transition_id="close" title="close" new_state="ended" trigger="USER"
-        before_script="" after_script="">
-        <action url="" category="workflow" icon="">close</action>
         <guard>
             <guard-permission>Review portal content</guard-permission>
         </guard>
@@ -327,10 +342,25 @@
             <guard-permission>Review portal content</guard-permission>
         </guard>
     </transition>
+    <transition transition_id="close" title="close" new_state="ended" trigger="USER"
+        before_script="" after_script="">
+        <action url="" category="workflow" icon="">close</action>
+        <guard>
+            <guard-permission>Review portal content</guard-permission>
+        </guard>
+    </transition>
     <transition transition_id="to_2nd_observation" title="to_2nd_observation"
         new_state="2nd_observation" trigger="USER" before_script=""
         after_script="">
         <action url="" category="workflow" icon="">to_2nd_observation</action>
+        <guard>
+            <guard-permission>Review portal content</guard-permission>
+        </guard>
+    </transition>
+    <transition transition_id="to_3rd_observation" title="to_3rd_observation"
+        new_state="3rd_observation" trigger="USER" before_script=""
+        after_script="">
+        <action url="" category="workflow" icon="">to_3rd_observation</action>
         <guard>
             <guard-permission>Review portal content</guard-permission>
         </guard>

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from DateTime import DateTime
 from Products.Archetypes.event import ObjectInitializedEvent
 from Products.Five import BrowserView
@@ -13,11 +12,14 @@ from Products.urban.notice.exceptions import NoImplementationFoundException
 from Products.urban.notice.exceptions import NoLicenceFoundException
 from Products.urban.notice.exceptions import NotificationAlreadyHandledException
 from Products.urban.services import notice
+from Products.urban.utils import is_same_person
 from StringIO import StringIO
 from datetime import datetime
 from plone import api
 from plone.api.exc import InvalidParameterError
 from plone.stringinterp.interfaces import IContextWrapper
+from random import randint
+from time import sleep
 from zope.annotation.interfaces import IAnnotations
 from zope.event import notify
 from zope.i18n import translate
@@ -25,6 +27,7 @@ from zope.lifecycleevent import ObjectModifiedEvent
 
 import logging
 import transaction
+
 
 logger = logging.getLogger("urban: Notice Cron")
 
@@ -35,6 +38,7 @@ class ImportFromNoticeView(BrowserView):
     def __call__(self):
 
         self._initialize()
+        self._add_random_sleep()
         self._retry_failed_notifications()
         self._process_fresh_notifications()
         self._save_progress()
@@ -62,6 +66,17 @@ class ImportFromNoticeView(BrowserView):
         )
         self.already_handled_notifications = []
 
+    def _add_random_sleep(self):
+        """
+        Add a random sleep to cron-based requests, to avoid swarming the NOTICe API.
+        TEMPORARY FIX !
+        """
+
+        if not self.retry_failed_notifications:
+            delay = randint(1, 1800)
+            logger.info(u"Delaying NOTICe cron call by %s seconds", delay)
+            sleep(delay)
+
     def _retry_failed_notifications(self):
         """Retry processing of previously failed notifications, if requested."""
         if not self.retry_failed_notifications or not self.failed_notifications:
@@ -78,6 +93,12 @@ class ImportFromNoticeView(BrowserView):
             try:
                 self._handle_notification(failed_notice_id)
                 logger.info(u"Retried notification %s succeeded", failed_notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    failed_notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(
@@ -126,6 +147,12 @@ class ImportFromNoticeView(BrowserView):
                 if notif_last_status_date > self.latest_successful_date:
                     self.latest_successful_date = notif_last_status_date
                 logger.info(u"Notification %s succeeded", notice_id)
+            except NotificationAlreadyHandledException:
+                savepoint.rollback()
+                logger.warning(
+                    u"Ignoring import of existing notification %s",
+                    notice_id,
+                )
             except Exception as exc:
                 savepoint.rollback()
                 custom_exc = ErrorProcessingNotificationException(notice_id, exc)
@@ -228,6 +255,15 @@ class ImportFromNoticeView(BrowserView):
         ):
             handler = DeadlineExtensionHandler
         elif detailed_notification.notice_type in (
+            "ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE",
+            "PM_ABANDON_COMMUNE_FTFD",
+            "ABANDON_COMMUNE_MANUELLE",
+            "PM_ABANDON_COMMUNE_EP",
+            "PM_ABANDON_COMMUNE_EP_FTFD",
+        ):
+            handler = AbandonHandler
+        elif detailed_notification.notice_type in (
             "NOTIFICATION_RS_COMMUNE",
             "NOTIFICATION_RS_COMMUNE_RETARD",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
@@ -248,6 +284,11 @@ class ImportFromNoticeView(BrowserView):
             "PM_REFUS_TACITE_COMMUNE",
         ):
             handler = DecisionSPWHandler
+        elif detailed_notification.notice_type in (
+            "ARRET_PLAN_MODIF_COMMUNE",
+            "ARRET_PLAN_MODIF_COMMUNE_MANUELLE",
+        ):
+            handler = StopForAmendedPlansHandler
 
         # GESPER
 
@@ -277,6 +318,7 @@ class ImportFromNoticeView(BrowserView):
             "DEMANDE_AVIS_FACULTATIF_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_1_ERE_INSTANCE",
             "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_1_ERE_INSTANCE",
+            "PM_EP_COURRIER_COMMUNE",
         ):
             handler = GesperAmendedPlansSPWHandler
         elif detailed_notification.notice_type in (
@@ -291,6 +333,8 @@ class ImportFromNoticeView(BrowserView):
             "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE",
         ):
             handler = GesperFreeNotificationSPWHandler
+        elif detailed_notification.notice_type in ("ACTE_CESSION_COMMUNE",):
+            handler = CessionSpwHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -353,12 +397,22 @@ class IncomingNoticeHandler(object):
             if not parcel.parcel:
                 data = {
                     translate(_("CaPaKey"), context=self.request): parcel.capakey,
-                    translate(_("urban_label_division"), context=self.request): parcel.division,
-                    translate(_("urban_label_section"), context=self.request): parcel.section,
-                    translate(_("urban_label_radical"), context=self.request): parcel.radical,
+                    translate(
+                        _("urban_label_division"), context=self.request
+                    ): parcel.division,
+                    translate(
+                        _("urban_label_section"), context=self.request
+                    ): parcel.section,
+                    translate(
+                        _("urban_label_radical"), context=self.request
+                    ): parcel.radical,
                     translate(_("urban_label_bis"), context=self.request): parcel.bis,
-                    translate(_("urban_label_exposant"), context=self.request): parcel.exposant,
-                    translate(_("urban_label_puissance"), context=self.request): parcel.puissance,
+                    translate(
+                        _("urban_label_exposant"), context=self.request
+                    ): parcel.exposant,
+                    translate(
+                        _("urban_label_puissance"), context=self.request
+                    ): parcel.puissance,
                 }
                 self._add_error(_("Can not find a parcel"), data)
                 continue
@@ -367,13 +421,21 @@ class IncomingNoticeHandler(object):
     def import_addresses(self):
         for address in self.notification.addresses:
             data = {
-                translate(_("urban_label_street"), context=self.request): address.notice_street,
-                translate(_("urban_label_locality"), context=self.request): address.locality,
+                translate(
+                    _("urban_label_street"), context=self.request
+                ): address.notice_street,
+                translate(
+                    _("urban_label_locality"), context=self.request
+                ): address.locality,
                 translate(
                     _("municipality"), context=self.request
                 ): address.municipality,
-                translate(_("urban_label_zipCode"), context=self.request): address.postCode,
-                translate(_("urban_label_number"), context=self.request): address.number,
+                translate(
+                    _("urban_label_zipCode"), context=self.request
+                ): address.postCode,
+                translate(
+                    _("urban_label_number"), context=self.request
+                ): address.number,
             }
             if not address.address:
                 self._add_error(_("Can not find an address"), data)
@@ -388,7 +450,7 @@ class IncomingNoticeHandler(object):
         event_config = self.notification.event_config(self.event_config_marker)
         self.event = self.licence.createUrbanEvent(event_config)
         self.fill_incoming_event()
-        api.content.transition(self.event, "close")
+        api.content.transition(self.event, to_state="closed")
 
     def fill_incoming_event(self):
         usable_date = None
@@ -499,7 +561,9 @@ class IncomingNoticeHandler(object):
         )
         description_field = self.licence.getField("description")
         old_description = description_field.getRaw(self.licence)
-        new_description = old_description + translate(error, context=self.request).encode("utf8")
+        new_description = old_description + translate(
+            error, context=self.request
+        ).encode("utf8")
         description_field.set(self.licence, new_description)
         self.licence._p_changed = 1
 
@@ -632,6 +696,14 @@ class DeadlineExtensionHandler(IncomingNoticeHandler):
             self.licence.reindexObject()
 
 
+class AbandonHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IForcedEndEvent"
+
+    @property
+    def desired_licence_state(self):
+        return "retired"
+
+
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
 
@@ -641,6 +713,11 @@ class SummaryReportHandler(IncomingNoticeHandler):
 
     def fill_incoming_event(self):
         super(SummaryReportHandler, self).fill_incoming_event()
+
+        if self.notification.due_date:
+            event_date = DateTime(str(self.notification.due_date))
+            self.event.setUltimeDate(event_date)
+
         if self.notification.proposed_decision_code:
             self.event.setExternalDecision(self.notification.proposed_decision_code)
 
@@ -680,6 +757,14 @@ class DecisionSPWHandler(IncomingNoticeHandler):
             return ""
 
 
+class StopForAmendedPlansHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IIntentionToSubmitAmendedPlans"
+
+    @property
+    def desired_licence_state(self):
+        return "suspension"
+
+
 class GesperPublicSurveyHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IAcknowledgmentEvent"
     create_licence_if_missing = True
@@ -703,15 +788,11 @@ class GesperDecisionSPWHandler(IncomingNoticeHandler):
                 "UFD2_DECISION_FD_OCTROI": "favorable",
                 "UFD2_DECISION_FD_REFUSEE": "defavorable",
             }
-            urban_decision_term = mapping_decision_terms.get(
-                decision_code
-            )
+            urban_decision_term = mapping_decision_terms.get(decision_code)
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
-                self.event.setDescription(
-                    u"Décision: {}".format(decision_code)
-                )
+                self.event.setDescription(u"Décision: {}".format(decision_code))
 
     @property
     def desired_licence_state(self):
@@ -739,3 +820,69 @@ class GesperAmendedPlansSPWHandler(IncomingNoticeHandler):
 class GesperFreeNotificationSPWHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IFreeNotificationEvent"
     create_licence_if_missing = True
+
+
+class CessionSpwHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.ICessionEvent"
+
+    def update_licence(self):
+        super(CessionSpwHandler, self).update_licence()
+        self.import_new_applicant()
+
+    def import_new_applicant(self):
+        # Without parties, every applicant would be disabled
+        if not self.notification.parties:
+            raise ValueError(
+                "No party found in notification {0}".format(self.notification.noticeId)
+            )
+        portal_workflow = api.portal.get_tool("portal_workflow")
+        existing_applicants = self.licence.getApplicants()
+        disabled_applicants = self.licence.get_applicants_history()
+        self.new_applicants = []
+
+        # Create only the missing parties
+        for party in self.notification.parties:
+            party_data = party.serialize()
+            applicant = None
+            for existing_applicant in existing_applicants:
+                if is_same_person(existing_applicant, party_data):
+                    applicant = existing_applicant
+            # Enable again a previously disabled applicant instead of
+            # creating a duplicate
+            if applicant is None:
+                for disabled_applicant in disabled_applicants:
+                    if is_same_person(disabled_applicant, party_data):
+                        transitions = [
+                            t["id"]
+                            for t in portal_workflow.getTransitionsFor(
+                                disabled_applicant
+                            )
+                        ]
+                        if "enable" in transitions:
+                            api.content.transition(
+                                obj=disabled_applicant, transition="enable"
+                            )
+                            applicant = disabled_applicant
+                            break
+            if applicant is None:
+                applicant = api.content.create(container=self.licence, **party_data)
+            self.new_applicants.append(applicant)
+
+        # Disable only the applicants no longer in the notification
+        for existing_applicant in existing_applicants:
+            if existing_applicant not in self.new_applicants:
+                transitions = [
+                    t["id"]
+                    for t in portal_workflow.getTransitionsFor(existing_applicant)
+                ]
+                if "disable" in transitions:
+                    api.content.transition(obj=existing_applicant, transition="disable")
+
+    def fill_incoming_event(self):
+        super(CessionSpwHandler, self).fill_incoming_event()
+        if self.new_applicants:
+            self.event.setNewOperator(self.new_applicants)
+
+    def process(self):
+        super(CessionSpwHandler, self).process()
+        notify(ObjectModifiedEvent(self.licence))

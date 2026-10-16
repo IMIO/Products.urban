@@ -93,6 +93,12 @@ msgstr ""
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr ""
 
+msgid "ARRET_PLAN_MODIF_COMMUNE"
+msgstr ""
+
+msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
+msgstr ""
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:39
@@ -567,6 +573,10 @@ msgstr ""
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr ""
 
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:401
 msgid "IAcknowledgment type marker interface"
 msgstr ""
@@ -585,6 +595,10 @@ msgstr ""
 
 #: ../interfaces.py:433
 msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr ""
+
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:361
@@ -631,12 +645,20 @@ msgstr ""
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:529
+#: ../interfaces.py:609
+msgid "IEstablishmentEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:537
 msgid "IForcedEndEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:521
 msgid "IIILEPrescriptionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:437
@@ -719,7 +741,11 @@ msgstr ""
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:513
+#: ../interfaces.py:613
+msgid "IExtensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:521
 msgid "IProvocationEvent type marker interface"
 msgstr ""
 
@@ -743,8 +769,24 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:581
 msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:481
@@ -935,6 +977,15 @@ msgid "PM_RS_PAS_ENVOYE"
 msgstr ""
 
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
+msgstr ""
+
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
 msgstr ""
 
 msgid "NOTIFICATION_RS_COMMUNE"
@@ -5967,4 +6018,28 @@ msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
 msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
+
+msgid "ICessionEvent type marker interface"
+msgstr ""
+
+msgid "urban_label_newOperator"
+msgstr ""
+
+msgid "urban_label_cessionType"
+msgstr ""
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr ""
+
+msgid "cessiontype_folder_title"
 msgstr ""

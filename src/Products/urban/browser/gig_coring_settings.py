@@ -49,6 +49,7 @@ class GigCoringLinkEditForm(RegistryEditForm):
     Define form logic
     """
 
+    prefix = "gig_coring."
     schema = IGigCoringLink
     label = _(u"gig coring link")
     description = _(u"""""")

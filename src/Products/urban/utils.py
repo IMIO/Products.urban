@@ -390,3 +390,27 @@ def find_address(term, exact_match=False):
 
 
 WIDGET_DATE_END_YEAR = datetime.now().year + 25
+
+
+def is_same_person(applicant, party_data):
+    """Return True if the licence applicant matches the given party data.
+
+    Identity is only confirmed by the national register or BCE number,
+    a name match is not enough as two different people can share a name.
+    """
+    party_type = party_data.get("type")
+    if applicant.portal_type != party_type:
+        return False
+    if party_type == "Corporation":
+        number_field = "bceNumber"
+    else:
+        number_field = "nationalRegister"
+
+    old_number = only_digits(applicant.getField(number_field).get(applicant))
+    new_number = only_digits(party_data.get(number_field))
+    return bool(old_number) and old_number == new_number
+
+
+def only_digits(value):
+    """Return only the digits of value, e.g. '85.07.30-033.61' -> '85073003361'"""
+    return "".join(c for c in (value or "") if c.isdigit())

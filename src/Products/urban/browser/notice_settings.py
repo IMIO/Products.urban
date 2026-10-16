@@ -43,6 +43,7 @@ class INoticeSettings(Interface):
 
 
 class NoticeSettingsEditForm(RegistryEditForm):
+    prefix = "notice."
     schema = INoticeSettings
     label = _("Notice settings")
     description = ""

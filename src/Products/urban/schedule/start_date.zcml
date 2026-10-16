@@ -114,8 +114,49 @@
         name="urban.schedule.start_date.spw_decision_project_receipt_date_or_acknowledgment_date"
     />
 
+    <!-- walloonregion_decision_date -->
     <adapter
-        for="Products.urban.interfaces.IBaseAllBuildLicence
+        for="Products.urban.interfaces.IArticle127
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.WalloonRegionDecisionDate"
+        name="urban.schedule.start_date.walloonregion_decision_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_Article127
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.WalloonRegionDecisionDate"
+        name="urban.schedule.start_date.walloonregion_decision_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IIntegratedLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.WalloonRegionDecisionDate"
+        name="urban.schedule.start_date.walloonregion_decision_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IEnvironmentBase
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.WalloonRegionDecisionDate"
+        name="urban.schedule.start_date.walloonregion_decision_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.IUniqueLicence
+             imio.schedule.content.task.IAutomatedTask"
+        provides="imio.schedule.interfaces.IStartDate"
+        factory=".start_date.WalloonRegionDecisionDate"
+        name="urban.schedule.start_date.walloonregion_decision_date"
+    />
+
+    <adapter
+        for="Products.urban.interfaces.ICODT_UniqueLicence
              imio.schedule.content.task.IAutomatedTask"
         provides="imio.schedule.interfaces.IStartDate"
         factory=".start_date.WalloonRegionDecisionDate"

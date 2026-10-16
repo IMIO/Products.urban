@@ -1621,6 +1621,15 @@ msgstr ""
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr ""
 
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr ""
+
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr ""
 
@@ -1640,6 +1649,12 @@ msgid "PM_RS_PAS_ENVOYE"
 msgstr ""
 
 msgid "NOTIFICATION_DECISION_COMMUNE"
+msgstr ""
+
+msgid "ARRET_PLAN_MODIF_COMMUNE"
+msgstr ""
+
+msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
 msgstr ""
 
 msgid "DEMANDE_AVIS_OBLIGATOIRE_PLAN_INITIAL_1_ERE_INSTANCE"
@@ -1724,4 +1739,19 @@ msgid "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE"
 msgstr ""
 
 msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
+
+msgid "ACTE_CESSION_COMMUNE"
+msgstr ""
+
+msgid "PM_EP_COURRIER_COMMUNE"
 msgstr ""

@@ -8,6 +8,109 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.32 (2026-10-16)
+-------------------
+
+New features:
+
+
+- Add new marker interface for event
+  [jchandelle] (SUP-56325)
+- Implement notifications `ARRET_PLAN_MODIF_COMMUNE`, `ARRET_PLAN_MODIF_COMMUNE_MANUELLE`
+  [daggelpop] (URB-3550)
+- Add handling of ABANDON_COMMUNE_MANUELLE, PM_ABANDON_COMMUNE_EP, and PM_ABANDON_COMMUNE_EP_FTFD notification.
+  [WBoudabous] (URB-3568)
+- Implement ACTE_CESSION_COMMUNE NOTICe notification and add cession type vocabulary
+  [WBoudabous] (URB-3636)
+- Handle PM_EP_COURRIER_COMMUNE notification
+  [WBoudabous] (URB-3640)
+- Add due date to imported summary report events
+  [daggelpop] (URB-3659)
+- Add event marker interfaces for the special conditions revision events (deposit, project, decision), tacit refusal, information, abandon and cession events
+  [WBoudabous] (URB-3669)
+- Add a random sleep to cron-based NOTICe listing calls
+  [daggelpop] (URB-3769)
+
+
+Bug fixes:
+
+
+- Fix interface for walloonregion_decision_date starting date for task
+  [jchandelle] (SUP-45885)
+- Fix list 220 to support unicode characters.
+  [WBoudabous] (SUP-46077)
+- Add prefix to urban configs forms
+  [jchandelle] (SUP-56733)
+- Set `urbanConfigId` property for PUL
+  [daggelpop] (URB-3735)
+- Close incoming notice events regardless of their workflow
+  [WBoudabous] (URB-3777)
+- Forcing send mail rules title in form modal title
+  [jchandelle] (URB-3787)
+- Fix automatic owner encoding for housing
+  [WBoudabous] (URBBDC-3374)
+
+
+2.9.31 (2026-09-03)
+-------------------
+
+New features:
+
+
+- Add a configurable subject (objet) to licences, backfilled for existing Housing licences, for future use in notary letters and divisions
+  [WBoudabous] (URBBDC-3225)
+
+
+Bug fixes:
+
+
+- Remove extra scheme from parent url variable interpolation
+  [daggelpop] (URB-3652)
+
+
+2.9.30 (2026-09-02)
+-------------------
+
+New features:
+
+
+- Implement notifications ABANDON_COMMUNE, PM_ABANDON_COMMUNE and PM_ABANDON_COMMUNE_FTFD
+  [WBoudabous] (URB-3567)
+- Add 3rd observation state to Housing workflow
+  [WBoudabous] (URBBDC-3278)
+
+
+2.9.29 (2026-08-21)
+-------------------
+
+New features:
+
+
+- Add upgrade step to hide `CODT_UniqueBorderingLicences` folder
+  [jchandelle] (SUP-52184)
+
+
+Bug fixes:
+
+
+- Avoid double import of NOTICe notification
+  [daggelpop] (URB-3711)
+- Reorder actions in NOTICe forms: send documents first, then send the response
+  [daggelpop] (URB-3730)
+
+
+2.9.28 (2026-08-12)
+-------------------
+
+Bug fixes:
+
+
+- Clarify translations for NOTICE response buttons
+  [daggelpop] (URB-3658)
+- Fix decision display form
+  [daggelpop] (URB-3720)
+
+
 2.9.27 (2026-07-24)
 -------------------
 
