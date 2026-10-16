@@ -214,6 +214,7 @@ def initialize(context):
     import content.UrbanEventInquiry
     import content.UrbanEventInspectionReport
     import content.licence.Article127
+    import content.licence.Article65
     import content.licence.BuildLicence
     import content.licence.CODT_Article127
     import content.licence.CODT_BuildLicence

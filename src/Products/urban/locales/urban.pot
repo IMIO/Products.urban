@@ -93,10 +93,31 @@ msgstr ""
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr ""
 
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
 msgid "ARRET_PLAN_MODIF_COMMUNE"
 msgstr ""
 
 msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "ART65_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "ART65_AVIS_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_ENVOI_PROJET_COMMUNE"
+msgstr ""
+
+msgid "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_FTAC_DECISION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_REFUS_TACITE_COURRIER_COMMUNE"
 msgstr ""
 
 #: ../browser/licence/templates/licenceview.pt:31
@@ -191,6 +212,9 @@ msgid "Apply only when the Event Type corresponds to the one of the context"
 msgstr ""
 
 msgid "Article127"
+msgstr ""
+
+msgid "Article65"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:469
@@ -967,6 +991,9 @@ msgstr ""
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr ""
 
+msgid "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE"
+msgstr ""
+
 msgid "NOTIFICATION_PAS_ENVOI_RS"
 msgstr ""
 
@@ -979,13 +1006,10 @@ msgstr ""
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr ""
 
-msgid "ABANDON_COMMUNE"
+msgid "NOTIFICATION_RECEVABILITE_ART65_COMMUNE"
 msgstr ""
 
-msgid "PM_ABANDON_COMMUNE"
-msgstr ""
-
-msgid "PM_ABANDON_COMMUNE_FTFD"
+msgid "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE"
 msgstr ""
 
 msgid "NOTIFICATION_RS_COMMUNE"
@@ -1093,6 +1117,12 @@ msgstr ""
 msgid "Opinion to ask"
 msgstr ""
 
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr ""
+
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
 msgstr ""
 
@@ -1156,6 +1186,9 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:18
 msgid "Proposed value"
+msgstr ""
+
+msgid "REVISION_CP_FT_ENVOI_COMMUNE"
 msgstr ""
 
 #: ../browser/templates/parcelrecordsview.pt:28
@@ -1613,6 +1646,12 @@ msgid "article127_urbanconfig_title"
 msgstr ""
 
 msgid "article127s"
+msgstr ""
+
+msgid "article65_urbanconfig_title"
+msgstr ""
+
+msgid "article65s"
 msgstr ""
 
 msgid "articles_folder_title"

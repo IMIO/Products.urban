@@ -561,6 +561,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
         types = {
             "buildlicence": buildlicence_tabs_config,
             "article127": buildlicence_tabs_config,
+            "article65": env_inquiry_tabs_config,
             "uniquelicence": uniquelicence_tabs_config,
             "integratedlicence": buildlicence_tabs_config,
             "parceloutlicence": inquiry_tabs_config,
