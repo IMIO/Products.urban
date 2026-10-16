@@ -1,2 +1,0 @@
-Implement notifications `ARRET_PLAN_MODIF_COMMUNE`, `ARRET_PLAN_MODIF_COMMUNE_MANUELLE`
-[daggelpop]
