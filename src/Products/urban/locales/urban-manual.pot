@@ -20,6 +20,9 @@ msgstr ""
 msgid "Article127"
 msgstr ""
 
+msgid "Article65"
+msgstr ""
+
 msgid "BuildLicence"
 msgstr ""
 
@@ -155,6 +158,12 @@ msgid "article127_urbanconfig_title"
 msgstr ""
 
 msgid "article127s"
+msgstr ""
+
+msgid "article65_urbanconfig_title"
+msgstr ""
+
+msgid "article65s"
 msgstr ""
 
 msgid "articles_folder_title"
@@ -1739,6 +1748,36 @@ msgid "NOTIF_LIBRE_AVEC_REPONSE_2_EME_INSTANCE"
 msgstr ""
 
 msgid "NOTIF_LIBRE_SANS_REPONSE_2_EME_INSTANCE"
+msgstr ""
+
+msgid "REVISION_CP_FT_ENVOI_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RECEVABILITE_ART65_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE"
+msgstr ""
+
+msgid "ART65_ENVOI_PROJET_COMMUNE"
+msgstr ""
+
+msgid "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_FTAC_DECISION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_AVIS_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_REFUS_TACITE_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_ABANDON_COMMUNE"
 msgstr ""
 
 msgid "ABANDON_COMMUNE_MANUELLE"

@@ -88,11 +88,32 @@ msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importa
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/reclamant_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
 
+msgid "ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure"
+
 msgid "ARRET_PLAN_MODIF_COMMUNE"
 msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs"
 
 msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
 msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs (autre commune)"
+
+msgid "ART65_ABANDON_COMMUNE"
+msgstr "Article 65 - Notification à la commune de l'abandon de la procédure de révision des CP"
+
+msgid "ART65_AVIS_FT_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune que l'avis FT vaut décision"
+
+msgid "ART65_ENVOI_PROJET_COMMUNE"
+msgstr "Article 65 - Notification à la commune du projet de révision des CP"
+
+msgid "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE"
+msgstr "Article 65 - Envoi tardif à la commune du projet de décision par le FT"
+
+msgid "ART65_FTAC_DECISION_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la décision de révision des CP"
+
+msgid "ART65_REFUS_TACITE_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune du refus tacite de la demande de révision des CP"
 
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
@@ -187,6 +208,9 @@ msgstr "Appliquer uniquement lorsque le type d'événement correspond à celui d
 
 msgid "Article127"
 msgstr "Article 127"
+
+msgid "Article65"
+msgstr "Article 65"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:469
 #: ../browser/licence/templates/licenceview.pt:50
@@ -960,6 +984,9 @@ msgstr "Transmissions (NOTICe)"
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr "Notification à la commune de la décision"
 
+msgid "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE"
+msgstr "Article 65 - Notification à la commune de l'irrecevabilité de la demande de révision des CP"
+
 msgid "NOTIFICATION_PAS_ENVOI_RS"
 msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
 
@@ -972,17 +999,11 @@ msgstr "Impossibilité de transmettre un rapport de synthèse suite aux plans mo
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction"
 
-msgid "PM_PROROGATION_COURRIER_COMMUNE"
-msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
+msgid "NOTIFICATION_RECEVABILITE_ART65_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la recevabilité & Demande d'organisation d'EP"
 
-msgid "ABANDON_COMMUNE"
-msgstr "Notification à la commune de l'abandon de la procédure"
-
-msgid "PM_ABANDON_COMMUNE"
-msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs)"
-
-msgid "PM_ABANDON_COMMUNE_FTFD"
-msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
+msgid "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la recevabilité de la demande de révision des CP"
 
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr "Transmission du rapport de synthèse"
@@ -1091,8 +1112,17 @@ msgstr "Un fichier n'est plus disponible et n'a pas pu être envoyé"
 msgid "Opinion to ask"
 msgstr "Avis à demander"
 
+msgid "PM_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs)"
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
+
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
@@ -1142,7 +1172,10 @@ msgstr "Réunion de projet"
 msgid "Proposed value"
 msgstr "Valeur proposée"
 
-#: ../browser/templates/parcelrecordsview.pt:22
+msgid "REVISION_CP_FT_ENVOI_COMMUNE"
+msgstr "Article 65 - Demande à la commune de révision CP par le fonctionnaire technique"
+
+#: ../browser/templates/parcelrecordsview.pt:28
 #: ../browser/templates/parcelsinfo.pt:51
 msgid "Related licences"
 msgstr "Dossiers liés à la parcelle"
@@ -1585,6 +1618,12 @@ msgstr "Paramètres des Articles 127"
 
 msgid "article127s"
 msgstr "Articles 127"
+
+msgid "article65_urbanconfig_title"
+msgstr "Paramètres des Articles 65"
+
+msgid "article65s"
+msgstr "Articles 65"
 
 msgid "articles_folder_title"
 msgstr "Articles"
