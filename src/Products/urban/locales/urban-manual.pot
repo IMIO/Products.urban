@@ -1792,6 +1792,9 @@ msgstr ""
 msgid "ACTE_CESSION_COMMUNE"
 msgstr ""
 
+msgid "NOTIFICATION_ABANDON_COMMUNE"
+msgstr ""
+
 msgid "PM_EP_COURRIER_COMMUNE"
 msgstr ""
 
