@@ -803,4 +803,15 @@ def add_article65_type(context):
 
     add_new_urban_licence_type("Article65")
 
+    rule_id = "notification_arne_imported_successfully"
+    rule_obj = ContentRulesUtils.get_rule(rule_id)
+    if rule_obj:
+        for condition in rule_obj.conditions:
+            if (
+                condition.element == "urban.conditions.licence_type"
+                and condition.licence_type
+                and "Article65" not in condition.licence_type
+            ):
+                condition.licence_type = condition.licence_type + ["Article65"]
+
     logger.info("Upgrade done!")
