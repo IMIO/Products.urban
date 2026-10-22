@@ -587,10 +587,8 @@ schema = Schema(
         ),
         StringField(
             name="referenceIaDocs",
-            widget=StringField._properties["widget"](
-                label=_(
-                    "urban_label_referenceIaDocs", default="referenceIaDocs"
-                ),
+            widget=StringWidget(
+                label=_("urban_label_referenceIaDocs", default="referenceIaDocs"),
             ),
             optional=True,
         ),
