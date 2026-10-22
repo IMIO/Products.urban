@@ -6086,8 +6086,5 @@ msgstr ""
 msgid "IProvisionOfSecurity type marker interface"
 msgstr ""
 
-msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
-msgstr ""
-
 msgid "IReleaseOfSecurity type marker interface"
 msgstr ""

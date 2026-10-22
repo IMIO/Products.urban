@@ -357,14 +357,6 @@
     interface=".interfaces.IExtensionEvent"
     type=".interfaces.IEventTypeType"/>
 
-  <interface
-    interface=".interfaces.IProvisionOfSecurity"
-    type=".interfaces.IEventTypeType"/>
-
-  <interface
-    interface=".interfaces.IReleaseOfSecurity"
-    type=".interfaces.IEventTypeType"/>
-
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
         Products.Archetypes.interfaces.IUIDCatalog"
@@ -394,6 +386,14 @@
 
 <interface
     interface=".interfaces.IAcknowledgmentOfTransfer"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IProvisionOfSecurity"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IReleaseOfSecurity"
     type=".interfaces.IEventTypeType"/>
 
 </configure>

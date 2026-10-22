@@ -1794,3 +1794,6 @@ msgstr ""
 
 msgid "PM_EP_COURRIER_COMMUNE"
 msgstr ""
+
+msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
+msgstr ""
