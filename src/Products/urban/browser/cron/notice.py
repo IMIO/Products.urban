@@ -296,29 +296,34 @@ class ImportFromNoticeView(BrowserView):
             handler = SpecialConditionsRevisionDepositHandler
 
         elif detailed_notification.notice_type in (
-                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
-                "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE",
+            "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
+            "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE",
         ):
             handler = SpecialConditionsPublicSurveyHandler
 
-        elif detailed_notification.notice_type == "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE":
+        elif (
+            detailed_notification.notice_type
+            == "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE"
+        ):
             handler = SpecialConditionsInadmissibleHandler
 
         elif detailed_notification.notice_type in (
-                "ART65_ENVOI_PROJET_COMMUNE",
-                "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
+            "ART65_ENVOI_PROJET_COMMUNE",
+            "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
         ):
             handler = SpecialConditionsRevisionProjectHandler
 
         elif detailed_notification.notice_type in (
-                "ART65_FTAC_DECISION_COURRIER_COMMUNE",
-                "ART65_AVIS_FT_COURRIER_COMMUNE",
-                "ART65_REFUS_TACITE_COURRIER_COMMUNE",
+            "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+            "ART65_AVIS_FT_COURRIER_COMMUNE",
+            "ART65_REFUS_TACITE_COURRIER_COMMUNE",
         ):
             handler = SpecialConditionsDecisionSPWHandler
 
         elif detailed_notification.notice_type == "ART65_ABANDON_COMMUNE":
             handler = SpecialConditionsAbandonHandler
+        elif detailed_notification.notice_type == "ACTE_CONSTITUTION_SURETE_COMMUNE":
+            handler = ProvisionOfSecurityHandler
 
         # GESPER
 
@@ -647,7 +652,9 @@ class ModificationDepositHandler(IncomingNoticeHandler):
 
 
 class SpecialConditionsRevisionDepositHandler(IncomingNoticeHandler):
-    event_config_marker = "Products.urban.interfaces.ISpecialConditionsRevisionDepositEvent"
+    event_config_marker = (
+        "Products.urban.interfaces.ISpecialConditionsRevisionDepositEvent"
+    )
     create_licence_if_missing = True
 
     @property
@@ -774,7 +781,9 @@ class SummaryReportHandler(IncomingNoticeHandler):
 
 
 class SpecialConditionsRevisionProjectHandler(SummaryReportHandler):
-    event_config_marker = "Products.urban.interfaces.ISpecialConditionsRevisionProjectEvent"
+    event_config_marker = (
+        "Products.urban.interfaces.ISpecialConditionsRevisionProjectEvent"
+    )
     create_licence_if_missing = True
 
 
@@ -814,7 +823,9 @@ class DecisionSPWHandler(IncomingNoticeHandler):
 
 
 class SpecialConditionsDecisionSPWHandler(DecisionSPWHandler):
-    event_config_marker = "Products.urban.interfaces.ISpecialConditionsRevisionDecisionEvent"
+    event_config_marker = (
+        "Products.urban.interfaces.ISpecialConditionsRevisionDecisionEvent"
+    )
     create_licence_if_missing = True
 
 
@@ -824,6 +835,10 @@ class StopForAmendedPlansHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "suspension"
+
+
+class ProvisionOfSecurityHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IProvisionOfSecurity"
 
 
 class GesperPublicSurveyHandler(IncomingNoticeHandler):

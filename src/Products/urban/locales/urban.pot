@@ -6082,3 +6082,9 @@ msgstr ""
 
 msgid "cessiontype_folder_title"
 msgstr ""
+
+msgid "IProvisionOfSecurity type marker interface"
+msgstr ""
+
+msgid "IReleaseOfSecurity type marker interface"
+msgstr ""

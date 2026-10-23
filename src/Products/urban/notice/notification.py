@@ -192,6 +192,7 @@ class NoticeNotification(NoticeElement):
             "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
             "ART65_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
 
+            "ACTE_CONSTITUTION_SURETE_COMMUNE": "ns3:TwiceDefaultRequest",
             # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",

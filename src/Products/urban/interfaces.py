@@ -817,3 +817,11 @@ class IMissingCapakey(Interface):
 
 class IAcknowledgmentOfTransfer(Interface):
     __doc__ = _("""IAcknowledgmentOfTransfer type marker interface""")
+
+
+class IProvisionOfSecurity(Interface):
+    __doc__ = _("""IProvisionOfSecurity type marker interface""")
+
+
+class IReleaseOfSecurity(Interface):
+    __doc__ = _("""IReleaseOfSecurity type marker interface""")

@@ -388,4 +388,12 @@
     interface=".interfaces.IAcknowledgmentOfTransfer"
     type=".interfaces.IEventTypeType"/>
 
+<interface
+    interface=".interfaces.IProvisionOfSecurity"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IReleaseOfSecurity"
+    type=".interfaces.IEventTypeType"/>
+
 </configure>
