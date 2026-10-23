@@ -6040,6 +6040,16 @@ msgstr ""
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
+#. Default: "referenceIaDocs"
+#: ../UrbanEvent.py:588
+msgid "urban_label_referenceIaDocs"
+msgstr ""
+
+#. Default: "urlIaDocs"
+#: ../UrbanEvent.py:597
+msgid "urban_label_urlIaDocs"
+msgstr ""
+
 msgid "watercourses_folder_title"
 msgstr ""
 
