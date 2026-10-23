@@ -764,6 +764,14 @@ class SpecialConditionsAbandonHandler(AbandonHandler):
 
 class SummaryReportHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDecisionProjectFromSPWEvent"
+    # existing externaldecisions terms kept their historical ids, map the
+    # NOTICE codes to them (new terms are created with the NOTICE code as id)
+    external_decision_mapping = {
+        "FAVORABLE": "favorable",
+        "DEFAVORABLE": "defavorable",
+        "FAVORABLE_CONDITIONS": "favorable-conditionnel",
+        "FAVORABLE_PARTIEL": "FAVORABLE_PARTIEL",
+    }
 
     @property
     def desired_licence_state(self):
@@ -776,8 +784,13 @@ class SummaryReportHandler(IncomingNoticeHandler):
             event_date = DateTime(str(self.notification.due_date))
             self.event.setUltimeDate(event_date)
 
-        if self.notification.proposed_decision_code:
-            self.event.setExternalDecision(self.notification.proposed_decision_code)
+        decision_code = self.notification.proposed_decision_code
+        if decision_code:
+            mapped_value = self.external_decision_mapping.get(decision_code)
+            if mapped_value is not None:
+                self.event.setExternalDecision(mapped_value)
+            else:
+                self.event.setDescription(u"Avis proposé: {}".format(decision_code))
 
 
 class SpecialConditionsRevisionProjectHandler(SummaryReportHandler):
