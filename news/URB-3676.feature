@@ -1,2 +1,2 @@
-Handle NOTIFICATION_ABANDON_COMMUNE  Notification
+Handle NOTIFICATION_ABANDON_COMMUNE Notification
 [WBoudabous]
