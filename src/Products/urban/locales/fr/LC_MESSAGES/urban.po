@@ -6119,3 +6119,6 @@ msgstr "Notification à la commune de l'acte de constitution de sûreté"
 
 msgid "IReleaseOfSecurity type marker interface"
 msgstr "Libération de sûreté"
+
+msgid "NOTIFICATION_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon (registre des modifications)"
