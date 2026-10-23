@@ -740,6 +740,13 @@ def setup_referenceFT_PM(context):
     logger.info("upgrade step done!")
 
 
+def import_notice_form_buttons(context):
+    logger = logging.getLogger("urban: Import buttons for NOTICe forms")
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
+    logger.info("upgrade step done!")
+    
+    
 def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
     logger = logging.getLogger("urban: Hide CODT_UniqueBorderingLicences folder")
     webservice = WebserviceNotice()
