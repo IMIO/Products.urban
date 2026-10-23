@@ -67,6 +67,18 @@ def initialize_notice_settings(context):
         registry_record = Record(registry_field)
         registry_record.value = []
         registry.records["{0}.failed_notifications".format(base)] = registry_record
+    if (
+        "{0}.successful_notice_events_to_notify_by_email".format(base)
+        not in registry.records
+    ):
+        registry_field = field.List(
+            title=INoticeSettings["successful_notice_events_to_notify_by_email"].title
+        )
+        registry_record = Record(registry_field)
+        registry_record.value = []
+        registry.records[
+            "{0}.successful_notice_events_to_notify_by_email".format(base)
+        ] = registry_record
     logger.info("Upgrade done!")
 
 
@@ -804,3 +816,7 @@ def add_article65_type(context):
     add_new_urban_licence_type("Article65")
 
     logger.info("Upgrade done!")
+
+
+def add_async_notice_mails(context):
+    initialize_notice_settings(context)

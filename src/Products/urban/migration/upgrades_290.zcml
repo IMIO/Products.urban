@@ -196,4 +196,12 @@
         handler=".update_290.add_article65_type"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add async notice mail list in registry"
+        description=""
+        source="2924"
+        destination="2925"
+        handler=".update_290.add_async_notice_mails"
+        profile="Products.urban:default" />
+
 </configure>

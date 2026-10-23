@@ -39,6 +39,7 @@ class ImportFromNoticeView(BrowserView):
 
         self._initialize()
         self._add_random_sleep()
+        self.notify_successful_imports_from_previous_tick()
         self._retry_failed_notifications()
         self._process_fresh_notifications()
         self._save_progress()
@@ -76,6 +77,66 @@ class ImportFromNoticeView(BrowserView):
             delay = randint(1, 1800)
             logger.info(u"Delaying NOTICe cron call by %s seconds", delay)
             sleep(delay)
+
+    def notify_successful_imports_from_previous_tick(self):
+        events_to_notify = (
+            api.portal.get_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                default=[],
+            )
+            or []
+        )
+        handled_events = []
+
+        for event_path in events_to_notify:
+            event = api.content.get(path=event_path)
+            if not event:
+                handled_events.append(event_path)
+                logger.warning(
+                    "Skipping notification of missing NOTICe event: %s", event_path
+                )
+            else:
+                annotations = IAnnotations(event)
+                key = "notice_notification"
+                notice = annotations.get(key, {})
+                incoming = notice.get("incoming", {})
+                notice_id = incoming.get("notice_id")
+                notice_type = incoming.get("notice_type")
+
+                try:
+                    args = {
+                        "notice_id": notice_id,
+                        "notice_type": translate(
+                            notice_type, "urban", context=self.request
+                        ),
+                    }
+                    event_wrapper = IContextWrapper(event)(**args)
+                    notify(NoticeImportSucceededEvent(event_wrapper))
+                    handled_events.append(event_path)
+                    logger.info(
+                        "Triggered notification of successfully imported NOTICe event: %s",
+                        event_path,
+                    )
+                    sleep(
+                        5
+                    )  # reduces risk of losing emails (happens when sending them too quickly)
+                except Exception:
+                    logger.exception(
+                        u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                        notice_id,
+                    )
+
+        leftover_events = [
+            event_path
+            for event_path in events_to_notify
+            if event_path not in handled_events
+        ]
+        if events_to_notify != leftover_events:
+            api.portal.set_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                leftover_events,
+            )
+        logger.info("Notified successfully imported NOTICe events")
 
     def _retry_failed_notifications(self):
         """Retry processing of previously failed notifications, if requested."""
@@ -403,7 +464,7 @@ class IncomingNoticeHandler(object):
         self.create_incoming_event()
         self.import_documents()
         self.do_licence_transition()
-        self.notify_successful_import()
+        self.enqueue_successful_import_notification()
 
     def create_licence(self):
         self.licence = api.content.create(
@@ -612,21 +673,25 @@ class IncomingNoticeHandler(object):
         )
         return translate(msg, context=self.request)
 
-    def notify_successful_import(self):
-        notice_id = ""
-        try:
-            notice_id = self.notification.noticeId
-            notice_type = self.notification.notice_type
-            args = {
-                "notice_id": notice_id,
-                "notice_type": translate(notice_type, "urban", context=self.request),
-            }
-            event_wrapper = IContextWrapper(self.event)(**args)
-            notify(NoticeImportSucceededEvent(event_wrapper))
-        except Exception:
-            logger.exception(
-                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
-                notice_id,
+    def enqueue_successful_import_notification(self):
+        portal_physical_path = api.portal.get().getPhysicalPath()
+        event_physical_path = self.event.getPhysicalPath()
+        relative_path = event_physical_path[len(portal_physical_path):]
+        event_path = "/" + "/".join(relative_path)
+
+        events_to_notify = (
+            api.portal.get_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                default=[],
+            )
+            or []
+        )
+
+        if event_path not in events_to_notify:
+            events_to_notify.append(event_path)
+            api.portal.set_registry_record(
+                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                events_to_notify,
             )
 
 
