@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.interfaces import IUrbanWarningCondition
 from plone import api
 from zope.interface import implements
-from zope.annotation.interfaces import IAnnotations
+
 
 class WarningCondition(object):
     """
@@ -51,13 +52,4 @@ class NoticeWarning(WarningCondition):
     """
 
     def evaluate(self):
-        events = self.licence.getAllEvents()
-
-        for event in events:
-            annotations = IAnnotations(event)
-            notice = annotations.get("notice_notification", {})
-
-            if notice:
-                return True
-
-        return False
+        return ILicenceCreatedViaNoticeWS.providedBy(self.licence)

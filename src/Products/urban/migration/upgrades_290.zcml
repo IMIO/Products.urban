@@ -187,7 +187,7 @@
         destination="2923"
         handler=".update_290.add_cessiontype_vocabulary"
         profile="Products.urban:default" />
-  
+
     <gs:upgradeStep
         title="Add Article 65 type"
         description=""
@@ -196,11 +196,12 @@
         handler=".update_290.add_article65_type"
         profile="Products.urban:default" />
 
-    <gs::upgradeStep
+    <gs:upgradeStep
         title="Add notice warning"
         description=""
         source="2923"
         destination="2924"
         handler=".update_290.add_notice_warning"
         profile="Products.urban:default"/>
+
 </configure>

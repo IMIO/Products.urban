@@ -11,8 +11,10 @@ from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
+from Products.urban.setuphandlers import addNoticeWarning
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
@@ -812,16 +814,6 @@ def add_notice_warning(context):
     """
     logger = logging.getLogger("urban: Add notice warning")
     logger.info("starting upgrade steps")
-    portal_urban = api.portal.get_tool("portal_urban")
-    existing = list(portal_urban.getWarnings())
-    names = [w["condition"] for w in existing]
-    if "urban.warnings.notice" not in names:
-        existing.append(
-            {
-                "condition": "urban.warnings.notice",
-                "level": "warning",
-                "message": "Ce dossier a \xc3\xa9t\xc3\xa9 encod\xc3\xa9 de mani\xc3\xa8re d\xc3\xa9mat\xc3\xa9rialis\xc3\xa9e",
-            }
-        )
-        portal_urban.setWarnings(tuple(existing))
+    addNoticeWarning(context)
+    markLicencesCreatedViaNotice(context)
     logger.info("upgrade done!")

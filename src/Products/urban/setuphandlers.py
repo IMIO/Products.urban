@@ -27,9 +27,12 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicenceConfig
 from Products.urban.interfaces import ILicenceContainer
+from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.interfaces import IUrbanConfigurationFolder
+from Products.urban.interfaces import IUrbanEventNotice
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.profiles.extra.config_default_values import (
     vocabularies_with_HTML_description,
@@ -42,8 +45,6 @@ from Products.urban.utils import getLicenceFolderId
 from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
-from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.profiles.extra.config_default_values import vocabularies_with_HTML_description
 from datetime import date
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.schedule.utils import _set_faceted_view
@@ -58,6 +59,7 @@ from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from plone.portlets.interfaces import IPortletManager
 from zExceptions import BadRequest
 from zope import event
+from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
@@ -214,6 +216,12 @@ def postInstall(context):
     logger.info("addDefaultCronJobs : starting...")
     addDefaultCronJobs(context)
     logger.info("addDefaultCronJobs : Done")
+    logger.info("addNoticeWarning : starting...")
+    addNoticeWarning(context)
+    logger.info("addNoticeWarning : Done")
+    logger.info("markLicencesCreatedViaNotice : starting...")
+    markLicencesCreatedViaNotice(context)
+    logger.info("markLicencesCreatedViaNotice : Done")
 
 
 def _(msgid, default="", domain="urban"):
@@ -304,6 +312,39 @@ def addDefaultCronJobs(context):
         u"0 2 * * portal/@@inquiry_radius",
         u"0 4 * * portal/@@claimants_import",
     ]
+
+
+def addNoticeWarning(context):
+    """Add the notice warning on portal_urban warnings field."""
+    portal_urban = api.portal.get_tool("portal_urban")
+    warnings = list(portal_urban.getWarnings())
+    if "urban.warnings.notice" in [w["condition"] for w in warnings]:
+        return
+    warnings.append(
+        {
+            "condition": "urban.warnings.notice",
+            "level": "warning",
+            "message": translate(
+                "urban.warnings.notice",
+                domain="urban",
+                target_language="fr",
+                default=u"Ce dossier a été encodé de manière dématérialisée",
+            ).encode("utf-8"),
+        }
+    )
+    portal_urban.setWarnings(tuple(warnings))
+
+
+def markLicencesCreatedViaNotice(context):
+    """Mark licences having a NOTICE notification with ILicenceCreatedViaNoticeWS."""
+    catalog = api.portal.get_tool("portal_catalog")
+    licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
+    for licence_brain in licence_brains:
+        licence = licence_brain.getObject()
+        for urban_event in licence.getAllEvents(IUrbanEventNotice):
+            if IAnnotations(urban_event).get("notice_notification", {}):
+                alsoProvides(licence, ILicenceCreatedViaNoticeWS)
+                break
 
 
 def setFolderAllowedTypes(folder, portal_types):
@@ -1856,7 +1897,9 @@ def activateAnnouncementArticlesText(context):
 
 def check_if_type_already_install(urban_type):
     portal_urban = api.portal.get_tool("portal_urban")
-    return urban_type.lower() in portal_urban and ILicenceConfig.providedBy(portal_urban[urban_type.lower()])
+    return urban_type.lower() in portal_urban and ILicenceConfig.providedBy(
+        portal_urban[urban_type.lower()]
+    )
 
 
 def add_new_urban_licence_type(urban_type):
@@ -1943,6 +1986,7 @@ def add_aplication_folder(urban_type, urban_folder=None):
     urban_folder.moveObjectsToBottom([licence_folder_id])
     return licence_folder
 
+
 def set_licence_folder_security(urban_type, urban_folder=None):
     if urban_folder is None:
         site = api.portal.get()
@@ -1958,9 +2002,7 @@ def set_licence_folder_security(urban_type, urban_folder=None):
     environment_folder_names = getEnvironmentLicenceFolderIds() + uniquelicences_names
     try:
         # we try in case we apply the profile again...
-        urban_folder.manage_addProperty(
-            "urbanConfigId", urban_type, "string"
-        )
+        urban_folder.manage_addProperty("urbanConfigId", urban_type, "string")
     except BadRequest:
         pass
     urban_folder.manage_delLocalRoles(["urban_editors"])

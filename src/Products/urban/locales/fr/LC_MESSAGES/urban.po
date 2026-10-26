@@ -6054,6 +6054,9 @@ msgstr "Eléments de constatation"
 msgid "buildingtype_folder_title"
 msgstr "Nature de l'immeuble"
 
+msgid "urban_label_buildingType"
+msgstr "Nature de l'immeuble"
+
 msgid "part_of_the_building_concerned_folder_title"
 msgstr "Partie de l'immeuble concernée"
 
