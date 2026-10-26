@@ -191,14 +191,12 @@ class NoticeNotification(NoticeElement):
             "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
             "ART65_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
-
             "ACTE_CONSTITUTION_SURETE_COMMUNE": "ns3:TwiceDefaultRequest",
             # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
             "NOTIFICATION_RECEVABILITE_ART65_COMMUNE": "ns3:PublicSurveyRequest",
-
             # Summary Report
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
@@ -211,7 +209,6 @@ class NoticeNotification(NoticeElement):
             "PM_RS_PAS_ENVOYE_SFD": "ns3:SummaryReportRequest",
             "ART65_ENVOI_PROJET_COMMUNE": "ns3:SummaryReportRequest",
             "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE": "ns3:SummaryReportRequest",
-
             # Decision
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
             "NOTIFICATION_DEC_RS_COMMUNE": "ns3:DecisionRequest",
@@ -222,6 +219,8 @@ class NoticeNotification(NoticeElement):
             "ART65_FTAC_DECISION_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "ART65_AVIS_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
             "ART65_REFUS_TACITE_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            # Registre des modifications
+            "NOTIFICATION_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
         }
         return specific.get(self.notice_type)
 

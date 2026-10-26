@@ -370,6 +370,8 @@ class ImportFromNoticeView(BrowserView):
             handler = GesperFreeNotificationSPWHandler
         elif detailed_notification.notice_type in ("ACTE_CESSION_COMMUNE",):
             handler = CessionSpwHandler
+        elif detailed_notification.notice_type == "NOTIFICATION_ABANDON_COMMUNE":
+            handler = AbandonRegisterModificationSpwHandler
         else:
             raise NoImplementationFoundException(detailed_notification.notice_type)
 
@@ -962,3 +964,7 @@ class CessionSpwHandler(IncomingNoticeHandler):
     def process(self):
         super(CessionSpwHandler, self).process()
         notify(ObjectModifiedEvent(self.licence))
+
+
+class AbandonRegisterModificationSpwHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IAbandonEvent"
