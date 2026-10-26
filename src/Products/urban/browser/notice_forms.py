@@ -304,6 +304,32 @@ class NoticeResponseActionForm(Form):
     def do_additional_validation(self, data, errors):
         pass
 
+    def _validate_decision_code(self, data, errors):
+        college_decision_code = self.context.getDecision()
+        if type(college_decision_code) is list and len(college_decision_code) > 0:
+            college_decision_code = college_decision_code[0]
+        if not college_decision_code:
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        u"No college decision code was provided in the event; please edit it and select a code first."
+                    )
+                )
+            )
+
+    def _validate_opinion_code(self, data, errors):
+        college_opinion_code = self.context.getCollegeOpinion()
+        if type(college_opinion_code) is list and len(college_opinion_code) > 0:
+            college_opinion_code = college_opinion_code[0]
+        if not college_opinion_code:
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        u"No college opinion code was provided in the event; please edit it and select a code first."
+                    )
+                )
+            )
+
 
 class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
     incoming_notification = schema.Choice(
@@ -541,17 +567,7 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
         return output
 
     def do_additional_validation(self, data, errors):
-        college_decision_code = self.context.getDecision()
-        if type(college_decision_code) is list and len(college_decision_code) > 0:
-            college_decision_code = college_decision_code[0]
-        if not college_decision_code:
-            raise ActionExecutionError(
-                Invalid(
-                    _(
-                        u"No college decision code was provided in the event; please edit it and select a code first."
-                    )
-                )
-            )
+        self._validate_decision_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
@@ -813,6 +829,9 @@ class TransferOpinionGesperEPActionForm(NoticeResponseActionForm):
         self.field_values_to_store["college_opinion"] = output
         return output
 
+    def do_additional_validation(self, data, errors):
+        self._validate_opinion_code(data, errors)
+
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
         inquiry_event = self._get_inquiry_event(incoming_id)
@@ -973,17 +992,7 @@ class TransferOpinionGesperAPActionForm(NoticeResponseActionForm):
         return output
 
     def do_additional_validation(self, data, errors):
-        college_opinion_code = self.context.getCollegeOpinion()
-        if type(college_opinion_code) is list and len(college_opinion_code) > 0:
-            college_opinion_code = college_opinion_code[0]
-        if not college_opinion_code:
-            raise ActionExecutionError(
-                Invalid(
-                    _(
-                        u"No college opinion code was provided in the event; please edit it and select a code first."
-                    )
-                )
-            )
+        self._validate_opinion_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
@@ -1037,6 +1046,9 @@ class TransferOpinionGesperOpinionRequestActionForm(NoticeResponseActionForm):
         output = college_opinion.output if college_opinion else ""
         self.field_values_to_store["college_opinion"] = output
         return output
+
+    def do_additional_validation(self, data, errors):
+        self._validate_opinion_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
