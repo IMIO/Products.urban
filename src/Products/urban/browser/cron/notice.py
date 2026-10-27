@@ -35,6 +35,14 @@ logger = logging.getLogger("urban: Notice Cron")
 class ImportFromNoticeView(BrowserView):
     """Get new notification from Notice API"""
 
+    last_import_date_key = (
+        "Products.urban.browser.notice_settings.INoticeSettings.last_import_date"
+    )
+    failed_notifications_key = (
+        "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications"
+    )
+    successful_notice_events_to_notify_by_email_key = "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email"
+
     def __call__(self):
 
         self._initialize()
@@ -52,7 +60,7 @@ class ImportFromNoticeView(BrowserView):
         self.retry_failed_notifications = self.request.form.get("retry") == "1"
         self.last_import_date = (
             api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+                self.last_import_date_key,
                 default=datetime(2000, 1, 1),
             )
             or datetime(2000, 1, 1)
@@ -60,7 +68,7 @@ class ImportFromNoticeView(BrowserView):
         self.latest_successful_date = self.last_import_date
         self.failed_notifications = (
             api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+                self.failed_notifications_key,
                 default=[],
             )
             or []
@@ -81,7 +89,7 @@ class ImportFromNoticeView(BrowserView):
     def notify_successful_imports_from_previous_tick(self):
         events_to_notify = (
             api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                self.successful_notice_events_to_notify_by_email_key,
                 default=[],
             )
             or []
@@ -133,7 +141,7 @@ class ImportFromNoticeView(BrowserView):
         ]
         if events_to_notify != leftover_events:
             api.portal.set_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                self.successful_notice_events_to_notify_by_email_key,
                 leftover_events,
             )
         logger.info("Notified successfully imported NOTICe events")
@@ -176,7 +184,7 @@ class ImportFromNoticeView(BrowserView):
                 remaining_failed.append(failed_notice_id)
 
         api.portal.set_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            self.failed_notifications_key,
             remaining_failed,
         )
         self.failed_notifications = remaining_failed
@@ -232,7 +240,7 @@ class ImportFromNoticeView(BrowserView):
 
         if self.latest_successful_date > self.last_import_date:
             api.portal.set_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+                self.last_import_date_key,
                 self.latest_successful_date,
             )
             logger.info(
@@ -241,7 +249,7 @@ class ImportFromNoticeView(BrowserView):
             )
 
         api.portal.set_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            self.failed_notifications_key,
             self.failed_notifications,
         )
         if self.failed_notifications:
@@ -681,7 +689,7 @@ class IncomingNoticeHandler(object):
 
         events_to_notify = (
             api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                self.successful_notice_events_to_notify_by_email_key,
                 default=[],
             )
             or []
@@ -690,7 +698,7 @@ class IncomingNoticeHandler(object):
         if event_path not in events_to_notify:
             events_to_notify.append(event_path)
             api.portal.set_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email",
+                self.successful_notice_events_to_notify_by_email_key,
                 events_to_notify,
             )
 
