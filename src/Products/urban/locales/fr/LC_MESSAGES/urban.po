@@ -6128,3 +6128,6 @@ msgstr "Notification à la commune de l'abandon (registre des modifications)"
 
 msgid "urban.warnings.notice"
 msgstr "Ce dossier a été encodé de manière dématérialisée"
+
+msgid "Proposed opinion: ${decision_code}"
+msgstr "Avis proposé: ${decision_code}"
