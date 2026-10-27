@@ -796,7 +796,11 @@ class SummaryReportHandler(IncomingNoticeHandler):
             if mapped_value is not None:
                 self.event.setExternalDecision(mapped_value)
             else:
-                self.event.setDescription(u"Avis proposé: {}".format(decision_code))
+                msg = _(
+                    u"Proposed opinion: ${decision_code}",
+                    mapping={"decision_code": decision_code},
+                )
+                self.event.setDescription(translate(msg, context=self.request))
 
 
 class SpecialConditionsRevisionProjectHandler(SummaryReportHandler):

@@ -6101,3 +6101,6 @@ msgstr ""
 
 msgid "IReleaseOfSecurity type marker interface"
 msgstr ""
+
+msgid "Proposed opinion: ${decision_code}"
+msgstr ""
