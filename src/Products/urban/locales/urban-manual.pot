@@ -1801,9 +1801,8 @@ msgstr ""
 msgid "PM_EP_COURRIER_COMMUNE"
 msgstr ""
 
-<<<<<<< HEAD
 msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
-=======
+msgstr ""
+
 msgid "DECISION_REGISTRE_COMMUNE"
->>>>>>> 6ac063df7 (URB-3674: Handle DECISION_REGISTRE_COMMUNE notification)
 msgstr ""
