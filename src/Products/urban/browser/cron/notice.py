@@ -37,10 +37,19 @@ logger = logging.getLogger("urban: Notice Cron")
 class ImportFromNoticeView(BrowserView):
     """Get new notification from Notice API"""
 
+    last_import_date_key = (
+        "Products.urban.browser.notice_settings.INoticeSettings.last_import_date"
+    )
+    failed_notifications_key = (
+        "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications"
+    )
+    successful_notice_events_to_notify_by_email_key = "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email"
+
     def __call__(self):
 
         self._initialize()
         self._add_random_sleep()
+        self.notify_successful_imports_from_previous_tick()
         self._retry_failed_notifications()
         self._process_fresh_notifications()
         self._save_progress()
@@ -53,7 +62,7 @@ class ImportFromNoticeView(BrowserView):
         self.retry_failed_notifications = self.request.form.get("retry") == "1"
         self.last_import_date = (
             api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+                self.last_import_date_key,
                 default=datetime(2000, 1, 1),
             )
             or datetime(2000, 1, 1)
@@ -61,7 +70,7 @@ class ImportFromNoticeView(BrowserView):
         self.latest_successful_date = self.last_import_date
         self.failed_notifications = (
             api.portal.get_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+                self.failed_notifications_key,
                 default=[],
             )
             or []
@@ -78,6 +87,81 @@ class ImportFromNoticeView(BrowserView):
             delay = randint(1, 1800)
             logger.info(u"Delaying NOTICe cron call by %s seconds", delay)
             sleep(delay)
+
+    def notify_successful_imports_from_previous_tick(self):
+        """
+        Triggers successful NOTICe content rule on events previously imported.
+
+        Origin of this method:
+            in case of a ConflictError after the cron tick,
+            the changes can be lost and the cron task restarts from nothing.
+            The problem is that a successful import email has already been sent to users.
+            Differing this action avoids this,
+            as queued event objects to notify are checked for existence first.
+
+        Warning:
+            there is always a risk of losing emails if they are sent too quickly.
+        Temporary solution:
+            the sleep call after a successful content rule execution.
+        """
+        events_to_notify = (
+            api.portal.get_registry_record(
+                self.successful_notice_events_to_notify_by_email_key,
+                default=[],
+            )
+            or []
+        )
+        handled_events = []
+
+        for event_path in events_to_notify:
+            event = api.content.get(path=event_path)
+            if not event:
+                handled_events.append(event_path)
+                logger.warning(
+                    "Skipping notification of missing NOTICe event: %s", event_path
+                )
+            else:
+                annotations = IAnnotations(event)
+                key = "notice_notification"
+                notice = annotations.get(key, {})
+                incoming = notice.get("incoming", {})
+                notice_id = incoming.get("notice_id")
+                notice_type = incoming.get("notice_type")
+
+                try:
+                    args = {
+                        "notice_id": notice_id,
+                        "notice_type": translate(
+                            notice_type, "urban", context=self.request
+                        ),
+                    }
+                    event_wrapper = IContextWrapper(event)(**args)
+                    notify(NoticeImportSucceededEvent(event_wrapper))
+                    handled_events.append(event_path)
+                    logger.info(
+                        "Triggered notification of successfully imported NOTICe event: %s",
+                        event_path,
+                    )
+                    sleep(
+                        5
+                    )  # reduces risk of losing emails (happens when sending them too quickly)
+                except Exception:
+                    logger.exception(
+                        u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
+                        notice_id,
+                    )
+
+        leftover_events = [
+            event_path
+            for event_path in events_to_notify
+            if event_path not in handled_events
+        ]
+        if events_to_notify != leftover_events:
+            api.portal.set_registry_record(
+                self.successful_notice_events_to_notify_by_email_key,
+                leftover_events,
+            )
+        logger.info("Notified successfully imported NOTICe events")
 
     def _retry_failed_notifications(self):
         """Retry processing of previously failed notifications, if requested."""
@@ -117,7 +201,7 @@ class ImportFromNoticeView(BrowserView):
                 remaining_failed.append(failed_notice_id)
 
         api.portal.set_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            self.failed_notifications_key,
             remaining_failed,
         )
         self.failed_notifications = remaining_failed
@@ -173,7 +257,7 @@ class ImportFromNoticeView(BrowserView):
 
         if self.latest_successful_date > self.last_import_date:
             api.portal.set_registry_record(
-                "Products.urban.browser.notice_settings.INoticeSettings.last_import_date",
+                self.last_import_date_key,
                 self.latest_successful_date,
             )
             logger.info(
@@ -182,7 +266,7 @@ class ImportFromNoticeView(BrowserView):
             )
 
         api.portal.set_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.failed_notifications",
+            self.failed_notifications_key,
             self.failed_notifications,
         )
         if self.failed_notifications:
@@ -408,7 +492,7 @@ class IncomingNoticeHandler(object):
         self.create_incoming_event()
         self.import_documents()
         self.do_licence_transition()
-        self.notify_successful_import()
+        self.enqueue_successful_import_notification()
 
     def create_licence(self):
         self.licence = api.content.create(
@@ -618,21 +702,25 @@ class IncomingNoticeHandler(object):
         )
         return translate(msg, context=self.request)
 
-    def notify_successful_import(self):
-        notice_id = ""
-        try:
-            notice_id = self.notification.noticeId
-            notice_type = self.notification.notice_type
-            args = {
-                "notice_id": notice_id,
-                "notice_type": translate(notice_type, "urban", context=self.request),
-            }
-            event_wrapper = IContextWrapper(self.event)(**args)
-            notify(NoticeImportSucceededEvent(event_wrapper))
-        except Exception:
-            logger.exception(
-                u"Failed to emit NoticeImportSucceededEvent for notice_id=%s",
-                notice_id,
+    def enqueue_successful_import_notification(self):
+        portal_physical_path = api.portal.get().getPhysicalPath()
+        event_physical_path = self.event.getPhysicalPath()
+        relative_path = event_physical_path[len(portal_physical_path):]
+        event_path = "/" + "/".join(relative_path)
+
+        events_to_notify = (
+            api.portal.get_registry_record(
+                self.successful_notice_events_to_notify_by_email_key,
+                default=[],
+            )
+            or []
+        )
+
+        if event_path not in events_to_notify:
+            events_to_notify.append(event_path)
+            api.portal.set_registry_record(
+                self.successful_notice_events_to_notify_by_email_key,
+                events_to_notify,
             )
 
 
