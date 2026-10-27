@@ -1118,6 +1118,9 @@ msgstr "Notification à la commune de l'abandon de la procédure (Plans modifica
 msgid "PM_ABANDON_COMMUNE_FTFD"
 msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
 
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr "Notification hors délai à la commune du RS - Plans Modificatifs"
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
 
@@ -6054,6 +6057,9 @@ msgstr "Eléments de constatation"
 msgid "buildingtype_folder_title"
 msgstr "Nature de l'immeuble"
 
+msgid "urban_label_buildingType"
+msgstr "Nature de l'immeuble"
+
 msgid "part_of_the_building_concerned_folder_title"
 msgstr "Partie de l'immeuble concernée"
 
@@ -6071,9 +6077,6 @@ msgstr "Taxation"
 
 msgid "urban_label_buildingPart"
 msgstr "Partie de l'immeuble concernée"
-
-msgid "urban_label_buildingType"
-msgstr "Nature de l'immeuble"
 
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
 msgstr "Plans Modificatifs - Notification à la commune de la décision"
@@ -6119,3 +6122,18 @@ msgstr "Notification à la commune de l'acte de constitution de sûreté"
 
 msgid "IReleaseOfSecurity type marker interface"
 msgstr "Libération de sûreté"
+
+msgid "NOTIFICATION_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon (registre des modifications)"
+
+msgid "urban.warnings.notice"
+msgstr "Ce dossier a été encodé de manière dématérialisée"
+
+msgid "Proposed opinion: ${decision_code}"
+msgstr "Avis proposé: ${decision_code}"
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr "Décision sur le registre des modifications"
+
+msgid "DECISION_REGISTRE_COMMUNE"
+msgstr "Registre des modifications - Notification à la commune de la décision"

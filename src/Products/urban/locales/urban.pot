@@ -1126,6 +1126,9 @@ msgstr ""
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
 msgstr ""
 
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr ""
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr ""
 
@@ -6097,4 +6100,10 @@ msgid "IProvisionOfSecurity type marker interface"
 msgstr ""
 
 msgid "IReleaseOfSecurity type marker interface"
+msgstr ""
+
+msgid "Proposed opinion: ${decision_code}"
+msgstr ""
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
 msgstr ""

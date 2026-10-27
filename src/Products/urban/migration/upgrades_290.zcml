@@ -187,7 +187,7 @@
         destination="2923"
         handler=".update_290.add_cessiontype_vocabulary"
         profile="Products.urban:default" />
-  
+
     <gs:upgradeStep
         title="Add Article 65 type"
         description=""
@@ -197,10 +197,18 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add async notice mail list in registry"
+        title="Add notice warning"
         description=""
         source="2924"
         destination="2925"
+        handler=".update_290.add_notice_warning"
+        profile="Products.urban:default"/>
+
+    <gs:upgradeStep
+        title="Add async notice mail list in registry"
+        description=""
+        source="2925"
+        destination="2926"
         handler=".update_290.add_async_notice_mails"
         profile="Products.urban:default" />
 

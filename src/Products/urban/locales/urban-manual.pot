@@ -1720,6 +1720,9 @@ msgstr ""
 msgid "DECISION_GESPER_2_EME_INSTANCE"
 msgstr ""
 
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr ""
+
 msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
 msgstr ""
 
@@ -1792,8 +1795,14 @@ msgstr ""
 msgid "ACTE_CESSION_COMMUNE"
 msgstr ""
 
+msgid "NOTIFICATION_ABANDON_COMMUNE"
+msgstr ""
+
 msgid "PM_EP_COURRIER_COMMUNE"
 msgstr ""
 
 msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
+msgstr ""
+
+msgid "DECISION_REGISTRE_COMMUNE"
 msgstr ""
