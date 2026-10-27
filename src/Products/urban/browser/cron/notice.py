@@ -87,6 +87,21 @@ class ImportFromNoticeView(BrowserView):
             sleep(delay)
 
     def notify_successful_imports_from_previous_tick(self):
+        """
+        Triggers successful NOTICe content rule on events previously imported.
+
+        Origin of this method:
+            in case of a ConflictError after the cron tick,
+            the changes can be lost and the cron task restarts from nothing.
+            The problem is that a successful import email has already been sent to users.
+            Differing this action avoids this,
+            as queued event objects to notify are checked for existence first.
+
+        Warning:
+            there is always a risk of losing emails if they are sent too quickly.
+        Temporary solution:
+            the sleep call after a successful content rule execution.
+        """
         events_to_notify = (
             api.portal.get_registry_record(
                 self.successful_notice_events_to_notify_by_email_key,
