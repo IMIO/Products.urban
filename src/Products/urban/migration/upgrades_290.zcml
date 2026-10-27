@@ -157,10 +157,66 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Add last received notice notification"
+        title="Hide CODT_UniqueBorderingLicences for none notice instance"
         description=""
         source="2919"
         destination="2920"
+        handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add 3rd_observation state to housing workflow"
+        description=""
+        source="2920"
+        destination="2921"
+        handler=".update_290.add_3rd_observation_to_housing_workflow"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set urbanConfigId for PUL"
+        description=""
+        source="2921"
+        destination="2922"
+        handler=".update_290.set_pul_urbanConfigId"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add cession type"
+        description=""
+        source="2922"
+        destination="2923"
+        handler=".update_290.add_cessiontype_vocabulary"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add Article 65 type"
+        description=""
+        source="2923"
+        destination="2924"
+        handler=".update_290.add_article65_type"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add notice warning"
+        description=""
+        source="2924"
+        destination="2925"
+        handler=".update_290.add_notice_warning"
+        profile="Products.urban:default"/>
+
+    <gs:upgradeStep
+        title="Add async notice mail list in registry"
+        description=""
+        source="2925"
+        destination="2926"
+        handler=".update_290.add_async_notice_mails"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add last received notice notification"
+        description=""
+        source="2926"
+        destination="2927"
         handler=".update_290.add_last_received_notice_notification"
         profile="Products.urban:default" />
 

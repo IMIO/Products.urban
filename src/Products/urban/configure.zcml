@@ -114,6 +114,18 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.ISpecialConditionsRevisionDepositEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISpecialConditionsRevisionProjectEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ISpecialConditionsRevisionDecisionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IDepositEvent"
     type=".interfaces.IEventTypeType"/>
 
@@ -318,8 +330,36 @@
     type=".interfaces.IEventTypeType"/>
 
   <interface
+    interface=".interfaces.IAbandonEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IInformationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ICessionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.ITacitRefusalEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
     interface=".interfaces.IAmendedPlansAcknowledgmentEvent"
-    type=".interfaces.IEventTypeType"/> 
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IEstablishmentEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IExtensionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+  <interface
+    interface=".interfaces.IModificationRegistryDecisionEvent"
+    type=".interfaces.IEventTypeType"/>
 
   <adapter
     for="Products.CMFCore.interfaces.ICatalogAware
@@ -343,5 +383,21 @@
            Products.DCWorkflow.interfaces.IAfterTransitionEvent"
     handler=".subscribers.after_term_deactivate"
     />
+
+<interface
+    interface=".interfaces.ICessionEvent"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IAcknowledgmentOfTransfer"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IProvisionOfSecurity"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
+    interface=".interfaces.IReleaseOfSecurity"
+    type=".interfaces.IEventTypeType"/>
 
 </configure>

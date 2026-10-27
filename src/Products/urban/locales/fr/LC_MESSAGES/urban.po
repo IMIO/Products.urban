@@ -88,6 +88,33 @@ msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importa
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/reclamant_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
 
+msgid "ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure"
+
+msgid "ARRET_PLAN_MODIF_COMMUNE"
+msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs"
+
+msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
+msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs (autre commune)"
+
+msgid "ART65_ABANDON_COMMUNE"
+msgstr "Article 65 - Notification à la commune de l'abandon de la procédure de révision des CP"
+
+msgid "ART65_AVIS_FT_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune que l'avis FT vaut décision"
+
+msgid "ART65_ENVOI_PROJET_COMMUNE"
+msgstr "Article 65 - Notification à la commune du projet de révision des CP"
+
+msgid "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE"
+msgstr "Article 65 - Envoi tardif à la commune du projet de décision par le FT"
+
+msgid "ART65_FTAC_DECISION_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la décision de révision des CP"
+
+msgid "ART65_REFUS_TACITE_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune du refus tacite de la demande de révision des CP"
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:34
@@ -181,6 +208,9 @@ msgstr "Appliquer uniquement lorsque le type d'événement correspond à celui d
 
 msgid "Article127"
 msgstr "Article 127"
+
+msgid "Article65"
+msgstr "Article 65"
 
 #: ../browser/licence/templates/licencetabsmacros.pt:469
 #: ../browser/licence/templates/licenceview.pt:50
@@ -382,6 +412,9 @@ msgstr "Demande d'organisation d'une enquête publique (interrogée précédemme
 msgid "DEMANDE_EP_EXTRA"
 msgstr "Demande d'organisation d'une enquête publique (hors territoire)"
 
+msgid "PM_EP_COURRIER_COMMUNE"
+msgstr "Demande d'organisation d'une enquête publique - Plans Modificatifs"
+
 #: ../browser/offdays_settings.py:47
 msgid "Date"
 msgstr "Date"
@@ -550,6 +583,10 @@ msgstr "Je créerai une demande d'avis préalable du Collège"
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr "Je ne créerai pas de demande d'avis préalable du Collège, et je finalise la réponse vers le SPW maintenant"
 
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr "Abandon"
+
 #. Default: "Acknowledgement"
 #: ../interfaces.py:385
 msgid "IAcknowledgment type marker interface"
@@ -570,6 +607,10 @@ msgstr "Annonce de projet"
 #: ../interfaces.py:417
 msgid "ICODTProcedureChoiceNotified type marker interface"
 msgstr "Notification du choix de la procédure"
+
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
+msgstr "Cession"
 
 #: ../interfaces.py:345
 msgid "ICollege type marker interface"
@@ -618,13 +659,21 @@ msgstr "Événement exclusif à l'environnement (permis unique)"
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr "Collège simple (environnement)"
 
-#: ../interfaces.py:513
+#: ../interfaces.py:609
+msgid "IEstablishmentEvent type marker interface"
+msgstr "Implantation"
+
+#: ../interfaces.py:537
 msgid "IForcedEndEvent type marker interface"
 msgstr "Fin forcée"
 
 #: ../interfaces.py:505
 msgid "IIILEPrescriptionEvent type marker interface"
 msgstr "Prescription IILE"
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
+msgstr "Information"
 
 #. Default: "Inquiry"
 #: ../interfaces.py:421
@@ -708,7 +757,11 @@ msgstr "Changement d'exploitant"
 msgid "IProrogation type marker interface"
 msgstr "Prorogation"
 
-#: ../interfaces.py:497
+#: ../interfaces.py:613
+msgid "IExtensionEvent type marker interface"
+msgstr "Prolongation"
+
+#: ../interfaces.py:521
 msgid "IProvocationEvent type marker interface"
 msgstr "Provocation"
 
@@ -735,9 +788,25 @@ msgstr "Règlement transactionnel"
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr "Collège simple"
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr "Décision de révision des conditions particulières"
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr "Dépôt de révision des conditions particulières"
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr "Projet de révision des conditions particulières"
+
 #: ../interfaces.py:565
 msgid "ISuspensionEvent type marker interface"
 msgstr "Suspension"
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
+msgstr "Refus tacite"
 
 #: ../interfaces.py:465
 msgid "ITechnicalAnalysis type marker interface"
@@ -915,6 +984,9 @@ msgstr "Transmissions (NOTICe)"
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr "Notification à la commune de la décision"
 
+msgid "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE"
+msgstr "Article 65 - Notification à la commune de l'irrecevabilité de la demande de révision des CP"
+
 msgid "NOTIFICATION_PAS_ENVOI_RS"
 msgstr "Impossibilité de transmettre un rapport de synthèse dans les délais impartis"
 
@@ -927,8 +999,11 @@ msgstr "Impossibilité de transmettre un rapport de synthèse suite aux plans mo
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction"
 
-msgid "PM_PROROGATION_COURRIER_COMMUNE"
-msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
+msgid "NOTIFICATION_RECEVABILITE_ART65_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la recevabilité & Demande d'organisation d'EP"
+
+msgid "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la recevabilité de la demande de révision des CP"
 
 msgid "NOTIFICATION_RS_COMMUNE"
 msgstr "Transmission du rapport de synthèse"
@@ -1037,8 +1112,20 @@ msgstr "Un fichier n'est plus disponible et n'a pas pu être envoyé"
 msgid "Opinion to ask"
 msgstr "Avis à demander"
 
+msgid "PM_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs)"
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
+
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr "Notification hors délai à la commune du RS - Plans Modificatifs"
+
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
 msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
+
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
@@ -1088,7 +1175,10 @@ msgstr "Réunion de projet"
 msgid "Proposed value"
 msgstr "Valeur proposée"
 
-#: ../browser/templates/parcelrecordsview.pt:22
+msgid "REVISION_CP_FT_ENVOI_COMMUNE"
+msgstr "Article 65 - Demande à la commune de révision CP par le fonctionnaire technique"
+
+#: ../browser/templates/parcelrecordsview.pt:28
 #: ../browser/templates/parcelsinfo.pt:51
 msgid "Related licences"
 msgstr "Dossiers liés à la parcelle"
@@ -1531,6 +1621,12 @@ msgstr "Paramètres des Articles 127"
 
 msgid "article127s"
 msgstr "Articles 127"
+
+msgid "article65_urbanconfig_title"
+msgstr "Paramètres des Articles 65"
+
+msgid "article65s"
+msgstr "Articles 65"
 
 msgid "articles_folder_title"
 msgstr "Articles"
@@ -2935,13 +3031,13 @@ msgid "transfer_opinion"
 msgstr "Envoyer l'avis préalable du Collège vers le SPW"
 
 msgid "transfer_opinion_gesper_ap"
-msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège (A.P.) vers le SPW"
 
 msgid "transfer_opinion_gesper_ep"
-msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège (E.P.) vers le SPW"
 
 msgid "transfer_opinion_gesper_opinion_request"
-msgstr "Envoyer l'avis préalable du Collège vers le SPW"
+msgstr "Envoyer l'avis préalable du Collège (avis seul) vers le SPW"
 
 msgid "transfer_ticket"
 msgstr "Envoyer le PV et les réclamations vers le SPW"
@@ -5917,6 +6013,16 @@ msgstr "Veuillez renseigner le ou les demandeur(s)"
 msgid "warning_add_an_plaintiff"
 msgstr "Veuillez renseigner un plaignant "
 
+#. Default: "referenceIaDocs"
+#: ../UrbanEvent.py:588
+msgid "urban_label_referenceIaDocs"
+msgstr "Référence iA.Docs"
+
+#. Default: "urlIaDocs"
+#: ../UrbanEvent.py:597
+msgid "urban_label_urlIaDocs"
+msgstr "URL iA.Docs"
+
 msgid "watercourses_folder_title"
 msgstr "Liste des cours d'eau de la commune"
 
@@ -5951,6 +6057,9 @@ msgstr "Eléments de constatation"
 msgid "buildingtype_folder_title"
 msgstr "Nature de l'immeuble"
 
+msgid "urban_label_buildingType"
+msgstr "Nature de l'immeuble"
+
 msgid "part_of_the_building_concerned_folder_title"
 msgstr "Partie de l'immeuble concernée"
 
@@ -5969,9 +6078,6 @@ msgstr "Taxation"
 msgid "urban_label_buildingPart"
 msgstr "Partie de l'immeuble concernée"
 
-msgid "urban_label_buildingType"
-msgstr "Nature de l'immeuble"
-
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
 msgstr "Plans Modificatifs - Notification à la commune de la décision"
 
@@ -5980,3 +6086,54 @@ msgstr "Plans Modificatifs - Notification à la commune que le RS vaut décision
 
 msgid "PM_REFUS_TACITE_COMMUNE"
 msgstr "Plans modificatifs - Notification à la commune du refus tacite"
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr "Notification à la commune de l'abandon de la procédure"
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr "Plans modificatifs - Notification à la commune de l'abandon de la procédure"
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr "Plans modificatifs - Notification à la commune de l'abandon de la procédure (AC=FTFD)"
+
+msgid "ICessionEvent type marker interface"
+msgstr "Cession"
+
+msgid "urban_label_newOperator"
+msgstr "Nouvel exploitant"
+
+msgid "urban_label_cessionType"
+msgstr "Type de cession"
+
+msgid "cessiontype_folder_title"
+msgstr "Type de cession"
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr "Prise de connaissance de la cession"
+
+msgid "ACTE_CESSION_COMMUNE"
+msgstr "Notification à la commune de l'acte de cession"
+
+msgid "IProvisionOfSecurity type marker interface"
+msgstr "Constitution de sûreté"
+
+msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
+msgstr "Notification à la commune de l'acte de constitution de sûreté"
+
+msgid "IReleaseOfSecurity type marker interface"
+msgstr "Libération de sûreté"
+
+msgid "NOTIFICATION_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon (registre des modifications)"
+
+msgid "urban.warnings.notice"
+msgstr "Ce dossier a été encodé de manière dématérialisée"
+
+msgid "Proposed opinion: ${decision_code}"
+msgstr "Avis proposé: ${decision_code}"
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr "Décision sur le registre des modifications"
+
+msgid "DECISION_REGISTRE_COMMUNE"
+msgstr "Registre des modifications - Notification à la commune de la décision"

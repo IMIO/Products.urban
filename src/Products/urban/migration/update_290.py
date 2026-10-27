@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-from textwrap import dedent
-
 from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
@@ -10,9 +8,15 @@ from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
-from Products.urban.utils import moveElementAfter
+from Products.urban.setuphandlers import addNoticeWarning
+from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
+from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
 from eea.facetednavigation.criteria.interfaces import ICriteria
 from imio.helpers.catalog import reindexIndexes
@@ -21,6 +25,7 @@ from plone.app.textfield import RichTextValue
 from plone.registry import field
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
+from textwrap import dedent
 from zope.component import getUtility
 from zope.event import notify
 
@@ -65,6 +70,18 @@ def initialize_notice_settings(context):
         registry_record = Record(registry_field)
         registry_record.value = []
         registry.records["{0}.failed_notifications".format(base)] = registry_record
+    if (
+        "{0}.successful_notice_events_to_notify_by_email".format(base)
+        not in registry.records
+    ):
+        registry_field = field.List(
+            title=INoticeSettings["successful_notice_events_to_notify_by_email"].title
+        )
+        registry_record = Record(registry_field)
+        registry_record.value = []
+        registry.records[
+            "{0}.successful_notice_events_to_notify_by_email".format(base)
+        ] = registry_record
     logger.info("Upgrade done!")
 
 
@@ -349,6 +366,20 @@ def fix_housing_roaddecree(context):
     portal_types = ["Housing", "RoadDecree"]
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
+    logger.info("upgrade step done!")
+
+
+def add_3rd_observation_to_housing_workflow(context):
+    logger = logging.getLogger("urban: Add 3rd_observation state to housing workflow")
+    logger.info("starting upgrade steps")
+    from Products.urban.migration.utils import refresh_workflow_permissions
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    refresh_workflow_permissions("housing_workflow")
     logger.info("upgrade step done!")
 
 
@@ -757,3 +788,84 @@ def setup_referenceFT_PM(context):
     reindexIndexes(None, ["referenceFT_PM"])
 
     logger.info("upgrade step done!")
+
+
+def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
+    logger = logging.getLogger("urban: Hide CODT_UniqueBorderingLicences folder")
+    webservice = WebserviceNotice()
+    if webservice.is_setup:
+        logger.info("Notice is configure, abort hiding")
+        return
+    portal = api.portal.get()
+    urban = portal["urban"]
+    codt_uniqueborderinglicences = urban.get("codt_uniqueborderinglicences", None)
+    if codt_uniqueborderinglicences is None:
+        logger.warning("codt_uniqueborderinglicences folder is not present")
+        return
+    codt_uniqueborderinglicences.setExcludeFromNav(True)
+
+
+def set_pul_urbanConfigId(context):
+    logger = logging.getLogger("urban: Set urbanConfigId for PUL")
+
+    portal = api.portal.get()
+    licence_folder = getattr(portal.urban, "codt_uniqueborderinglicences", None)
+    if not licence_folder.getProperty("urbanConfigId", ""):
+        licence_folder.manage_addProperty(
+            "urbanConfigId", "codt_uniqueborderinglicence", "string"
+        )
+
+    logger.info("upgrade step done!")
+
+
+def add_cessiontype_vocabulary(context):
+    logger = logging.getLogger("urban: add cessiontype vocabulary")
+    portal_urban = api.portal.get_tool("portal_urban")
+    cessiontype_values = default_values["global"]["cessiontype"]
+    allowedtypes = cessiontype_values[0]
+    cessiontype_folder = createVocabularyFolder(
+        portal_urban, "cessiontype", context, allowedtypes
+    )
+    createFolderDefaultValues(cessiontype_folder, cessiontype_values[1:], allowedtypes)
+    logger.info("upgrade step done!")
+
+
+def add_article65_type(context):
+    """
+    Note: the events must be added by upgrade step in `urban.events`
+    """
+
+    logger = logging.getLogger("urban: Add Article 65 licences")
+
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "workflow"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "typeinfo"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
+
+    add_new_urban_licence_type("Article65")
+
+    logger.info("Upgrade done!")
+
+
+def add_notice_warning(context):
+    """
+    Add notice warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger("urban: Add notice warning")
+    logger.info("starting upgrade steps")
+    addNoticeWarning(context)
+    markLicencesCreatedViaNotice(context)
+    logger.info("upgrade done!")
+
+
+def add_async_notice_mails(context):
+    initialize_notice_settings(context)

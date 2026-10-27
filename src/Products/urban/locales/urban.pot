@@ -93,6 +93,33 @@ msgstr ""
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr ""
 
+msgid "ABANDON_COMMUNE"
+msgstr ""
+
+msgid "ARRET_PLAN_MODIF_COMMUNE"
+msgstr ""
+
+msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "ART65_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "ART65_AVIS_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_ENVOI_PROJET_COMMUNE"
+msgstr ""
+
+msgid "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_FTAC_DECISION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ART65_REFUS_TACITE_COURRIER_COMMUNE"
+msgstr ""
+
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
 #: ../browser/templates/urbaneventinquiryview.pt:39
@@ -185,6 +212,9 @@ msgid "Apply only when the Event Type corresponds to the one of the context"
 msgstr ""
 
 msgid "Article127"
+msgstr ""
+
+msgid "Article65"
 msgstr ""
 
 #: ../browser/licence/templates/licencetabsmacros.pt:469
@@ -567,6 +597,10 @@ msgstr ""
 msgid "I will not send a college opinion and I am finalizing the response to the SPW now"
 msgstr ""
 
+#: ../interfaces.py:624
+msgid "IAbandonEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:401
 msgid "IAcknowledgment type marker interface"
 msgstr ""
@@ -585,6 +619,10 @@ msgstr ""
 
 #: ../interfaces.py:433
 msgid "ICODTProcedureChoiceNotified type marker interface"
+msgstr ""
+
+#: ../interfaces.py:632
+msgid "ICessionEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:361
@@ -631,12 +669,20 @@ msgstr ""
 msgid "IEnvironmentSimpleCollegeEvent type marker interface"
 msgstr ""
 
-#: ../interfaces.py:529
+#: ../interfaces.py:609
+msgid "IEstablishmentEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:537
 msgid "IForcedEndEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:521
 msgid "IIILEPrescriptionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:628
+msgid "IInformationEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:437
@@ -719,7 +765,11 @@ msgstr ""
 msgid "IProrogation type marker interface"
 msgstr ""
 
-#: ../interfaces.py:513
+#: ../interfaces.py:613
+msgid "IExtensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:521
 msgid "IProvocationEvent type marker interface"
 msgstr ""
 
@@ -743,8 +793,24 @@ msgstr ""
 msgid "ISimpleCollegeEvent type marker interface"
 msgstr ""
 
+#: ../interfaces.py:445
+msgid "ISpecialConditionsRevisionDecisionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:437
+msgid "ISpecialConditionsRevisionDepositEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:441
+msgid "ISpecialConditionsRevisionProjectEvent type marker interface"
+msgstr ""
+
 #: ../interfaces.py:581
 msgid "ISuspensionEvent type marker interface"
+msgstr ""
+
+#: ../interfaces.py:541
+msgid "ITacitRefusalEvent type marker interface"
 msgstr ""
 
 #: ../interfaces.py:481
@@ -925,6 +991,9 @@ msgstr ""
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr ""
 
+msgid "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE"
+msgstr ""
+
 msgid "NOTIFICATION_PAS_ENVOI_RS"
 msgstr ""
 
@@ -935,6 +1004,12 @@ msgid "PM_RS_PAS_ENVOYE"
 msgstr ""
 
 msgid "NOTIFICATION_PROROGATION_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RECEVABILITE_ART65_COMMUNE"
+msgstr ""
+
+msgid "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE"
 msgstr ""
 
 msgid "NOTIFICATION_RS_COMMUNE"
@@ -1042,7 +1117,16 @@ msgstr ""
 msgid "Opinion to ask"
 msgstr ""
 
+msgid "PM_ABANDON_COMMUNE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr ""
+
 msgid "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "PM_ENVOI_RS_HD_COMMUNE"
 msgstr ""
 
 msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
@@ -1105,6 +1189,9 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:18
 msgid "Proposed value"
+msgstr ""
+
+msgid "REVISION_CP_FT_ENVOI_COMMUNE"
 msgstr ""
 
 #: ../browser/templates/parcelrecordsview.pt:28
@@ -1562,6 +1649,12 @@ msgid "article127_urbanconfig_title"
 msgstr ""
 
 msgid "article127s"
+msgstr ""
+
+msgid "article65_urbanconfig_title"
+msgstr ""
+
+msgid "article65s"
 msgstr ""
 
 msgid "articles_folder_title"
@@ -5950,6 +6043,16 @@ msgstr ""
 msgid "warning_add_an_plaintiff"
 msgstr ""
 
+#. Default: "referenceIaDocs"
+#: ../UrbanEvent.py:588
+msgid "urban_label_referenceIaDocs"
+msgstr ""
+
+#. Default: "urlIaDocs"
+#: ../UrbanEvent.py:597
+msgid "urban_label_urlIaDocs"
+msgstr ""
+
 msgid "watercourses_folder_title"
 msgstr ""
 
@@ -5967,4 +6070,40 @@ msgid "PM_ENVOI_RS_HD_SFD_COMMUNE"
 msgstr ""
 
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr ""
+
+msgid "ABANDON_COMMUNE_MANUELLE"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP"
+msgstr ""
+
+msgid "PM_ABANDON_COMMUNE_EP_FTFD"
+msgstr ""
+
+msgid "ICessionEvent type marker interface"
+msgstr ""
+
+msgid "urban_label_newOperator"
+msgstr ""
+
+msgid "urban_label_cessionType"
+msgstr ""
+
+msgid "IAcknowledgmentOfTransfer type marker interface"
+msgstr ""
+
+msgid "cessiontype_folder_title"
+msgstr ""
+
+msgid "IProvisionOfSecurity type marker interface"
+msgstr ""
+
+msgid "IReleaseOfSecurity type marker interface"
+msgstr ""
+
+msgid "Proposed opinion: ${decision_code}"
+msgstr ""
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
 msgstr ""

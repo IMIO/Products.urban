@@ -41,8 +41,16 @@ class INoticeSettings(Interface):
         default=[],
     )
 
+    successful_notice_events_to_notify_by_email = schema.List(
+        title=_("Successful NOTICe events to notify by email"),
+        value_type=schema.TextLine(),
+        required=False,
+        default=[],
+    )
+
 
 class NoticeSettingsEditForm(RegistryEditForm):
+    prefix = "notice."
     schema = INoticeSettings
     label = _("Notice settings")
     description = ""

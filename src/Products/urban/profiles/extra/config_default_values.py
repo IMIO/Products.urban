@@ -1497,6 +1497,38 @@ default_values = {
             },
         ],
     },
+    "Article65": {
+        "decisions": [
+            "UrbanVocabularyTerm",
+            {"id": "octroi", "title": u"Octroi", "extraValue": "Recevable"},
+            {"id": "refus", "title": u"Refus", "extraValue": "Irrecevable"},
+        ],
+        "folderdelays": [
+            "UrbanDelay",
+            {"id": "40j", "title": u"40 jours", "deadLineDelay": 40, "alertDelay": 20},
+            {"id": "50j", "title": u"50 jours", "deadLineDelay": 50, "alertDelay": 20},
+            {"id": "70j", "title": u"70 jours", "deadLineDelay": 70, "alertDelay": 20},
+            {"id": "80j", "title": u"80 jours", "deadLineDelay": 80, "alertDelay": 20},
+            {
+                "id": "140j",
+                "title": u"140 jours",
+                "deadLineDelay": 140,
+                "alertDelay": 20,
+            },
+            {
+                "id": "170j",
+                "title": u"170 jours",
+                "deadLineDelay": 170,
+                "alertDelay": 20,
+            },
+            {
+                "id": "inconnu",
+                "title": u"Inconnu",
+                "deadLineDelay": 0,
+                "alertDelay": 20,
+            },
+        ],
+    },
     "ParcelOutLicence": {
         "foldercategories": [
             "UrbanVocabularyTerm",
@@ -1942,6 +1974,7 @@ default_values = {
                 "EnvClassOne",
                 "EnvClassTwo",
                 "EnvClassBordering",
+                "Article65",
             ],
             {
                 "id": "spw-dgo1",
@@ -2072,13 +2105,14 @@ default_values = {
                 "EnvClassOne",
                 "EnvClassTwo",
                 "UniqueLicence",
+                "Article65",
             ],
             {"id": "college", "title": u"Collège"},
             {"id": "ft", "title": u"Fonctionnaire technique"},
         ],
         "inadmissibilityreasons": [
             "UrbanVocabularyTerm",
-            ["EnvClassOne", "EnvClassTwo", "EnvClassThree", "EnvClassBordering"],
+            ["EnvClassOne", "EnvClassTwo", "EnvClassThree", "EnvClassBordering", "Article65"],
             {"id": "missing_parts", "title": u"Pièces/renseignements manquants"},
             {
                 "id": "no_deposit_receipt",
@@ -2097,6 +2131,7 @@ default_values = {
                 "EnvClassThree",
                 "EnvClassBordering",
                 "CODT_IntegratedLicence",
+                "Article65",
             ],
             {
                 "id": "new_business",
@@ -3057,6 +3092,11 @@ default_values = {
         ],
     },
     "global": {
+        "cessiontype": [
+            "UrbanVocabularyTerm",
+            {"id": "partial", "title": u"Partielle"},
+            {"id": "total", "title": u"Totale"},
+        ],
         "dimensiontypes": [
             "UrbanVocabularyTerm",
             {"id": "width", "title": u"Largeur"},
@@ -3882,73 +3922,73 @@ default_values = {
         "buildingtype": [
             "UrbanVocabularyTerm",
             {
-                "id": "annexe", 
-                "title": u"Annexe", 
+                "id": "annexe",
+                "title": u"Annexe",
             },
             {
-                "id": "commerce", 
-                "title": u"Commerce", 
+                "id": "commerce",
+                "title": u"Commerce",
             },
             {
-                "id": "industrie", 
-                "title": u"Industrie", 
+                "id": "industrie",
+                "title": u"Industrie",
             },
             {
-                "id": "infrastructure-publique", 
-                "title": u"Infrastructure publique", 
+                "id": "infrastructure-publique",
+                "title": u"Infrastructure publique",
             },
             {
-                "id": "logement", 
-                "title": u"Logement", 
+                "id": "logement",
+                "title": u"Logement",
             },
             {
-                "id": "logement-et-commerce", 
-                "title": u"Logement et commerce", 
+                "id": "logement-et-commerce",
+                "title": u"Logement et commerce",
             },
         ],
         "inspectioncontexts": [
             "UrbanVocabularyTerm",
             {
-                "id": "constat", 
-                "title": u"Constat", 
+                "id": "constat",
+                "title": u"Constat",
             },
             {
-                "id": "logement-declare-inhabitable-depuis-au-moins-12-mois", 
-                "title": u"Logement déclaré inhabitable depuis au moins 12 mois", 
+                "id": "logement-declare-inhabitable-depuis-au-moins-12-mois",
+                "title": u"Logement déclaré inhabitable depuis au moins 12 mois",
             },
             {
-                "id": "logement-dont-la-consommation-annuelle-est-inferieure-a-15-m3-d2019eau-ou-a-100-kwh-d2019electricite", 
-                "title": u"Logement dont la consommation annuelle est inférieure à 15 m³ d'eau ou à 100 kWh d'électricité", 
+                "id": "logement-dont-la-consommation-annuelle-est-inferieure-a-15-m3-d2019eau-ou-a-100-kwh-d2019electricite",
+                "title": u"Logement dont la consommation annuelle est inférieure à 15 m³ d'eau ou à 100 kWh d'électricité",
             },
             {
-                "id": "logement-inoccupe", 
-                "title": u"Logement pour lequel aucune personne n'est inscrite dans les registres de la population pendant une période d'au moins douze mois consécutifs", 
+                "id": "logement-inoccupe",
+                "title": u"Logement pour lequel aucune personne n'est inscrite dans les registres de la population pendant une période d'au moins douze mois consécutifs",
             },
             {
-                "id": "logement-qui-n2019est-pas-garni-du-mobilier-indispensable-a-son-affectation-pendant-une-periode-de-12-mois-consecutifs", 
-                "title": u"Logement qui n'est pas garni du mobilier indispensable à son affectation pendant une période de 12 mois consécutifs", 
+                "id": "logement-qui-n2019est-pas-garni-du-mobilier-indispensable-a-son-affectation-pendant-une-periode-de-12-mois-consecutifs",
+                "title": u"Logement qui n'est pas garni du mobilier indispensable à son affectation pendant une période de 12 mois consécutifs",
             },
             {
-                "id": "plainte", 
-                "title": u"Plainte", 
+                "id": "plainte",
+                "title": u"Plainte",
             },
         ],
         "part_of_the_building_concerned": [
             "UrbanVocabularyTerm",
             {
-                "id": "1er-etage", 
+                "id": "1er-etage",
                 "title": "1er étage",
             },
             {
-                "id": "2eme-etage", 
+                "id": "2eme-etage",
                 "title": "2éme étage",
             },
             {
-                "id": "entierte", 
+                "id": "entierte",
                 "title": "Entierté",
             },
             {
-                "id": "rez-de-chaussee", 
+                "id": "rez-de-chaussee",
                 "title": "Rez-de-chaussée",
             },
         ],

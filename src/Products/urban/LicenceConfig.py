@@ -561,6 +561,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
         types = {
             "buildlicence": buildlicence_tabs_config,
             "article127": buildlicence_tabs_config,
+            "article65": env_inquiry_tabs_config,
             "uniquelicence": uniquelicence_tabs_config,
             "integratedlicence": buildlicence_tabs_config,
             "parceloutlicence": inquiry_tabs_config,
@@ -641,7 +642,10 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
         available_fields = [
             field
             for field in licence_schema.fields()
-            if field.getType() == "Products.Archetypes.Field.TextField"
+            if (
+                field.getType() == "Products.Archetypes.Field.TextField"
+                or field.getName() == "licenceSubject"
+            )
             and field.getName() != "rights"
         ]
         vocabulary_fields = [

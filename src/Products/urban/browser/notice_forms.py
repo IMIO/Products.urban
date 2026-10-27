@@ -151,7 +151,7 @@ class NoticeResponseActionForm(Form):
             annotations = IAnnotations(event)
             key = "notice_notification"
             notice = annotations.get(key, {})
-            incoming = notice.get("incoming", [])
+            incoming = notice.get("incoming", {})
             if incoming.get("notice_id") == incoming_id:
                 return incoming.get("notice_type")
         return None
@@ -233,26 +233,9 @@ class NoticeResponseActionForm(Form):
             return
 
         incoming_notice_id = data["incoming_notification"]
-
         self.field_values_to_store = {}
-        try:
-            response_result = self.transfer_response(data)
-        except NoticeResponseException as e:
-            IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
-            # NoticeResponseException have already been logged in the service layer
-            self._notify_response_error(incoming_notice_id, e.get_error_report())
-            return
-        except Exception as e:
-            IStatusMessage(self.request).addStatusMessage(
-                _(u"Couldn't process your request. Please contact an administrator."),
-                "error",
-            )
-            logger.exception(u"%s", e)
-            self._notify_response_error(incoming_notice_id, str(e))
-            return
-        else:
-            IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
 
+        # first, send documents
         file_paths = data.get("file_paths", [])
         for file_path in file_paths:
             file_obj = api.content.get(path=file_path)
@@ -283,6 +266,25 @@ class NoticeResponseActionForm(Form):
                 )
                 self.field_values_to_store["documents"] = sent_documents
 
+        # second, send response
+        try:
+            response_result = self.transfer_response(data)
+        except NoticeResponseException as e:
+            IStatusMessage(self.request).addStatusMessage(e.get_user_message(), "error")
+            # NoticeResponseException have already been logged in the service layer
+            self._notify_response_error(incoming_notice_id, e.get_error_report())
+            return
+        except Exception as e:
+            IStatusMessage(self.request).addStatusMessage(
+                _(u"Couldn't process your request. Please contact an administrator."),
+                "error",
+            )
+            logger.exception(u"%s", e)
+            self._notify_response_error(incoming_notice_id, str(e))
+            return
+        else:
+            IStatusMessage(self.request).addStatusMessage(self.success_message, "info")
+
         response_body = response_result.get("body", {}) or {}
         response_body_result = response_body.get("result", {}) or {}
         reception_date_str = response_body_result.get("receptionDate")
@@ -302,6 +304,32 @@ class NoticeResponseActionForm(Form):
     def do_additional_validation(self, data, errors):
         pass
 
+    def _validate_decision_code(self, data, errors):
+        college_decision_code = self.context.getDecision()
+        if type(college_decision_code) is list and len(college_decision_code) > 0:
+            college_decision_code = college_decision_code[0]
+        if not college_decision_code:
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        u"No college decision code was provided in the event; please edit it and select a code first."
+                    )
+                )
+            )
+
+    def _validate_opinion_code(self, data, errors):
+        college_opinion_code = self.context.getCollegeOpinion()
+        if type(college_opinion_code) is list and len(college_opinion_code) > 0:
+            college_opinion_code = college_opinion_code[0]
+        if not college_opinion_code:
+            raise ActionExecutionError(
+                Invalid(
+                    _(
+                        u"No college opinion code was provided in the event; please edit it and select a code first."
+                    )
+                )
+            )
+
 
 class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
     incoming_notification = schema.Choice(
@@ -311,6 +339,7 @@ class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
                 "TRANSFERT_DOSSIER",
                 "TRANSFERT_DOSSIER_DRC",
                 "TRANSFERT_DOSSIER_PM",
+                "REVISION_CP_FT_ENVOI_COMMUNE",
             ],
             ["transfer_folder_to_dpa"]
         ),
@@ -342,6 +371,7 @@ class ITransferDatesTicketActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP",
                 "DEMANDE_EP_DOSSIER_PRECEDENT",
                 "DEMANDE_EP_EXTRA",
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
             ["transfer_dates"]
         ),
@@ -373,6 +403,7 @@ class ITransferTicketActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP",
                 "DEMANDE_EP_DOSSIER_PRECEDENT",
                 "DEMANDE_EP_EXTRA",
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
             ["transfer_ticket", "transfer_ticket_final"]
         ),
@@ -430,6 +461,7 @@ class ITransferOpinionActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP",
                 "DEMANDE_EP_DOSSIER_PRECEDENT",
                 "DEMANDE_EP_EXTRA",
+                "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
             ["transfer_opinion", "transfer_ticket_final"]
         ),
@@ -504,8 +536,11 @@ class ITransferDecisionActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_RS_COMMUNE_RETARD_SFD",
                 "NOTIFICATION_PAS_ENVOI_RS",
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
+                "PM_ENVOI_RS_HD_COMMUNE",
                 "PM_RS_PAS_ENVOYE",
                 "PM_ENVOI_RS_COMMUNE",
+                "ART65_ENVOI_PROJET_COMMUNE",
+                "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
             ],
             ["transfer_decision"]
         ),
@@ -533,17 +568,7 @@ class TransferDecisionActionForm(NoticeResponseActionForm):
         return output
 
     def do_additional_validation(self, data, errors):
-        college_decision_code = self.context.getDecision()
-        if type(college_decision_code) is list and len(college_decision_code) > 0:
-            college_decision_code = college_decision_code[0]
-        if not college_decision_code:
-            raise ActionExecutionError(
-                Invalid(
-                    _(
-                        u"No college decision code was provided in the event; please edit it and select a code first."
-                    )
-                )
-            )
+        self._validate_decision_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
@@ -571,12 +596,18 @@ class ITransferDecisionDisplayActionForm(ITransferBaseActionForm):
                 "NOTIFICATION_PAS_ENVOI_RS_SFD",
                 "PM_RS_PAS_ENVOYE",
                 "PM_ENVOI_RS_COMMUNE",
+                "PM_ENVOI_RS_HD_COMMUNE",
                 "NOTIFICATION_DECISION_COMMUNE",
                 "NOTIFICATION_DEC_RS_COMMUNE",
                 "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE",
                 "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
                 "PM_RS_DECISION_COMMUNE",
                 "PM_REFUS_TACITE_COMMUNE",
+                "ART65_ENVOI_PROJET_COMMUNE",
+                "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
+                "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+                "ART65_AVIS_FT_COURRIER_COMMUNE",
+                "ART65_REFUS_TACITE_COURRIER_COMMUNE",
             ],
             ["transfer_decision_display"]
         ),
@@ -620,6 +651,9 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             "NOTIFICATION_PAS_ENVOI_RS_SFD",
             "PM_RS_PAS_ENVOYE",
             "PM_ENVOI_RS_COMMUNE",
+            "PM_ENVOI_RS_HD_COMMUNE",
+            "ART65_ENVOI_PROJET_COMMUNE",
+            "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
         ):
             decision_event, college_decision = self._get_decision_data(incoming_id)
             if not decision_event:
@@ -638,6 +672,9 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE",
             "PM_RS_DECISION_COMMUNE",
             "PM_REFUS_TACITE_COMMUNE",
+            "ART65_FTAC_DECISION_COURRIER_COMMUNE",
+            "ART65_AVIS_FT_COURRIER_COMMUNE",
+            "ART65_REFUS_TACITE_COURRIER_COMMUNE",
         ):
             result = self.context.transfer_decision_display(incoming_id)
         return result
@@ -794,6 +831,9 @@ class TransferOpinionGesperEPActionForm(NoticeResponseActionForm):
         output = college_opinion.output if college_opinion else ""
         self.field_values_to_store["college_opinion"] = output
         return output
+
+    def do_additional_validation(self, data, errors):
+        self._validate_opinion_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
@@ -955,17 +995,7 @@ class TransferOpinionGesperAPActionForm(NoticeResponseActionForm):
         return output
 
     def do_additional_validation(self, data, errors):
-        college_opinion_code = self.context.getCollegeOpinion()
-        if type(college_opinion_code) is list and len(college_opinion_code) > 0:
-            college_opinion_code = college_opinion_code[0]
-        if not college_opinion_code:
-            raise ActionExecutionError(
-                Invalid(
-                    _(
-                        u"No college opinion code was provided in the event; please edit it and select a code first."
-                    )
-                )
-            )
+        self._validate_opinion_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
@@ -1019,6 +1049,9 @@ class TransferOpinionGesperOpinionRequestActionForm(NoticeResponseActionForm):
         output = college_opinion.output if college_opinion else ""
         self.field_values_to_store["college_opinion"] = output
         return output
+
+    def do_additional_validation(self, data, errors):
+        self._validate_opinion_code(data, errors)
 
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
