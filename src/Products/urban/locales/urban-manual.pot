@@ -1803,3 +1803,6 @@ msgstr ""
 
 msgid "ACTE_CONSTITUTION_SURETE_COMMUNE"
 msgstr ""
+
+msgid "DECISION_REGISTRE_COMMUNE"
+msgstr ""

@@ -6131,3 +6131,9 @@ msgstr "Ce dossier a été encodé de manière dématérialisée"
 
 msgid "Proposed opinion: ${decision_code}"
 msgstr "Avis proposé: ${decision_code}"
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr "Décision sur le registre des modifications"
+
+msgid "DECISION_REGISTRE_COMMUNE"
+msgstr "Registre des modifications - Notification à la commune de la décision"

@@ -6104,3 +6104,6 @@ msgstr ""
 
 msgid "Proposed opinion: ${decision_code}"
 msgstr ""
+
+msgid "IModificationRegistryDecisionEvent type marker interface"
+msgstr ""
