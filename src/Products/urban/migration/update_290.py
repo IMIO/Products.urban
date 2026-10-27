@@ -14,7 +14,7 @@ from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.setuphandlers import addNoticeWarning
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
-from Products.urban.setuphandlers import markLicencesCreatedViaNotice
+from Products.urban.setuphandlers import markLicencesAndEventsCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
@@ -863,7 +863,7 @@ def add_notice_warning(context):
     logger = logging.getLogger("urban: Add notice warning")
     logger.info("starting upgrade steps")
     addNoticeWarning(context)
-    markLicencesCreatedViaNotice(context)
+    markLicencesAndEventsCreatedViaNotice(context)
     logger.info("upgrade done!")
 
 

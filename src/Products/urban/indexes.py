@@ -26,7 +26,6 @@ from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.indexer import indexer
 from requests.exceptions import RequestException
-from zope.annotation.interfaces import IAnnotations
 from zope.component import queryAdapter
 from zope.interface import Interface
 
@@ -439,11 +438,7 @@ def last_received_notice_notification(object):
         object.getAllEvents(), key=lambda e: e.created(), reverse=True
     )
     for event in all_licence_events:
-        annotations = IAnnotations(event)
-        key = "notice_notification"
-        notice = annotations.get(key, {})
-        incoming = notice.get("incoming", {})
-        if incoming.get("notice_id"):
+        if interfaces.IEventCreatedViaNoticeWS.providedBy(event):
             return event.created()
 
     return None
