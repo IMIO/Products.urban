@@ -17,9 +17,11 @@ __docformat__ = "plaintext"
 from Acquisition import aq_inner
 from DateTime import DateTime
 from Products.Archetypes.interfaces import IBaseFolder
+from Products.CMFPlone.utils import safe_unicode
 from Products.urban import interfaces
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
+from Products.urban.utils import strip_tags
 from datetime import date
 from datetime import datetime
 from imio.schedule.content.task import IAutomatedTask
@@ -279,8 +281,7 @@ def genericlicence_decisiondate(licence):
                 decision_date = linked_pm_items[0]["extra_include_meeting"]["date"]
                 if isinstance(decision_date, unicode):
                     decision_date = datetime.strptime(
-                        decision_date,
-                        "%Y-%m-%dT%H:%M:%S"
+                        decision_date, "%Y-%m-%dT%H:%M:%S"
                     ).date()
                 return decision_date
         return decision_event.getDecisionDate() or decision_event.getEventDate()
@@ -426,3 +427,18 @@ def streetcode_indexer(obj):
 @indexer(interfaces.IGenericLicence)
 def additional_reference(object):
     return object.getAdditionalReference()
+
+
+@indexer(interfaces.IGenericLicence)
+def genericlicence_rubrics(licence):
+    """
+    Index rubrics number and description to be able to search on it with a
+    text filter.
+    """
+    rubrics = [
+        u"{} {}".format(
+            safe_unicode(rubric.getId()), strip_tags(safe_unicode(rubric.Description()))
+        )
+        for rubric in licence.getRubrics()
+    ]
+    return u" ".join(rubrics) or None
