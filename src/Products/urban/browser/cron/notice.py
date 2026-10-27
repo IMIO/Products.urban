@@ -696,6 +696,7 @@ class IncomingNoticeHandler(object):
         return translate(msg, context=self.request)
 
     def enqueue_successful_import_notification(self):
+        successful_notice_events_to_notify_by_email_key = "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email"
         portal_physical_path = api.portal.get().getPhysicalPath()
         event_physical_path = self.event.getPhysicalPath()
         relative_path = event_physical_path[len(portal_physical_path):]
@@ -703,7 +704,7 @@ class IncomingNoticeHandler(object):
 
         events_to_notify = (
             api.portal.get_registry_record(
-                self.successful_notice_events_to_notify_by_email_key,
+                successful_notice_events_to_notify_by_email_key,
                 default=[],
             )
             or []
@@ -712,7 +713,7 @@ class IncomingNoticeHandler(object):
         if event_path not in events_to_notify:
             events_to_notify.append(event_path)
             api.portal.set_registry_record(
-                self.successful_notice_events_to_notify_by_email_key,
+                successful_notice_events_to_notify_by_email_key,
                 events_to_notify,
             )
 
