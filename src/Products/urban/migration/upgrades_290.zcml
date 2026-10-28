@@ -252,4 +252,13 @@
         handler=".update_290.unhide_CODT_UniqueBorderingLicences"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Import SPW reference rubrics"
+        description="Consolidate the EnvironmentRubricTerm vocabulary with the SPW/NOTICe reference rubric list and their exploitation conditions"
+        source="2931"
+        destination="2932"
+        handler=".update_290.import_spw_rubrics"
+        profile="Products.urban:default" />
+
+
 </configure>
