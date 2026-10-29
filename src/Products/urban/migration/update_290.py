@@ -18,6 +18,7 @@ from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
+from eea.facetednavigation.interfaces import ICriteria
 from imio.helpers.catalog import reindexIndexes
 from plone import api
 from plone.app.textfield import RichTextValue
@@ -833,3 +834,66 @@ def add_notice_warning(context):
 
 def add_async_notice_mails(context):
     initialize_notice_settings(context)
+
+
+RUBRICS_LICENCE_FOLDERS = (
+    "envclassones",
+    "envclasstwos",
+    "envclassthrees",
+    "envclassborderings",
+    "uniquelicences",
+    "codt_uniquelicences",
+    "codt_integratedlicences",
+    "codt_uniqueborderinglicences",
+)
+
+
+def add_rubrics_index_and_filter(context):
+    logger = logging.getLogger("urban: Add `getRubrics` index and dashboard filter")
+    logger.info("starting upgrade step")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reference_catalog = api.portal.get_tool("reference_catalog")
+    licence_uids = set(
+        ref.sourceUID for ref in reference_catalog(relationship="rubric")
+    )
+    catalog = api.portal.get_tool("portal_catalog")
+    brains = catalog.unrestrictedSearchResults(UID=list(licence_uids))
+    logger.info("indexing rubrics of {} licences".format(len(brains)))
+    for brain in brains:
+        path = brain.getPath()
+        try:
+            licence = brain._unrestrictedGetObject()
+            catalog.catalog_object(
+                licence, path, idxs=["getRubrics"], update_metadata=0
+            )
+        except Exception:
+            logger.exception("could not index rubrics of {}".format(path))
+
+    # add the filter on existing dashboards without overriding local customizations
+    urban_folder = api.portal.get().urban
+    for folder_id in RUBRICS_LICENCE_FOLDERS:
+        folder = getattr(urban_folder, folder_id, None)
+        if folder is None:
+            continue
+        criteria = ICriteria(folder, None)
+        if criteria is None:
+            continue
+        if [c for c in criteria.values() if c.index == u"getRubrics"]:
+            logger.info("`getRubrics` filter already present on {}".format(folder_id))
+            continue
+        data = {
+            "title": u"Rubrique",
+            "hidden": False,
+            "index": u"getRubrics",
+            "onlyallelements": True,
+            "wildcard": True,
+        }
+        if u"c96" not in criteria.keys():
+            data["_cid_"] = u"c96"
+        criteria.add(wid="text", position="top", section="advanced", **data)
+        logger.info("`getRubrics` filter added on {}".format(folder_id))
+
+    logger.info("upgrade step done!")

@@ -162,5 +162,16 @@
    <property name="hidezerocount">False</property>
    <property name="sortreversed">False</property>
   </criterion>
+  <criterion name="c96">
+   <property name="widget">text</property>
+   <property name="title">Rubrique</property>
+   <property name="position">top</property>
+   <property name="section">advanced</property>
+   <property name="hidden">False</property>
+   <property name="index">getRubrics</property>
+   <property name="default"></property>
+   <property name="onlyallelements">True</property>
+   <property name="wildcard">True</property>
+  </criterion>
  </criteria>
 </object>
