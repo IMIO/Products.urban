@@ -121,6 +121,7 @@ class CopyRecipientCadastreToClaimantView(BrowserView):
         claimant_arg["id"] = site.plone_utils.normalizeString(
             "claimant_" + recipient.id
         )
+        claimant_arg["claimType"] = "writedClaim"
 
         catalog = api.portal.get_tool("portal_catalog")
         result = catalog(id=claimant_arg["id"], portal_type="Claimant")
