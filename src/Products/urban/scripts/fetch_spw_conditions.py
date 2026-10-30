@@ -7,14 +7,14 @@ the SPW permis-environnement site.
 
 """
 
-from parse_spw_rubrics import parse_rubrics
-from parse_spw_rubrics import safe_id
+from Products.urban.scripts.parse_spw_rubrics import parse_rubrics
+from Products.urban.scripts.parse_spw_rubrics import safe_id
 
 import io
 import json
+import requests
 import sys
 import time
-import urllib2
 
 
 ENDPOINT = (
@@ -32,24 +32,21 @@ def fetch_legal_conditions(identifier, retries=3, pause=0.3):
     no conditions".
     """
     url = ENDPOINT.format(identifier=identifier)
-    request = urllib2.Request(
-        url,
-        headers={
-            "Accept": "application/json, text/plain, */*",
-            "User-Agent": "Mozilla/5.0",
-            "X-Requested-With": "XMLHttpRequest",
-            "Referer": (
-                "https://permis-environnement.spw.wallonie.be/home/"
-                "fiche-rubrique.html?rubricId={0}".format(identifier)
-            ),
-        },
-    )
+    headers = {
+        "Accept": "application/json, text/plain, */*",
+        "User-Agent": "Mozilla/5.0",
+        "X-Requested-With": "XMLHttpRequest",
+        "Referer": (
+            "https://permis-environnement.spw.wallonie.be/home/"
+            "fiche-rubrique.html?rubricId={0}".format(identifier)
+        ),
+    }
     for attempt in range(retries):
         try:
-            response = urllib2.urlopen(request, timeout=10)
-            payload = json.load(response)
-            return payload.get("legal", [])
-        except Exception as exc:
+            response = requests.get(url, headers=headers, timeout=10)
+            response.raise_for_status()
+            return response.json().get("legal", [])
+        except Exception:
             if attempt == retries - 1:
                 raise
             time.sleep(pause)
@@ -124,7 +121,8 @@ def build_mapping_and_conditions(xml_path):
 def main():
     if len(sys.argv) != 3:
         sys.stderr.write(
-            "usage: python fetch_spw_conditions.py <Rubriques_PE.xml> <output.json>\n"
+            "usage: bin/zopepy fetch_spw_conditions.py "
+            "<Rubriques_PE.xml> <output.json>\n"
         )
         sys.exit(1)
 

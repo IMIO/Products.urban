@@ -5,8 +5,8 @@ Replacement for slurp.extractRubricsFolders / extractRubricsTerm.
 
 Parses the reference rubric list provided by the SPW (as used by
 NOTICe/Twice) directly from its XML SOAP export (searchRubricResponse).
-`parse_rubrics(xml_path)` is meant to be imported and called at migration
-time (see Products.urban.migration.update_290.import_spw_rubrics) -- there
+`parse_rubrics(xml_path)` is meant to be imported and called at install and
+migration time (see Products.urban.spw_rubrics.import_spw_rubrics) -- there
 is no intermediate JSON file, the XML stays the single source of truth.
 
 The XML only contains the rubrics themselves (no parent category nodes,
@@ -46,8 +46,19 @@ def _code(el, path):
 
 
 def parse_rubrics(xml_path):
-    """Parse the SPW rubric XML export and return a flat list of dicts:
-    {id, identifier, category_id, number, extraValue, description}
+    """Parse the SPW rubric XML export and return a flat list of dicts,
+    sorted by rubric number, with the keys:
+
+    - id: Zope-safe id built from the rubric code
+    - identifier: SPW rubric identifier (used to fetch its conditions)
+    - category_id: Zope-safe id of the rubric category
+    - number: rubric code, e.g. "40.10.01"
+    - extraValue: rubric class as an integer (0 when unknown)
+    - description: rubric label
+    - exploitationCondition: always an empty list, conditions are linked
+      separately (see fetch_spw_conditions)
+    - startValidity: begin date of the rubric version
+    - endValidity: end date of the rubric version
     """
     tree = ET.parse(xml_path)
     root = tree.getroot()
@@ -55,6 +66,8 @@ def parse_rubrics(xml_path):
     rubrics = {}
     for r in root.iter("{%s}rubric" % NS["ns5"]):
         identifier = _text(r, "ns5:identifier")
+        if not identifier:
+            continue
         rubrics[identifier] = {
             "identifier": identifier,
             "code": _text(r, "ns5:code"),
@@ -94,7 +107,7 @@ def parse_rubrics(xml_path):
                 "identifier": r["identifier"],
                 "category_id": safe_id(code.split(".")[0]),
                 "number": code,
-                "extraValue": r["classe"] or 0,
+                "extraValue": int(r["classe"]) if r["classe"] else 0,
                 "description": observation,
                 "exploitationCondition": [],
                 "endValidity": r["endDate"],
@@ -102,4 +115,10 @@ def parse_rubrics(xml_path):
             }
         )
 
+    if not out:
+        raise ValueError(
+            "No rubric found in {0}, the XML structure may have changed".format(
+                xml_path
+            )
+        )
     return sorted(out, key=lambda r: r["number"])
