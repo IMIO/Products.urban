@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+import os
 import requests
 
 from Products.urban import UrbanMessage as _
@@ -66,9 +67,9 @@ class NoticeGet(Service):
 class WebserviceNotice(WebService):
     """Webservice to interract with Notice"""
 
-    def __init__(self, user="", password=""):
-        self.user = user
-        self.password = password
+    def __init__(self):
+        self.user = "iaurban"
+        self.password = os.getenv("NOTICE_API_PASSWORD")
 
     @property
     def url(self):
