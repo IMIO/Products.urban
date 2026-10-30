@@ -2,6 +2,7 @@
 
 from Products.CMFCore.utils import getToolByName
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
+from Products.urban import spw_rubrics
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import INoticeImportFailedEvent
@@ -11,7 +12,6 @@ from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
-from Products.urban.scripts.parse_spw_rubrics import parse_rubrics
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.setuphandlers import addNoticeWarning
@@ -32,9 +32,7 @@ from zope.component import getUtility
 from zope.component import queryUtility
 from zope.event import notify
 
-import json
 import logging
-import os
 
 
 logger = logging.getLogger("urban: migrations")
@@ -1000,101 +998,7 @@ def _get_or_create_condition(
 
 
 def import_spw_rubrics(context):
-    """
-    Replace/complete the EnvironmentRubricTerm vocabulary with the
-    reference rubric list provided by the SPW, so
-    iA.Urban and NOTICe/Twice share a consistent list from the start, and
-    link each rubric to its sectoral/integral exploitation conditions.
-
-    Rubrics are parsed directly from the committed SPW XML export
-    (`data/Rubriques_PE.xml`, see Products.urban.scripts.parse_spw_rubrics).
-    The conditions mapping is read from a static JSON file
-    (`data/spw_conditions.json`, `{"mapping": ..., "conditions": ...}`)
-    generated ahead of time by `Products.urban.scripts.fetch_spw_conditions`.
-    """
     logger = logging.getLogger("urban: Import SPW reference rubrics")
-
-    data_dir = os.path.join(os.path.dirname(__file__), "data")
-    rubrics = parse_rubrics(os.path.join(data_dir, "Rubriques_PE.xml"))
-    with open(os.path.join(data_dir, "spw_conditions.json")) as json_file:
-        conditions_data = json.load(json_file)
-    mapping = conditions_data["mapping"]
-    all_conditions = conditions_data["conditions"]
-
-    portal_urban = api.portal.get_tool("portal_urban")
-    rubrics_folder = portal_urban.rubrics
-    conditions_root = portal_urban.exploitationconditions
-
-    condition_uids_by_key = {}
-
-    for code_type, conditions_by_id in all_conditions.iteritems():
-        for conditions_folder_id in _folder_ids_for_code_type(code_type):
-            conditions_folder = _get_or_create_folder(
-                conditions_root,
-                conditions_folder_id,
-                FOLDER_TITLES.get(conditions_folder_id, conditions_folder_id),
-                "UrbanVocabularyTerm",
-            )
-
-            for condition_id, condition_data in conditions_by_id.iteritems():
-                condition = _get_or_create_condition(
-                    conditions_folder, condition_id, condition_data, code_type
-                )
-                condition_uids_by_key.setdefault((code_type, condition_id), [])
-                condition_uids_by_key[(code_type, condition_id)].append(condition.UID())
-
-    created = 0
-    updated = 0
-
-    for rubric in rubrics:
-        category_id = rubric["category_id"]
-        category_folder = _get_or_create_folder(
-            rubrics_folder,
-            category_id,
-            RUBRIC_CATEGORY_TITLES.get(category_id, category_id),
-            "EnvironmentRubricTerm",
-        )
-
-        rubric_id = rubric["id"]
-        if rubric_id in category_folder:
-            term = getattr(category_folder, rubric_id)
-            term.setNumber(rubric["number"])
-            term.setExtraValue(rubric["extraValue"])
-            term.setDescription(rubric["description"])
-            term.processForm()
-            updated += 1
-        else:
-            # Set `number` here: create() renames the object to its number right away,
-            # and crashes if the number is still empty.
-
-            term = api.content.create(
-                container=category_folder,
-                type="EnvironmentRubricTerm",
-                id=rubric_id,
-                title=rubric_id,
-                number=rubric["number"],
-                extraValue=rubric["extraValue"],
-                description=rubric["description"],
-            )
-            created += 1
-        term.updateTitle()
-
-        bound_conditions = mapping.get(rubric["number"])
-        if not bound_conditions:
-            continue
-
-        existing_uids = set(term.getRawExploitationCondition() or [])
-        condition_uids = set(existing_uids)
-        for bound_condition in bound_conditions:
-            key = (bound_condition["type"], bound_condition["id"])
-            condition_uids.update(condition_uids_by_key.get(key, []))
-
-        if condition_uids != existing_uids:
-            term.setExploitationCondition(list(condition_uids))
-
-    _sort_folder(rubrics_folder)
-    for category_folder in rubrics_folder.objectValues():
-        _update_rubric_category_title(category_folder)
-        _sort_folder(category_folder)
-
-    logger.info("SPW rubrics import done: %s created, %s updated", created, updated)
+    logger.info("starting upgrade steps")
+    spw_rubrics.import_spw_rubrics()
+    logger.info("upgrade done!")
