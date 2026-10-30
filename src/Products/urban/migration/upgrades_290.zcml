@@ -210,6 +210,14 @@
         source="2925"
         destination="2926"
         handler=".update_290.add_async_notice_mails"
+        profile="Products.urban:default"/>
+
+    <gs:upgradeStep
+        title="Set cession TAL condition and mark transferred licences"
+        description=""
+        source="2926"
+        destination="2927"
+        handler=".update_290.upgrade_cession_transfer_of_licence"
         profile="Products.urban:default" />
 
 </configure>
