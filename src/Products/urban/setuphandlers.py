@@ -27,12 +27,12 @@ from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
+from Products.urban.interfaces import IEventCreatedViaNoticeWS
 from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ILicenceConfig
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.interfaces import IUrbanConfigurationFolder
-from Products.urban.interfaces import IUrbanEventNotice
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.profiles.extra.config_default_values import (
     vocabularies_with_HTML_description,
@@ -335,16 +335,29 @@ def addNoticeWarning(context):
     portal_urban.setWarnings(tuple(warnings))
 
 
-def markLicencesCreatedViaNotice(context):
-    """Mark licences having a NOTICE notification with ILicenceCreatedViaNoticeWS."""
+def markLicencesAndEventsCreatedViaNotice(context):
+    """
+    - Mark licences having a NOTICE notification with ILicenceCreatedViaNoticeWS
+    - Mark events created as incoming NOTICE notifications with IEventCreatedViaNoticeWS
+    """
     catalog = api.portal.get_tool("portal_catalog")
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
     for licence_brain in licence_brains:
         licence = licence_brain.getObject()
-        for urban_event in licence.getAllEvents(IUrbanEventNotice):
-            if IAnnotations(urban_event).get("notice_notification", {}):
-                alsoProvides(licence, ILicenceCreatedViaNoticeWS)
-                break
+        is_notice_licence = False
+        for urban_event in licence.getAllEvents():
+            try:
+                notice_notification = (
+                    IAnnotations(urban_event).get("notice_notification", {}) or {}
+                )
+            except TypeError:
+                notice_notification = {}  # ignore broken event
+            incoming = notice_notification.get("incoming", {}) or {}
+            if incoming:
+                alsoProvides(urban_event, IEventCreatedViaNoticeWS)
+                is_notice_licence = True
+        if is_notice_licence:
+            alsoProvides(licence, ILicenceCreatedViaNoticeWS)
 
 
 def setFolderAllowedTypes(folder, portal_types):

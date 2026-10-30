@@ -426,3 +426,19 @@ def streetcode_indexer(obj):
 @indexer(interfaces.IGenericLicence)
 def additional_reference(object):
     return object.getAdditionalReference()
+
+
+@indexer(interfaces.IGenericLicence)
+def last_received_notice_notification(object):
+    """
+    Get the creation date of the last received NOTICe event
+    """
+
+    all_licence_events = sorted(
+        object.getAllEvents(), key=lambda e: e.created(), reverse=True
+    )
+    for event in all_licence_events:
+        if interfaces.IEventCreatedViaNoticeWS.providedBy(event):
+            return event.created()
+
+    return None
