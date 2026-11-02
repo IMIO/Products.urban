@@ -101,8 +101,9 @@ class WebserviceNotice(WebService):
 
     @property
     def _auth(self):
-        if self.user and self.password:
-            return (self.user, self.password)
+        if not self.password:
+            raise ValueError("Authentification password for NOTICe Webservice is missing")
+        return (self.user, self.password)
 
     def _get(self, endpoint, **parameters):
         return requests.get(
