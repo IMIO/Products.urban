@@ -16,6 +16,8 @@ from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
 from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
+from Products.urban.setuphandlers import setup_notice_folder_manager
+from Products.urban.setuphandlers import setup_notice_mailing_content_rules
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
@@ -163,56 +165,9 @@ def add_event_config_types_notice(context):
 
 
 def add_folder_manager_notice(context):
-    from Products.urban.setuphandlers import _activate_dashboard_navigation
-    from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
-    from eea.facetednavigation.criteria.interfaces import ICriteria
-    from eea.facetednavigation.events import FacetedGlobalSettingsChangedEvent
-
     logger = logging.getLogger("urban: Add folder manager for notice import")
 
-    # create folder manager
-    urban_tool = api.portal.get_tool("portal_urban")
-    foldermanagers = getattr(urban_tool, "foldermanagers")
-    if "notice" not in foldermanagers.objectIds():
-        foldermanagers.invokeFactory(
-            "FolderManager",
-            "notice",
-            name1="Import NOTICE",
-            grade="agent-technique",
-            ploneUserId="",
-            manageableLicences=URBAN_TYPES,
-        )
-    notice_folder_manager = foldermanagers.notice
-    notice_folder_manager.reindexObject()
-
-    # create dashboard for incoming notice notifications
-    urban_folder = api.portal.get().urban
-
-    if "import-notice" not in urban_folder.objectIds():
-        import_notice_folder = api.content.create(
-            container=urban_folder,
-            type="Folder",
-            id="import-notice",
-            title="Import NOTICE",
-        )
-
-        _activate_dashboard_navigation(
-            import_notice_folder, "/dashboard/config/import_notice.xml"
-        )
-
-        # no need to create another collection, this one does the job
-        all_licences_collection = getattr(urban_folder, "collection_all_licences")
-        _updateDefaultCollectionFor(import_notice_folder, all_licences_collection.UID())
-
-        # set notice folder manager's UID as default in faceted filter widget
-        criteria = ICriteria(import_notice_folder).criteria
-        for criterion in criteria:
-            if criterion.index == "folder_manager":
-                ICriteria(import_notice_folder).edit(
-                    criterion.__name__,
-                    default=notice_folder_manager.UID(),
-                )
-        notify(FacetedGlobalSettingsChangedEvent(import_notice_folder))
+    setup_notice_folder_manager(context)
 
     logger.info("Upgrade done!")
 
@@ -445,126 +400,10 @@ def add_codt_uniquebordering_licences(context):
     logger.info("Upgrade done!")
 
 
-def setup_notice_mailing_content_rules(context):
+def setup_notice_mailing_base_content_rules(context):
     logger = logging.getLogger("urban: Set up NOTICE mailing content rules")
 
-    portal = api.portal.get()
-
-    success_template = dedent(
-        u"""
-        Bonjour,
-
-        Une notification du SPW a été réceptionnée pour:
-
-        - Dossier : ${parent_url}
-        - Type de notification : ${notice_type}
-        - Mail de l'agent traitant : ${folder_manager_email}
-
-        Belle journée.
-        """
-    ).strip()
-
-    failure_template = dedent(
-        u"""
-        Créer un ticket JIRA à l'attention d'un développeur
-        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
-
-        "Bonjour,
-
-        Une erreur d'implémentation de notification du webservice Notice a été enregistrée.
-        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
-
-        - commune / dossier : ${parent_url}
-        - identifiant NOTICE : ${notice_id}
-
-        ```
-        ${notice_error}
-        ```
-
-        Belle journée.
-
-        Aurore"
-        """
-    ).strip()
-
-    rule_id = "notification_tlpe_imported_successfully"
-    if not ContentRulesUtils.rule_exists(rule_id):
-        ContentRulesUtils.create_content_rule(
-            title=u"Notification TLPE importée",
-            event_interface=INoticeImportSucceededEvent,
-            rule_id=rule_id,
-        )
-        ContentRulesUtils.add_condition(
-            rule_id=rule_id,
-            condition_name="urban.conditions.licence_type",
-            data={"licence_type": ["CODT_Article127"]},
-        )
-        ContentRulesUtils.add_action(
-            rule_id=rule_id,
-            action_name="plone.actions.Mail",
-            data={
-                "exclude_actor": False,
-                "subject": u"Notification importée",
-                "recipients": u"support-urban@imio.be",
-                "message": success_template,
-            },
-        )
-        ContentRulesUtils.assign_rule(portal, rule_id)
-        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
-
-    rule_id = "notification_arne_imported_successfully"
-    if not ContentRulesUtils.rule_exists(rule_id):
-        ContentRulesUtils.create_content_rule(
-            title=u"Notification ARNE importée",
-            event_interface=INoticeImportSucceededEvent,
-            rule_id=rule_id,
-        )
-        ContentRulesUtils.add_condition(
-            rule_id=rule_id,
-            condition_name="urban.conditions.licence_type",
-            data={
-                "licence_type": [
-                    "CODT_UniqueLicence",
-                    "CODT_UniqueBorderingLicence",
-                    "EnvClassOne",
-                    "EnvClassTwo",
-                    "EnvClassThree",
-                    "EnvClassBordering",
-                ]
-            },
-        )
-        ContentRulesUtils.add_action(
-            rule_id=rule_id,
-            action_name="plone.actions.Mail",
-            data={
-                "exclude_actor": False,
-                "subject": u"Notification importée",
-                "recipients": u"support-urban@imio.be",
-                "message": success_template,
-            },
-        )
-        ContentRulesUtils.assign_rule(portal, rule_id)
-        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
-
-    rule_id = "notification_import_failed"
-    if not ContentRulesUtils.rule_exists(rule_id):
-        ContentRulesUtils.create_content_rule(
-            title=u"Notification NOTICE en erreur",
-            event_interface=INoticeImportFailedEvent,
-            rule_id=rule_id,
-        )
-        ContentRulesUtils.add_action(
-            rule_id=rule_id,
-            action_name="plone.actions.Mail",
-            data={
-                "exclude_actor": False,
-                "subject": u"Notification Notice en erreur",
-                "recipients": u"support-urban@imio.be",
-                "message": failure_template,
-            },
-        )
-        ContentRulesUtils.assign_rule(portal, rule_id)
-        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+    setup_notice_mailing_content_rules(context)
 
     logger.info("Upgrade done!")
 
@@ -630,50 +469,7 @@ def add_digital_term_to_deposit_type(context):
 def setup_notice_form_error_mailing_content_rule(context):
     logger = logging.getLogger("urban: Set up NOTICE form error mailing content rule")
 
-    portal = api.portal.get()
-
-    failure_template = dedent(
-        u"""
-        Créer un ticket JIRA à l'attention d'un développeur
-        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
-
-        "Bonjour,
-
-        Une erreur d'implémentation de formulaire de réponse Notice a été enregistrée.
-        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
-
-        - commune / dossier : ${parent_url}
-        - identifiant NOTICE : ${notice_id}
-
-        ```
-        ${notice_error}
-        ```
-
-        Belle journée.
-
-        Aurore"
-        """
-    ).strip()
-
-    rule_id = "notification_form_failed"
-    if not ContentRulesUtils.rule_exists(rule_id):
-        ContentRulesUtils.create_content_rule(
-            title=u"Formulaire pour notification NOTICE en erreur",
-            event_interface=INoticeResponseFailedEvent,
-            rule_id=rule_id,
-        )
-        ContentRulesUtils.add_action(
-            rule_id=rule_id,
-            action_name="plone.actions.Mail",
-            data={
-                "exclude_actor": False,
-                "subject": u"Formulaire pour notification Notice en erreur",
-                "recipients": u"support-urban@imio.be",
-                "message": failure_template,
-            },
-        )
-        ContentRulesUtils.assign_rule(portal, rule_id)
-        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+    setup_notice_mailing_content_rules(context)
 
     logger.info("Upgrade done!")
 
