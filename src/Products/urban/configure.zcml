@@ -67,6 +67,7 @@
   <include package=".history" />
   <include package=".contentrules" />
   <include package=".send_mail_action" />
+  <include package=".notice" />
 
   <!-- needed to migrate UrbanDoc type, to remove in next release -->
   <adapter name="plone.app.blob.subtypes.file"

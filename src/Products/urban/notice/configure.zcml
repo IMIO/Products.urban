@@ -1,0 +1,30 @@
+<configure xmlns="http://namespaces.zope.org/zope">
+
+  <!-- Notice rules selection, for event configs -->
+  <adapter factory=".adapters.NoticeRequiredValues" />
+
+  <!-- Notice rules, named '<notice type>.<notice event type>' -->
+
+  <!-- ARNE -->
+  <adapter factory=".adapters.ARNEDepositRules" name="ARNE.deposit" />
+  <adapter factory=".adapters.ARNESendFTRules" name="ARNE.send_FT" />
+  <adapter factory=".adapters.ARNEInacceptableRules" name="ARNE.inacceptable" />
+  <adapter factory=".adapters.ARNEIncompleteRules" name="ARNE.incomplete" />
+  <adapter factory=".adapters.ARNECompleteFolderRules" name="ARNE.complete_folder" />
+  <adapter factory=".adapters.ARNEInquiryRules" name="ARNE.inquiry" />
+  <adapter factory=".adapters.ARNECollegePreliminaryOpinionRules" name="ARNE.college_preliminary_opinion" />
+  <adapter factory=".adapters.ARNEProrogationRules" name="ARNE.prorogation" />
+  <adapter factory=".adapters.ARNEFTOpinionRules" name="ARNE.FT_opinion" />
+  <adapter factory=".adapters.ARNECollegeDecisionRules" name="ARNE.college_decision" />
+  <adapter factory=".adapters.ARNESPWDecisionRules" name="ARNE.spw_decision" />
+  <adapter factory=".adapters.ARNEDisplayCollegeDecisionRules" name="ARNE.display_college_decision" />
+
+  <!-- TLPE -->
+  <adapter factory=".adapters.TLPECompleteFolderRules" name="TLPE.complete_folder" />
+  <adapter factory=".adapters.TLPECompleteFolderModifiedPlanRules" name="TLPE.complete_folder_modified_plan" />
+  <adapter factory=".adapters.TLPEInquiryRules" name="TLPE.inquiry" />
+  <adapter factory=".adapters.TLPEAnnouncementRules" name="TLPE.announcement" />
+  <adapter factory=".adapters.TLPECollegeOpinionRules" name="TLPE.college_opinion" />
+  <adapter factory=".adapters.TLPESPWDecisionRules" name="TLPE.spw_decision" />
+
+</configure>
