@@ -7,6 +7,18 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b20 (2026-11-07)
+---------------------
+
+Bug fixes:
+
+
+- Fix recursive fonction in rubrics vocabulary
+  [jchandelle] (SUP-54388)
+- Add missing translations for notice
+  [mpeeters] (URB-3795)
+
+
 3.0.0b19 (2026-10-16)
 ---------------------
 
