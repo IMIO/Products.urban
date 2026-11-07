@@ -1,0 +1,2 @@
+Add missing translations for notice
+[mpeeters]

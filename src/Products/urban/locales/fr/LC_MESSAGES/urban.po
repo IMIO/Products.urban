@@ -66,6 +66,18 @@ msgstr "75 jours"
 msgid "<p>${msg} for informations: ${data}</p>"
 msgstr ""
 
+msgid "A opinion to ask condition makes the rule apply only when one of the Opinion to ask slelected correspond to the one of the context"
+msgstr "Une condition d'opinion à demander rend la règle applicable uniquement lorsqu'une des opinions à demander sélectionnées correspond à celle du contexte."
+
+msgid "A NOTICe notification import failed"
+msgstr "Une notification NOTICe n'a pas pu être importée"
+
+msgid "A NOTICe notification import succeeded"
+msgstr "Une notification NOTICe a été importée avec succès"
+
+msgid "A NOTICe notification response failed"
+msgstr "Un formulaire NOTICe n'a pas pu être envoyé"
+
 #: ../browser/urbaneventviews.py:434
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/destinaires_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/destinaires_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
@@ -74,11 +86,32 @@ msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importa
 msgid "A specially formatted CSV file must be used for import. The CSV file can be created from the ODT template file (can be downloaded <a href='/++resource++Products.urban/reclamant_reimport.ods'>here</a>) by 'save as' in CSV format"
 msgstr "Un fichier CSV spécialement formaté doit être utilisé pour l'importation. Le fichier CSV peut être créé à partir du fichier modèle ODT (téléchargeable <a href='/++resource++Products.urban/reclamant_reimport.ods'>ici</a>) en l'enregistrant sous le format CSV"
 
+msgid "ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure"
+
 msgid "ARRET_PLAN_MODIF_COMMUNE"
 msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs"
 
 msgid "ARRET_PLAN_MODIF_COMMUNE_MANUELLE"
 msgstr "Notification à la commune de l'arrêt de la procédure au profit de plans modificatifs (autre commune)"
+
+msgid "ART65_ABANDON_COMMUNE"
+msgstr "Article 65 - Notification à la commune de l'abandon de la procédure de révision des CP"
+
+msgid "ART65_AVIS_FT_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune que l'avis FT vaut décision"
+
+msgid "ART65_ENVOI_PROJET_COMMUNE"
+msgstr "Article 65 - Notification à la commune du projet de révision des CP"
+
+msgid "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE"
+msgstr "Article 65 - Envoi tardif à la commune du projet de décision par le FT"
+
+msgid "ART65_FTAC_DECISION_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune de la décision de révision des CP"
+
+msgid "ART65_REFUS_TACITE_COURRIER_COMMUNE"
+msgstr "Article 65 - Notification à la commune du refus tacite de la demande de révision des CP"
 
 #: ../browser/licence/templates/licenceview.pt:31
 #: ../browser/templates/urbaneventannouncementview.pt:35
@@ -236,6 +269,9 @@ msgstr "Conditions sectorielles Eau"
 
 msgid "CS_folder_title"
 msgstr "Conditions sectorielles"
+ 
+msgid "CaPaKey"
+msgstr "CaPaKey"
 
 #: ../browser/cron/notice.py:266
 msgid "Can not find a parcel"
@@ -582,6 +618,9 @@ msgstr "Accusé de réception"
 #: ../interfaces.py:521
 msgid "IActivityEndedEvent type marker interface"
 msgstr "Cessation d'activité"
+ 
+msgid "IAmendedPlansAcknowledgmentEvent type marker interface"
+msgstr "Accusé de réception des plans modifiés"
 
 #: ../interfaces.py:437
 msgid "IAnnouncement type marker interface"
@@ -763,6 +802,9 @@ msgstr "Refus pour incomplétude"
 #: ../interfaces.py:533
 msgid "ISentToArchivesEvent type marker interface"
 msgstr "Envoi aux archives"
+ 
+msgid "IFreeNotificationEvent type marker interface"
+msgstr "Notification libre"
 
 #: ../interfaces.py:581
 msgid "ISettlementEvent type marker interface"
@@ -860,6 +902,9 @@ msgstr "Fin des travaux"
 #: ../interfaces.py:549
 msgid "ImpactStudy event type marker interface"
 msgstr "Étude d'incidence"
+ 
+msgid "IObservationEvent type marker interface"
+msgstr "Constat"
 
 #: ../browser/urbaneventviews.py:338
 msgid "Import"
@@ -868,6 +913,9 @@ msgstr "Import"
 #: ../browser/urbaneventviews.py:400
 msgid "Import cancel : error with claimant ${claimant} on value ${value}"
 msgstr "Annulation d'importation : erreur avec le demandeur ${claimant} sur la valeur ${value}"
+ 
+msgid "Incoming notification to answer to"
+msgstr "Notification NOTICe concernée"
 
 msgid "Inspection"
 msgstr "Inspection"
@@ -938,13 +986,31 @@ msgstr "Plusieurs résultats trouvés pour une adresse"
 msgid "Municipality ID in Notice"
 msgstr "Identifiant de la commune dans NOTICe"
 
+msgid "NOTICe"
+msgstr "NOTICe"
+
+msgid "NOTICe Error"
+msgstr "Erreur NOTICe"
+
+msgid "NOTICe ID"
+msgstr "Identifiant NOTICe"
+
+msgid "NOTICe Type"
+msgstr "Type de notification NOTICe"
+
+msgid "NOTICe notification n° ${noticeId}"
+msgstr "Notification NOTICe n° ${noticeId}"
+
+msgid "NOTICe reception"
+msgstr "Réception (NOTICe)"
+
 #: ../viewlets/templates/notice_transmit_state.pt:3
 msgid "NOTICe reception date"
 msgstr "Date de réception (NOTICe)"
 
 #: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe transmits"
-msgstr "Dates de transmission (NOTICe)"
+msgstr "Transmissions (NOTICe)"
 
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr "Notification à la commune de la décision"
@@ -1033,6 +1099,12 @@ msgstr "Nouvel objet"
 #: ../schedule/browser/debug.py:58
 msgid "No"
 msgstr "Non"
+ 
+msgid "No college decision code was provided in the event; please edit it and select a code first."
+msgstr "La décision n'a pas été cochée dans cet événement; veuillez l'éditer avant de procéder à l'envoi."
+ 
+msgid "No college opinion code was provided in the event; please edit it and select a code first."
+msgstr "L'avis du collège n'a pas été coché dans cet événement; veuillez l'éditer avant de procéder à l'envoi."
 
 #: ../browser/templates/coring_update.pt:61
 msgid "No data to update"
@@ -1083,6 +1155,21 @@ msgstr "Un fichier n'est plus disponible et n'a pas pu être envoyé"
 #: ../contentrules/opinions.py:26
 msgid "Opinion to ask"
 msgstr "Avis à demander"
+ 
+msgid "PM_ABANDON_COMMUNE"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs)"
+
+msgid "PM_ABANDON_COMMUNE_FTFD"
+msgstr "Notification à la commune de l'abandon de la procédure (Plans modificatifs, AC=FTFD)"
+
+msgid "PM_ENVOI_RS_HD_COMMUNE"
+msgstr "Notification hors délai à la commune du RS - Plans Modificatifs"
+
+msgid "PM_NOTIF_IRRECEVABLE_COMMUNE"
+msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
+
+msgid "PM_PROROGATION_COURRIER_COMMUNE"
+msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
 
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
@@ -1249,6 +1336,15 @@ msgstr "Période de suspension du ${from} au ${to}: CORRIGEZ LA DATE DE FIN DE P
 #: ../interfaces.py:734
 msgid "Suspension period start date"
 msgstr "Date de début"
+ 
+msgid "TRANSFERT_DOSSIER"
+msgstr "Nouveau dossier à destination de la commune"
+
+msgid "TRANSFERT_DOSSIER_DRC"
+msgstr "Compléments d'informations à destination de la commune"
+
+msgid "TRANSFERT_DOSSIER_PM"
+msgstr "Nouveaux Plans modificatifs à destination de la commune"
 
 #: ../browser/licence/duplicate_licence.py:51
 msgid "Tabs to duplicate"
@@ -2041,6 +2137,9 @@ msgstr "Paramètres des détentions d'explosifs"
 
 msgid "explosivespossessions"
 msgstr "Détention d'explosifs"
+ 
+msgid "Housing"
+msgstr "Logement"
 
 msgid "externaldecisions_folder_title"
 msgstr "Décision des avis externes"
@@ -2308,6 +2407,9 @@ msgstr "Contexte d'inspection"
 
 msgid "integratedlicence_urbanconfig_title"
 msgstr "Paramètres des permis intégrés"
+ 
+msgid "investigations_radius_folder_title"
+msgstr "Rayons d'enquête"
 
 msgid "investigationarticles_folder_title"
 msgstr "Articles pour les enquêtes"
@@ -2575,7 +2677,7 @@ msgstr "Singulier"
 
 #: ../browser/cron/notice.py:111
 msgid "municipality"
-msgstr ""
+msgstr "Commune"
 
 msgid "natura_2000_folder_title"
 msgstr "Périmètre Natura 2000"
@@ -2973,6 +3075,12 @@ msgstr "Envoyer les dates d'enquête vers le SPW"
 
 msgid "transfer_decision"
 msgstr "Envoyer la décision vers le SPW"
+ 
+msgid "transfer_dates_gesper_ap"
+msgstr "Envoyer les dates d'annonce vers le SPW"
+
+msgid "transfer_dates_gesper_ep"
+msgstr "Envoyer les dates d'enquête vers le SPW"
 
 msgid "transfer_decision_display"
 msgstr "Envoyer les dates d'affichage vers le SPW"
@@ -3024,6 +3132,10 @@ msgstr "Le"
 #: ../viewlets/templates/notice_transmit_state.pt:17
 msgid "transmit_form_data"
 msgstr "Données du formulaire"
+ 
+#. Default: "Type"
+msgid "transmit_type"
+msgstr "Type"
 
 #. Default: "User"
 #: ../viewlets/templates/notice_transmit_state.pt:15
@@ -5970,6 +6082,9 @@ msgstr "Pas d'application"
 #: ../content/licence/BaseBuildLicence.py:685
 msgid "usage_not_for_habitation"
 msgstr "Modèle II: Bâtiment(s) destiné(s) exclusivement ou principalement à un autre usage que l'habitation"
+ 
+msgid "user_id"
+msgstr "Identifiant de l'utilisateur"
 
 # error messages...
 #. Default: "You must encode concerned parcel(s)"
