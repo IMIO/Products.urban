@@ -1,0 +1,2 @@
+Fix decisionDate filter: ensure getDecisionDate indexer always returns a DateTime (including PloneMeeting data).
+[WBoudabous]

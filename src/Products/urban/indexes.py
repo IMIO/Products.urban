@@ -275,14 +275,9 @@ def genericlicence_decisiondate(licence):
                     )
                 return decision_date
         if linked_pm_items:
-            if "date" in linked_pm_items[0]["extra_include_meeting"].keys():
-                decision_date = linked_pm_items[0]["extra_include_meeting"]["date"]
-                if isinstance(decision_date, unicode):
-                    decision_date = datetime.strptime(
-                        decision_date,
-                        "%Y-%m-%dT%H:%M:%S"
-                    ).date()
-                return decision_date
+            date_str = linked_pm_items[0]["extra_include_meeting"].get("date")
+            if date_str:
+                return DateTime(date_str)
         return decision_event.getDecisionDate() or decision_event.getEventDate()
 
 
