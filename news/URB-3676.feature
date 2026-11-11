@@ -1,2 +1,0 @@
-Handle NOTIFICATION_ABANDON_COMMUNE Notification
-[WBoudabous]

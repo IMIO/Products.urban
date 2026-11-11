@@ -8,6 +8,47 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.33 (2026-11-11)
+-------------------
+
+New features:
+
+
+- Put a default value for `claimType` for claimant when copy from recipient
+  [jchandelle] (SUP-56440)
+- Add referenceIaDocs and urlIaDocs fields to the event configuration
+  [WBoudabous] (URB-3242)
+- Implement `PM_ENVOI_RS_HD_COMMUNE`
+  [daggelpop] (URB-3312)
+- Add dematerialized encoding warning on NOTICE folder
+  [WBoudabous] (URB-3595)
+- Handle NOTICE DECISION_REGISTRE_COMMUNE notifications and add the IModificationRegistryDecisionEvent marker for the matching event
+  [WBoudabous] (URB-3674)
+- Handle NOTIFICATION_ABANDON_COMMUNE Notification
+  [WBoudabous] (URB-3676)
+- Implement ACTE_CONSTITUTION_SURETE_COMMUNE NOTICe notification and add provision of security and release of security event markers
+  [WBoudabous] (URB-3678)
+- Add validation on opinion NOTICe forms
+  [daggelpop] (URB-3776)
+- Add licence type Article65
+  [daggelpop] (URB-3779)
+- Map NOTICE proposed decision codes to existing external decision terms on imported summary report events
+  [WBoudabous] (URB-3796)
+- Send asynchronously successful NOTICe import emails
+  [daggelpop] (URB-3804)
+
+
+Bug fixes:
+
+
+- Fix decisionDate filter: ensure getDecisionDate indexer always returns a DateTime (including PloneMeeting data).
+  [WBoudabous] (SUP-52501)
+- Use reception date for incoming notice event dates
+  [daggelpop] (URB-3660)
+- Fix variable definition
+  [daggelpop] (URB-3804)
+
+
 2.9.32 (2026-10-16)
 -------------------
 
