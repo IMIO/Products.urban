@@ -16,6 +16,7 @@ __docformat__ = "plaintext"
 
 import datetime
 from collections import OrderedDict
+from time import time
 
 from AccessControl import ClassSecurityInfo
 from Acquisition import aq_parent
@@ -36,6 +37,11 @@ from Products.urban.config import *
 from Products.urban.interfaces import IUrbanDoc
 from Products.urban.notice import NoticeOutgoingDecisionNotification
 from Products.urban.notice import NoticeOutgoingFileNotification
+from Products.urban.notice import NoticeOutgoingGesperOpinionRequestNotification
+from Products.urban.notice import (
+    NoticeOutgoingGesperProjectAnnouncementOpinionNotification,
+)
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyOpinionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDecisionNotification
 from Products.urban.notice import NoticeOutgoingSummaryReportDatesNotification
@@ -530,6 +536,19 @@ schema = Schema(
             default_output_type="text/html",
             optional=True,
         ),
+        ReferenceField(
+            name="newOperator",
+            widget=ReferenceBrowserWidget(
+                label=_("urban_label_newOperator", default="NewOperator"),
+                allow_search=1,
+                allow_browse=1,
+                show_indexes=0,
+            ),
+            allowed_types=("Applicant", "Corporation"),
+            multiValued=1,
+            optional=True,
+            relationship="newOperator",
+        ),
         DateTimeField(
             name="videoConferenceDate",
             widget=DateTimeField._properties["widget"](
@@ -552,6 +571,33 @@ schema = Schema(
                 ending_year=WIDGET_DATE_END_YEAR,
                 label=_("urban_label_validityEndDate", default="validityEndDate"),
             ),
+            optional=True,
+        ),
+        StringField(
+            name="cessionType",
+            widget=SelectionWidget(
+                label=_("urban_label_cessionType", default="Cessiontype"),
+            ),
+            enforceVocabulary=True,
+            optional=True,
+            vocabulary=UrbanVocabulary(
+                "cessiontype", with_empty_value=True, inUrbanConfig=False
+            ),
+            default_method="getDefaultValue",
+        ),
+        StringField(
+            name="referenceIaDocs",
+            widget=StringWidget(
+                label=_("urban_label_referenceIaDocs", default="referenceIaDocs"),
+            ),
+            optional=True,
+        ),
+        StringField(
+            "urlIaDocs",
+            widget=StringWidget(
+                label=_("urban_label_urlIaDocs", default="urlIaDocs"),
+            ),
+            validators=("isURL",),
             optional=True,
         ),
     ),
@@ -1012,56 +1058,117 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
         )
         return result
 
-    def store_reception_date(self, date=None):
+    def store_incoming_notice(self, notice_id, notice_type, reception_date):
         annotations = IAnnotations(self)
-        key = "notice_reception_date"
-        annotations[key] = date
+        key = "notice_notification"
 
-    def transfer_opinion(self, college_opinion):
-        notification = NoticeOutgoingPublicSurveyOpinionNotification(self, college_opinion)
+        notice = annotations.get(key, {})
+        notice["incoming"] = {
+            "reception_date": reception_date,
+            "notice_id": notice_id,
+            "notice_type": notice_type,
+        }
+        annotations[key] = notice
+
+    def store_outgoing_notice(
+        self,
+        incoming_notice_id,
+        outgoing_notice_type,
+        partial_or_final,
+        send_date,
+        user,
+        field_values,
+    ):
+        annotations = IAnnotations(self)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        outgoing = notice.get("outgoing", [])
+        outgoing.append(
+            {
+                "timestamp": "{:.6f}".format(time()),
+                "incoming_notice_id": incoming_notice_id,
+                "outgoing_notice_type": outgoing_notice_type,
+                "partial_or_final": partial_or_final,
+                "send_date": send_date,
+                "user": user,
+                "field_values": field_values,
+            }
+        )
+        notice["outgoing"] = outgoing
+        annotations[key] = notice
+
+    def transfer_opinion(self, incoming_id, inquiry_event, college_opinion):
+        notification = NoticeOutgoingPublicSurveyOpinionNotification(
+            self, inquiry_event, college_opinion
+        )
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def transfer_decision(self, college_decision):
-
-        # store college decision for later use (final response, transfer decision display)
-        self._notice_decision = college_decision
-
-        notification = NoticeOutgoingSummaryReportDecisionNotification(self)
+    def transfer_decision(self, incoming_id, college_decision):
+        notification = NoticeOutgoingSummaryReportDecisionNotification(
+            self, college_decision
+        )
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("NOTIFICATION_RS"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def transfer_decision_display(self):
-        licence = self.aq_parent
-
-        if licence.get_notice_id("NOTIFICATION_DECISION"):
-            notification = NoticeOutgoingDecisionNotification(self)
-            service = WebserviceNotice()
-            result = service.post_notification_response(
-                notification.notice_id("NOTIFICATION_DECISION"),
-                notification.serialize(),
-            )
-        elif licence.get_notice_id("NOTIFICATION_RS"):
-            notification = NoticeOutgoingSummaryReportDatesNotification(self)
-            service = WebserviceNotice()
-            result = service.post_notification_response(
-                notification.notice_id("NOTIFICATION_RS"),
-                notification.serialize(),
+    def transfer_decision_display(
+        self, incoming_id, decision_event=None, college_decision=None
+    ):
+        if decision_event is not None:
+            notification = NoticeOutgoingSummaryReportDatesNotification(
+                self, decision_event=decision_event, college_decision=college_decision
             )
         else:
-            raise ValueError(
-                "No Notice ID found (either RS or DECISION) for licence {}".format(
-                    licence.getReference()
-                )
-            )
+            notification = NoticeOutgoingDecisionNotification(self)
+
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_opinion_gesper_ep(self, incoming_id, inquiry_event, college_opinion):
+        notification = NoticeOutgoingGesperPublicSurveyOpinionNotification(
+            self, inquiry_event, college_opinion
+        )
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_opinion_gesper_ap(
+        self, incoming_id, announcement_event, college_opinion
+    ):
+        notification = NoticeOutgoingGesperProjectAnnouncementOpinionNotification(
+            self, announcement_event, college_opinion
+        )
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_opinion_gesper_opinion_request(self, incoming_id, college_motivation):
+        notification = NoticeOutgoingGesperOpinionRequestNotification(
+            self, college_motivation
+        )
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
         return result
 
 

@@ -21,6 +21,7 @@ from Products.urban import interfaces
 from Products.urban.schedule.interfaces import ILicenceDeliveryTask
 from Products.urban.utils import get_ws_meetingitem_infos
 from datetime import date
+from datetime import datetime
 from imio.schedule.content.task import IAutomatedTask
 from plone import api
 from plone.indexer import indexer
@@ -158,7 +159,7 @@ def genericlicence_modified(licence):
 
 @indexer(interfaces.IGenericLicence)
 def genericlicence_streetsuid(licence):
-    if licence.portal_type in ["EnvClassBordering"]:
+    if licence.portal_type in ["EnvClassBordering", "CODT_UniqueBorderingLicence"]:
         return []
     streets = [location["street"] for location in licence.getWorkLocations()]
     return streets

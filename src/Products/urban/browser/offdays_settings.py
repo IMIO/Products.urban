@@ -84,6 +84,7 @@ class OffDaysEditForm(RegistryEditForm):
     Define form logic
     """
 
+    prefix = "offdays."
     schema = IOffDays
     label = _(u"Off days")
     description = _(u"""""")

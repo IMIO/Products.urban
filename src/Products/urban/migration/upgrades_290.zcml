@@ -18,7 +18,7 @@
         destination="2901"
         handler=".update_290.add_event_config_types_notice"
         profile="Products.urban:default" />
-    
+
     <gs:upgradeStep
         title="Add folder manager for notice import"
         description=""
@@ -82,6 +82,134 @@
         source="2908"
         destination="2909"
         handler=".update_290.fix_housing_roaddecree"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Update manageableLicences for notice FolderManager"
+        description=""
+        source="2909"
+        destination="2910"
+        handler=".update_290.update_folder_manager_notice"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add CODT unique bordering licences"
+        description=""
+        source="2910"
+        destination="2912"
+        handler=".update_290.add_codt_uniquebordering_licences"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up `referenceDGATLP` index"
+        description=""
+        source="2912"
+        destination="2913"
+        handler=".update_290.setup_index_referenceDGATLP"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up NOTICE mailing content rules"
+        description=""
+        source="2913"
+        destination="2914"
+        handler=".update_290.setup_notice_mailing_content_rules"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Reindex getDecisionDate"
+        description=""
+        source="2914"
+        destination="2915"
+        handler=".update_290.reindex_getDecisionDate"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add 'digital' deposit type and activate field on deposit event"
+        description=""
+        source="2915"
+        destination="2916"
+        handler=".update_290.add_digital_term_to_deposit_type"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Normalize external decisions vocabulary"
+        description=""
+        source="2916"
+        destination="2917"
+        handler=".update_290.normalize_externaldecisions_vocabulary"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up NOTICE form error mailing content rule"
+        description=""
+        source="2917"
+        destination="2918"
+        handler=".update_290.setup_notice_form_error_mailing_content_rule"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set up `referenceFT_PM` index"
+        description=""
+        source="2918"
+        destination="2919"
+        handler=".update_290.setup_referenceFT_PM"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Hide CODT_UniqueBorderingLicences for none notice instance"
+        description=""
+        source="2919"
+        destination="2920"
+        handler=".update_290.hide_CODT_UniqueBorderingLicences_for_none_notice_instance"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add 3rd_observation state to housing workflow"
+        description=""
+        source="2920"
+        destination="2921"
+        handler=".update_290.add_3rd_observation_to_housing_workflow"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Set urbanConfigId for PUL"
+        description=""
+        source="2921"
+        destination="2922"
+        handler=".update_290.set_pul_urbanConfigId"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add cession type"
+        description=""
+        source="2922"
+        destination="2923"
+        handler=".update_290.add_cessiontype_vocabulary"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add Article 65 type"
+        description=""
+        source="2923"
+        destination="2924"
+        handler=".update_290.add_article65_type"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Add notice warning"
+        description=""
+        source="2924"
+        destination="2925"
+        handler=".update_290.add_notice_warning"
+        profile="Products.urban:default"/>
+
+    <gs:upgradeStep
+        title="Add async notice mail list in registry"
+        description=""
+        source="2925"
+        destination="2926"
+        handler=".update_290.add_async_notice_mails"
         profile="Products.urban:default" />
 
 </configure>

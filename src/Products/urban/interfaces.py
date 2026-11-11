@@ -195,6 +195,10 @@ class IUrbanEventNotice(Interface):
     """Marker interface for .UrbanEventNotice.UrbanEventNotice"""
 
 
+class ILicenceCreatedViaNoticeWS(Interface):
+    """Marker interface for a licence created through the Notice webservice"""
+
+
 class IUrbanEventOpinionRequest(Interface):
     """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest"""
 
@@ -315,6 +319,10 @@ class ICODT_IntegratedLicence(ICODT_BaseBuildLicence):
     """Marker interface for  CODT_ IntegratedLicence"""
 
 
+class ICODT_UniqueBorderingLicence(ICODT_UniqueLicence):
+    """Marker interface for CODT_UniqueLicenceBordering"""
+
+
 class ILicenceContainer(Interface):
     """
     Marker interface for a folder containing Licences
@@ -405,6 +413,10 @@ class IDefaultCODTAcknowledgmentEvent(IAcknowledgmentEvent):
     __doc__ = _("""IDefaultCODTAcknowledgmentEvent type marker interface""")
 
 
+class IAmendedPlansAcknowledgmentEvent(IAcknowledgmentEvent):
+    __doc__ = _("""IAmendedPlansAcknowledgmentEvent type marker interface""")
+
+
 class ICommunalCouncilEvent(Interface):
     __doc__ = _("""ICommunalCouncil type marker interface""")
 
@@ -423,6 +435,18 @@ class IMissingPartTransmitToSPWEvent(IDepositEvent):
 
 class IModificationDepositEvent(IDepositEvent):
     __doc__ = _("""IModificationDeposit type marker interface""")
+
+
+class ISpecialConditionsRevisionDepositEvent(IDepositEvent):
+    __doc__ = _("""ISpecialConditionsRevisionDepositEvent type marker interface""")
+
+
+class ISpecialConditionsRevisionProjectEvent(Interface):
+    __doc__ = _("""ISpecialConditionsRevisionProjectEvent type marker interface""")
+
+
+class ISpecialConditionsRevisionDecisionEvent(Interface):
+    __doc__ = _("""ISpecialConditionsRevisionDecisionEvent type marker interface""")
 
 
 class IMissingPartEvent(Interface):
@@ -517,6 +541,10 @@ class IRefusedIncompletenessEvent(Interface):
     __doc__ = _("""IRefusedIncompleteness type marker interface""")
 
 
+class ITacitRefusalEvent(Interface):
+    __doc__ = _("""ITacitRefusalEvent type marker interface""")
+
+
 class IIILEPrescriptionEvent(Interface):
     __doc__ = _("""IIILEPrescriptionEvent type marker interface""")
 
@@ -581,8 +609,16 @@ class ISuspensionEvent(Interface):
     __doc__ = _("""ISuspensionEvent type marker interface""")
 
 
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
+
+
 class ISettlementEvent(Interface):
     __doc__ = _("""ISettlementEvent type marker interface""")
+
+
+class IFreeNotificationEvent(Interface):
+    __doc__ = _("""IFreeNotificationEvent type marker interface""")
 
 
 class ITransferOfLicenceEvent(Interface):
@@ -591,6 +627,26 @@ class ITransferOfLicenceEvent(Interface):
 
 class IObservationEvent(Interface):
     __doc__ = _("""IObservationEvent type marker interface""")
+
+
+class IEstablishmentEvent(Interface):
+    __doc__ = _("""IEstablishmentEvent type marker interface""")
+
+
+class IExtensionEvent(Interface):
+    __doc__ = _("""IExtensionEvent type marker interface""")
+
+
+class IAbandonEvent(Interface):
+    __doc__ = _("""IAbandonEvent type marker interface""")
+
+
+class IInformationEvent(Interface):
+    __doc__ = _("""IInformationEvent type marker interface""")
+
+
+class ICessionEvent(Interface):
+    __doc__ = _("""ICessionEvent type marker interface""")
 
 
 class IUrbanBase(Interface):
@@ -613,8 +669,8 @@ class ICODT_NotaryLetter(IGenericLicence):
     """Marker interface for CODT_ NotaryLetter"""
 
 
-class IEnvCLassOne(Interface):
-    """Marker interface for EnvClassOne"""
+class IArticle65(IEnvironmentLicence):
+    """Marker interface for Article65"""
 
 
 class IContactFolder(Interface):
@@ -761,3 +817,19 @@ class IIntentionToSubmitAmendedPlans(Interface):
 
 class IMissingCapakey(Interface):
     """ """
+
+
+class IAcknowledgmentOfTransfer(Interface):
+    __doc__ = _("""IAcknowledgmentOfTransfer type marker interface""")
+
+
+class IProvisionOfSecurity(Interface):
+    __doc__ = _("""IProvisionOfSecurity type marker interface""")
+
+
+class IReleaseOfSecurity(Interface):
+    __doc__ = _("""IReleaseOfSecurity type marker interface""")
+
+
+class IModificationRegistryDecisionEvent(Interface):
+    __doc__ = _("""IModificationRegistryDecisionEvent type marker interface""")

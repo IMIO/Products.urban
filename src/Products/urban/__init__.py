@@ -214,12 +214,14 @@ def initialize(context):
     import content.UrbanEventInquiry
     import content.UrbanEventInspectionReport
     import content.licence.Article127
+    import content.licence.Article65
     import content.licence.BuildLicence
     import content.licence.CODT_Article127
     import content.licence.CODT_BuildLicence
     import content.licence.CODT_CommercialLicence
     import content.licence.CODT_IntegratedLicence
     import content.licence.CODT_ParcelOutLicence
+    import content.licence.CODT_UniqueBorderingLicence
     import content.licence.CODT_UniqueLicence
     import content.licence.CODT_UrbanCertificateTwo
     import content.licence.Declaration

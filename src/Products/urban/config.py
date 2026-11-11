@@ -64,6 +64,7 @@ setDefaultRoles(DEFAULT_ADD_CONTENT_PERMISSION, ("Manager", "Owner", "Contributo
 ADD_CONTENT_PERMISSIONS = {
     "Applicant": "urban: Add Applicant",
     "Article127": "urban: Add Article127",
+    "Article65": "urban: Add Article65",
     "BuildLicence": "urban: Add BuildLicence",
     "CODT_Article127": "urban: Add CODT_Article127",
     "CODT_BuildLicence": "urban: Add CODT_BuildLicence",
@@ -71,6 +72,7 @@ ADD_CONTENT_PERMISSIONS = {
     "CODT_IntegratedLicence": "urban: Add CODT_IntegratedLicence",
     "CODT_ParcelOutLicence": "urban: Add CODT_ParcelOutLicence",
     "CODT_UniqueLicence": "urban: Add CODT_UniqueLicence",
+    "CODT_UniqueBorderingLicence": "urban: Add CODT_UniqueBorderingLicence",
     "CODT_UrbanCertificateTwo": "urban: Add CODT_UrbanCertificateTwo",
     "CODT_UrbanCertificateBase": "urban: Add CODT_UrbanCertificateBase",
     "Contact": "urban: Add Contact",
@@ -128,6 +130,7 @@ ADD_CONTENT_PERMISSIONS = {
 
 setDefaultRoles("urban: Add Applicant", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add Article127", ("Manager", "Contributor"))
+setDefaultRoles("urban: Add Article65", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add BuildLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add City", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add Claimant", ("Manager", "Contributor", "ClaimantEditor"))
@@ -138,6 +141,7 @@ setDefaultRoles("urban: Add CODT_IntegratedLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_NotaryLetter", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_ParcelOutLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UniqueLicence", ("Manager", "Contributor"))
+setDefaultRoles("urban: Add CODT_UniqueBorderingLicence", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UrbanCertificateOne", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UrbanCertificateTwo", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add CODT_UrbanCertificateBase", ("Manager", "Contributor"))
@@ -201,11 +205,13 @@ URBAN_TYPES = [
     "CODT_BuildLicence",
     "Article127",
     "CODT_Article127",
+    "Article65",
     "CODT_CommercialLicence",
     "IntegratedLicence",
     "CODT_IntegratedLicence",
     "UniqueLicence",
     "CODT_UniqueLicence",
+    "CODT_UniqueBorderingLicence",
     "Declaration",
     "UrbanCertificateOne",
     "CODT_UrbanCertificateOne",
@@ -235,12 +241,14 @@ URBAN_TYPES_ACRONYM = {
     "BuildLicence": "P",
     "CODT_BuildLicence": "P",
     "Article127": "PA",
+    "Article65": "A65",
     "CODT_Article127": "PA",
     "CODT_CommercialLicence": "PIC",
     "IntegratedLicence": "PI",
     "CODT_IntegratedLicence": "PI",
     "UniqueLicence": "PU",
     "CODT_UniqueLicence": "PU",
+    "CODT_UniqueBorderingLicence": "PUL",
     "Declaration": "D",
     "UrbanCertificateOne": "CU1",
     "CODT_UrbanCertificateOne": "CU1",
@@ -292,6 +300,7 @@ URBAN_CODT_TYPES = [
     "CODT_IntegratedLicence",
     "CODT_ParcelOutLicence",
     "CODT_UniqueLicence",
+    "CODT_UniqueBorderingLicence",
     "CODT_UrbanCertificateTwo",
     "CODT_UrbanCertificateOne",
     "CODT_NotaryLetter",
@@ -312,6 +321,7 @@ URBAN_ENVIRONMENT_TYPES = [
     "EnvClassThree",
     "ExplosivesPossession",
     "EnvClassBordering",
+    "Article65",
 ]
 
 LICENCE_FINAL_STATES = [

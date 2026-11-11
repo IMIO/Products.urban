@@ -166,7 +166,7 @@ class ConfigImportContent(ImportContent):
         return self.get_uid_from_proximity_context(aq_parent(context), id, ignore_uid)
 
     def get_template_uid(self, item, template):
-        if isinstance(template["template"], str):
+        if isinstance(template["template"], basestring):
             obj = api.content.get(UID=template["template"])
             if obj:
                 return template["template"]

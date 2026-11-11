@@ -27,6 +27,12 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
+from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementDatesNotification
+from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementFinalWithoutOpinionNotification
+from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementPVNotification
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyDatesNotification
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification
+from Products.urban.notice import NoticeOutgoingGesperPublicSurveyPVNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyDatesNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyPVNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
@@ -343,29 +349,85 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
                 number += claimant.getSignatureNumber()
         return number
 
-    def transfer_dates(self):
+    def transfer_dates(self, incoming_id):
         notification = NoticeOutgoingPublicSurveyDatesNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def transfer_ticket(self):
+    def transfer_ticket(self, incoming_id):
         notification = NoticeOutgoingPublicSurveyPVNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
             notification.serialize(),
         )
         return result
 
-    def finalize_inquiry_without_opinion(self):
+    def finalize_inquiry_without_opinion(self, incoming_id):
         notification = NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(self)
         service = WebserviceNotice()
         result = service.post_notification_response(
-            notification.notice_id("DEMANDE_EP"),
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_dates_gesper_ep(self, incoming_id):
+        notification = NoticeOutgoingGesperPublicSurveyDatesNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_ticket_gesper_ep(self, incoming_id):
+        notification = NoticeOutgoingGesperPublicSurveyPVNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def finalize_inquiry_without_opinion_gesper_ep(self, incoming_id):
+        notification = NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_dates_gesper_ap(self, incoming_id):
+        notification = NoticeOutgoingGesperProjectAnnouncementDatesNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def transfer_ticket_gesper_ap(self, incoming_id):
+        notification = NoticeOutgoingGesperProjectAnnouncementPVNotification(self)
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
+            notification.serialize(),
+        )
+        return result
+
+    def finalize_inquiry_without_opinion_gesper_ap(self, incoming_id):
+        notification = (
+            NoticeOutgoingGesperProjectAnnouncementFinalWithoutOpinionNotification(self)
+        )
+        service = WebserviceNotice()
+        result = service.post_notification_response(
+            incoming_id,
             notification.serialize(),
         )
         return result

@@ -24,6 +24,13 @@
         permission="cmf.ManagePortal"
         />
 
+    <adapter
+        for="*"
+        provides="plone.stringinterp.interfaces.IStringSubstitution"
+        factory="Products.urban.contentrules.stringinterp.ParentUrlSubstitution"
+        name="parent_url"
+        />
+
     <configure package="imio.actionspanel">
         <browser:page
            for="*"

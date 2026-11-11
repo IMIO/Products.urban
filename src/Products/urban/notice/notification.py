@@ -3,6 +3,7 @@ from Products.urban.interfaces import IGenericLicence
 from Products.urban.notice.address import NoticeAddress
 from Products.urban.notice.base import NoticeElement
 from Products.urban.notice.document import NoticeDocument
+from Products.urban.notice.exceptions import NoEnabledEventConfigFoundException
 from Products.urban.notice.parcel import NoticeParcel
 from Products.urban.notice.party import NoticeParty
 from Products.urban.notice.sender import NoticeSender
@@ -24,7 +25,7 @@ class NoticeNotification(NoticeElement):
         "sender",
         "status",
         "reception_date",
-        "notice_type",
+        "status_date",
         "notification_subtype",
         "notification_type",
     )
@@ -35,6 +36,8 @@ class NoticeNotification(NoticeElement):
         "parcels",
         "parties",
         "decision_code",
+        "original_application",
+        "business_reference_denomination",
     )
 
     def __init__(self, service, json):
@@ -85,7 +88,34 @@ class NoticeNotification(NoticeElement):
 
     @property
     def referenceFT(self):
-        return self._get_data("BO", "idBO")
+        if self.original_application == "TWICE" and self.notification_type in (
+            "PE_PU",
+            "ARTICLE65",
+        ):
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def referenceFT_PM(self):
+        if (
+            self.original_application == "TWICE"
+            and self.notification_type == "PLANS_MODIFICATIFS"
+        ):
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def referenceDGATLP(self):
+        if self.original_application == "GESPER":
+            return self._get_data("BO", "idBO")
+        else:
+            return None
+
+    @property
+    def original_application(self):
+        return self._get_data("BO", "applicationCodeBO")
 
     @property
     def type(self):
@@ -94,7 +124,10 @@ class NoticeNotification(NoticeElement):
         if not hasattr(self, "_licence_type"):
             self._licence_type = None
 
-            if self.notice_type == "TRANSFERT_DOSSIER":
+            if self.original_application == "GESPER":
+                if self.notification_type == "UFD2_GESPER":
+                    self._licence_type = "CODT_Article127"
+            elif self.notice_type == "TRANSFERT_DOSSIER":
                 if self.notification_type == "PE_PU":
                     if self.notification_subtype == "PU":
                         self._licence_type = "CODT_UniqueLicence"
@@ -114,6 +147,13 @@ class NoticeNotification(NoticeElement):
                             "2": "EnvClassTwo",
                             "3": "EnvClassThree",
                         }.get(penv_classe, None)
+            elif self.notice_type == "DEMANDE_EP_EXTRA":
+                self._licence_type = {
+                    "PU": "CODT_UniqueBorderingLicence",
+                    "PE": "EnvClassBordering",
+                }.get(self.notification_subtype)
+            elif self.notification_type == "ARTICLE65":
+                self._licence_type = "Article65"
             else:
                 existing_licence = self.licence
                 if existing_licence:
@@ -129,22 +169,61 @@ class NoticeNotification(NoticeElement):
     @property
     def _specific_code(self):
         specific = {
+            # Twice Default
             "TRANSFERT_DOSSIER": "ns3:TwiceDefaultRequest",
+            "TRANSFERT_DOSSIER_PM": "ns3:TwiceDefaultRequest",
+            "TRANSFERT_DOSSIER_DRC": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_INCOMPLET_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
             "NOTIF_COMPLETUDE2_NON_RECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ARRET_PLAN_MODIF_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ARRET_PLAN_MODIF_COMMUNE_MANUELLE": "ns3:TwiceDefaultRequest",
+            "PM_NOTIF_IRRECEVABLE_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_PROROGATION_COURRIER_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "PM_ABANDON_COMMUNE_FTFD": "ns3:TwiceDefaultRequest",
+            "ACTE_CESSION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "REVISION_CP_FT_ENVOI_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_RECEVABILITE_SANSEP_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_NON_RECEVABILITE_ART65_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ART65_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            "ACTE_CONSTITUTION_SURETE_COMMUNE": "ns3:TwiceDefaultRequest",
+            # Public Survey
             "DEMANDE_EP": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_DOSSIER_PRECEDENT": "ns3:PublicSurveyRequest",
             "DEMANDE_EP_EXTRA": "ns3:PublicSurveyRequest",
-            "NOTIFICATION_PROROGATION_COMMUNE": "ns3:TwiceDefaultRequest",
+            "NOTIFICATION_RECEVABILITE_ART65_COMMUNE": "ns3:PublicSurveyRequest",
+            # Summary Report
             "NOTIFICATION_RS_COMMUNE": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD": "ns3:SummaryReportRequest",
             "NOTIFICATION_RS_COMMUNE_RETARD_SFD": "ns3:SummaryReportRequest",
             "NOTIFICATION_PAS_ENVOI_RS": "ns3:SummaryReportRequest",
             "NOTIFICATION_PAS_ENVOI_RS_SFD": "ns3:SummaryReportRequest",
+            "PM_RS_PAS_ENVOYE": "ns3:SummaryReportRequest",
+            "PM_ENVOI_RS_COMMUNE": "ns3:SummaryReportRequest",
+            "PM_ENVOI_RS_HD_COMMUNE": "ns3:SummaryReportRequest",
+            "PM_ENVOI_RS_HD_SFD_COMMUNE": "ns3:SummaryReportRequest",
+            "PM_RS_PAS_ENVOYE_SFD": "ns3:SummaryReportRequest",
+            "ART65_ENVOI_PROJET_COMMUNE": "ns3:SummaryReportRequest",
+            "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE": "ns3:SummaryReportRequest",
+            # Decision
             "NOTIFICATION_DECISION_COMMUNE": "ns3:DecisionRequest",
+            "NOTIFICATION_DEC_RS_COMMUNE": "ns3:DecisionRequest",
+            "NOTIFICATION_DECRS_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
+            "PM_ENVOI_DECISION_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            "PM_REFUS_TACITE_COMMUNE": "ns3:DecisionRequest",
+            "PM_RS_DECISION_COMMUNE": "ns3:DecisionRequest",
+            "ART65_FTAC_DECISION_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            "ART65_AVIS_FT_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            "ART65_REFUS_TACITE_COURRIER_COMMUNE": "ns3:DecisionRequest",
+            # Registre des modifications
+            "NOTIFICATION_ABANDON_COMMUNE": "ns3:TwiceDefaultRequest",
+            # Modification log
+            "DECISION_REGISTRE_COMMUNE": "ns3:TwiceDefaultRequest",
         }
         return specific.get(self.notice_type)
 
@@ -163,7 +242,7 @@ class NoticeNotification(NoticeElement):
                 document.document_mimetype == "application/xml"
                 and document.document_type_code == "PJ_FORMULAIRE"
             ):
-                return etree.parse(document.file)
+                return etree.fromstring(document.document)
         raise ValueError("No PJ_FORMULAIRE XML document found")
 
     @property
@@ -177,14 +256,19 @@ class NoticeNotification(NoticeElement):
                 "/dataStore/projet/rubriques/item"
             )
             for rubrique in rubrique_elements:
-                classe = rubrique.xpath("classe/text()")[0]
-                number = rubrique.xpath("numRubrique")[0].text
-                number = number.replace("-", "")  # special case: `COV-01.01` => `COV01.01`
-                rubric_obj = get_rubric_obj(classe, number)
-                if rubric_obj:
-                    found_uids.append(rubric_obj.UID())
-                else:
-                    missing_rubrics.append("classe {}, {}".format(classe, number))
+                class_elements = rubrique.xpath("classe/text()")
+                number_elements = rubrique.xpath("numRubrique")
+                if class_elements and number_elements:
+                    classe = class_elements[0]
+                    number = number_elements[0].text
+                    number = number.replace(
+                        "-", ""
+                    )  # special case: `COV-01.01` => `COV01.01`
+                    rubric_obj = get_rubric_obj(classe, number)
+                    if rubric_obj:
+                        found_uids.append(rubric_obj.UID())
+                    else:
+                        missing_rubrics.append("classe {}, {}".format(classe, number))
 
         if missing_rubrics:
             raise ValueError(
@@ -203,7 +287,15 @@ class NoticeNotification(NoticeElement):
     def send_date(self):
         """Return the send date"""
         raw_date = self._get_data("sendDate")
-        return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
+
+    @property
+    def due_date(self):
+        """Return the due date"""
+        raw_date = self._get_data("dueDate")
+        if raw_date:
+            return datetime.strptime(raw_date[:19], "%Y-%m-%dT%H:%M:%S").date()
 
     @property
     def container(self):
@@ -233,11 +325,25 @@ class NoticeNotification(NoticeElement):
                 licence = brains[0].getObject()
                 return licence
 
-        raise ValueError(
-            "No licence found with reference number {} / reference FT {}".format(
-                self.reference, self.referenceFT
+        if self.referenceFT_PM:
+            brains = catalog.unrestrictedSearchResults(
+                referenceFT_PM=self.referenceFT_PM,
+                object_provides=IGenericLicence.__identifier__,
             )
-        )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        if self.referenceDGATLP:
+            brains = catalog.unrestrictedSearchResults(
+                referenceDGATLP=self.referenceDGATLP,
+                object_provides=IGenericLicence.__identifier__,
+            )
+            if brains:
+                licence = brains[0].getObject()
+                return licence
+
+        return None
 
     @property
     def event_configs(self):
@@ -260,11 +366,10 @@ class NoticeNotification(NoticeElement):
             config_event_types = config.eventType or []
             if interface_identifier in config_event_types:
                 return config
-        raise ValueError(
-            "No enabled EventConfig found for marker {} of licence type {}".format(
-                interface_identifier,
-                self.type,
-            )
+
+        raise NoEnabledEventConfigFoundException(
+            interface_identifier,
+            self.type,
         )
 
     @property
@@ -287,7 +392,10 @@ class NoticeNotification(NoticeElement):
     @property
     def parcels(self):
         """Return parcels"""
-        return [NoticeParcel(self.service, p) for p in self.json["parcels"]["parcel"]]
+        return [
+            NoticeParcel(self.service, p)
+            for p in self._get_data("parcels", "parcel") or []
+        ]
 
     @property
     def parties(self):
@@ -298,10 +406,15 @@ class NoticeNotification(NoticeElement):
         ]
 
     @property
+    def business_reference_denomination(self):
+        return self._get_data("businessReference", "denomination")
+
+    @property
     def addresses(self):
         """Return work locations"""
         return [
-            NoticeAddress(self.service, a) for a in self.json["addresses"]["address"]
+            NoticeAddress(self.service, a)
+            for a in self._get_data("addresses", "address") or []
         ]
 
     @property
@@ -309,7 +422,7 @@ class NoticeNotification(NoticeElement):
         """Return documents"""
         return [
             NoticeDocument(self.service, d, self.noticeId)
-            for d in self.json["documents"]["document"]
+            for d in self._get_data("documents", "document") or []
         ]
 
     @property
@@ -318,8 +431,30 @@ class NoticeNotification(NoticeElement):
         return []
 
     @property
+    def proposed_decision_code(self):
+        """Return proposed decision code from a SummaryReportRequest"""
+        return self._get_data(
+            "specific", "ns3:SummaryReportRequest", "ns3:proposedDecisionCode", "code"
+        )
+
+    @property
     def decision_code(self):
         """Return decision code from a DecisionRequest"""
-        return self._get_data(
-            "specific", self._specific_code, "ns3:decisionCode", "code"
-        )
+
+        if self.original_application == "TWICE":
+            return self._get_data(
+                "specific", self._specific_code, "ns3:decisionCode", "code"
+            )
+        if self.original_application == "GESPER" and self.notice_type in (
+            "DECISION_GESPER_1_ERE_INSTANCE",
+            "DECISION_GESPER_2_EME_INSTANCE",
+        ):
+            for document in self.documents:
+                if document.document_type_code in (
+                    "UFD2_DEMAT_DECISION_FD",
+                    "UFD2_DECISION_FD_OCTROI",
+                    "UFD2_DECISION_FD_REFUSEE",
+                ):
+                    return document.document_type_code
+
+        return None

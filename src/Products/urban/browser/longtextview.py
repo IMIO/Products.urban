@@ -83,22 +83,25 @@ class PmSummaryTextView(BrowserView):
 class NoticeFormDataTextView(BrowserView):
     def __init__(self, context, request):
         super(NoticeFormDataTextView, self).__init__(context, request)
-        self.action_code = self.request.get("action_code", "")
-        if not self.action_code:
+        self.timestamp = self.request.get("timestamp", "")
+        if not self.timestamp:
             plone_utils = getToolByName(self.context, "plone_utils")
             plone_utils.addPortalMessage(_("Nothing to show !!!"), type="error")
 
+    def get_field_values(self):
+        annotations = IAnnotations(self.context)
+        outgoing_params = annotations.get("notice_notification", {}).get("outgoing", [])
+        for outgoing in outgoing_params:
+            if outgoing["timestamp"] == self.timestamp:
+                return outgoing["field_values"]
+
     def getFieldText(self):
         """
-        Returns an HTML structure of the form data sent with a particular action code.
+        Returns an HTML structure of the form data sent with a particular timestamp.
         This data comes from a dict stored as annotation on the event.
         """
 
-        annotations = IAnnotations(self.context)
-        transmits = annotations.get("notice_transmit_dates", {})
-        action_data = transmits.get(self.action_code, {})
-        field_values = action_data.get("field_values", {})
-
+        field_values = self.get_field_values()
         if not field_values:
             return _("Nothing to show !!!")
 
@@ -107,6 +110,7 @@ class NoticeFormDataTextView(BrowserView):
             field_title = translate(
                 field_id,
                 context=self.request,
+                domain=u"urban",
             )
             html_blocks.append(u"<h2>{}</h2>".format(field_title))
             if field_id in ("college_opinion", "college_decision"):

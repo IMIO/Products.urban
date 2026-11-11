@@ -1,38 +1,52 @@
 <metal:noticeTransmitDates define-macro="noticeTransmitDates" i18n:domain="urban">
-  <fieldset tal:define="reception_date view/get_reception_date"
-            tal:condition="reception_date">
-    <legend i18n:translate="">NOTICe reception date</legend>
-    <strong tal:content="python: reception_date.strftime('%d/%m/%Y, %H:%M:%S')"
-    ></strong>
-  </fieldset>
-  <fieldset tal:define="transmits view/get_transmits"
-            tal:condition="transmits">
-    <legend i18n:translate="">NOTICe transmits</legend>
-    <div class="clear">
-      <table class="listing" tal:condition="transmits">
-          <thead>
-            <th i18n:translate="transmit_action">Action</th>
-            <th i18n:translate="transmit_date">When</th>
-            <th i18n:translate="transmit_user">User</th>
-            <th i18n:translate="transmit_form_data">Form data</th>
-          </thead>
-          <tbody>
-            <tr tal:repeat="transmit transmits">
-                <td tal:content="transmit/label"></td>
-                <td tal:content="python: transmit['date'].strftime('%d/%m/%Y, %H:%M:%S')"></td>
-                <td tal:content="transmit/user"></td>
-                <td tal:define="action_code transmit/action_code">
-                    <span class="urban-form-data">
-                        <a class="link-overlay"
-                           href="@@noticeformdatatextview"
-                           tal:attributes="href python: context.absolute_url() + '/@@noticeformdatatextview?action_code=' + action_code"
-                           i18n:translate="read_more">Lire la suite
-                        </a>
-                    </span>
-                </td>
-            </tr>
-          </tbody>
-      </table>
-    </div>
-  </fieldset>
+      <fieldset tal:define="incoming view/incoming"
+                tal:condition="incoming">
+          <legend i18n:translate="">NOTICe reception</legend>
+          <table class="listing">
+              <thead>
+                <th i18n:translate="transmit_date">When</th>
+                <th i18n:translate="transmit_type">Type</th>
+                <th i18n:translate="">NOTICe ID</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td tal:content="incoming/date"></td>
+                  <td tal:content="incoming/type_label"></td>
+                  <td tal:content="incoming/id"></td>
+                </tr>
+              </tbody>
+          </table>
+      </fieldset>
+      <fieldset tal:define="outgoings view/outgoings"
+                tal:condition="outgoings">
+        <legend i18n:translate="">NOTICe transmits</legend>
+        <div class="clear">
+          <table class="listing">
+              <thead>
+                <th i18n:translate="transmit_date">When</th>
+                <th i18n:translate="transmit_user">User</th>
+                <th i18n:translate="transmit_action">Action</th>
+                <th i18n:translate="">NOTICe ID</th>
+                <th i18n:translate="transmit_form_data">Form data</th>
+              </thead>
+              <tbody>
+                <tr tal:repeat="outgoing outgoings">
+                    <td tal:content="outgoing/date"></td>
+                    <td tal:content="outgoing/user"></td>
+                    <td tal:content="outgoing/type_label"></td>
+                    <td tal:content="outgoing/incoming_notice_id"></td>
+                    <td tal:define="timestamp outgoing/timestamp">
+                        <span class="urban-form-data">
+                            <a class="link-overlay"
+                               href="@@noticeformdatatextview"
+                               tal:attributes="href python: context.absolute_url() + '/@@noticeformdatatextview?timestamp=' + timestamp"
+                               i18n:translate="read_more">Lire la suite
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </fieldset>
 </metal:noticeTransmitDates>

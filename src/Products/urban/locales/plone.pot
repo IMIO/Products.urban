@@ -21,6 +21,9 @@ msgstr ""
 msgid "Architect"
 msgstr ""
 
+msgid "Article65"
+msgstr ""
+
 msgid "Claimant"
 msgstr ""
 
@@ -555,4 +558,7 @@ msgid "annual_observation"
 msgstr ""
 
 msgid "ComplementaryDelayTerm"
+msgstr ""
+
+msgid "warning_add_a_proprietary"
 msgstr ""

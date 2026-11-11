@@ -8,6 +8,307 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.32 (2026-10-16)
+-------------------
+
+New features:
+
+
+- Add new marker interface for event
+  [jchandelle] (SUP-56325)
+- Implement notifications `ARRET_PLAN_MODIF_COMMUNE`, `ARRET_PLAN_MODIF_COMMUNE_MANUELLE`
+  [daggelpop] (URB-3550)
+- Add handling of ABANDON_COMMUNE_MANUELLE, PM_ABANDON_COMMUNE_EP, and PM_ABANDON_COMMUNE_EP_FTFD notification.
+  [WBoudabous] (URB-3568)
+- Implement ACTE_CESSION_COMMUNE NOTICe notification and add cession type vocabulary
+  [WBoudabous] (URB-3636)
+- Handle PM_EP_COURRIER_COMMUNE notification
+  [WBoudabous] (URB-3640)
+- Add due date to imported summary report events
+  [daggelpop] (URB-3659)
+- Add event marker interfaces for the special conditions revision events (deposit, project, decision), tacit refusal, information, abandon and cession events
+  [WBoudabous] (URB-3669)
+- Add a random sleep to cron-based NOTICe listing calls
+  [daggelpop] (URB-3769)
+
+
+Bug fixes:
+
+
+- Fix interface for walloonregion_decision_date starting date for task
+  [jchandelle] (SUP-45885)
+- Fix list 220 to support unicode characters.
+  [WBoudabous] (SUP-46077)
+- Add prefix to urban configs forms
+  [jchandelle] (SUP-56733)
+- Set `urbanConfigId` property for PUL
+  [daggelpop] (URB-3735)
+- Close incoming notice events regardless of their workflow
+  [WBoudabous] (URB-3777)
+- Forcing send mail rules title in form modal title
+  [jchandelle] (URB-3787)
+- Fix automatic owner encoding for housing
+  [WBoudabous] (URBBDC-3374)
+
+
+2.9.31 (2026-09-03)
+-------------------
+
+New features:
+
+
+- Add a configurable subject (objet) to licences, backfilled for existing Housing licences, for future use in notary letters and divisions
+  [WBoudabous] (URBBDC-3225)
+
+
+Bug fixes:
+
+
+- Remove extra scheme from parent url variable interpolation
+  [daggelpop] (URB-3652)
+
+
+2.9.30 (2026-09-02)
+-------------------
+
+New features:
+
+
+- Implement notifications ABANDON_COMMUNE, PM_ABANDON_COMMUNE and PM_ABANDON_COMMUNE_FTFD
+  [WBoudabous] (URB-3567)
+- Add 3rd observation state to Housing workflow
+  [WBoudabous] (URBBDC-3278)
+
+
+2.9.29 (2026-08-21)
+-------------------
+
+New features:
+
+
+- Add upgrade step to hide `CODT_UniqueBorderingLicences` folder
+  [jchandelle] (SUP-52184)
+
+
+Bug fixes:
+
+
+- Avoid double import of NOTICe notification
+  [daggelpop] (URB-3711)
+- Reorder actions in NOTICe forms: send documents first, then send the response
+  [daggelpop] (URB-3730)
+
+
+2.9.28 (2026-08-12)
+-------------------
+
+Bug fixes:
+
+
+- Clarify translations for NOTICE response buttons
+  [daggelpop] (URB-3658)
+- Fix decision display form
+  [daggelpop] (URB-3720)
+
+
+2.9.27 (2026-07-24)
+-------------------
+
+New features:
+
+
+- Implement reception of NOTICE free notification
+  [daggelpop] (URB-3561)
+- Store and index `referenceFT_PM`, coming from TWICE
+  [daggelpop] (URB-3703)
+
+
+Bug fixes:
+
+
+- Fix an issue with unicode in upgrade step title
+  [mpeeters] (URB-3445)
+- Fill missing keys for specific code mapping
+  [daggelpop] (URB-3703)
+
+
+Internal:
+
+
+- Fix a missing upgrade step number
+  [mpeeters] (URB-3470)
+- Add missing logging during upgrade step
+  [mpeeters] (URB-3528)
+
+
+2.9.26 (2026-07-15)
+-------------------
+
+Internal:
+
+
+- Increase metadata version to last upgrade step (2916 -> 2918)
+  [daggelpop] (URB-3650)
+
+
+2.9.25 (2026-07-14)
+-------------------
+
+New features:
+
+
+- Add NOTICE form error handling
+  [daggelpop]
+  Add mailing content rule for NOTICE form errors
+  [daggelpop] (URB-3650)
+
+
+Bug fixes:
+
+
+- Handle an empty list of NOTICe notifications
+  [daggelpop] (URB-3704)
+- Handle parentheses in street searches
+  [daggelpop] (URB-3709)
+
+
+2.9.24 (2026-07-13)
+-------------------
+
+New features:
+
+
+- Handle PM_RS_PAS_ENVOYE_SFD and PM_ENVOI_RS_HD_SFD_COMMUNE notification
+  [WBoudabous] (URB-3313)
+- Handle PM_RS_PAS_ENVOYE notification
+  [WBoudabous] (URB-3314)
+- Add upgrade step to check existing vocabulary terms, create missing ones and add required mappings
+  [WBoudabous] (URB-3528)
+- Add a marker for the free notification event type
+  [WBoudabous] (URB-3594)
+- Handle PM_NOTIF_IRRECEVABLE_COMMUNE notification
+  [WBoudabous] (URB-3639)
+- Handle PM_PROROGATION_COURRIER_COMMUNE notification
+  [WBoudabous] (URB-3641)
+- Handle PM_ENVOI_DECISION_FT_COURRIER_COMMUNE  PM_RS_DECISION_COMMUNE and PM_REFUS_TACITE_COMMUNE notifications
+  [WBoudabous] (URB-3642)
+- Add college opinion code to GESPER EP & AP final responses
+  [daggelpop]
+  Validate the presence of a college opinion code in GESPER EP & AP final forms
+  [daggelpop]
+  Validate the presence of a college decision code in ARNE decision form
+  [daggelpop] (URB-3657)
+
+
+Bug fixes:
+
+
+- Add missing translation for urban_bound_roaddecrees
+  [WBoudabous] (SUP-53078)
+- Add  missing translation of warning_add_a_proprietary
+  [WBoudabous] (URB-2540)
+- Avoid handling the same incoming NOTICE notification twice
+  Hide NOTICE response forms from events with a final notification
+  [daggelpop] (URB-3683)
+- Handle irregular parcel data from NOTICe
+  [daggelpop] (URB-3705)
+
+
+2.9.23 (2026-06-10)
+-------------------
+
+Bug fixes:
+
+
+- Add getLastMissingPartTransmitToSPW method to fix broken merge fields in Avis préalable du Collège template
+  [Wiemboudabous] (SUP-53434)
+- Revert "SUP-53131: Change widget for prevent reset value when editing (#562)"
+  [jchandelle] (SUP-53692)
+- Add missing configuration values for transfer to DPA forms
+  [daggelpop] (URB-3562)
+- Fix missing result in TLPE response
+  [daggelpop] (URB-3645)
+- Handle empty XML rubrics
+  [daggelpop] (URB-3646)
+- Fix ARNE response types
+  [daggelpop] (URB-3647)
+
+
+2.9.22 (2026-06-02)
+-------------------
+
+Bug fixes:
+
+
+- Add external method to fix changesDescription field in parceling
+  [jchandelle] (SUP-46704)
+- Fix `getInquiryRadius` method to retrieve correct radius
+  [jchandelle] (SUP-51548)
+- Fix `getDecisionDate` indexer because of webservice change
+  [jchandelle] (SUP-52184)
+- Change widget for prevent reset value when editing
+  [jchandelle] (SUP-53131)
+- Fix typos in NOTICE translations
+  [daggelpop] (URB-3303)
+
+
+2.9.21 (2026-05-31)
+-------------------
+
+New features:
+
+
+- Handle `NOTIF_COMPLETUDE1_NON_RECEVABLE_COMMUNE` as inadmissible
+  [ndemonte] (URB-3304)
+- Add specific code mapping for 2 types
+  [ndemonte] (URB-3448)
+- Add utils class to manage content rules
+  Handle context wrappers in Parent Licence Type rule condition
+  Set up NOTICE mailing content rules
+  [ndemonte] (URB-3480)
+- Handle `TRANSFERT_DOSSIER_PM` notification
+  [ndemonte] (URB-3562)
+- Handle `TRANSFERT_DOSSIER_DRC` notification
+  [ndemonte] (URB-3581)
+- Search for NOTICE adresses by street name only, as a fallback
+  [ndemonte] (URB-3611)
+- Use custom exceptions for common NOTICe errors
+  [ndemonte] (URB-3623)
+
+
+2.9.20 (2026-05-12)
+-------------------
+
+Bug fixes:
+
+
+- Avoid content lookup with a unicode path
+  [ndemonte] (URB-3470)
+
+
+2.9.19 (2026-05-12)
+-------------------
+
+New features:
+
+
+- Add new content type `CODT_UniqueBorderingLicence`
+  Handle `DEMANDE_EP_EXTRA` notification
+  [daggelpop] (URB-3470)
+- Add content rule events for successful and broken NOTICe handling
+  [daggelpop] (URB-3480)
+
+
+2.9.18 (2026-04-19)
+-------------------
+
+Bug fixes:
+
+
+- Add migration for updating manageableLicences notice folder manager
+  [wboudabous] (URB-3600)
+
+
 2.9.17 (2026-04-10)
 -------------------
 

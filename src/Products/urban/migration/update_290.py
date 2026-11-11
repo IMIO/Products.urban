@@ -1,10 +1,22 @@
 # encoding: utf-8
+
 from Products.CMFCore.utils import getToolByName
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
+from Products.urban.contentrules.notice import INoticeImportFailedEvent
+from Products.urban.contentrules.notice import INoticeImportSucceededEvent
+from Products.urban.contentrules.notice import INoticeResponseFailedEvent
+from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.migration.utils import cook_javascript_resources
-from Products.urban.utils import moveElementAfter
+from Products.urban.profiles.extra.config_default_values import default_values
+from Products.urban.services.notice import WebserviceNotice
+from Products.urban.setuphandlers import add_new_urban_licence_type
+from Products.urban.setuphandlers import addNoticeWarning
+from Products.urban.setuphandlers import createFolderDefaultValues
+from Products.urban.setuphandlers import createVocabularyFolder
+from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
+from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
 from plone import api
@@ -12,6 +24,7 @@ from plone.app.textfield import RichTextValue
 from plone.registry import field
 from plone.registry import Record
 from plone.registry.interfaces import IRegistry
+from textwrap import dedent
 from zope.component import getUtility
 from zope.event import notify
 
@@ -56,6 +69,18 @@ def initialize_notice_settings(context):
         registry_record = Record(registry_field)
         registry_record.value = []
         registry.records["{0}.failed_notifications".format(base)] = registry_record
+    if (
+        "{0}.successful_notice_events_to_notify_by_email".format(base)
+        not in registry.records
+    ):
+        registry_field = field.List(
+            title=INoticeSettings["successful_notice_events_to_notify_by_email"].title
+        )
+        registry_record = Record(registry_field)
+        registry_record.value = []
+        registry.records[
+            "{0}.successful_notice_events_to_notify_by_email".format(base)
+        ] = registry_record
     logger.info("Upgrade done!")
 
 
@@ -129,7 +154,9 @@ def add_event_config_types_notice(context):
                 old_interfaces = folder_event.getEventType()
                 missing_interfaces = set(uet.get("eventType", [])) - set(old_interfaces)
                 if missing_interfaces:
-                    new_interfaces = tuple(list(old_interfaces) + list(missing_interfaces))
+                    new_interfaces = tuple(
+                        list(old_interfaces) + list(missing_interfaces)
+                    )
                     setattr(folder_event, "eventType", new_interfaces)
 
             last_urbaneventype_id = id
@@ -264,9 +291,7 @@ def update_documentation_url(context):
     """
     Update documentation url
     """
-    logger = logging.getLogger(
-        "urban: Update documentation url"
-    )
+    logger = logging.getLogger("urban: Update documentation url")
     logger.info("starting upgrade steps")
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
@@ -277,9 +302,7 @@ def add_architect_folder_view(context):
     """
     Add architect folder view
     """
-    logger = logging.getLogger(
-        "urban: Add architect folder view"
-    )
+    logger = logging.getLogger("urban: Add architect folder view")
     logger.info("starting upgrade steps")
     portal = api.portal.get()
     architects_folder = portal["urban"]["architects"]
@@ -290,7 +313,9 @@ def add_architect_folder_view(context):
 def recover_event_config_portal_types(context):
     from Products.urban.profiles.extra.data import EventConfigs
 
-    logger = logging.getLogger("urban: Recover `UrbanEventCollege` portal type in relevant EventConfig")
+    logger = logging.getLogger(
+        "urban: Recover `UrbanEventCollege` portal type in relevant EventConfig"
+    )
 
     tool = getToolByName(context, "portal_urban")
     for urban_config_id in EventConfigs:
@@ -311,7 +336,10 @@ def recover_event_config_portal_types(context):
 
             if folder_event:  # patch existing eventConfig
                 should_be_college = "pmTitle" in folder_event.getActivatedFields()
-                if should_be_college and folder_event.getEventPortalType() != "UrbanEventCollege":
+                if (
+                    should_be_college
+                    and folder_event.getEventPortalType() != "UrbanEventCollege"
+                ):
                     setattr(folder_event, "eventPortalType", "UrbanEventCollege")
 
     logger.info("upgrade step done!")
@@ -331,8 +359,477 @@ def setup_index_referenceFT(context):
 def fix_housing_roaddecree(context):
     logger = logging.getLogger("urban: Fix housing and roaddecree security")
     setup_tool = api.portal.get_tool("portal_setup")
-    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "factorytool")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
     portal_types = ["Housing", "RoadDecree"]
     for portal_type in portal_types:
         set_licence_folder_security(portal_type)
     logger.info("upgrade step done!")
+
+
+def add_3rd_observation_to_housing_workflow(context):
+    logger = logging.getLogger("urban: Add 3rd_observation state to housing workflow")
+    logger.info("starting upgrade steps")
+    from Products.urban.migration.utils import refresh_workflow_permissions
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:preinstall", "workflow")
+    setup_tool.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    refresh_workflow_permissions("housing_workflow")
+    logger.info("upgrade step done!")
+
+
+def update_folder_manager_notice(context):
+
+    UPDATED_URBAN_TYPES = [
+        "CODT_Article127",
+        "CODT_UniqueLicence",
+        "EnvClassOne",
+        "EnvClassTwo",
+        "EnvClassBordering",
+    ]
+
+    logger = logging.getLogger("urban: Update manageableLicences for notice")
+
+    urban_tool = api.portal.get_tool("portal_urban")
+    foldermanagers = getattr(urban_tool, "foldermanagers", None)
+
+    if not foldermanagers or "notice" not in foldermanagers.objectIds():
+        logger.warning("Notice FolderManager not found, skipping")
+        return
+
+    notice_folder_manager = foldermanagers.notice
+    notice_folder_manager.manageableLicences = UPDATED_URBAN_TYPES
+    notice_folder_manager.reindexObject()
+
+    logger.info("manageableLicences updated for notice FolderManager")
+
+
+def setup_index_referenceDGATLP(context):
+    logger = logging.getLogger("urban: Set up `referenceDGATLP` index")
+
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+
+    reindexIndexes(None, ["referenceDGATLP"])
+
+    logger.info("upgrade step done!")
+
+
+def add_codt_uniquebordering_licences(context):
+    """
+    Note: the events must be added by upgrade step in `urban.events`
+    """
+
+    logger = logging.getLogger("urban: Add CODT unique bordering licences")
+
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "workflow"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "typeinfo"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
+
+    add_new_urban_licence_type("CODT_UniqueBorderingLicence")
+
+    logger.info("Upgrade done!")
+
+
+def setup_notice_mailing_content_rules(context):
+    logger = logging.getLogger("urban: Set up NOTICE mailing content rules")
+
+    portal = api.portal.get()
+
+    success_template = dedent(
+        u"""
+        Bonjour,
+
+        Une notification du SPW a été réceptionnée pour:
+
+        - Dossier : ${parent_url}
+        - Type de notification : ${notice_type}
+        - Mail de l'agent traitant : ${folder_manager_email}
+
+        Belle journée.
+        """
+    ).strip()
+
+    failure_template = dedent(
+        u"""
+        Créer un ticket JIRA à l'attention d'un développeur
+        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
+
+        "Bonjour,
+
+        Une erreur d'implémentation de notification du webservice Notice a été enregistrée.
+        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
+
+        - commune / dossier : ${parent_url}
+        - identifiant NOTICE : ${notice_id}
+
+        ```
+        ${notice_error}
+        ```
+
+        Belle journée.
+
+        Aurore"
+        """
+    ).strip()
+
+    rule_id = "notification_tlpe_imported_successfully"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Notification TLPE importée",
+            event_interface=INoticeImportSucceededEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_condition(
+            rule_id=rule_id,
+            condition_name="urban.conditions.licence_type",
+            data={"licence_type": ["CODT_Article127"]},
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Notification importée",
+                "recipients": u"support-urban@imio.be",
+                "message": success_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    rule_id = "notification_arne_imported_successfully"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Notification ARNE importée",
+            event_interface=INoticeImportSucceededEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_condition(
+            rule_id=rule_id,
+            condition_name="urban.conditions.licence_type",
+            data={
+                "licence_type": [
+                    "CODT_UniqueLicence",
+                    "CODT_UniqueBorderingLicence",
+                    "EnvClassOne",
+                    "EnvClassTwo",
+                    "EnvClassThree",
+                    "EnvClassBordering",
+                ]
+            },
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Notification importée",
+                "recipients": u"support-urban@imio.be",
+                "message": success_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    rule_id = "notification_import_failed"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Notification NOTICE en erreur",
+            event_interface=INoticeImportFailedEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Notification Notice en erreur",
+                "recipients": u"support-urban@imio.be",
+                "message": failure_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    logger.info("Upgrade done!")
+
+
+def reindex_getDecisionDate(context):
+    logger = logging.getLogger("urban: Reindex getDecisionDate")
+
+    reindexIndexes(None, ["getDecisionDate"])
+
+    logger.info("Upgrade done!")
+
+
+def add_digital_term_to_deposit_type(context):
+    """
+    Add 'digital' term to the global deposittype vocabulary
+    and activate depositType on the depot-de-la-demande event config for
+    licence types.
+    """
+    logger = logging.getLogger("urban: Add MonEspace deposit type")
+    tool = getToolByName(context, "portal_urban")
+
+    if hasattr(tool, "deposittype"):
+        deposittype_folder = tool.deposittype
+        if "digital" not in deposittype_folder.objectIds():
+            deposittype_folder.invokeFactory(
+                "UrbanVocabularyTerm", id="digital", title=u"Dématérialisé"
+            )
+            logger.info("Added 'digital' vocabulary term to global deposittype")
+
+    target_configs = {
+        "codt_uniquelicence": "depot-de-la-demande",
+        "envclassone": "depot-de-la-demande",
+        "envclasstwo": "depot-de-la-demande",
+        "envclassthree": "depot-de-la-demande",
+    }
+    for urban_config_id, event_config_id in target_configs.items():
+        try:
+            licence_config = tool.getLicenceConfig(None, urbanConfigId=urban_config_id)
+            event_config = getattr(licence_config.eventconfigs, event_config_id, None)
+        except AttributeError:
+            logger.warning("Could not find config for %s, skipping", urban_config_id)
+            continue
+
+        if event_config is None:
+            logger.warning(
+                "Event config '%s' not found for %s, skipping",
+                event_config_id,
+                urban_config_id,
+            )
+            continue
+
+        activated = list(event_config.getActivatedFields())
+        if "depositType" not in activated:
+            activated.insert(0, "depositType")
+            setattr(event_config, "activatedFields", activated)
+            logger.info(
+                "Activated depositType on '%s' for %s", event_config_id, urban_config_id
+            )
+
+    logger.info("upgrade step done!")
+
+
+def setup_notice_form_error_mailing_content_rule(context):
+    logger = logging.getLogger("urban: Set up NOTICE form error mailing content rule")
+
+    portal = api.portal.get()
+
+    failure_template = dedent(
+        u"""
+        Créer un ticket JIRA à l'attention d'un développeur
+        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
+
+        "Bonjour,
+
+        Une erreur d'implémentation de formulaire de réponse Notice a été enregistrée.
+        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
+
+        - commune / dossier : ${parent_url}
+        - identifiant NOTICE : ${notice_id}
+
+        ```
+        ${notice_error}
+        ```
+
+        Belle journée.
+
+        Aurore"
+        """
+    ).strip()
+
+    rule_id = "notification_form_failed"
+    if not ContentRulesUtils.rule_exists(rule_id):
+        ContentRulesUtils.create_content_rule(
+            title=u"Formulaire pour notification NOTICE en erreur",
+            event_interface=INoticeResponseFailedEvent,
+            rule_id=rule_id,
+        )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": u"Formulaire pour notification Notice en erreur",
+                "recipients": u"support-urban@imio.be",
+                "message": failure_template,
+            },
+        )
+        ContentRulesUtils.assign_rule(portal, rule_id)
+        ContentRulesUtils.enable_rule(portal, rule_id, bubbles=True)
+
+    logger.info("Upgrade done!")
+
+
+def normalize_externaldecisions_vocabulary(context):
+    logger = logging.getLogger("urban: Normalize external decisions vocabulary")
+
+    VOCABULARY_TERMS = [
+        "FAVORABLE",
+        "DEFAVORABLE",
+        "FAVORABLE_PARTIEL",
+        "FAVORABLE_CONDITIONS",
+    ]
+
+    EXTERNALDECISIONS_MAPPING = {
+        "favorable": "FAVORABLE",
+        "defavorable": "DEFAVORABLE",
+        "favorable-conditionnel": "FAVORABLE_CONDITIONS",
+    }
+    DESCRIPTION = u"obligatoire pour la dématérialisation => NE PAS SUPPRIMER"
+    portal_urban = api.portal.get_tool("portal_urban")
+    voc_folder = portal_urban.externaldecisions
+    term_objects = portal_urban.listVocabularyObjects(
+        "externaldecisions",
+        context,
+        inUrbanConfig=False,
+        allowedStates=["enabled", "disabled"],
+    )
+
+    found_terms = set()
+
+    for term_id, term_obj in term_objects.items():
+        # 1st case: term already has vocabulary_term id
+        if term_id in VOCABULARY_TERMS:
+            term_obj.setDescription(DESCRIPTION)
+            found_terms.add(term_id)
+            continue
+
+        # 2nd case: term exists but needs mapping
+        existing_vocabulary_term = EXTERNALDECISIONS_MAPPING.get(term_id)
+        if existing_vocabulary_term in VOCABULARY_TERMS:
+            term_obj.setDescription(DESCRIPTION)
+            found_terms.add(existing_vocabulary_term)
+
+    # 3rd case: vocabulary_term term doesn't exist yet, must be added
+    for vocabulary_term in VOCABULARY_TERMS:
+        if vocabulary_term not in found_terms:
+            voc_folder.invokeFactory(
+                "UrbanVocabularyTerm",
+                id=vocabulary_term,
+                title=vocabulary_term.replace("_", " ").capitalize(),
+            )
+            new_term = getattr(voc_folder, vocabulary_term)
+            new_term.setDescription(DESCRIPTION)
+            logger.info("Created missing vocabulary term: %s", vocabulary_term)
+
+    logger.info("Upgrade done!")
+
+
+def setup_referenceFT_PM(context):
+    logger = logging.getLogger("urban: Set up `referenceFT_PM` index and attribute")
+
+    # activate optional attribute
+    portal_urban = api.portal.get_tool("portal_urban")
+    for config in portal_urban.objectValues("LicenceConfig"):
+        if (
+            "referenceFT_PM" in config.listUsedAttributes()
+            and "referenceFT_PM" not in config.getUsedAttributes()
+        ):
+            to_set = ("referenceFT_PM",)
+            config.setUsedAttributes(config.getUsedAttributes() + to_set)
+
+    # set up index
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+    reindexIndexes(None, ["referenceFT_PM"])
+
+    logger.info("upgrade step done!")
+
+
+def hide_CODT_UniqueBorderingLicences_for_none_notice_instance(context):
+    logger = logging.getLogger("urban: Hide CODT_UniqueBorderingLicences folder")
+    webservice = WebserviceNotice()
+    if webservice.is_setup:
+        logger.info("Notice is configure, abort hiding")
+        return
+    portal = api.portal.get()
+    urban = portal["urban"]
+    codt_uniqueborderinglicences = urban.get("codt_uniqueborderinglicences", None)
+    if codt_uniqueborderinglicences is None:
+        logger.warning("codt_uniqueborderinglicences folder is not present")
+        return
+    codt_uniqueborderinglicences.setExcludeFromNav(True)
+
+
+def set_pul_urbanConfigId(context):
+    logger = logging.getLogger("urban: Set urbanConfigId for PUL")
+
+    portal = api.portal.get()
+    licence_folder = getattr(portal.urban, "codt_uniqueborderinglicences", None)
+    if not licence_folder.getProperty("urbanConfigId", ""):
+        licence_folder.manage_addProperty(
+            "urbanConfigId", "codt_uniqueborderinglicence", "string"
+        )
+
+    logger.info("upgrade step done!")
+
+
+def add_cessiontype_vocabulary(context):
+    logger = logging.getLogger("urban: add cessiontype vocabulary")
+    portal_urban = api.portal.get_tool("portal_urban")
+    cessiontype_values = default_values["global"]["cessiontype"]
+    allowedtypes = cessiontype_values[0]
+    cessiontype_folder = createVocabularyFolder(
+        portal_urban, "cessiontype", context, allowedtypes
+    )
+    createFolderDefaultValues(cessiontype_folder, cessiontype_values[1:], allowedtypes)
+    logger.info("upgrade step done!")
+
+
+def add_article65_type(context):
+    """
+    Note: the events must be added by upgrade step in `urban.events`
+    """
+
+    logger = logging.getLogger("urban: Add Article 65 licences")
+
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "workflow"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "typeinfo"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
+
+    add_new_urban_licence_type("Article65")
+
+    logger.info("Upgrade done!")
+
+
+def add_notice_warning(context):
+    """
+    Add notice warning on portal_urban warnings field.
+    """
+    logger = logging.getLogger("urban: Add notice warning")
+    logger.info("starting upgrade steps")
+    addNoticeWarning(context)
+    markLicencesCreatedViaNotice(context)
+    logger.info("upgrade done!")
+
+
+def add_async_notice_mails(context):
+    initialize_notice_settings(context)

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from Acquisition import aq_inner
 from OFS.SimpleItem import SimpleItem
 from plone import api
 from plone.app.contentrules import PloneMessageFactory as _
@@ -7,6 +8,7 @@ from plone.app.contentrules.browser.formhelper import AddForm
 from plone.app.contentrules.browser.formhelper import EditForm
 from plone.contentrules.rule.interfaces import IExecutable
 from plone.contentrules.rule.interfaces import IRuleElementData
+from plone.stringinterp.interfaces import IContextWrapper
 from zope import schema
 from zope.component import adapts
 from zope.component import getUtility
@@ -64,16 +66,20 @@ class LicenceTypeConditionExecutor(object):
         self.event = event
 
     def __call__(self):
+        event_object = self.event.object
+        if IContextWrapper.providedBy(event_object):
+            event_object = aq_inner(event_object.context)
+
         if not hasattr(
-            self.event.object,
+            event_object,
             "get_parent_licence",
         ):
             return False
-        parent_type = self.event.object.get_parent_licence().portal_type
+        parent_type = event_object.get_parent_licence().portal_type
         if parent_type is None:
             return False
         condition_types = getattr(self.element, "licence_type", None)
-        if not condition_types and not isinstance(condition_types, list):
+        if not condition_types or not isinstance(condition_types, list):
             return False
 
         return parent_type in condition_types

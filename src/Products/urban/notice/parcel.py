@@ -54,19 +54,31 @@ class NoticeParcel(NoticeElement):
 
     @property
     def radical(self):
-        return self._get_data("radical").lstrip("0")
+        raw = self._get_data("radical")
+        if raw and isinstance(raw, basestring):
+            raw = raw.lstrip("0")
+        return raw
 
     @property
     def bis(self):
-        return self._get_data("bisTer").lstrip("0")
+        raw = self._get_data("bisTer")
+        if raw and isinstance(raw, basestring):
+            raw = raw.lstrip("0")
+        return raw
 
     @property
     def exposant(self):
-        return self._get_data("exponent")
+        raw = self._get_data("exponent")
+        if raw == "_":
+            return None
+        return raw
 
     @property
     def puissance(self):
-        return self._get_data("power").lstrip("0")
+        raw = self._get_data("power")
+        if raw and isinstance(raw, basestring):
+            raw = raw.lstrip("0")
+        return raw
 
     @property
     def partie(self):
