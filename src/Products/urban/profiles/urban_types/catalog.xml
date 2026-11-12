@@ -143,5 +143,10 @@
   </index>
   <column value="referenceDGATLP"/>
 
+  <index name="last_received_notice_notification" meta_type="DateIndex">
+    <indexed_attr value="last_received_notice_notification"/>
+  </index>
+  <column value="last_received_notice_notification"/>
+
 <!-- ##/code-section FOOT -->
 </object>

@@ -31,6 +31,7 @@
   <adapter name="cmf_uid" factory=".indexes.eventconfig_urbaneventtype" />
   <adapter name="getStreetCode" factory=".indexes.streetcode_indexer" />
   <adapter name="getAdditionalReference" factory=".indexes.additional_reference" />
+  <adapter name="last_received_notice_notification" factory=".indexes.last_received_notice_notification" />
 
   <!-- Unindex UrbanEvent, UrbanDoc, Applicant and PortionOut -->
 

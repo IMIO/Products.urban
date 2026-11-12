@@ -6,6 +6,7 @@ from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import NoticeImportFailedEvent
 from Products.urban.contentrules.notice import NoticeImportSucceededEvent
 from Products.urban.interfaces import IBaseBuildLicence
+from Products.urban.interfaces import IEventCreatedViaNoticeWS
 from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.notice.exceptions import ErrorProcessingNotificationException
 from Products.urban.notice.exceptions import FailedGettingRecentNotificationsException
@@ -574,6 +575,7 @@ class IncomingNoticeHandler(object):
     def create_incoming_event(self):
         event_config = self.notification.event_config(self.event_config_marker)
         self.event = self.licence.createUrbanEvent(event_config)
+        alsoProvides(self.event, IEventCreatedViaNoticeWS)
         self.fill_incoming_event()
         api.content.transition(self.event, to_state="closed")
 
