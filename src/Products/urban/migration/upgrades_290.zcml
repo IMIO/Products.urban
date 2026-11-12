@@ -113,7 +113,7 @@
         description=""
         source="2913"
         destination="2914"
-        handler=".update_290.setup_notice_mailing_content_rules"
+        handler=".update_290.setup_notice_mailing_base_content_rules"
         profile="Products.urban:default" />
 
     <gs:upgradeStep

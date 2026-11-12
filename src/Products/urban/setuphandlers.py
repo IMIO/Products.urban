@@ -13,6 +13,7 @@ __author__ = """Gauthier BASTIEN <gbastien@commune.sambreville.be>, Stephan GEUL
 <stephan.geulette@uvcw.be>, Jean-Michel Abe <jm.abe@la-bruyere.be>"""
 __docformat__ = "plaintext"
 
+from textwrap import dedent
 
 from Acquisition import aq_base
 from Products.Archetypes.event import EditBegunEvent
@@ -25,6 +26,10 @@ from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.config import URBAN_CFG_DIR
 from Products.urban.config import URBAN_TYPES
 from Products.urban.config import URBAN_TYPES_ACRONYM
+from Products.urban.contentrules.notice import INoticeImportFailedEvent
+from Products.urban.contentrules.notice import INoticeImportSucceededEvent
+from Products.urban.contentrules.notice import INoticeResponseFailedEvent
+from Products.urban.contentrules.utils import ContentRulesUtils
 from Products.urban.exportimport import updateAllUrbanTemplates
 from Products.urban.interfaces import IContactFolder
 from Products.urban.interfaces import IGenericLicence
@@ -46,6 +51,8 @@ from Products.urban.utils import getUrbanOnlyLicenceFolderIds
 from Products.urban.utils import moveElementAfter
 from collective.eeafaceted.collectionwidget.utils import _updateDefaultCollectionFor
 from datetime import date
+from eea.facetednavigation.criteria.interfaces import ICriteria
+from eea.facetednavigation.events import FacetedGlobalSettingsChangedEvent
 from eea.facetednavigation.layout.interfaces import IFacetedLayout
 from imio.schedule.utils import _set_faceted_view
 from imio.schedule.utils import interface_to_tuple
@@ -64,6 +71,7 @@ from zope.component import getMultiAdapter
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component.interface import getInterface
+from zope.event import notify
 from zope.i18n import translate
 from zope.i18n.interfaces import ITranslationDomain
 from zope.interface import alsoProvides
@@ -216,6 +224,12 @@ def postInstall(context):
     logger.info("addDefaultCronJobs : starting...")
     addDefaultCronJobs(context)
     logger.info("addDefaultCronJobs : Done")
+    logger.info("setup_notice_mailing_content_rules : starting...")
+    setup_notice_mailing_content_rules(context)
+    logger.info("setup_notice_mailing_content_rules : Done")
+    logger.info("setup_notice_folder_manager : starting...")
+    setup_notice_folder_manager(context)
+    logger.info("setup_notice_folder_manager : Done")
     logger.info("addNoticeWarning : starting...")
     addNoticeWarning(context)
     logger.info("addNoticeWarning : Done")
@@ -2167,3 +2181,198 @@ def add_vocabularies(config_folder, urban_type):
         if voc_folder_id in vocabularies_with_HTML_description:
             voc_folder = getattr(config_folder, voc_folder_id)
             setHTMLContentType(voc_folder, "description")
+
+
+def setup_notice_folder_manager(context):
+    # create folder manager
+    urban_tool = api.portal.get_tool("portal_urban")
+    foldermanagers = getattr(urban_tool, "foldermanagers")
+    if "notice" not in foldermanagers.objectIds():
+        foldermanagers.invokeFactory(
+            "FolderManager",
+            "notice",
+            name1="Import NOTICE",
+            grade="agent-technique",
+            ploneUserId="",
+            manageableLicences=[
+                "CODT_Article127",
+                "CODT_UniqueLicence",
+                "CODT_UniqueBorderingLicence",
+                "EnvClassOne",
+                "EnvClassTwo",
+                "EnvClassBordering",
+                "Article65",
+            ],
+        )
+    notice_folder_manager = foldermanagers.notice
+    notice_folder_manager.reindexObject()
+
+    # create dashboard for incoming notice notifications
+    urban_folder = api.portal.get().urban
+
+    if "import-notice" not in urban_folder.objectIds():
+        import_notice_folder = api.content.create(
+            container=urban_folder,
+            type="Folder",
+            id="import-notice",
+            title="Import NOTICE",
+        )
+
+        _activate_dashboard_navigation(
+            import_notice_folder, "/dashboard/config/import_notice.xml"
+        )
+
+        # no need to create another collection, this one does the job
+        all_licences_collection = getattr(urban_folder, "collection_all_licences")
+        _updateDefaultCollectionFor(import_notice_folder, all_licences_collection.UID())
+
+        # set notice folder manager's UID as default in faceted filter widget
+        criteria = ICriteria(import_notice_folder).criteria
+        for criterion in criteria:
+            if criterion.index == "folder_manager":
+                ICriteria(import_notice_folder).edit(
+                    criterion.__name__,
+                    default=notice_folder_manager.UID(),
+                )
+        notify(FacetedGlobalSettingsChangedEvent(import_notice_folder))
+
+
+def setup_notice_mailing_content_rules(context):
+    def _create_mail_rule(
+        context, rule_id, title, event_interface, subject, message, licence_types=None
+    ):
+        """Create (once) a content rule that mails the support team."""
+        support_email = u"support-urban@imio.be"
+
+        if ContentRulesUtils.rule_exists(rule_id):
+            return
+        ContentRulesUtils.create_content_rule(
+            title=title,
+            event_interface=event_interface,
+            rule_id=rule_id,
+        )
+        if licence_types:
+            ContentRulesUtils.add_condition(
+                rule_id=rule_id,
+                condition_name="urban.conditions.licence_type",
+                data={"licence_type": licence_types},
+            )
+        ContentRulesUtils.add_action(
+            rule_id=rule_id,
+            action_name="plone.actions.Mail",
+            data={
+                "exclude_actor": False,
+                "subject": subject,
+                "recipients": support_email,
+                "message": message,
+            },
+        )
+        ContentRulesUtils.assign_rule(context, rule_id)
+        ContentRulesUtils.enable_rule(context, rule_id, bubbles=True)
+
+    import_success_template = dedent(
+        u"""
+        Bonjour,
+
+        Une notification du SPW a été réceptionnée pour:
+
+        - Dossier : ${parent_url}
+        - Type de notification : ${notice_type}
+        - Mail de l'agent traitant : ${folder_manager_email}
+
+        Belle journée.
+        """
+    ).strip()
+
+    import_failure_template = dedent(
+        u"""
+        Créer un ticket JIRA à l'attention d'un développeur
+        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
+
+        "Bonjour,
+
+        Une erreur d'implémentation de notification du webservice Notice a été enregistrée.
+        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
+
+        - commune / dossier : ${parent_url}
+        - identifiant NOTICE : ${notice_id}
+
+        ```
+        ${notice_error}
+        ```
+
+        Belle journée.
+
+        Aurore"
+        """
+    ).strip()
+
+    form_failure_template = dedent(
+        u"""
+        Créer un ticket JIRA à l'attention d'un développeur
+        (composant : Dématérialisation, sprint : En cours, état : Bloquant)
+
+        "Bonjour,
+
+        Une erreur d'implémentation de formulaire de réponse Notice a été enregistrée.
+        Merci de prendre connaissance des raisons dans Kibana et de la débloquer.
+
+        - commune / dossier : ${parent_url}
+        - identifiant NOTICE : ${notice_id}
+
+        ```
+        ${notice_error}
+        ```
+
+        Belle journée.
+
+        Aurore"
+        """
+    ).strip()
+
+    portal = api.portal.get()
+
+    _create_mail_rule(
+        portal,
+        rule_id="notification_tlpe_imported_successfully",
+        title=u"Notification TLPE importée",
+        event_interface=INoticeImportSucceededEvent,
+        subject=u"Notification importée",
+        message=import_success_template,
+        licence_types=["CODT_Article127"],
+    )
+
+    _create_mail_rule(
+        portal,
+        rule_id="notification_arne_imported_successfully",
+        title=u"Notification ARNE importée",
+        event_interface=INoticeImportSucceededEvent,
+        subject=u"Notification importée",
+        message=import_success_template,
+        licence_types=[
+            "CODT_UniqueLicence",
+            "CODT_UniqueBorderingLicence",
+            "EnvClassOne",
+            "EnvClassTwo",
+            "EnvClassBordering",
+            "Article65",
+        ],
+    )
+
+    _create_mail_rule(
+        portal,
+        rule_id="notification_import_failed",
+        title=u"Notification NOTICE en erreur",
+        event_interface=INoticeImportFailedEvent,
+        subject=u"Notification Notice en erreur",
+        message=import_failure_template,
+    )
+
+    _create_mail_rule(
+        portal,
+        rule_id="notification_form_failed",
+        title=u"Formulaire pour notification NOTICE en erreur",
+        event_interface=INoticeResponseFailedEvent,
+        subject=u"Formulaire pour notification Notice en erreur",
+        message=form_failure_template,
+    )
