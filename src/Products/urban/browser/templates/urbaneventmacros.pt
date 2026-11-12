@@ -18,7 +18,7 @@
                                 isTooLong python: infos[0];
                                 textToShow python: infos[1];">
                                 <span tal:condition="isTooLong" id="urban-claims-text">
-                                    <span tal:replace="structure textToShow">Content...</span>
+                                    <span tal:replace="textToShow">Content...</span>
                                     <br />
                                     <a
                                         class="link-overlay"
