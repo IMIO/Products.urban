@@ -7,6 +7,8 @@ from Products.urban.contentrules.notice import INoticeImportFailedEvent
 from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
+from Products.urban.interfaces import ICessionEvent
+from Products.urban.interfaces import IEnvironmentBase
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.services.notice import WebserviceNotice
@@ -833,3 +835,24 @@ def add_notice_warning(context):
 
 def add_async_notice_mails(context):
     initialize_notice_settings(context)
+
+
+def upgrade_cession_transfer_of_licence(context):
+    """
+    Add TAL condition on cession event configs and check "isTransferOfLicence"
+    on licences that already have a cession event.
+    """
+    logger = logging.getLogger("urban: Upgrade cession transfer of licence")
+    logger.info("starting upgrade steps")
+    portal_urban = api.portal.get_tool("portal_urban")
+    for licence_config in portal_urban.objectValues("LicenceConfig"):
+        for event_config in licence_config.eventconfigs.objectValues():
+            if ICessionEvent.__identifier__ in (event_config.eventType or []):
+                event_config.TALCondition = "here/mayAddTransferOfLicenceEvent"
+
+    catalog = api.portal.get_tool("portal_catalog")
+    for brain in catalog(object_provides=IEnvironmentBase.__identifier__):
+        licence = brain.getObject()
+        if licence.getAllEvents(ICessionEvent):
+            licence.setIsTransferOfLicence(True)
+    logger.info("upgrade done!")

@@ -1008,7 +1008,13 @@ class CessionSpwHandler(IncomingNoticeHandler):
 
     def update_licence(self):
         super(CessionSpwHandler, self).update_licence()
+        self.set_transfer_of_licence()
         self.import_new_applicant()
+
+    def set_transfer_of_licence(self):
+        if self.licence.getField("isTransferOfLicence") is None:
+            return
+        self.licence.setIsTransferOfLicence(True)
 
     def import_new_applicant(self):
         # Without parties, every applicant would be disabled
