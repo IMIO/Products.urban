@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from Products.CMFCore.utils import getToolByName
+from Products.urban import spw_rubrics
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import INoticeImportFailedEvent
@@ -833,3 +834,10 @@ def add_notice_warning(context):
 
 def add_async_notice_mails(context):
     initialize_notice_settings(context)
+
+
+def import_spw_rubrics(context):
+    logger = logging.getLogger("urban: Import SPW reference rubrics")
+    logger.info("starting upgrade steps")
+    spw_rubrics.import_spw_rubrics()
+    logger.info("upgrade done!")

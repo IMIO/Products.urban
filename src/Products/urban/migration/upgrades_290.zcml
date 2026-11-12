@@ -212,4 +212,13 @@
         handler=".update_290.add_async_notice_mails"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Import SPW reference rubrics"
+        description="Consolidate the EnvironmentRubricTerm vocabulary with the SPW/NOTICe reference rubric list and their exploitation conditions"
+        source="2926"
+        destination="2927"
+        handler=".update_290.import_spw_rubrics"
+        profile="Products.urban:default" />
+
+
 </configure>

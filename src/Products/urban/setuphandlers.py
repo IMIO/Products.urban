@@ -20,6 +20,7 @@ from Products.Archetypes.event import ObjectInitializedEvent
 from Products.CMFCore.utils import getToolByName
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
 from Products.urban import services
+from Products.urban import spw_rubrics
 from Products.urban.config import DefaultTexts
 from Products.urban.config import LICENCE_FINAL_STATES
 from Products.urban.config import URBAN_CFG_DIR
@@ -600,6 +601,8 @@ def addEnvironmentRubrics(context):
     rubrics_folder = getattr(tool, "rubrics")
     # add the rubrics subfolders
     addRubricValues(context, rubrics_folder)
+    # complete them with the SPW reference rubrics and their conditions
+    spw_rubrics.import_spw_rubrics()
 
 
 def addRubricValues(context, config_folder):
