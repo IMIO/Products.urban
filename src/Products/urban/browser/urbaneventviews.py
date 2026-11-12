@@ -8,6 +8,11 @@ from Products.statusmessages.interfaces import IStatusMessage
 from Products.urban import services
 from Products.urban import UrbanMessage as _
 from Products.urban import utils
+from Products.urban.browser.import_utils import find_matching_claimant
+from Products.urban.browser.import_utils import merge_missing_fields
+from Products.urban.browser.import_utils import parse_and_validate_claimants_csv
+from Products.urban.browser.import_utils import iso_string_to_datetime
+from Products.urban.browser.import_utils import CLAIM_TYPE_MAPPING
 from Products.urban.browser.licence.licenceview import LicenceView
 from Products.urban.browser.mapview import MapView
 from Products.urban.browser.notice_forms import possible_outgoing_notice_notifications
@@ -33,6 +38,7 @@ from zope.annotation import interfaces
 from zope.annotation.interfaces import IAnnotations
 from zope.component import getMultiAdapter
 from zope.component import getUtility
+from zope.i18n import translate
 from zope.interface import Interface
 
 import collections
@@ -354,13 +360,17 @@ class ImportClaimantListingForm(form.Form):
                 planned_claimants_import.remove(inquiry_UID)
         else:
             csv_file = data["listing_file_claimants"]
-            csv_integrity_error = self.validate_csv_integrity(csv_file)
-            if csv_integrity_error:
-                api.portal.show_message(csv_integrity_error, self.request, "error")
+            normalized_rows, csv_errors = self.validate_csv_integrity(csv_file)
+            if csv_errors:
+                translated = [
+                    translate(msg, context=self.request) for msg in csv_errors
+                ]
+                api.portal.show_message(u"\n".join(translated), self.request, "error")
             else:
-                interfaces.IAnnotations(self.context)[
-                    "urban.claimants_to_import"
-                ] = csv_file.data
+                # store already-normalized rows, not the raw CSV text
+                interfaces.IAnnotations(self.context)["urban.claimants_to_import"] = (
+                    json.dumps(normalized_rows)
+                )
                 if inquiry_UID not in planned_claimants_import:
                     planned_claimants_import.append(inquiry_UID)
         api.portal.set_registry_record(
@@ -370,65 +380,12 @@ class ImportClaimantListingForm(form.Form):
         return not bool(errors)
 
     def validate_csv_integrity(self, csv_file):
-        if csv_file.contentType not in ("text/csv"):
-            return _(
+        if csv_file.contentType not in ("text/csv", "application/vnd.ms-excel", "text/plain"):
+            return [], [_(
                 u"The imported file (${name}) doesn't appear to be a CSV file.",
                 mapping={u"name": csv_file.filename},
-            )
-
-        error = _(
-            u"The imported file (${name}) couldn't be read properly. Please verify its structure and try again.",
-            mapping={u"name": csv_file.filename},
-        )
-
-        if not csv_file.data.startswith(EXCEL_HEADER_CLAIMANT):
-            return error
-
-        try:
-            reader = csv.DictReader(
-                StringIO(csv_file.data),
-                claimants_csv_fieldnames,
-                delimiter=",",
-                quotechar='"',
-            )
-            claimant_args = [
-                row for row in reader if row["name1"] or row["name2"] or row["society"]
-            ][1:]
-        except csv.Error as error:
-            return error
-
-        try:
-            claimant_args = [self.check_claimant_arg(row) for row in claimant_args]
-        except ValueError as err:
-            return _(
-                "Import cancel : error with claimant ${claimant} on value ${value}",
-                mapping={"claimant": err[0], "value": err[1]},
-            )
-
-        return None
-
-    def check_claimant_arg(self, row):
-        hasPetition = row.get("hasPetition", False)
-        outOfTime = row.get("outOfTime", False)
-        wantDecisionCopy = row.get("wantDecisionCopy", False)
-
-        try:
-            handle_boolean_value(hasPetition)
-        except ValueError as err:
-            raise ValueError(row["name1"], "hasPetition")
-
-        try:
-            handle_boolean_value(outOfTime)
-        except ValueError as err:
-            raise ValueError(row["name1"], "outOfTime")
-
-        try:
-            handle_boolean_value(wantDecisionCopy)
-        except ValueError as err:
-            raise ValueError(row["name1"], "wantDecisionCopy")
-
-        return row
-
+            )]
+        return parse_and_validate_claimants_csv(csv_file.data)
 
 class IImportRecipientListingForm(Interface):
 
@@ -691,14 +648,6 @@ class ImportRecipientListingForm(form.Form):
             )
 
 
-def handle_boolean_value(value):
-    if value == "Vrai" or value is True:
-        return True
-    if value == "Faux" or value == "" or value is False:
-        return False
-    raise ValueError(value)
-
-
 class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
     """
     This manage the base view of UrbanEventInquiry
@@ -730,101 +679,71 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
 
     def import_claimants_from_csv(self):
         portal_urban = api.portal.get_tool("portal_urban")
-        plone_utils = api.portal.get_tool("plone_utils")
         site = api.portal.get()
 
         titles_mapping = {"": ""}
-        titles_folder = portal_urban.persons_titles
-        for title_obj in titles_folder.objectValues():
+        for title_obj in portal_urban.persons_titles.objectValues():
             titles_mapping[title_obj.Title()] = title_obj.id
 
         country_mapping = {"": ""}
-        country_folder = portal_urban.country
-        for country_obj in country_folder.objectValues():
+        for country_obj in portal_urban.country.objectValues():
             country_mapping[country_obj.Title()] = country_obj.id
 
-        claim_type_mapping = {
-            "Écrite": "writedClaim",
-            "Orale": "oralClaim",
-        }
-
-        claimants_file = interfaces.IAnnotations(self.context)[
+        stored_data = interfaces.IAnnotations(self.context).get(
             "urban.claimants_to_import"
-        ]
-        if claimants_file:
-            reader = csv.DictReader(
-                StringIO(claimants_file),
-                claimants_csv_fieldnames,
-                delimiter=",",
-                quotechar='"',
-            )
-        else:
-            reader = []
-        try:
-            claimant_args = [
-                row for row in reader if row["name1"] or row["name2"] or row["society"]
-            ][1:]
-        except csv.Error as error:
-            return
-
-        try:
-            claimant_args = [
-                self.handle_claimant_arg(
-                    row, titles_mapping, country_mapping, site, claim_type_mapping
-                )
-                for row in claimant_args
-            ]
-        except ValueError as err:
-            msg = _(
-                "Import cancel : error with claimant ${claimant} on value ${value}",
-                mapping={"claimant": err[0], "value": err[1]},
-            )
-            plone_utils.addPortalMessage(msg, type="error")
-            return
-
-        for claimant_arg in claimant_args:
-            # create claimant
-            with api.env.adopt_roles(["Manager"]):
-                self.context.invokeFactory("Claimant", **claimant_arg)
-            logger.info(
-                "imported claimant {id}, {name} {surname}".format(
-                    id=claimant_arg["id"],
-                    name=claimant_arg["name1"],
-                    surname=claimant_arg["name2"],
-                )
-            )
-
-    def handle_claimant_arg(
-        self, row, titles_mapping, country_mapping, site, claim_type_mapping
-    ):
-        # default values
-        if not row["claimType"]:
-            row["claimType"] = "Écrite"
-
-        try:
-            row["hasPetition"] = handle_boolean_value(row.get("hasPetition", False))
-        except ValueError as err:
-            raise ValueError(row["name1"], "hasPetition")
-
-        try:
-            row["outOfTime"] = handle_boolean_value(row.get("outOfTime", False))
-        except ValueError as err:
-            raise ValueError(row["name1"], "outOfTime")
-
-        try:
-            row["wantDecisionCopy"] = handle_boolean_value(
-                row.get("wantDecisionCopy", False)
-            )
-        except ValueError as err:
-            raise ValueError(row["name1"], "wantDecisionCopy")
-
-        # mappings
-        row["personTitle"] = titles_mapping.get(row["personTitle"], "notitle")
-        row["country"] = country_mapping.get(row["country"], "belgium")
-        row["id"] = site.plone_utils.normalizeString(
-            row["name1"] + row["name2"] + row["society"]
         )
-        row["claimType"] = claim_type_mapping[row["claimType"]]
+        if not stored_data:
+            return 0, 0, 0
+
+        claimant_rows = json.loads(stored_data)
+
+        imported = 0
+        merged = 0
+        failed = 0
+        for row in claimant_rows:
+            try:
+                existing = find_matching_claimant(
+                    self.context, row, titles_mapping, country_mapping
+                )
+                if existing is not None:
+                    if merge_missing_fields(existing, row, titles_mapping, country_mapping):
+                        logger.info(
+                            u"merged missing fields into existing claimant {id}".format(
+                                id=existing.getId()
+                            )
+                        )
+                    merged += 1
+                    continue
+
+                claimant_arg = self.handle_claimant_arg(
+                    row, titles_mapping, country_mapping, site
+                )
+                with api.env.adopt_roles(["Manager"]):
+                    self.context.invokeFactory("Claimant", **claimant_arg)
+                logger.info(
+                    u"imported claimant {id}, {name} {surname}".format(
+                        id=claimant_arg["id"],
+                        name=claimant_arg.get("name1", ""),
+                        surname=claimant_arg.get("name2", ""),
+                    )
+                )
+                imported += 1
+            except Exception:
+                logger.exception(u"failed to import claimant row: {row}".format(row=row))
+                failed += 1
+
+        return imported, merged, failed
+
+
+    def handle_claimant_arg(self, row, titles_mapping, country_mapping, site):
+        row["claimType"] = CLAIM_TYPE_MAPPING[row["claimType"]]
+        row["personTitle"] = titles_mapping.get(row.get("personTitle"), "notitle")
+        row["country"] = country_mapping.get(row.get("country"), "belgium")
+        # explicit DateTime, bypasses the widget's ambiguous string parsing
+        row["claimDate"] = iso_string_to_datetime(row.get("claimDate"))
+        row["id"] = site.plone_utils.normalizeString(
+            (row.get("name1") or "") + (row.get("name2") or "") + (row.get("society") or "")
+        )
         count = 0
         if row["id"] in self.context.objectIds():
             count += 1
