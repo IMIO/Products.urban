@@ -248,6 +248,7 @@ class NoticeNotification(NoticeElement):
     @property
     def rubrics(self):
         """Return the rubrics as a list of UIDs, if present"""
+        parsed_rubrics = []
         found_uids = []
         missing_rubrics = []
 
@@ -261,15 +262,25 @@ class NoticeNotification(NoticeElement):
                 if class_elements and number_elements:
                     classe = class_elements[0]
                     number = number_elements[0].text
-                    number = number.replace(
-                        "-", ""
-                    )  # special case: `COV-01.01` => `COV01.01`
-                    rubric_obj = get_rubric_obj(classe, number)
-                    if rubric_obj:
-                        found_uids.append(rubric_obj.UID())
-                    else:
-                        missing_rubrics.append("classe {}, {}".format(classe, number))
+                    parsed_rubrics.append((classe, number))
+        else:
+            rubrique_elements = self._get_data(
+                "specific", self._specific_code, "ns3:rubrics", "ns3:rubric"
+            )
+            for rubrique in rubrique_elements:
+                classe = rubrique.get("ns4:classe", {}).get("code")
+                number = rubrique.get("ns4:code")
+                parsed_rubrics.append((classe, number))
 
+        for (classe, number) in parsed_rubrics:
+            number = number.replace(
+                "-", ""
+            )  # special case: `COV-01.01` => `COV01.01`
+            rubric_obj = get_rubric_obj(classe, number)
+            if rubric_obj:
+                found_uids.append(rubric_obj.UID())
+            else:
+                missing_rubrics.append("classe {}, {}".format(classe, number))
         if missing_rubrics:
             raise ValueError(
                 "cannot find these rubrics: {}".format(" | ".join(missing_rubrics))
