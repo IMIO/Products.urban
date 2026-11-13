@@ -1936,6 +1936,24 @@ class GenericLicence(OrderedBaseFolder, UrbanBase, BrowserDefaultMixin):
     def getAllSuspensionEvents(self):
         return self.getAllEvents(interfaces.ISuspensionEvent)
 
+    def getFirstSettlementEvent(self):
+        return self.getFirstEvent(interfaces.ISettlementEvent)
+
+    def getLastSettlementEvent(self):
+        return self.getLastEvent(interfaces.ISettlementEvent)
+
+    def getAllSettlementEvent(self):
+        return self.getAllEvents(interfaces.ISettlementEvent)
+
+    def getFirstUrbanEventFollowUpWithDelay(self):
+        return self.getFirstEvent(interfaces.IUrbanEventFollowUpWithDelay)
+
+    def getLastUrbanEventFollowUpWithDelay(self):
+        return self.getLastEvent(interfaces.IUrbanEventFollowUpWithDelay)
+
+    def getAllUrbanEventFollowUpWithDelay(self):
+        return self.getAllEvents(interfaces.IUrbanEventFollowUpWithDelay)
+
     def getIntentionToSubmitAmendedPlans(self):
         return self.getLastEvent(interfaces.IIntentionToSubmitAmendedPlans)
 
