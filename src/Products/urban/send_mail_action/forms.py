@@ -45,7 +45,10 @@ class SendMailActionForm(Form):
         self.context = context
         self.request = request
 
-        rules = [safe_unicode(rule.title) for rule in self.context.get_all_rules_for_this_event(ISendMailAction)]
+        rules = [
+            safe_unicode(rule.title)
+            for rule in self.context.get_all_rules_for_this_event(ISendMailAction)
+        ]
         last_rule = None
         if len(rules) > 1:
             last_rule = rules.pop()

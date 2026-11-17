@@ -74,8 +74,7 @@ class WebserviceNotice(WebService):
     @property
     def url(self):
         url = api.portal.get_registry_record(
-            "Products.urban.browser.notice_settings.INoticeSettings.url",
-            default=None
+            "Products.urban.browser.notice_settings.INoticeSettings.url", default=None
         )
         if not url:
             return
@@ -94,7 +93,7 @@ class WebserviceNotice(WebService):
         return api.portal.get_registry_record(
             "Products.urban.browser.notice_settings.INoticeSettings.sent_on_behalf_of_municipality_id"
         )
-    
+
     @property
     def is_setup(self):
         return self.url and self.instance_code and self.sent_on_behalf_of
@@ -142,7 +141,9 @@ class WebserviceNotice(WebService):
         response = self._get_notifications(status=status)
         if response.status_code != 200:
             raise ValueError(
-                "Unexpected response {}: '{}'".format(response.status_code, response.content)
+                "Unexpected response {}: '{}'".format(
+                    response.status_code, response.content
+                )
             )
         result = response.json()
         if result["status"] != "PROCESSED":
@@ -220,7 +221,9 @@ class WebserviceNotice(WebService):
             custom_exc = UnprocessableEntityException(response.url, body.get("detail"))
             logger.exception(u"%s", custom_exc)
             raise custom_exc
-        if body.get("status") == u"ERROR" and u"error" in body:  # error coming from SOAP WS
+        if (
+            body.get("status") == u"ERROR" and u"error" in body
+        ):  # error coming from SOAP WS
             customer_ticket = body.get("customerTicket", "")
             error = body["error"]
             information = error.get("information") or {}

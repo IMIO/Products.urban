@@ -27,15 +27,23 @@ from Products.urban import UrbanMessage as _
 from Products.urban.UrbanEvent import UrbanEvent
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import *
-from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementDatesNotification
-from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementFinalWithoutOpinionNotification
+from Products.urban.notice import (
+    NoticeOutgoingGesperProjectAnnouncementDatesNotification,
+)
+from Products.urban.notice import (
+    NoticeOutgoingGesperProjectAnnouncementFinalWithoutOpinionNotification,
+)
 from Products.urban.notice import NoticeOutgoingGesperProjectAnnouncementPVNotification
 from Products.urban.notice import NoticeOutgoingGesperPublicSurveyDatesNotification
-from Products.urban.notice import NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification
+from Products.urban.notice import (
+    NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification,
+)
 from Products.urban.notice import NoticeOutgoingGesperPublicSurveyPVNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyDatesNotification
 from Products.urban.notice import NoticeOutgoingPublicSurveyPVNotification
-from Products.urban.notice import NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification
+from Products.urban.notice import (
+    NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification,
+)
 from Products.urban.services.notice import WebserviceNotice
 from Products.urban.utils import WIDGET_DATE_END_YEAR
 from archetypes.referencebrowserwidget.widget import ReferenceBrowserWidget
@@ -395,7 +403,9 @@ class UrbanEventInquiry(OrderedBaseFolder, UrbanEvent, BrowserDefaultMixin):
         return result
 
     def finalize_inquiry_without_opinion_gesper_ep(self, incoming_id):
-        notification = NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(self)
+        notification = NoticeOutgoingGesperPublicSurveyFinalWithoutOpinionNotification(
+            self
+        )
         service = WebserviceNotice()
         result = service.post_notification_response(
             incoming_id,

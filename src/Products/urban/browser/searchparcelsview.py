@@ -219,7 +219,13 @@ class SearchParcelsView(BrowserView):
         Create the PortionOut with given parameters...
         """
         contact_type = "Applicant"
-        list_interfaces = [IUrbanCertificateBase, IDivision, IInspection, ITicket, IHousing]
+        list_interfaces = [
+            IUrbanCertificateBase,
+            IDivision,
+            IInspection,
+            ITicket,
+            IHousing,
+        ]
         for elmt in list_interfaces:
             if elmt.providedBy(self.context):
                 contact_type = "Proprietary"

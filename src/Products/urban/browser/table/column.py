@@ -115,7 +115,7 @@ class TitleColumn(UrbanColumn):
         title = '<a href="%s" class="%s">%s</a>' % (
             safe_unicode(url),
             safe_unicode(css_class),
-            safe_unicode(title)
+            safe_unicode(title),
         )
         return title
 

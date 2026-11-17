@@ -419,7 +419,6 @@ class Inspection(BaseInspection):
     schema = Inspection_schema
 
 
-
 registerType(Inspection, PROJECTNAME)
 
 

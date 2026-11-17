@@ -73,7 +73,9 @@ class NoticeOutgoingFileNotification(NoticeElement):
     def description(self):
         return self._file.title
 
+
 # TWICE
+
 
 class NoticeOutgoingNotification(NoticeResponse):
     state = "FINAL"
@@ -213,8 +215,13 @@ class NoticeOutgoingPublicSurveyFinalWithoutOpinionNotification(
 
 
 class NoticeOutgoingSummaryReportNotification(NoticeResponse):
-
-    def __init__(self, event, decision_event=None, decision_display_event=None, college_decision=None):
+    def __init__(
+        self,
+        event,
+        decision_event=None,
+        decision_display_event=None,
+        college_decision=None,
+    ):
         super(NoticeOutgoingSummaryReportNotification, self).__init__(event)
         self._decision_event = decision_event
         self._decision_display_event = decision_display_event
@@ -228,11 +235,19 @@ class NoticeOutgoingSummaryReportNotification(NoticeResponse):
 
     @property
     def _display_decision_start_date(self):
-        return self._decision_display_event.getDisplayDate() if self._decision_display_event else None
+        return (
+            self._decision_display_event.getDisplayDate()
+            if self._decision_display_event
+            else None
+        )
 
     @property
     def _display_decision_end_date(self):
-        return self._decision_display_event.getDisplayDateEnd() if self._decision_display_event else None
+        return (
+            self._decision_display_event.getDisplayDateEnd()
+            if self._decision_display_event
+            else None
+        )
 
     @property
     def _decision_code(self):
@@ -329,6 +344,7 @@ class NoticeOutgoingDecisionNotification(NoticeResponse):
 
 
 # GESPER
+
 
 class NoticeOutgoingGesperPublicSurveyNotification(NoticeResponse):
 
@@ -502,9 +518,7 @@ class NoticeOutgoingGesperOpinionRequestNotification(NoticeResponse):
     state = "FINAL"
 
     def __init__(self, event, college_motivation=None):
-        super(
-            NoticeOutgoingGesperOpinionRequestNotification, self
-        ).__init__(event)
+        super(NoticeOutgoingGesperOpinionRequestNotification, self).__init__(event)
         self._college_motivation = college_motivation
 
     @property

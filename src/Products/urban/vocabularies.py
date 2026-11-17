@@ -456,10 +456,7 @@ class LicenceDocumentsVocabulary(object):
         return SimpleTerm(self.get_path(doc), self.get_path(doc), doc.Title())
 
     def __call__(self, context):
-        terms = [
-            self.make_term(doc)
-            for doc in self.list_documents(context)
-        ]
+        terms = [self.make_term(doc) for doc in self.list_documents(context)]
         return SimpleVocabulary(terms)
 
 

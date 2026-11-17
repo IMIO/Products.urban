@@ -699,7 +699,7 @@ class IncomingNoticeHandler(object):
         successful_notice_events_to_notify_by_email_key = "Products.urban.browser.notice_settings.INoticeSettings.successful_notice_events_to_notify_by_email"
         portal_physical_path = api.portal.get().getPhysicalPath()
         event_physical_path = self.event.getPhysicalPath()
-        relative_path = event_physical_path[len(portal_physical_path):]
+        relative_path = event_physical_path[len(portal_physical_path) :]
         event_path = "/" + "/".join(relative_path)
 
         events_to_notify = (

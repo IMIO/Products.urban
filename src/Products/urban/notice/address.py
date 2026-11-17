@@ -27,7 +27,9 @@ class NoticeAddress(NoticeElement):
             result = utils.find_address(self.search_term, exact_match=False)
         # just by street
         if self.notice_street:
-            sanitized_street = re.sub("[()]", "", self.notice_street)  # ZCTextIndex limitation
+            sanitized_street = re.sub(
+                "[()]", "", self.notice_street
+            )  # ZCTextIndex limitation
             if not result:
                 result = utils.find_address(sanitized_street, exact_match=True)
             if not result:

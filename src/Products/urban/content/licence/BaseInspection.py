@@ -12,6 +12,7 @@ from plone import api
 from zope.annotation import IAnnotations
 from zope.interface import implements
 
+
 class BaseInspection(BaseFolder, GenericLicence, Inquiry, BrowserDefaultMixin):
 
     security = ClassSecurityInfo()

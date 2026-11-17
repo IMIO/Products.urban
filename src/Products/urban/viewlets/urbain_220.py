@@ -222,7 +222,8 @@ class UrbainXMLExport(BrowserView):
                             )
                     if number:
                         xml.append(
-                            u"      <E_220_huisnr>%s</E_220_huisnr>" % safe_unicode(number)
+                            u"      <E_220_huisnr>%s</E_220_huisnr>"
+                            % safe_unicode(number)
                         )
                 worktype = licence.getWorkType() and licence.getWorkType()[0] or ""
                 work_types = UrbanVocabulary("folderbuildworktypes").getAllVocTerms(

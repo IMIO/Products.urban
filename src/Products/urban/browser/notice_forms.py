@@ -252,7 +252,9 @@ class NoticeResponseActionForm(Form):
                 self.context.transfer_notice_file(incoming_notice_id, file_path)
             except Exception as e:
                 IStatusMessage(self.request).addStatusMessage(
-                    _(u"Couldn't send one of the files. Please contact an administrator."),
+                    _(
+                        u"Couldn't send one of the files. Please contact an administrator."
+                    ),
                     "error",
                 )
                 logger.exception(u"%s", e)
@@ -289,7 +291,9 @@ class NoticeResponseActionForm(Form):
         response_body_result = response_body.get("result", {}) or {}
         reception_date_str = response_body_result.get("receptionDate")
         if reception_date_str:
-            reception_date = datetime.strptime(reception_date_str[:19], "%Y-%m-%dT%H:%M:%S")
+            reception_date = datetime.strptime(
+                reception_date_str[:19], "%Y-%m-%dT%H:%M:%S"
+            )
         else:
             reception_date = datetime.now()
 
@@ -341,7 +345,7 @@ class ITransferFolderToDPAActionForm(ITransferBaseActionForm):
                 "TRANSFERT_DOSSIER_PM",
                 "REVISION_CP_FT_ENVOI_COMMUNE",
             ],
-            ["transfer_folder_to_dpa"]
+            ["transfer_folder_to_dpa"],
         ),
     )
 
@@ -373,7 +377,7 @@ class ITransferDatesTicketActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP_EXTRA",
                 "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
-            ["transfer_dates"]
+            ["transfer_dates"],
         ),
     )
 
@@ -405,7 +409,7 @@ class ITransferTicketActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP_EXTRA",
                 "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
-            ["transfer_ticket", "transfer_ticket_final"]
+            ["transfer_ticket", "transfer_ticket_final"],
         ),
     )
 
@@ -463,7 +467,7 @@ class ITransferOpinionActionForm(ITransferBaseActionForm):
                 "DEMANDE_EP_EXTRA",
                 "NOTIFICATION_RECEVABILITE_ART65_COMMUNE",
             ],
-            ["transfer_opinion", "transfer_ticket_final"]
+            ["transfer_opinion", "transfer_ticket_final"],
         ),
     )
 
@@ -515,7 +519,9 @@ class TransferOpinionActionForm(NoticeResponseActionForm):
         incoming_id = data.get("incoming_notification")
         inquiry_event = self._get_inquiry_event(incoming_id)
         college_opinion = self._get_college_opinion_text(data)
-        result = self.context.transfer_opinion(incoming_id, inquiry_event, college_opinion)
+        result = self.context.transfer_opinion(
+            incoming_id, inquiry_event, college_opinion
+        )
         return result
 
     def updateWidgets(self):
@@ -542,7 +548,7 @@ class ITransferDecisionActionForm(ITransferBaseActionForm):
                 "ART65_ENVOI_PROJET_COMMUNE",
                 "ART65_ENVOI_TARDIF_AVISFT_COURRIER_COMMUNE",
             ],
-            ["transfer_decision"]
+            ["transfer_decision"],
         ),
     )
 
@@ -609,7 +615,7 @@ class ITransferDecisionDisplayActionForm(ITransferBaseActionForm):
                 "ART65_AVIS_FT_COURRIER_COMMUNE",
                 "ART65_REFUS_TACITE_COURRIER_COMMUNE",
             ],
-            ["transfer_decision_display"]
+            ["transfer_decision_display"],
         ),
     )
 
@@ -634,7 +640,9 @@ class TransferDecisionDisplayActionForm(NoticeResponseActionForm):
             outgoings = notice.get("outgoing", [])
             for outgoing in outgoings:
                 matching_notice_id = outgoing["incoming_notice_id"] == incoming_id
-                matching_action_code = outgoing["outgoing_notice_type"] == "transfer_decision"
+                matching_action_code = (
+                    outgoing["outgoing_notice_type"] == "transfer_decision"
+                )
                 if matching_notice_id and matching_action_code:
                     college_decision = outgoing["field_values"]["college_decision"]
                     return event, college_decision
@@ -693,7 +701,7 @@ class ITransferDatesGesperEPActionForm(ITransferBaseActionForm):
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
-            ["transfer_dates_gesper_ep"]
+            ["transfer_dates_gesper_ep"],
         ),
     )
 
@@ -724,7 +732,7 @@ class ITransferTicketGesperEPActionForm(ITransferBaseActionForm):
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
-            ["transfer_ticket_gesper_ep", "transfer_ticket_final_gesper_ep"]
+            ["transfer_ticket_gesper_ep", "transfer_ticket_final_gesper_ep"],
         ),
     )
 
@@ -780,7 +788,7 @@ class ITransferOpinionGesperEPActionForm(ITransferBaseActionForm):
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ENQUETE_PUBLIQUE_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
-            ["transfer_opinion_gesper_ep", "transfer_ticket_final_gesper_ep"]
+            ["transfer_opinion_gesper_ep", "transfer_ticket_final_gesper_ep"],
         ),
     )
 
@@ -839,7 +847,9 @@ class TransferOpinionGesperEPActionForm(NoticeResponseActionForm):
         incoming_id = data.get("incoming_notification")
         inquiry_event = self._get_inquiry_event(incoming_id)
         college_opinion = self._get_college_opinion_text(data)
-        return self.context.transfer_opinion_gesper_ep(incoming_id, inquiry_event, college_opinion)
+        return self.context.transfer_opinion_gesper_ep(
+            incoming_id, inquiry_event, college_opinion
+        )
 
 
 TransferOpinionGesperEPActionWrapper = wrap_form(TransferOpinionGesperEPActionForm)
@@ -855,7 +865,7 @@ class ITransferDatesGesperAPActionForm(ITransferBaseActionForm):
                 "DEMANDE_ANNONCE_PROJET_PLAN_INITIAL_2_EME_INSTANCE",
                 "DEMANDE_ANNONCE_PROJET_PLAN_MODIFIE_2_EME_INSTANCE",
             ],
-            ["transfer_dates_gesper_ap"]
+            ["transfer_dates_gesper_ap"],
         ),
     )
 
@@ -1001,7 +1011,9 @@ class TransferOpinionGesperAPActionForm(NoticeResponseActionForm):
         incoming_id = data.get("incoming_notification")
         announcement_event = self._get_announcement_event(incoming_id)
         college_opinion = self._get_college_opinion_text(data)
-        return self.context.transfer_opinion_gesper_ap(incoming_id, announcement_event, college_opinion)
+        return self.context.transfer_opinion_gesper_ap(
+            incoming_id, announcement_event, college_opinion
+        )
 
 
 TransferOpinionGesperAPActionWrapper = wrap_form(TransferOpinionGesperAPActionForm)
@@ -1056,7 +1068,11 @@ class TransferOpinionGesperOpinionRequestActionForm(NoticeResponseActionForm):
     def transfer_response(self, data):
         incoming_id = data.get("incoming_notification")
         college_motivation = self._get_college_opinion_text(data)
-        return self.context.transfer_opinion_gesper_opinion_request(incoming_id, college_motivation)
+        return self.context.transfer_opinion_gesper_opinion_request(
+            incoming_id, college_motivation
+        )
 
 
-TransferOpinionGesperOpinionRequestActionWrapper = wrap_form(TransferOpinionGesperOpinionRequestActionForm)
+TransferOpinionGesperOpinionRequestActionWrapper = wrap_form(
+    TransferOpinionGesperOpinionRequestActionForm
+)

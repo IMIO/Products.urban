@@ -2112,7 +2112,13 @@ default_values = {
         ],
         "inadmissibilityreasons": [
             "UrbanVocabularyTerm",
-            ["EnvClassOne", "EnvClassTwo", "EnvClassThree", "EnvClassBordering", "Article65"],
+            [
+                "EnvClassOne",
+                "EnvClassTwo",
+                "EnvClassThree",
+                "EnvClassBordering",
+                "Article65",
+            ],
             {"id": "missing_parts", "title": u"Pièces/renseignements manquants"},
             {
                 "id": "no_deposit_receipt",

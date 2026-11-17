@@ -10571,7 +10571,7 @@ EventConfigs = {
             ),
             "eventType": (
                 "Products.urban.interfaces.IInquiryEvent",
-                "Products.urban.interfaces.ITransmitToSPWEvent"
+                "Products.urban.interfaces.ITransmitToSPWEvent",
             ),
             "eventPortalType": "UrbanEventInquiry",
             "textDefaultValues": [

@@ -7,7 +7,9 @@ from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.urban import UrbanMessage as _
 from plone import api
 from plone.stringinterp.adapters import BaseSubstitution
-from plone.stringinterp.adapters import ParentUrlSubstitution as BaseParentUrlSubstitution
+from plone.stringinterp.adapters import (
+    ParentUrlSubstitution as BaseParentUrlSubstitution,
+)
 from plone.stringinterp.adapters import UserEmailSubstitution
 from zope.component import adapter
 
@@ -66,9 +68,8 @@ class FolderManagersMail(BaseSubstitution):
 
 
 class ParentUrlSubstitution(BaseParentUrlSubstitution):
-
     def safe_call(self):
-        url = aq_get(aq_parent(self.context), 'absolute_url')()
+        url = aq_get(aq_parent(self.context), "absolute_url")()
         # start patch
         if url and isinstance(url, basestring):
             url = url.replace("http://https://", "https://")

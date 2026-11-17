@@ -79,9 +79,7 @@ def add_housing_vocabularies(context):
         return
 
     # buildingtype
-    buildingtype_items_vocabulary_config = default_values["Housing"][
-        "buildingtype"
-    ]
+    buildingtype_items_vocabulary_config = default_values["Housing"]["buildingtype"]
     allowedtypes = buildingtype_items_vocabulary_config[0]
     buildingtype_vocabulary_folder = createVocabularyFolder(
         housing_folder, "buildingtype", context, allowedtypes=allowedtypes
@@ -112,7 +110,10 @@ def add_housing_vocabularies(context):
     ]
     allowedtypes = part_of_the_building_concerned_items_vocabulary_config[0]
     part_of_the_building_concerned_vocabulary_folder = createVocabularyFolder(
-        housing_folder, "part_of_the_building_concerned", context, allowedtypes=allowedtypes
+        housing_folder,
+        "part_of_the_building_concerned",
+        context,
+        allowedtypes=allowedtypes,
     )
     createFolderDefaultValues(
         part_of_the_building_concerned_vocabulary_folder,

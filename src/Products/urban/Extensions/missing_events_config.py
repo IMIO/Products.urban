@@ -24,7 +24,8 @@ def list_missing_events():
     for count, brain in enumerate(
         catalog(
             object_provides=IGenericLicence.__identifier__,
-            path={"query": context_path, "depth": 10})
+            path={"query": context_path, "depth": 10},
+        )
     ):
         if count % 100 == 0:
             logger.info("licences scan :{}".format(count))
@@ -53,25 +54,19 @@ def fix_missing_event_types():
     for count_licence_type, (licence_type, events_to_fix) in enumerate(
         all_broken_events.iteritems()
     ):
-        logger.info("licence type : {} ({}/{})".format(
-            licence_type,
-            count_licence_type,
-            len(all_broken_events)
-        ))
+        logger.info(
+            "licence type : {} ({}/{})".format(
+                licence_type, count_licence_type, len(all_broken_events)
+            )
+        )
         urban_config = api.portal.get_tool("portal_urban")
         licence_cfg = getattr(urban_config, licence_type.lower()).eventconfigs
         all_event_types = licence_cfg.objectValues()
         for count_event, event_name in enumerate(events_to_fix):
-            logger.info("event : {} ({}/{})".format(
-                event_name,
-                count_event,
-                len(events_to_fix)
-            ))
-            event_types = [
-                evt
-                for evt in all_event_types
-                if evt.Title() in event_name
-            ]
+            logger.info(
+                "event : {} ({}/{})".format(event_name, count_event, len(events_to_fix))
+            )
+            event_types = [evt for evt in all_event_types if evt.Title() in event_name]
             if len(event_types) > 1:
                 event_types = [
                     evt
@@ -83,11 +78,11 @@ def fix_missing_event_types():
                 licences_to_fix = events_to_fix[event_name]
                 for count_licence, licence in enumerate(licences_to_fix):
                     licence_path = "/".join(licence.getPhysicalPath())
-                    logger.info("licence : {} ({}/{})".format(
-                        licence_path,
-                        count_licence,
-                        len(licences_to_fix)
-                    ))
+                    logger.info(
+                        "licence : {} ({}/{})".format(
+                            licence_path, count_licence, len(licences_to_fix)
+                        )
+                    )
                     to_fixes = [
                         obj
                         for obj in licence.objectValues()

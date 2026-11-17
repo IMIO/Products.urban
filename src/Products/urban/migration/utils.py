@@ -94,5 +94,5 @@ def cook_javascript_resources():
     Temporary fix in a hurry:
     activate & deactivate `Development mode` on page `portal_javascripts`
     """
-    js_tool = api.portal.get_tool('portal_javascripts')
+    js_tool = api.portal.get_tool("portal_javascripts")
     js_tool.cookResources()
