@@ -96,12 +96,14 @@ class WebserviceNotice(WebService):
 
     @property
     def is_setup(self):
-        return self.url and self.instance_code and self.sent_on_behalf_of
+        return (
+            self.url and self.instance_code and self.sent_on_behalf_of and self.password
+        )
 
     @property
     def _auth(self):
         if not self.password:
-            raise ValueError("Authentification password for NOTICe Webservice is missing")
+            raise ValueError("Authentication password for NOTICe Webservice is missing")
         return (self.user, self.password)
 
     def _get(self, endpoint, **parameters):
