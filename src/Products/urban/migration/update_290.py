@@ -836,6 +836,15 @@ def add_async_notice_mails(context):
     initialize_notice_settings(context)
 
 
+def update_api_url(context):
+    record = "Products.urban.browser.notice_settings.INoticeSettings.url"
+
+    api.portal.set_registry_record(
+        record,
+        u"https://ipa.imio.be/spw/notice/v1/"
+    )
+
+
 def reindex_decision_date(context):
     logger = logging.getLogger("urban: Reindex `getDecisionDate`")
 

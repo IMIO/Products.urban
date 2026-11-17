@@ -213,10 +213,18 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-        title="Reindex `getDecisionDate` as DateTime"
+        title="Update Notice API URL"
         description=""
         source="2926"
         destination="2927"
+        handler=".update_290.update_api_url"
+        profile="Products.urban:default" />
+
+    <gs:upgradeStep
+        title="Reindex `getDecisionDate` as DateTime"
+        description=""
+        source="2927"
+        destination="2928"
         handler=".update_290.reindex_decision_date"
         profile="Products.urban:default" />
 
