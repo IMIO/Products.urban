@@ -80,7 +80,7 @@ def postCreationActions(licence, event):
 def updateLicenceTitle(licence, event):
     if hasattr(licence, "updateTitle"):
         licence.updateTitle()
-        licence.reindexObject(idxs=["Title", "sortable_title"])
+        licence.reindexObject(idxs=["Title", "sortable_title", "SearchableText"])
 
 
 def updateTaskIndexes(task_container, event):
@@ -118,6 +118,7 @@ def _updateBoundLicencesIndexes(licence, events, indexes=[]):
             "StreetNumber",
             "StreetsUID",
             "parcelInfosIndex",
+            "SearchableText",
         ]
 
     annotations = IAnnotations(licence)

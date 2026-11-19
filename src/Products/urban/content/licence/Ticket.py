@@ -485,6 +485,7 @@ class Ticket(BaseFolder, GenericLicence, BrowserDefaultMixin):
             idxs=(
                 "Title",
                 "sortable_title",
+                "SearchableText",
             )
         )
 

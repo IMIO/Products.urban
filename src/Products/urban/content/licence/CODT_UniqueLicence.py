@@ -376,6 +376,7 @@ class CODT_UniqueLicence(
                 "Title",
                 "applicantInfosIndex",
                 "sortable_title",
+                "SearchableText",
             )
         )
 

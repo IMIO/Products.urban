@@ -594,6 +594,7 @@ class EnvironmentLicence(BaseFolder, EnvironmentBase, BrowserDefaultMixin):
                 "Title",
                 "applicantInfosIndex",
                 "sortable_title",
+                "SearchableText",
             )
         )
 

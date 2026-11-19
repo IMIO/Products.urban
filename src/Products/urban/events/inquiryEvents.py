@@ -40,7 +40,7 @@ def afterDelete(ob, event):
         if not inquiry.portal_type == "Inquiry":
             continue
         inquiry.setTitle(inquiry.generateInquiryTitle())
-        inquiry.reindexObject(idxs=("title",))
+        inquiry.reindexObject(idxs=("title", "SearchableText"))
 
 
 def setGeneratedTitle(ob, event):
@@ -52,7 +52,7 @@ def setGeneratedTitle(ob, event):
     if IGenericLicence.providedBy(ob):
         return
     ob.setTitle(ob.generateInquiryTitle())
-    ob.reindexObject(idxs=("title",))
+    ob.reindexObject(idxs=("title", "SearchableText"))
 
 
 def setDefaultValuesEvent(inquiry, event):
