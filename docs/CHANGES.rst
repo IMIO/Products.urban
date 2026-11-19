@@ -7,6 +7,18 @@ Changelog
 
 .. towncrier release notes start
 
+3.0.0b21 (2026-11-19)
+---------------------
+
+Bug fixes:
+
+
+- Add `SearchableText` to reindex object in content class and subscriber
+  [jchandelle] (SUP-51992)
+- Add missing file from cherrypick 5c40df8332e7d61c3d75221ccbc49539a3ac0df8
+  [jchandelle] (SUP-57823)
+
+
 3.0.0b20 (2026-11-07)
 ---------------------
 
