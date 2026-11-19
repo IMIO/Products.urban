@@ -185,7 +185,7 @@ class CouncildecisionDelay(UrbanBaseDelay):
     """
 
     def calculate_delay(self, with_modified_blueprints=True):
-        base_delay = super(AnnoncedDelay, self).calculate_delay()
+        base_delay = super(CouncildecisionDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getDecisional_delay() or 0
         delay = self.get_default_delay_value(delay) or 0
