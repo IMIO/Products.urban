@@ -212,4 +212,12 @@
         handler=".update_290.add_async_notice_mails"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add last received notice notification"
+        description=""
+        source="2926"
+        destination="2927"
+        handler=".update_290.add_last_received_notice_notification"
+        profile="Products.urban:default" />
+
 </configure>

@@ -14,10 +14,11 @@ from Products.urban.setuphandlers import add_new_urban_licence_type
 from Products.urban.setuphandlers import addNoticeWarning
 from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
-from Products.urban.setuphandlers import markLicencesCreatedViaNotice
+from Products.urban.setuphandlers import markLicencesAndEventsCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
+from eea.facetednavigation.criteria.interfaces import ICriteria
 from imio.helpers.catalog import reindexIndexes
 from plone import api
 from plone.app.textfield import RichTextValue
@@ -733,6 +734,41 @@ def normalize_externaldecisions_vocabulary(context):
     logger.info("Upgrade done!")
 
 
+def add_last_received_notice_notification(context):
+    logger = logging.getLogger("urban: Add last received notice notification")
+
+    # add catalog index
+    setup_tool = api.portal.get_tool("portal_setup")
+    setup_tool.runImportStepFromProfile("profile-Products.urban:urbantypes", "catalog")
+    reindexIndexes(None, ["last_received_notice_notification"])
+
+    # add dashboard widget
+    urban_base_folder = api.portal.get().urban
+    urban_dashboard_folders = [urban_base_folder]  # needed for dashboard 'All'
+    if "import-notice" in urban_base_folder.objectIds():
+        urban_dashboard_folders.append(getattr(urban_base_folder, "import-notice"))
+    for urban_type in URBAN_TYPES:
+        licence_folder = getattr(urban_base_folder, "{}s".format(urban_type.lower()), None)
+        if licence_folder is not None:
+            urban_dashboard_folders.append(licence_folder)
+
+    for licence_folder in urban_dashboard_folders:
+        criteria = ICriteria(licence_folder)
+        if criteria is not None and not criteria.get("c96"):
+            criteria.add(
+                _cid_=u"c96",
+                wid="daterange",
+                title=u"Dernier événement reçu",
+                position="top",
+                section="advanced",
+                hidden=False,
+                index=u"last_received_notice_notification",
+                calYearRange=u"c-10:c+10",
+            )
+
+    logger.info("upgrade step done!")
+
+
 def setup_referenceFT_PM(context):
     logger = logging.getLogger("urban: Set up `referenceFT_PM` index and attribute")
 
@@ -827,7 +863,7 @@ def add_notice_warning(context):
     logger = logging.getLogger("urban: Add notice warning")
     logger.info("starting upgrade steps")
     addNoticeWarning(context)
-    markLicencesCreatedViaNotice(context)
+    markLicencesAndEventsCreatedViaNotice(context)
     logger.info("upgrade done!")
 
 

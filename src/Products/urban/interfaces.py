@@ -199,6 +199,10 @@ class ILicenceCreatedViaNoticeWS(Interface):
     """Marker interface for a licence created through the Notice webservice"""
 
 
+class IEventCreatedViaNoticeWS(Interface):
+    """Marker interface for an event created through the Notice webservice"""
+
+
 class IUrbanEventOpinionRequest(Interface):
     """Marker interface for .UrbanEventOpinionRequest.UrbanEventOpinionRequest"""
 
