@@ -1,0 +1,2 @@
+Fix task due date computation crash when a delay field still has its default value, e.g. on licences created by NOTICe
+[WBoudabous]
