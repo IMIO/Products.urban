@@ -7,6 +7,7 @@ from Products.urban.contentrules.notice import INoticeImportFailedEvent
 from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.services.notice import WebserviceNotice
@@ -833,3 +834,16 @@ def add_notice_warning(context):
 
 def add_async_notice_mails(context):
     initialize_notice_settings(context)
+
+
+def reindex_decision_date(context):
+    logger = logging.getLogger("urban: Reindex `getDecisionDate`")
+
+    catalog = api.portal.get_tool("portal_catalog")
+    brains = catalog(object_provides=IGenericLicence.__identifier__)
+    total = len(brains)
+    logger.info("Reindexing getDecisionDate on {0} licences".format(total))
+    for i, brain in enumerate(brains, 1):
+        licence = brain.getObject()
+        licence.reindexObject(idxs=["getDecisionDate"])
+    logger.info("upgrade step done!")
