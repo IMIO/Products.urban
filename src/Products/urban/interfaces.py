@@ -833,3 +833,16 @@ class IReleaseOfSecurity(Interface):
 
 class IModificationRegistryDecisionEvent(Interface):
     __doc__ = _("""IModificationRegistryDecisionEvent type marker interface""")
+
+
+class INoticeRules(Interface):
+    """Notice required values rules for a licence config.
+
+    Named adapter on a licence config: '<notice type>.<notice event type>'.
+    """
+
+    def __call__():
+        """Return {field_name: {'all': values, 'any': [values, ...]}}.
+
+        values: [{'value': value, 'label': label}, ...]
+        """
