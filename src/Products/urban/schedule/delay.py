@@ -13,6 +13,16 @@ from plone import api
 class UrbanBaseDelay(BaseCalculationDelay):
     """ """
 
+    @staticmethod
+    def get_default_delay_value(value):
+        """
+        Delay fields are StringFields but their default_method (getDefaultValue)
+        returns [""] when Archetypes calls it without arguments.
+        """
+        if isinstance(value, (list, tuple)):
+            value = value and value[0] or ""
+        return value
+
     def calculate_delay(self):
         task = self.task
         is_licence = IGenericLicence.providedBy(self.task_container)
@@ -63,6 +73,7 @@ class AnnoncedDelay(UrbanBaseDelay):
             delay = licence.getDecisional_delay()
         if with_modified_blueprints and licence.getHasModifiedBlueprints():
             delay = licence.getDelayAfterModifiedBlueprints() or 0
+        delay = self.get_default_delay_value(delay) or 0
         if delay and delay.endswith("j"):
             delay = int(delay[:-1])
             delay += self.inquiry_suspension_delay()
@@ -146,6 +157,7 @@ class UniqueLicenceNotificationDelay(AnnoncedDelay):
                 delay = 20
         else:
             delay = self.task_container.getAnnoncedDelay()
+            delay = self.get_default_delay_value(delay)
             if type(delay) in [str, unicode] and delay.endswith("j"):
                 delay = int(delay[:-1])
             elif not delay:
@@ -173,9 +185,10 @@ class CouncildecisionDelay(UrbanBaseDelay):
     """
 
     def calculate_delay(self, with_modified_blueprints=True):
-        base_delay = super(AnnoncedDelay, self).calculate_delay()
+        base_delay = super(CouncildecisionDelay, self).calculate_delay()
         licence = self.task_container
         delay = licence.getDecisional_delay() or 0
+        delay = self.get_default_delay_value(delay) or 0
         if delay and delay.endswith("j"):
             delay = int(delay[:-1])
         return delay + base_delay
