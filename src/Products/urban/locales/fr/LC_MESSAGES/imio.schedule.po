@@ -254,10 +254,10 @@ msgstr "Date de la décision de la région wallonne"
 msgid "urban.schedule.calculation_default_delay"
 msgstr "Délai par défaut"
 
-msgid "urban.schedule.start_date.task_starting_date"
+msgid "schedule.start_date.task_starting_date"
 msgstr "Date de début de la macro-tâche"
 
-msgid "urban.schedule.start_date.infinite"
+msgid "schedule.start_date.infinite"
 msgstr "Date de début infinie"
 
 msgid "urban.schedule.condition.deposit_event_created"
