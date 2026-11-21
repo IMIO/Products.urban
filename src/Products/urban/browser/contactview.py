@@ -124,7 +124,11 @@ class CopyRecipientCadastreToClaimantView(BrowserView):
         claimant_arg["claimType"] = "writedClaim"
 
         catalog = api.portal.get_tool("portal_catalog")
-        result = catalog(id=claimant_arg["id"], portal_type="Claimant")
+        result = catalog(
+            path="/".join(inquiry_event.getPhysicalPath()),
+            id=claimant_arg["id"],
+            portal_type="Claimant"
+        )
         redirection = self.request.response.redirect(
             inquiry_event.absolute_url()
             + "/#fieldsetlegend-urbaneventinquiry_recipients"
