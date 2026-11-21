@@ -339,6 +339,11 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
                             ),
                         )
                     )
+        # Remove duplicates based on lowercase text while prioritizing lowercase entries
+        res = list({
+            field_label.lower(): (field_name, field_label)
+            for field_name, field_label in sorted(res, key=lambda x: x[1].islower(), reverse=True)
+        }.values())
         return DisplayList(tuple(res)).sortedByValue()
 
     def listLicenceConfigs(self):
