@@ -19,6 +19,7 @@ import pkg_resources
 import random
 import string
 import time
+import pytz
 
 
 def getCurrentFolderManager():
@@ -311,6 +312,14 @@ def get_licence_context(context, get_all_object=False, max_recurence=5):
 def cache_key_30min(func, *args, **kwargs):
     return (func.__name__, time.time() // (60 * 30), args, kwargs)
 
+def convert_to_europe_brussels(date_field):
+    """
+    Convert the datetime object to Europe/Brussels timezone
+    """
+    original_datetime = date_field.asdatetime()
+    brussels_tz = pytz.timezone('Europe/Brussels')
+    date_field = original_datetime.astimezone(brussels_tz)
+    return date_field
 
 def find_address(term, exact_match=False):
     """Find an address based on a term"""
