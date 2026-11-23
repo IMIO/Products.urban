@@ -3140,6 +3140,7 @@ default_values = {
             "UrbanVocabularyTerm",
             {"id": "recommande", "title": u"Par recommandé postal"},
             {"id": "surplace", "title": u"Déposé à l'administration communale"},
+            {"id": "digital", "title": u"Dématérialisé"},
         ],
         "recoursedecisions": [
             "UrbanVocabularyTerm",
