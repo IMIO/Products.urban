@@ -8,9 +8,9 @@ from Products.urban.contentrules.notice import INoticeImportFailedEvent
 from Products.urban.contentrules.notice import INoticeImportSucceededEvent
 from Products.urban.contentrules.notice import INoticeResponseFailedEvent
 from Products.urban.contentrules.utils import ContentRulesUtils
-from Products.urban.interfaces import IGenericLicence
 from Products.urban.interfaces import ICessionEvent
 from Products.urban.interfaces import IEnvironmentBase
+from Products.urban.interfaces import IGenericLicence
 from Products.urban.migration.utils import cook_javascript_resources
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.services.notice import WebserviceNotice
@@ -20,6 +20,7 @@ from Products.urban.setuphandlers import createFolderDefaultValues
 from Products.urban.setuphandlers import createVocabularyFolder
 from Products.urban.setuphandlers import markLicencesCreatedViaNotice
 from Products.urban.setuphandlers import set_licence_folder_security
+from Products.urban.utils import getLicenceSchema
 from Products.urban.utils import moveElementAfter
 from dm.historical import getHistory
 from imio.helpers.catalog import reindexIndexes
@@ -904,6 +905,11 @@ def upgrade_cession_transfer_of_licence(context):
     logger.info("starting upgrade steps")
     portal_urban = api.portal.get_tool("portal_urban")
     for licence_config in portal_urban.objectValues("LicenceConfig"):
+        schema = getLicenceSchema(licence_config.getLicencePortalType())
+        if schema is None or schema.get("isTransferOfLicence") is None:
+            # here/mayAddTransferOfLicenceEvent would always be False on
+            # these licences and block cession event creation
+            continue
         for event_config in licence_config.eventconfigs.objectValues():
             if ICessionEvent.__identifier__ in (event_config.eventType or []):
                 event_config.TALCondition = "here/mayAddTransferOfLicenceEvent"
@@ -911,6 +917,14 @@ def upgrade_cession_transfer_of_licence(context):
     catalog = api.portal.get_tool("portal_catalog")
     for brain in catalog(object_provides=IEnvironmentBase.__identifier__):
         licence = brain.getObject()
-        if licence.getAllEvents(ICessionEvent):
-            licence.setIsTransferOfLicence(True)
+        if not licence.getAllEvents(ICessionEvent):
+            continue
+        if licence.getField("isTransferOfLicence") is None:
+            logger.warning(
+                "Skipping %s: no 'isTransferOfLicence' field on %s",
+                brain.getPath(),
+                licence.portal_type,
+            )
+            continue
+        licence.setIsTransferOfLicence(True)
     logger.info("upgrade done!")

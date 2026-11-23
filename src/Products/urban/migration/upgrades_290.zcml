@@ -213,15 +213,7 @@
         profile="Products.urban:default"/>
 
     <gs:upgradeStep
-        title="Set cession TAL condition and mark transferred licences"
-        description=""
-        source="2926"
-        destination="2927"
-        handler=".update_290.upgrade_cession_transfer_of_licence"
-        profile="Products.urban:default" />
-
-    <gs:upgradeStep
-        title="Update Notice API URL"
+        title="Reindex `getDecisionDate` as DateTime"
         description=""
         source="2926"
         destination="2927"
@@ -258,6 +250,14 @@
         source="2930"
         destination="2931"
         handler=".update_290.unhide_CODT_UniqueBorderingLicences"
+        profile="Products.urban:default"/>
+
+    <gs:upgradeStep
+        title="Set cession TAL condition and mark transferred licences"
+        description=""
+        source="2932"
+        destination="2933"
+        handler=".update_290.upgrade_cession_transfer_of_licence"
         profile="Products.urban:default" />
 
 </configure>
