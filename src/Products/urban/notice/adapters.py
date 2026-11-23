@@ -29,19 +29,20 @@ from Products.urban.interfaces import ITheLicenceEvent
 from Products.urban.interfaces import ITransmitToSPWEvent
 from Products.urban.interfaces import IWalloonRegionDecisionEvent
 from Products.urban.utils import cache_key_5min
-from plone.memoize import ram
 from imio.urban.core.contents.eventconfig.content import IEventConfig
 from imio.urban.core.interfaces import IRequiredValues
+from imio.urban.core.schema_validation.schema import All
+from imio.urban.core.schema_validation.schema import Any
+from imio.urban.core.schema_validation.schema import Composite
+from imio.urban.core.schema_validation.schema import MustBe
 from plone import api
+from plone.memoize import ram
 from z3c.form.interfaces import IData
 from zope.component import adapter
 from zope.component import queryAdapter
 from zope.interface import implementer
 from zope.interface import Interface
-from imio.urban.core.schema_validation.schema import All
-from imio.urban.core.schema_validation.schema import Any
-from imio.urban.core.schema_validation.schema import Composite
-from imio.urban.core.schema_validation.schema import MustBe
+
 
 NOTICE_EVENT_TYPE_FIELD = "notice_event_type"
 
