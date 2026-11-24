@@ -835,13 +835,13 @@ class IModificationRegistryDecisionEvent(Interface):
     __doc__ = _("""IModificationRegistryDecisionEvent type marker interface""")
 
 
-class INoticeRules(Interface):
+class INoticeSchema(Interface):
     """Notice required values rules for a licence config.
 
     Named adapter on a licence config: '<notice type>.<notice event type>'.
     """
 
-    def __call__():
+    def __call__(self):
         """Return {field_name: {'all': values, 'any': [values, ...]}}.
 
         values: [{'value': value, 'label': label}, ...]
