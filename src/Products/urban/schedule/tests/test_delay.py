@@ -6,6 +6,6 @@ import unittest
 
 
 class TestUrbanBaseDelay(unittest.TestCase):
-    def test_get_default_delay_value(self):
+    def test_get_delay_value(self):
         # Archetypes default value of delay fields is [""]
-        self.assertEqual(UrbanBaseDelay.get_default_delay_value([""]), "")
+        self.assertEqual(UrbanBaseDelay.get_delay_value([""]), "")
