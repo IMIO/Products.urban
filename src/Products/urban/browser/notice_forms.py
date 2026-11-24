@@ -7,13 +7,16 @@ from z3c.form.browser.radio import RadioFieldWidget
 from z3c.form.interfaces import ActionExecutionError
 from z3c.form.form import Form
 from zope import schema
+from zope.app.pagetemplate import ViewPageTemplateFile
 from zope.annotation.interfaces import IAnnotations
+from zope.component import getUtility
 from zope.event import notify
 from zope.i18n import translate
 from zope.interface import Interface
 from zope.interface import Invalid
 from zope.interface import implementer
 from zope.schema.interfaces import IContextSourceBinder
+from zope.schema.interfaces import IVocabularyFactory
 from zope.schema.vocabulary import SimpleTerm
 from zope.schema.vocabulary import SimpleVocabulary
 from Products.statusmessages.interfaces import IStatusMessage
@@ -200,6 +203,29 @@ class NoticeResponseActionForm(Form):
             field_values,
         )
 
+    def store_sent_document_history(self, document, incoming_notice_id, event_path):
+        annotations = IAnnotations(document)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        outgoing = notice.get("outgoing", [])
+        outgoing.append(
+            {
+                "date": datetime.now(),
+                "user": api.user.get_current().id,
+                "event_path": event_path,
+                "incoming_notice_id": incoming_notice_id,
+            }
+        )
+        notice["outgoing"] = outgoing
+        annotations[key] = notice
+
+    def transferred_documents(self):
+        factory = getUtility(
+            IVocabularyFactory, "urban.vocabularies.already_sent_notice_licence_documents"
+        )
+        vocabulary = factory(self.context)
+        return vocabulary
+
     def updateWidgets(self):
         super(NoticeResponseActionForm, self).updateWidgets()
 
@@ -208,6 +234,9 @@ class NoticeResponseActionForm(Form):
         self.request.set("disable_plone.leftcolumn", 1)
 
         self.widgets["file_paths"].value = []
+        self.widgets["file_paths"].template = ViewPageTemplateFile(
+            "templates/notice_files_checkbox_input.pt"
+        )
 
     def _notify_response_error(self, notice_id="", error_message=""):
         try:
@@ -260,6 +289,11 @@ class NoticeResponseActionForm(Form):
                 logger.exception(u"%s", e)
                 self._notify_response_error(incoming_notice_id, str(e))
             else:
+                self.store_sent_document_history(
+                    file_obj,
+                    incoming_notice_id,
+                    "/".join(self.context.getPhysicalPath()),
+                )
                 sent_documents.append(
                     {
                         "path": file_path,

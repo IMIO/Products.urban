@@ -4,6 +4,7 @@
 # GNU General Public License (GPL)
 
 from Acquisition import aq_parent
+from Products.urban import UrbanMessage as _
 from Products.urban.UrbanVocabularyTerm import UrbanVocabulary
 from Products.urban.config import URBAN_CODT_TYPES
 from Products.urban.config import URBAN_CWATUPE_TYPES
@@ -16,6 +17,8 @@ from Products.urban.utils import convert_to_utf8
 from Products.urban.utils import get_licence_context
 from Products.urban.utils import getCurrentFolderManager
 from plone import api
+from zope.annotation.interfaces import IAnnotations
+from zope.globalrequest import getRequest
 from zope.i18n import translate
 from zope.interface import implements
 from zope.schema.interfaces import IVocabularyFactory
@@ -472,12 +475,16 @@ class ValidNoticeLicenceDocumentsVocabulary(LicenceDocumentsVocabulary):
 
     def filter_document(self, doc):
         """
-        Keep only document types that are viewable in TWICE,
+        Keep only document types that are viewable in TWICE and that have not been sent yet,
         and hide documents created by user admin (= documents received from Notice)
         """
         content_type = getattr(doc, "content_type", None)
         creator = doc.Creator()
-        return content_type in self.acceptable_content_types and creator != "admin"
+        return (
+            content_type in self.acceptable_content_types
+            and creator != "admin"
+            and not self.last_notice_sending(doc)
+        )
 
     def make_term(self, doc):
         """
@@ -487,8 +494,56 @@ class ValidNoticeLicenceDocumentsVocabulary(LicenceDocumentsVocabulary):
         title = "{} ({})".format(doc.Title(), extension)
         return SimpleTerm(self.get_path(doc), self.get_path(doc), title)
 
+    def last_notice_sending(self, doc):
+        annotations = IAnnotations(doc)
+        key = "notice_notification"
+        notice = annotations.get(key, {})
+        outgoing = notice.get("outgoing", [])
+        return outgoing[-1] if len(outgoing) > 0 else {}
+
 
 ValidNoticeLicenceDocumentsVocabularyFactory = ValidNoticeLicenceDocumentsVocabulary()
+
+
+class AlreadySentNoticeLicenceDocumentsVocabulary(
+    ValidNoticeLicenceDocumentsVocabulary
+):
+    def filter_document(self, doc):
+        """
+        Keep only document types that are viewable in TWICE and that have already been sent,
+        and hide documents created by user admin (= documents received from Notice),
+        """
+        content_type = getattr(doc, "content_type", None)
+        creator = doc.Creator()
+        return (
+            content_type in self.acceptable_content_types
+            and creator != "admin"
+            and self.last_notice_sending(doc)
+        )
+
+    def make_term(self, doc):
+        """
+        Display doc title, file type and send date
+        """
+        last_sending = self.last_notice_sending(doc)
+        last_sending_date = last_sending.get("date", None)
+        sent_on = (
+            last_sending_date.strftime("%d/%m/%Y, %H:%M:%S")
+            if last_sending_date
+            else "???"
+        )
+        title = _(
+            u"${title} (${extension}) - Sent on ${sent_on}",
+            mapping={
+                "title": doc.Title(),
+                "extension": self.acceptable_content_types.get(doc.content_type, ""),
+                "sent_on": sent_on,
+            },
+        )
+        return SimpleTerm(self.get_path(doc), self.get_path(doc), title)
+
+
+AlreadySentNoticeLicenceDocumentsVocabularyFactory = AlreadySentNoticeLicenceDocumentsVocabulary()
 
 
 class ComplementaryDelayVocabulary(object):
