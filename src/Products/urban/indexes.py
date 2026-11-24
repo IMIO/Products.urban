@@ -127,6 +127,7 @@ def _get_applicantsinfoindex(applicant):
 @indexer(interfaces.IBaseBuildLicence)
 @indexer(interfaces.ICODT_BaseBuildLicence)
 @indexer(interfaces.IMiscDemand)
+@indexer(interfaces.IMiscDemandEnvironment)
 @indexer(interfaces.IPatrimonyCertificate)
 def licence_architectinfoindex(object):
     """

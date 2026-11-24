@@ -944,7 +944,10 @@ msgstr "Profil de migration pour iA.Urban"
 msgid "MiscDemand"
 msgstr "Demandes diverses"
 
-#: ../browser/cron/notice.py:283
+msgid "MiscDemandEnvironment"
+msgstr "Demandes diverses environnement"
+
+#: ../browser/cron/notice.py:570
 msgid "Multiple results for an address"
 msgstr "Plusieurs résultats trouvés pour une adresse"
 
@@ -2590,6 +2593,12 @@ msgstr "${name}, domicilié ${address}"
 
 msgid "miscdemand_urbanconfig_title"
 msgstr "Paramètres des 'divers'"
+
+msgid "miscdemandenvironment_urbanconfig_title"
+msgstr "Paramètres des Divers environnement"
+
+msgid "miscdemandenvironments"
+msgstr "Divers environnement"
 
 msgid "miscdemands"
 msgstr "Divers"

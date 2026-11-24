@@ -244,4 +244,12 @@
         handler=".update_290.import_notice_form_buttons"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Add MiscDemandEnvironment type"
+        description=""
+        source="2930"
+        destination="2931"
+        handler=".update_290.add_MiscDemandEnvironment_type"
+        profile="Products.urban:default" />
+
 </configure>

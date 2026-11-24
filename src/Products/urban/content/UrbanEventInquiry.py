@@ -199,6 +199,7 @@ schema = Schema(
                 "BuildLicence",
                 "EnvironmentBase",
                 "MiscDemand",
+                "MiscDemandEnvironment",
             ),
             multiValued=0,
             relationship="linkedInquiry",

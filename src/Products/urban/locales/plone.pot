@@ -192,6 +192,9 @@ msgstr ""
 msgid "MiscDemand"
 msgstr ""
 
+msgid "MiscDemandEnvironment"
+msgstr ""
+
 msgid "EnvironmentRubricTerm"
 msgstr ""
 
