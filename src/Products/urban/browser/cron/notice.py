@@ -721,6 +721,12 @@ class IncomingNoticeHandler(object):
 class NewLicenceHandler(IncomingNoticeHandler):
     event_config_marker = "Products.urban.interfaces.IDepositEvent"
     create_licence_if_missing = True
+    # Folders transferred through Notice are submitted online via MonEspace
+    deposit_type = "digital"
+
+    def fill_incoming_event(self):
+        super(NewLicenceHandler, self).fill_incoming_event()
+        self.event.setDepositType(self.deposit_type)
 
 
 class MissingPartDepositHandler(IncomingNoticeHandler):
