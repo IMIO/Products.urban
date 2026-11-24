@@ -141,7 +141,6 @@
         profile="Products.urban:default" />
 
     <gs:upgradeStep
-<<<<<<< HEAD
         title="Set up NOTICE form error mailing content rule"
         description=""
         source="2917"
