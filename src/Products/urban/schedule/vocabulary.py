@@ -39,6 +39,7 @@ URBAN_TYPES_INTERFACES = {
     "Inspection": interfaces.IInspection,
     "IntegratedLicence": interfaces.IIntegratedLicence,
     "MiscDemand": interfaces.IMiscDemand,
+    "MiscDemandEnvironment": interfaces.IMiscDemandEnvironment,
     "NotaryLetter": interfaces.INotaryLetter,
     "ParcelOutLicence": interfaces.IParcelOutLicence,
     "PatrimonyCertificate": interfaces.IPatrimonyCertificate,

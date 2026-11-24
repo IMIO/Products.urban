@@ -414,6 +414,21 @@
   />
 
   <browser:page
+     for="Products.urban.interfaces.IMiscDemandEnvironment"
+     name="miscdemandenvironmentview"
+     class=".miscdemandenvironmentview.MiscDemandEnvironmentView"
+     template="templates/miscdemandenvironmentview.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
+     name="miscdemandenvironment-macros"
+     for="Products.urban.interfaces.IMiscDemandEnvironment"
+     template="templates/miscdemandenvironmentmacros.pt"
+     permission="zope2.View"
+  />
+
+  <browser:page
      for="Products.urban.interfaces.IPreliminaryNotice"
      name="preliminarynoticeview"
      class=".preliminarynoticeview.PreliminaryNoticeView"

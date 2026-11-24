@@ -135,6 +135,9 @@ msgstr "Lieu-dit"
 msgid "MiscDemand"
 msgstr "Demande diverse"
 
+msgid "MiscDemandEnvironment"
+msgstr "Demande diverse environnement"
+
 msgid "Notary"
 msgstr "Notaire"
 

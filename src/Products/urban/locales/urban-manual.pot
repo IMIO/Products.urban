@@ -93,6 +93,9 @@ msgstr ""
 msgid "MiscDemand"
 msgstr ""
 
+msgid "MiscDemandEnvironment"
+msgstr ""
+
 msgid "NotaryLetter"
 msgstr ""
 
@@ -588,7 +591,13 @@ msgstr ""
 msgid "miscdemand_urbanconfig_title"
 msgstr ""
 
+msgid "miscdemandenvironment_urbanconfig_title"
+msgstr ""
+
 msgid "miscdemands"
+msgstr ""
+
+msgid "miscdemandenvironments"
 msgstr ""
 
 msgid "missingparts_folder_title"

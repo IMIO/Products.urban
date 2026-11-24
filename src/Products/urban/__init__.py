@@ -147,6 +147,7 @@ from Products.urban.content.licence import Housing  # noqa
 from Products.urban.content.licence import Inspection  # noqa
 from Products.urban.content.licence import IntegratedLicence  # noqa
 from Products.urban.content.licence import MiscDemand  # noqa
+from Products.urban.content.licence import MiscDemandEnvironment  # noqa
 from Products.urban.content.licence import ParcelOutLicence  # noqa
 from Products.urban.content.licence import PatrimonyCertificate  # noqa
 from Products.urban.content.licence import PreliminaryNotice  # noqa
@@ -238,6 +239,7 @@ def initialize(context):
     import content.licence.Housing
     import content.licence.IntegratedLicence
     import content.licence.MiscDemand
+    import content.licence.MiscDemandEnvironment
     import content.licence.ParcelOutLicence
     import content.licence.PatrimonyCertificate
     import content.licence.PreliminaryNotice

@@ -215,6 +215,10 @@ class IMiscDemand(Interface):
     """Marker interface for .MiscDemand.MiscDemand"""
 
 
+class IMiscDemandEnvironment(Interface):
+    """Marker interface for .MiscDemandEnvironment.MiscDemandEnvironment"""
+
+
 class IPreliminaryNotice(IGenericLicence):
     """Marker interface for .PreliminaryNotice.PreliminaryNotice"""
 

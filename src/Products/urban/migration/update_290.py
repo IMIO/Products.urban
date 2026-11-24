@@ -880,3 +880,29 @@ def import_notice_form_buttons(context):
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     logger.info("upgrade step done!")
+
+
+def add_MiscDemandEnvironment_type(context):
+    """
+    Note: the events must be added by upgrade step in `urban.events`
+    """
+
+    logger = logging.getLogger("urban: Add MiscDemandEnvironment licences")
+
+    portal_setup = api.portal.get_tool("portal_setup")
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "workflow"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:preinstall", "update-workflow-rolemap"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "typeinfo"
+    )
+    portal_setup.runImportStepFromProfile(
+        "profile-Products.urban:urbantypes", "factorytool"
+    )
+
+    add_new_urban_licence_type("MiscDemandEnvironment")
+
+    logger.info("Upgrade done!")

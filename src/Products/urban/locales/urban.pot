@@ -951,7 +951,10 @@ msgstr ""
 msgid "MiscDemand"
 msgstr ""
 
-#: ../browser/cron/notice.py:346
+msgid "MiscDemandEnvironment"
+msgstr ""
+
+#: ../browser/cron/notice.py:570
 msgid "Multiple results for an address"
 msgstr ""
 
@@ -2599,6 +2602,12 @@ msgid "masculine_singular_residing"
 msgstr ""
 
 msgid "miscdemand_urbanconfig_title"
+msgstr ""
+
+msgid "miscdemandenvironment_urbanconfig_title"
+msgstr ""
+
+msgid "miscdemandenvironments"
 msgstr ""
 
 msgid "miscdemands"

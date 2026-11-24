@@ -1777,6 +1777,16 @@ default_values = {
             {"id": "div", "title": u"Divers"},
         ],
     },
+    "MiscDemandEnvironment": {
+        "foldercategories": [
+            "UrbanVocabularyTerm",
+            {"id": "apct", "title": u"Avis préalable construction ou transformation"},
+            {"id": "appu", "title": u"Avis préalable permis d'urbanisation"},
+            {"id": "apd", "title": u"Avis préalable de division"},
+            {"id": "dre", "title": u"Demande de raccordement à l'égout"},
+            {"id": "div", "title": u"Divers"},
+        ],
+    },
     "Declaration": {
         "foldercategories": [
             "UrbanVocabularyTerm",
@@ -2073,6 +2083,7 @@ default_values = {
                 "NotaryLetter",
                 "CODT_NotaryLetter",
                 "MiscDemand",
+                "MiscDemandEnvironment",
                 "Division",
                 "Declaration",
                 "RoadDecree",
@@ -2084,6 +2095,7 @@ default_values = {
                 "NotaryLetter",
                 "CODT_NotaryLetter",
                 "MiscDemand",
+                "MiscDemandEnvironment",
                 "Division",
                 "Declaration",
             ],
@@ -2094,6 +2106,7 @@ default_values = {
                 "NotaryLetter",
                 "CODT_NotaryLetter",
                 "MiscDemand",
+                "MiscDemandEnvironment",
                 "Division",
                 "Declaration",
                 "RoadDecree",

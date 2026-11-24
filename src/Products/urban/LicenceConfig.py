@@ -588,6 +588,7 @@ class LicenceConfig(BaseFolder, BrowserDefaultMixin, OrderedContainer):
             "roaddecree": buildlicence_tabs_config,
             "division": certificatebase_tabs_config,
             "miscdemand": miscdemand_tabs_config,
+            "miscdemandenvironment": miscdemand_tabs_config,
             "projectmeeting": miscdemand_tabs_config,
             "preliminarynotice": miscdemand_tabs_config,
         }

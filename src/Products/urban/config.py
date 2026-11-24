@@ -99,6 +99,7 @@ ADD_CONTENT_PERMISSIONS = {
     "LicenceConfig": "urban: Add LicenceConfig",
     "Locality": "urban: Add Locality",
     "MiscDemand": "urban: Add MiscDemand",
+    "MiscDemandEnvironment": "urban: Add MiscDemandEnvironment",
     "OpinionRequestEventType": "urban: Add OpinionRequestEventType",
     "OrganisationTerm": "urban: Add OrganisationTerm",
     "ParcelOutLicence": "urban: Add ParcelOutLicence",
@@ -167,6 +168,7 @@ setDefaultRoles("urban: Add CODT_Inquiry", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add LicenceConfig", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add Locality", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add MiscDemand", ("Manager", "Contributor"))
+setDefaultRoles("urban: Add MiscDemandEnvironment", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add OpinionRequestEventType", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add OrganisationTerm", ("Manager", "Contributor"))
 setDefaultRoles("urban: Add ParcelOutLicence", ("Manager", "Contributor"))
@@ -226,6 +228,7 @@ URBAN_TYPES = [
     "ParcelOutLicence",
     "CODT_ParcelOutLicence",
     "MiscDemand",
+    "MiscDemandEnvironment",
     "Division",
     "NotaryLetter",
     "CODT_NotaryLetter",
@@ -263,6 +266,7 @@ URBAN_TYPES_ACRONYM = {
     "ParcelOutLicence": "PURB",
     "CODT_ParcelOutLicence": "PURB",
     "MiscDemand": "DD",
+    "MiscDemandEnvironment": "DDE",
     "Division": "DIV",
     "NotaryLetter": "NOT",
     "CODT_NotaryLetter": "NOT",
@@ -322,6 +326,7 @@ URBAN_ENVIRONMENT_TYPES = [
     "ExplosivesPossession",
     "EnvClassBordering",
     "Article65",
+    "MiscDemandEnvironment",
 ]
 
 LICENCE_FINAL_STATES = [
