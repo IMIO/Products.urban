@@ -718,6 +718,12 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         self.import_recipients_listing_form.update()
 
     @property
+    def has_parcel_setup(self):
+        licence = self.context.get_parent_licence()
+        parcels = licence.getParcels()
+        return len(parcels) > 0
+
+    @property
     def has_planned_claimant_import(self):
         planned_claimants_import = (
             api.portal.get_registry_record(

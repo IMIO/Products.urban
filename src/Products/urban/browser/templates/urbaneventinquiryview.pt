@@ -176,7 +176,10 @@
                         <dt class="formTab" id="fieldsetlegend-urbaneventinquiry_recipients" i18n:translate="event_inquiry_recipients"><span>Recipients</span></dt>
                         <dd id="fieldset-urbaneventinquiry_recipients">
                             <tal:block condition="python: member.has_permission('Modify portal content', context)">
-                                <form tal:attributes="action context/absolute_url" method="post">
+                                <tal:noparcel condition="not: view/has_parcel_setup">
+                                    <p class="discreet" i18n:translate="no_parcel_for_inquiry_search">No parcel setup on the licence: impossible to find address or owners</p>
+                                </tal:noparcel>
+                                <form tal:condition="view/has_parcel_setup" tal:attributes="action context/absolute_url" method="post">
                                     <input type="submit" class="context" name="find_recipients_cadastre"
                                     tal:attributes="value python:'Rechercher les propriétaires situés dans un rayon de {radius}m'.format(
                                                                  radius=view.getInquiryRadius())" />
