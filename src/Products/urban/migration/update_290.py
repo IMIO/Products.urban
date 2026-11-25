@@ -880,3 +880,16 @@ def import_notice_form_buttons(context):
     setup_tool = api.portal.get_tool("portal_setup")
     setup_tool.runImportStepFromProfile("profile-Products.urban:default", "actions")
     logger.info("upgrade step done!")
+
+
+def unhide_CODT_UniqueBorderingLicences(context):
+    logger = logging.getLogger("urban: Unhide CODT_UniqueBorderingLicences folder")
+    portal = api.portal.get()
+    urban = portal["urban"]
+    codt_uniqueborderinglicences = urban.get("codt_uniqueborderinglicences", None)
+    if codt_uniqueborderinglicences is None:
+        logger.warning("codt_uniqueborderinglicences folder is not present")
+        return
+    if codt_uniqueborderinglicences.getExcludeFromNav():
+        codt_uniqueborderinglicences.setExcludeFromNav(False)
+    logger.info("upgrade step done!")
