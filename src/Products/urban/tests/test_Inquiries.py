@@ -1,6 +1,7 @@
 #  -*- coding: utf-8 -*-
 
 from OFS.ObjectManager import BeforeDeleteException
+from Products.urban.scripts.fix_inquiry_event_links import relink_event
 from Products.urban.testing import URBAN_TESTS_CONFIG_FUNCTIONAL
 from Products.urban.testing import URBAN_TESTS_LICENCES
 from Products.urban.tests.helpers import BrowserTestCase
@@ -220,3 +221,40 @@ class TestCODTInquiries(BrowserTestCase):
             licence = getattr(self.urban, licence_type).objectValues()[1]
             self.browser.open(licence.absolute_url())
             self.assertIn("Ajouter une enquête supplémentaire", self.browser.contents)
+
+    def test_inquiry_event_linked_to_inquiry_after_announcement(self):
+        """
+        Announcement n°1 (on the licence) then inquiry n°2: the new inquiry
+        event must be linked to inquiry n°2, not to announcement n°1.
+        """
+        licence = self.urban.codt_buildlicences.objectValues()[1]
+        licence.setInquiry_type("announcement")
+        inquiry_2 = getattr(
+            licence, licence.invokeFactory("CODT_Inquiry", id="test_inquiry_2")
+        )
+        inquiry_2.setInquiry_type("inquiry")
+
+        announcement_event = licence.createUrbanEvent("annonce-de-projet-codt")
+        self.assertEqual(announcement_event.getLinkedInquiry(), licence)
+        api.content.transition(announcement_event, "close")
+
+        inquiry_event = licence.createUrbanEvent("enquete-publique")
+        self.assertEqual(inquiry_event.getLinkedInquiry(), inquiry_2)
+        self.assertEqual(inquiry_2.getLinkedUrbanEventInquiry(), inquiry_event)
+
+    def test_fix_inquiry_event_links_script(self):
+
+        licence = self.urban.codt_buildlicences.objectValues()[1]
+        licence.setInquiry_type("announcement")
+        inquiry_2 = getattr(
+            licence, licence.invokeFactory("CODT_Inquiry", id="test_inquiry_2")
+        )
+        inquiry_2.setInquiry_type("inquiry")
+        announcement_event = licence.createUrbanEvent("annonce-de-projet-codt")
+        inquiry_event = licence.createUrbanEvent("enquete-publique")
+        inquiry_event.setLinkedInquiry(licence)
+
+        relink_event(inquiry_event, inquiry_2)
+        self.assertEqual(inquiry_event.getLinkedInquiry(), inquiry_2)
+        self.assertEqual(inquiry_2.getLinkedUrbanEventInquiry(), inquiry_event)
+        self.assertEqual(announcement_event.getLinkedInquiry(), licence)
