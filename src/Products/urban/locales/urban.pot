@@ -28,6 +28,10 @@ msgstr ""
 msgid "${nbr} days"
 msgstr ""
 
+#: ../vocabularies.py:529
+msgid "${title} (${extension}) - Sent on ${sent_on}"
+msgstr ""
+
 #: ../skins/urban_plone/create_UrbanEvent.cpy:56
 msgid "${tname} has been created."
 msgstr ""
@@ -920,7 +924,11 @@ msgstr ""
 msgid "Licence Types"
 msgstr ""
 
-#: ../browser/urbaneventviews.py:323
+#: ../browser/templates/notice_files_checkbox_input.pt:82
+msgid "Licence files already transferred"
+msgstr ""
+
+#: ../browser/urbaneventviews.py:325
 msgid "Listing file (claimants)"
 msgstr ""
 
@@ -986,6 +994,10 @@ msgstr ""
 
 #: ../viewlets/templates/notice_transmit_state.pt:10
 msgid "NOTICe transmits"
+msgstr ""
+
+#: ../viewlets/templates/notice_transmit_state.pt:54
+msgid "NOTICe transmitted documents"
 msgstr ""
 
 msgid "NOTIFICATION_DECISION_COMMUNE"
@@ -1292,6 +1304,10 @@ msgstr ""
 
 #: ../browser/templates/coring_update.pt:35
 msgid "Submit"
+msgstr ""
+
+#: ../browser/notice_settings.py:46
+msgid "Successful NOTICe events to notify by email"
 msgstr ""
 
 #: ../browser/offdays_settings.py:34
@@ -3073,6 +3089,11 @@ msgstr ""
 #. Default: "When"
 #: ../viewlets/templates/notice_transmit_state.pt:15
 msgid "transmit_date"
+msgstr ""
+
+#. Default: "Document"
+#: ../viewlets/templates/notice_transmit_state.pt:60
+msgid "transmit_document"
 msgstr ""
 
 #. Default: "Form data"

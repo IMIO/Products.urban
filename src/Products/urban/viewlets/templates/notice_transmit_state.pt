@@ -49,4 +49,26 @@
           </table>
         </div>
       </fieldset>
+      <fieldset tal:define="outgoings view/outgoing_documents"
+               tal:condition="outgoings">
+        <legend i18n:translate="">NOTICe transmitted documents</legend>
+        <div class="clear">
+            <table class="listing">
+                <thead>
+                <th i18n:translate="transmit_date">When</th>
+                <th i18n:translate="transmit_user">User</th>
+                <th i18n:translate="transmit_document">Document</th>
+                </thead>
+                <tbody>
+                <tr tal:repeat="outgoing outgoings">
+                    <td tal:content="outgoing/date"></td>
+                    <td tal:content="outgoing/user"></td>
+                    <td>
+                        <a tal:attributes="href outgoing/document_url" tal:content="outgoing/document_title"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+      </fieldset>
 </metal:noticeTransmitDates>

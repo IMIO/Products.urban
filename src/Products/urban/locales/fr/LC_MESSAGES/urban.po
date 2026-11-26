@@ -23,6 +23,10 @@ msgstr " et ${last_rule}"
 msgid "${nbr} days"
 msgstr "${nbr} jours"
 
+#: ../vocabularies.py:529
+msgid "${title} (${extension}) - Sent on ${sent_on}"
+msgstr "${title} (${extension}) - Envoyé le ${sent_on}"
+
 #: ../skins/urban_plone/create_UrbanEvent.cpy:56
 msgid "${tname} has been created."
 msgstr "${tname} a été créé(e)."
@@ -913,7 +917,11 @@ msgstr "Date du dernier import depuis le WebService de NOTICe"
 msgid "Licence Files"
 msgstr "Fichiers du permis"
 
-#: ../browser/urbaneventviews.py:314
+#: ../browser/templates/notice_files_checkbox_input.pt:82
+msgid "Licence files already transferred"
+msgstr "Fichiers déjà transférés"
+
+#: ../browser/urbaneventviews.py:325
 msgid "Listing file (claimants)"
 msgstr "Importer un fichier de réclamants (csv)"
 
@@ -980,6 +988,10 @@ msgstr "Réception (NOTICe)"
 #: ../viewlets/templates/notice_transmit_state.pt:9
 msgid "NOTICe transmits"
 msgstr "Transmissions (NOTICe)"
+
+#: ../viewlets/templates/notice_transmit_state.pt:54
+msgid "NOTICe transmitted documents"
+msgstr "Documents transmis (NOTICe)"
 
 msgid "NOTIFICATION_DECISION_COMMUNE"
 msgstr "Notification à la commune de la décision"
@@ -1278,8 +1290,12 @@ msgstr "Statistiques"
 msgid "Submit"
 msgstr "Valider"
 
-#: ../browser/offdays_settings.py:39
-#: ../interfaces.py:715
+#: ../browser/notice_settings.py:46
+msgid "Successful NOTICe events to notify by email"
+msgstr "Imports d'événement NOTICe à notifier par email"
+
+#: ../browser/offdays_settings.py:34
+#: ../interfaces.py:802
 msgid "Suspension period end date"
 msgstr "Date de fin"
 
@@ -3066,6 +3082,11 @@ msgstr "Action"
 #: ../viewlets/templates/notice_transmit_state.pt:14
 msgid "transmit_date"
 msgstr "Le"
+
+#. Default: "Document"
+#: ../viewlets/templates/notice_transmit_state.pt:60
+msgid "transmit_document"
+msgstr "Document"
 
 #. Default: "Form data"
 #: ../viewlets/templates/notice_transmit_state.pt:17
