@@ -907,12 +907,16 @@ class DecisionSPWHandler(IncomingNoticeHandler):
         if self.notification.decision_code:
             # set decision (octroi / refus)
             mapping_decision_terms = {
-                "OCTROI": "favorable",
-                "REFUS": "defavorable",
+                "OCTROI": ["octroi", "favorable"],
+                "REFUS": ["refus", "defavorable"],
             }
-            urban_decision_term = mapping_decision_terms.get(
-                self.notification.decision_code
-            )
+            available_terms = self.event.Vocabulary("decision")[0].keys()
+
+            urban_decision_term = None
+            for term in mapping_decision_terms.get(self.notification.decision_code, []):
+                if term in available_terms:
+                    urban_decision_term = term
+                    break
             if urban_decision_term:
                 self.event.setDecision(urban_decision_term)
             else:
