@@ -718,6 +718,12 @@ class UrbanEventInquiryBaseView(UrbanEventView, MapView, LicenceView):
         self.import_recipients_listing_form.update()
 
     @property
+    def has_parcel_setup(self):
+        licence = self.context.get_parent_licence()
+        parcels = licence.getParcels()
+        return len(parcels) > 0
+
+    @property
     def has_planned_claimant_import(self):
         planned_claimants_import = (
             api.portal.get_registry_record(
@@ -1033,10 +1039,10 @@ class UrbanEventInquiryView(UrbanEventInquiryBaseView):
         self.request.set("disable_plone.leftcolumn", 1)
 
     def __call__(self):
-        if "find_recipients_cadastre" in self.request.form:
+        if "find_recipients_cadastre" in self.request.form and self.has_parcel_setup:
             radius = self.getInquiryRadius()
             return self.getInvestigationPOs(radius)
-        if "find_address_cadastre" in self.request.form:
+        if "find_address_cadastre" in self.request.form and self.has_parcel_setup:
             radius = self.getInquiryRadius()
             return self.get_investigation_adress(radius)
         return self.index()

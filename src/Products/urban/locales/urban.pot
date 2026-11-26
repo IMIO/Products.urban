@@ -2659,6 +2659,11 @@ msgstr ""
 msgid "no_notary_defined"
 msgstr ""
 
+#. Default: "No parcel setup on the licence: impossible to find address or owners"
+#: ../browser/templates/urbaneventinquiryview.pt:180
+msgid "no_parcel_for_inquiry_search"
+msgstr ""
+
 msgid "no_parcels_found_on_licence"
 msgstr ""
 
