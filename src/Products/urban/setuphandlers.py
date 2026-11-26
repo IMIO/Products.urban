@@ -32,7 +32,6 @@ from Products.urban.interfaces import ILicenceConfig
 from Products.urban.interfaces import ILicenceContainer
 from Products.urban.interfaces import ILicenceCreatedViaNoticeWS
 from Products.urban.interfaces import IUrbanConfigurationFolder
-from Products.urban.interfaces import IUrbanEventNotice
 from Products.urban.profiles.extra.config_default_values import default_values
 from Products.urban.profiles.extra.config_default_values import (
     vocabularies_with_HTML_description,
@@ -340,12 +339,22 @@ def markLicencesCreatedViaNotice(context):
     """Mark licences having a NOTICE notification with ILicenceCreatedViaNoticeWS."""
     catalog = api.portal.get_tool("portal_catalog")
     licence_brains = catalog(object_provides=IGenericLicence.__identifier__)
-    for licence_brain in licence_brains:
+    total = len(licence_brains)
+    for i, licence_brain in enumerate(licence_brains, 1):
         licence = licence_brain.getObject()
-        for urban_event in licence.getAllEvents(IUrbanEventNotice):
-            if IAnnotations(urban_event).get("notice_notification", {}):
+        # Events created by the NOTICE cron are not necessarily IUrbanEventNotice:
+        # their portal_type comes from the event config, so check every event.
+        # Only "incoming" notifications matter, "outgoing" ones are sent by urban.
+        for urban_event in licence.getAllEvents():
+            notice = IAnnotations(urban_event).get("notice_notification", {})
+            if notice.get("incoming"):
                 alsoProvides(licence, ILicenceCreatedViaNoticeWS)
                 break
+        # Commit by batch to keep memory usage under control
+        if i % 200 == 0:
+            transaction.commit()
+            licence._p_jar.cacheMinimize()
+            logger.info("markLicencesCreatedViaNotice: %s/%s", i, total)
 
 
 def setFolderAllowedTypes(folder, portal_types):

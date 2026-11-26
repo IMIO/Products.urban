@@ -1,0 +1,2 @@
+Fix markLicencesCreatedViaNotice: check all events for incoming NOTICE notifications and commit by batch
+[WBoudabous]
