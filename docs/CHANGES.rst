@@ -8,6 +8,32 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.34 (2026-11-26)
+-------------------
+
+New features:
+
+
+- Add cron4plone instruction for notice import
+  Switch NOTICe API default URL to production
+  [daggelpop] (URB-3702)
+- Import buttons for GESPER forms
+  [daggelpop] (URB-3722)
+- Add upgrade step to unhide CODT_UniqueBorderingLicences folder
+  [jchandelle] (URB-3781)
+- Add basic auth to NOTICe API requests
+  [daggelpop] (URB-3814)
+
+
+Bug fixes:
+
+
+- Add upgrade step to reindex getDecisionDate on existing licences
+  [WBoudabous] (SUP-52501)
+- Set digital deposit type on the deposit event of licences created from NOTICe.
+  [WBoudabous] (URB-3445)
+
+
 2.9.33 (2026-11-11)
 -------------------
 
