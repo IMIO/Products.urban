@@ -1170,6 +1170,19 @@ class UrbanEvent(OrderedBaseFolder, BrowserDefaultMixin):
             notification.serialize(),
         )
         return result
+    
+    def getDelegateSignaturesTitle(self):
+        delegate_signatures = getattr(self, "delegateSignatures", None)
+        if not delegate_signatures:
+            return ""
+        portal_urban = api.portal.get_tool("portal_urban")
+        delegate_signatures_vocabulary = portal_urban.listVocabularyObjects(
+            vocToReturn="delegatesignatures",
+            context=self,
+            inUrbanConfig=False,
+            allowedStates=["disabled", "enabled"],
+        )
+        return delegate_signatures_vocabulary.get(delegate_signatures).Title()
 
 
 registerType(UrbanEvent, PROJECTNAME)
