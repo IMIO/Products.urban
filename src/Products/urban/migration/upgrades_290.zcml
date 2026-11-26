@@ -244,4 +244,12 @@
         handler=".update_290.import_notice_form_buttons"
         profile="Products.urban:default" />
 
+    <gs:upgradeStep
+        title="Unhide CODT_UniqueBorderingLicences folder"
+        description=""
+        source="2930"
+        destination="2931"
+        handler=".update_290.unhide_CODT_UniqueBorderingLicences"
+        profile="Products.urban:default" />
+
 </configure>
