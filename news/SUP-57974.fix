@@ -1,0 +1,2 @@
+Add set_eventconfig_key_event external method to set isKeyEvent on an EventConfig when the edit form crashes on a broken reference
+[WBoudabous]
