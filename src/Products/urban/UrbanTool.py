@@ -48,6 +48,8 @@ from plone.contentrules.engine.interfaces import IRuleStorage
 from plone.contentrules.rule.interfaces import IExecutable
 from plone.memoize import ram
 from plone.memoize.request import cache
+from lxml import html as lxml_html
+from lxml.etree import ParserError
 from zope.annotation import IAnnotations
 from zope.component import getGlobalSiteManager
 from zope.component import getMultiAdapter
@@ -844,20 +846,26 @@ class UrbanTool(UniqueObject, OrderedBaseFolder, BrowserDefaultMixin):
         """
         # the max text length to show, in number of characters
         maxLength = 50
+        field = context.getField(fieldName)
+        text = field.getRaw(context) or ""
 
-        def checkMaxLength(text):
-            """Check if we need to format the text if it is too long."""
-            utext = unicode(text, "utf-8")
-            isTooLarge = False
-            if maxLength and len(utext) > maxLength:
-                isTooLarge = True
-                return isTooLarge, utext[:maxLength].encode("utf-8") + "..."
-            return isTooLarge, utext.encode("utf-8")
+        if isinstance(text, str):
+            text = text.decode("utf-8")
 
-        # to be sure that we only have text (usefull for HTML) we get the raw value
-        return checkMaxLength(
-            getattr(context, "getRaw" + fieldName[0].capitalize() + fieldName[1:])()
-        )
+        if field.getContentType(context) == "text/html":
+            try:
+                utext = lxml_html.fragment_fromstring(
+                    text, create_parent="div"
+                ).text_content()
+            except ParserError:
+                utext = u""
+        else:
+            utext = text
+
+        utext = u" ".join(utext.split())
+        if maxLength and len(utext) > maxLength:
+            return True, (utext[:maxLength] + u"...").encode("utf-8")
+        return False, utext.encode("utf-8")
 
     security.declarePublic("getUrbanTypes")
 
