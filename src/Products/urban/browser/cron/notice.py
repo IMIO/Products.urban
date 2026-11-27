@@ -412,6 +412,11 @@ class ImportFromNoticeView(BrowserView):
         elif detailed_notification.notice_type == "ACTE_CONSTITUTION_SURETE_COMMUNE":
             handler = ProvisionOfSecurityHandler
 
+        # PPEIE
+
+        elif detailed_notification.notice_type == "PPEIE_DESIGNATION_COMMUNES":
+            handler = PPEIEDesignationHandler
+
         # GESPER
 
         elif detailed_notification.notice_type in (
@@ -946,6 +951,11 @@ class StopForAmendedPlansHandler(IncomingNoticeHandler):
     @property
     def desired_licence_state(self):
         return "suspension"
+
+
+class PPEIEDesignationHandler(IncomingNoticeHandler):
+    event_config_marker = "Products.urban.interfaces.IDesignationEvent"
+    create_licence_if_missing = True
 
 
 class ProvisionOfSecurityHandler(IncomingNoticeHandler):
