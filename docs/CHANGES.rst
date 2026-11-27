@@ -8,6 +8,23 @@ Changelog
 
 .. towncrier release notes start
 
+2.9.35 (2026-11-27)
+-------------------
+
+New features:
+
+
+- Check transfer of licence on ACTE_CESSION_COMMUNE NOTICe notification
+  [WBoudabous] (URB-3826)
+
+
+Bug fixes:
+
+
+- Skip cron import if NOTICe isn't set up
+  [daggelpop] (URB-3702)
+
+
 2.9.34 (2026-11-26)
 -------------------
 
