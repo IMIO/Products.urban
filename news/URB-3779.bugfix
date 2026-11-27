@@ -1,0 +1,2 @@
+Fix KeyError on references during NOTICe import
+[daggelpop]
