@@ -844,10 +844,7 @@ def add_async_notice_mails(context):
 def update_api_url(context):
     record = "Products.urban.browser.notice_settings.INoticeSettings.url"
 
-    api.portal.set_registry_record(
-        record,
-        u"https://ipa.imio.be/spw/notice/v1/"
-    )
+    api.portal.set_registry_record(record, u"https://ipa.imio.be/spw/notice/v1/")
 
 
 def reindex_decision_date(context):
@@ -896,6 +893,8 @@ def unhide_CODT_UniqueBorderingLicences(context):
     if codt_uniqueborderinglicences.getExcludeFromNav():
         codt_uniqueborderinglicences.setExcludeFromNav(False)
     logger.info("upgrade step done!")
+
+
 def upgrade_cession_transfer_of_licence(context):
     """
     Add TAL condition on cession event configs and check "isTransferOfLicence"
