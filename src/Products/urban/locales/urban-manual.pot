@@ -1806,3 +1806,6 @@ msgstr ""
 
 msgid "DECISION_REGISTRE_COMMUNE"
 msgstr ""
+
+msgid "PPEIE_DESIGNATION_COMMUNES"
+msgstr ""

@@ -649,6 +649,10 @@ class ICessionEvent(Interface):
     __doc__ = _("""ICessionEvent type marker interface""")
 
 
+class IDesignationEvent(Interface):
+    __doc__ = _("""IDesignationEvent type marker interface""")
+
+
 class IUrbanBase(Interface):
     """Marker interface for .Base.UrbanBase"""
 

@@ -1127,6 +1127,9 @@ msgstr "Notification à la commune que le Plan Modificatif est irrecevable"
 msgid "PM_PROROGATION_COURRIER_COMMUNE"
 msgstr "Notification à la commune de la prolongation du délai d'instruction (Plans modificatifs)"
 
+msgid "PPEIE_DESIGNATION_COMMUNES"
+msgstr "PPEIE - Désignation des communes"
+
 msgid "ParcelOutLicence"
 msgstr "Permis d'urbanisation"
 

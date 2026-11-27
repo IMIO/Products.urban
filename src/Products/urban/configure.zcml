@@ -389,6 +389,10 @@
     type=".interfaces.IEventTypeType"/>
 
 <interface
+    interface=".interfaces.IDesignationEvent"
+    type=".interfaces.IEventTypeType"/>
+
+<interface
     interface=".interfaces.IAcknowledgmentOfTransfer"
     type=".interfaces.IEventTypeType"/>
 

@@ -154,6 +154,8 @@ class NoticeNotification(NoticeElement):
                 }.get(self.notification_subtype)
             elif self.notification_type == "ARTICLE65":
                 self._licence_type = "Article65"
+            elif self.notification_type == "PPEIE":
+                self._licence_type = "MiscDemandEnvironment"
             else:
                 existing_licence = self.licence
                 if existing_licence:
