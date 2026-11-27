@@ -624,7 +624,7 @@ class IncomingNoticeHandler(object):
     def set_reference_ft(self):
         try:
             licence_ref = self.licence.getReferenceFT()
-        except AttributeError:
+        except (AttributeError, KeyError):
             return
 
         notification_ref = self.notification.referenceFT
@@ -635,7 +635,7 @@ class IncomingNoticeHandler(object):
     def set_reference_ft_pm(self):
         try:
             licence_ref = self.licence.getReferenceFT_PM()
-        except AttributeError:
+        except (AttributeError, KeyError):
             return
 
         notification_ref = self.notification.referenceFT_PM
@@ -646,7 +646,7 @@ class IncomingNoticeHandler(object):
     def set_reference_dgatlp(self):
         try:
             licence_ref = self.licence.getReferenceDGATLP()
-        except AttributeError:
+        except (AttributeError, KeyError):
             return
 
         notification_ref = self.notification.referenceDGATLP
