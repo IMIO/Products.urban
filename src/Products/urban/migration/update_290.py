@@ -2,6 +2,7 @@
 
 from Products.CMFCore.utils import getToolByName
 from Products.cron4plone.browser.configlets.cron_configuration import ICronConfiguration
+from Products.urban import spw_rubrics
 from Products.urban import URBAN_TYPES
 from Products.urban import UrbanMessage as _
 from Products.urban.contentrules.notice import INoticeImportFailedEvent
@@ -893,3 +894,111 @@ def unhide_CODT_UniqueBorderingLicences(context):
     if codt_uniqueborderinglicences.getExcludeFromNav():
         codt_uniqueborderinglicences.setExcludeFromNav(False)
     logger.info("upgrade step done!")
+# The SPW codeType values (I, S, SE, I_S) map to the existing legacy
+CODE_TYPE_TO_FOLDER_IDS = {
+    "I": ["CI"],
+    "S": ["CS"],
+    "SE": ["CS_Eau"],
+    "I_S": ["CI_CS"],
+}
+
+
+FOLDER_TITLES = {
+    "CI": u"Conditions intégrales",
+    "CS": u"Conditions sectorielles",
+    "CS_Eau": u"Conditions sectorielles Eau",
+    "CI_CS": u"Conditions intégrales et sectorielles",
+}
+
+# Titles of the rubric category folders,
+# categories absent from this mapping keep their current title.
+RUBRIC_CATEGORY_TITLES = {
+    "94": u"94 Espèces exotiques",
+    "COV-01": u"COV-01 Impression sur rotative offset à sécheur thermique",
+    "COV-02": u"COV-02 Héliogravure d’édition",
+    "COV-03": u"COV-03 Autres activités d’impression",
+    "COV-04": u"COV-04 Nettoyage de surface",
+    "COV-05": u"COV-05 Autres nettoyages de surface",
+    "COV-06": u"COV-06 Revêtement et retouche des véhicules",
+    "COV-07": u"COV-07 Laquage en continu",
+    "COV-08": u"COV-08 Autres revêtements, y compris le revêtement de métaux, "
+    u"de plastiques, de textiles, de feuilles de papier : "
+    u"consommation de solvant > 5 t/an",
+    "COV-09": u"COV-09 Revêtement de fils de bobinage",
+    "COV-10": u"COV-10 Revêtement de surface en bois",
+    "COV-11": u"COV-11 Nettoyage à sec",
+    "COV-12": u"COV-12 Imprégnation du bois",
+    "COV-13": u"COV-13 Revêtement du cuir",
+    "COV-14": u"COV-14 Fabrication de chaussures",
+    "COV-15": u"COV-15 Stratification de bois et de plastique",
+    "COV-16": u"COV-16 Revêtement adhésif",
+    "COV-17": u"COV-17 Fabrication de préparations, revêtements, vernis, "
+    u"encres et colles",
+    "COV-18": u"COV-18 Conversion de caoutchouc",
+    "COV-19": u"COV-19 Extraction d’huiles végétales et de graisses animales "
+    u"et activités de raffinage d’huile végétale",
+    "COV-20": u"COV-20 Fabrication de produits pharmaceutiques",
+    "COV-21": u"COV-21 Revêtement de véhicules (automobiles, cabines de "
+    u"camion, camionnettes, camions et autobus) neufs",
+}
+
+
+def _folder_ids_for_code_type(code_type):
+    return CODE_TYPE_TO_FOLDER_IDS.get(
+        code_type, [code_type.replace("/", "_").replace("-", "_")]
+    )
+
+
+def _get_or_create_folder(container, folder_id, title, allowed_type):
+    if folder_id in container:
+        return getattr(container, folder_id)
+    folder = api.content.create(
+        container=container, type="Folder", id=folder_id, title=title
+    )
+    folder.setConstrainTypesMode(1)
+    folder.setLocallyAllowedTypes([allowed_type])
+    folder.setImmediatelyAddableTypes([allowed_type])
+    return folder
+
+
+def _update_rubric_category_title(category_folder):
+    title = RUBRIC_CATEGORY_TITLES.get(category_folder.getId())
+    if title and category_folder.Title().decode("utf-8") != title:
+        category_folder.setTitle(title)
+        category_folder.reindexObject(
+            idxs=["Title", "SearchableText", "sortable_title"]
+        )
+
+
+def _sort_folder(folder):
+    for index, obj_id in enumerate(sorted(folder.objectIds())):
+        if folder.getObjectPosition(obj_id) != index:
+            folder.moveObject(obj_id, index)
+
+
+def _get_or_create_condition(
+    conditions_folder, condition_id, condition_data, code_type
+):
+    if condition_id in conditions_folder:
+        return getattr(conditions_folder, condition_id)
+
+    condition = api.content.create(
+        container=conditions_folder,
+        type="UrbanVocabularyTerm",
+        id=condition_id,
+        title=condition_data["title"],
+        extraValue=code_type,
+    )
+    field = condition.getField("description")
+    field.setContentType(condition, "text/html")
+    condition.setDescription(
+        u'<a href="{0}">{1}</a>'.format(condition_data["url"], condition_data["title"])
+    )
+    return condition
+
+
+def import_spw_rubrics(context):
+    logger = logging.getLogger("urban: Import SPW reference rubrics")
+    logger.info("starting upgrade steps")
+    spw_rubrics.import_spw_rubrics()
+    logger.info("upgrade done!")
