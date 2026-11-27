@@ -21,12 +21,14 @@ class INoticeSettings(Interface):
 
     municipality_id = schema.TextLine(
         title=_("Municipality ID in Notice"),
-        required=True,
+        required=False,
+        default=u"",
     )
 
     sent_on_behalf_of_municipality_id = schema.TextLine(
         title=_("Sent On Behalf Of Municipality ID in Notice"),
-        required=True,
+        required=False,
+        default=u"",
     )
 
     last_import_date = schema.Datetime(
