@@ -48,6 +48,10 @@ class ImportFromNoticeView(BrowserView):
     def __call__(self):
 
         self._initialize()
+        if not self.notice_service.is_setup:
+            logger.info(u"Skipping NOTICe cron import (not set up)")
+            return "OK"
+
         self._add_random_sleep()
         self.notify_successful_imports_from_previous_tick()
         self._retry_failed_notifications()
